@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->text('content');
-            $table->unsignedBigInteger('from_user');
-            $table->unsignedBigInteger('to_user');
-            $table->foreign('from_user')->references('id')->on('users');
-            $table->foreign('to_user')->references('id')->on('users');
+            $table->unsignedBigInteger('from_id');
+            $table->unsignedBigInteger('to_id');
+            $table->foreign('from_id')->references('id')->on('users');
+            $table->foreign('to_id')->references('id')->on('users');
         });
     }
 
