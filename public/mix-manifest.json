@@ -1,4 +1,8 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/js/bootstrap.js": "/js/bootstrap.js",
+    "/js/pages/index.init.js": "/js/pages/index.init.js",
+    "/js/pages/password-addon.init.js": "/js/pages/password-addon.init.js",
+    "/js/pages/theme-style.init.js": "/js/pages/theme-style.init.js",
+    "/js/pages/validation.init.js": "/js/pages/validation.init.js"
 }

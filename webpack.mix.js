@@ -1,4 +1,4 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
 
 /*
  |--------------------------------------------------------------------------
@@ -11,6 +11,24 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
-    .sourceMaps();
+// mix.js("resources/js/*.js", "public/js")
+// .js("resources/js/pages/*.js", "public/js/pages")
+// .sass("resources/scss/app.scss", "public/css")
+// .sourceMaps();
+
+let fs = require("fs");
+
+let getFiles = function (dir) {
+    // get all 'files' in this directory
+    // filter directories
+    return fs.readdirSync(dir).filter((file) => {
+        return fs.statSync(`${dir}/${file}`).isFile();
+    });
+};
+
+getFiles("resources/js").forEach(function (filepath) {
+    mix.js("resources/js/" + filepath, "public/js");
+});
+getFiles("resources/js/pages").forEach(function (filepath) {
+    mix.js("resources/js/pages/" + filepath, "public/js/pages");
+});
