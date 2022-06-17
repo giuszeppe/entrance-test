@@ -13,7 +13,7 @@ File: Index init js
 
     var currentSelectedChat = "users";
     var url = window.location.origin + "/js/dir/";
-    var usersList = "";
+    var usersList = [];
     var userChatId = 1;
     document.getElementById("copyClipBoard").style.display = "none";
     document.getElementById("copyClipBoardChannel").style.display = "none";
@@ -2332,6 +2332,7 @@ File: Index init js
                     }
                     var isAlighn =
                         isChat.from_id == userChatId ? " right" : " left";
+
                     var user = usersList.find(function (list) {
                         return list.id == isChat.from_id;
                     });
@@ -2342,7 +2343,7 @@ File: Index init js
                         isChat.id +
                         '>\
                         <div class="conversation-list">';
-                    if (userChatId != isChat.from_id)
+                    if (userChatId != isChat.from_id && user)
                         msgHTML +=
                             '<div class="chat-avatar"><img src="' +
                             user.profile +
@@ -2428,12 +2429,19 @@ function searchUser() {
 }
 
 //Search Contacts
+
 function searchContacts() {
     input = document.getElementById("searchContact");
     filter = input.value.toUpperCase();
     list = document.querySelector(".sort-contact");
     li = list.querySelectorAll(".mt-3 li");
     div = list.querySelectorAll(".mt-3 .contact-list-title");
+    let userUUID = document.querySelector('meta[name="uuid"]').content;
+    // Fetching users from remote
+
+    axios
+        .get("/api/user/contacts", { params: { searchQuery: input.value } })
+        .then((response) => {});
 
     for (j = 0; j < div.length; j++) {
         var contactTitle = div[j];
@@ -2455,6 +2463,9 @@ function searchContacts() {
         }
     }
 }
+document
+    .getElementById("searchContact")
+    .addEventListener("keyup", searchContacts);
 
 //Search contact on contactModalList
 function searchContactOnModal() {

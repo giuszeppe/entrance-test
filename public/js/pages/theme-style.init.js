@@ -1,49 +1,32 @@
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
 /******/ (() => { // webpackBootstrap
-var __webpack_exports__ = {};
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./resources/js/pages/theme-style.init.js":
 /*!************************************************!*\
   !*** ./resources/js/pages/theme-style.init.js ***!
   \************************************************/
-function themeColor() {
-  var activeCustomcolor = window.localStorage.getItem("activeCustomcolor");
+/***/ (() => {
 
-  switch (activeCustomcolor) {
-    case "customizer-color01":
-      document.documentElement.style.setProperty("--bs-primary-rgb", "97, 83, 204");
-      break;
+eval("function themeColor() {\n  var activeCustomcolor = window.localStorage.getItem(\"activeCustomcolor\");\n\n  switch (activeCustomcolor) {\n    case \"customizer-color01\":\n      document.documentElement.style.setProperty(\"--bs-primary-rgb\", \"97, 83, 204\");\n      break;\n\n    case \"customizer-color02\":\n      document.documentElement.style.setProperty(\"--bs-primary-rgb\", \"4, 135, 101\");\n      break;\n\n    case \"customizer-color03\":\n      document.documentElement.style.setProperty(\"--bs-primary-rgb\", \"48, 197, 210\");\n      break;\n\n    case \"customizer-color04\":\n      document.documentElement.style.setProperty(\"--bs-primary-rgb\", \"25, 176, 236\");\n      break;\n\n    case \"customizer-color05\":\n      document.documentElement.style.setProperty(\"--bs-primary-rgb\", \"117, 76, 195\");\n      break;\n\n    case \"customizer-color06\":\n      document.documentElement.style.setProperty(\"--bs-primary-rgb\", \"226, 148, 50\");\n      break;\n\n    case \"customizer-color07\":\n      document.documentElement.style.setProperty(\"--bs-primary-rgb\", \"14, 126, 211\");\n      break;\n\n    case \"customizer-color08\":\n      document.documentElement.style.setProperty(\"--bs-primary-rgb\", \"31, 196, 171\");\n      break;\n\n    default:\n      document.documentElement.style.setProperty(\"--bs-primary-rgb\", \"\");\n  }\n}\n\nthemeColor();//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJ0aGVtZUNvbG9yIiwiYWN0aXZlQ3VzdG9tY29sb3IiLCJ3aW5kb3ciLCJsb2NhbFN0b3JhZ2UiLCJnZXRJdGVtIiwiZG9jdW1lbnQiLCJkb2N1bWVudEVsZW1lbnQiLCJzdHlsZSIsInNldFByb3BlcnR5Il0sInNvdXJjZXMiOlsid2VicGFjazovLy8uL3Jlc291cmNlcy9qcy9wYWdlcy90aGVtZS1zdHlsZS5pbml0LmpzP2M5MDQiXSwic291cmNlc0NvbnRlbnQiOlsiZnVuY3Rpb24gdGhlbWVDb2xvcigpIHtcbiAgdmFyIGFjdGl2ZUN1c3RvbWNvbG9yID0gd2luZG93LmxvY2FsU3RvcmFnZS5nZXRJdGVtKFwiYWN0aXZlQ3VzdG9tY29sb3JcIik7XG4gIHN3aXRjaCAoYWN0aXZlQ3VzdG9tY29sb3IpIHtcbiAgICBjYXNlIFwiY3VzdG9taXplci1jb2xvcjAxXCI6XG4gICAgICBkb2N1bWVudC5kb2N1bWVudEVsZW1lbnQuc3R5bGUuc2V0UHJvcGVydHkoXG4gICAgICAgIFwiLS1icy1wcmltYXJ5LXJnYlwiLFxuICAgICAgICBcIjk3LCA4MywgMjA0XCJcbiAgICAgICk7XG4gICAgICBicmVhaztcblxuICAgIGNhc2UgXCJjdXN0b21pemVyLWNvbG9yMDJcIjpcbiAgICAgIGRvY3VtZW50LmRvY3VtZW50RWxlbWVudC5zdHlsZS5zZXRQcm9wZXJ0eShcbiAgICAgICAgXCItLWJzLXByaW1hcnktcmdiXCIsXG4gICAgICAgIFwiNCwgMTM1LCAxMDFcIlxuICAgICAgKTtcbiAgICAgIGJyZWFrO1xuXG4gICAgY2FzZSBcImN1c3RvbWl6ZXItY29sb3IwM1wiOlxuICAgICAgZG9jdW1lbnQuZG9jdW1lbnRFbGVtZW50LnN0eWxlLnNldFByb3BlcnR5KFxuICAgICAgICBcIi0tYnMtcHJpbWFyeS1yZ2JcIixcbiAgICAgICAgXCI0OCwgMTk3LCAyMTBcIlxuICAgICAgKTtcbiAgICAgIGJyZWFrO1xuXG4gICAgY2FzZSBcImN1c3RvbWl6ZXItY29sb3IwNFwiOlxuICAgICAgZG9jdW1lbnQuZG9jdW1lbnRFbGVtZW50LnN0eWxlLnNldFByb3BlcnR5KFxuICAgICAgICBcIi0tYnMtcHJpbWFyeS1yZ2JcIixcbiAgICAgICAgXCIyNSwgMTc2LCAyMzZcIlxuICAgICAgKTtcbiAgICAgIGJyZWFrO1xuXG4gICAgY2FzZSBcImN1c3RvbWl6ZXItY29sb3IwNVwiOlxuICAgICAgZG9jdW1lbnQuZG9jdW1lbnRFbGVtZW50LnN0eWxlLnNldFByb3BlcnR5KFxuICAgICAgICBcIi0tYnMtcHJpbWFyeS1yZ2JcIixcbiAgICAgICAgXCIxMTcsIDc2LCAxOTVcIlxuICAgICAgKTtcbiAgICAgIGJyZWFrO1xuXG4gICAgY2FzZSBcImN1c3RvbWl6ZXItY29sb3IwNlwiOlxuICAgICAgZG9jdW1lbnQuZG9jdW1lbnRFbGVtZW50LnN0eWxlLnNldFByb3BlcnR5KFxuICAgICAgICBcIi0tYnMtcHJpbWFyeS1yZ2JcIixcbiAgICAgICAgXCIyMjYsIDE0OCwgNTBcIlxuICAgICAgKTtcbiAgICAgIGJyZWFrO1xuXG4gICAgY2FzZSBcImN1c3RvbWl6ZXItY29sb3IwN1wiOlxuICAgICAgZG9jdW1lbnQuZG9jdW1lbnRFbGVtZW50LnN0eWxlLnNldFByb3BlcnR5KFxuICAgICAgICBcIi0tYnMtcHJpbWFyeS1yZ2JcIixcbiAgICAgICAgXCIxNCwgMTI2LCAyMTFcIlxuICAgICAgKTtcbiAgICAgIGJyZWFrO1xuXG4gICAgY2FzZSBcImN1c3RvbWl6ZXItY29sb3IwOFwiOlxuICAgICAgZG9jdW1lbnQuZG9jdW1lbnRFbGVtZW50LnN0eWxlLnNldFByb3BlcnR5KFxuICAgICAgICBcIi0tYnMtcHJpbWFyeS1yZ2JcIixcbiAgICAgICAgXCIzMSwgMTk2LCAxNzFcIlxuICAgICAgKTtcbiAgICAgIGJyZWFrO1xuXG4gICAgZGVmYXVsdDpcbiAgICAgIGRvY3VtZW50LmRvY3VtZW50RWxlbWVudC5zdHlsZS5zZXRQcm9wZXJ0eShcIi0tYnMtcHJpbWFyeS1yZ2JcIiwgXCJcIik7XG4gIH1cbn1cbnRoZW1lQ29sb3IoKTtcbiJdLCJtYXBwaW5ncyI6IkFBQUEsU0FBU0EsVUFBVCxHQUFzQjtFQUNwQixJQUFJQyxpQkFBaUIsR0FBR0MsTUFBTSxDQUFDQyxZQUFQLENBQW9CQyxPQUFwQixDQUE0QixtQkFBNUIsQ0FBeEI7O0VBQ0EsUUFBUUgsaUJBQVI7SUFDRSxLQUFLLG9CQUFMO01BQ0VJLFFBQVEsQ0FBQ0MsZUFBVCxDQUF5QkMsS0FBekIsQ0FBK0JDLFdBQS9CLENBQ0Usa0JBREYsRUFFRSxhQUZGO01BSUE7O0lBRUYsS0FBSyxvQkFBTDtNQUNFSCxRQUFRLENBQUNDLGVBQVQsQ0FBeUJDLEtBQXpCLENBQStCQyxXQUEvQixDQUNFLGtCQURGLEVBRUUsYUFGRjtNQUlBOztJQUVGLEtBQUssb0JBQUw7TUFDRUgsUUFBUSxDQUFDQyxlQUFULENBQXlCQyxLQUF6QixDQUErQkMsV0FBL0IsQ0FDRSxrQkFERixFQUVFLGNBRkY7TUFJQTs7SUFFRixLQUFLLG9CQUFMO01BQ0VILFFBQVEsQ0FBQ0MsZUFBVCxDQUF5QkMsS0FBekIsQ0FBK0JDLFdBQS9CLENBQ0Usa0JBREYsRUFFRSxjQUZGO01BSUE7O0lBRUYsS0FBSyxvQkFBTDtNQUNFSCxRQUFRLENBQUNDLGVBQVQsQ0FBeUJDLEtBQXpCLENBQStCQyxXQUEvQixDQUNFLGtCQURGLEVBRUUsY0FGRjtNQUlBOztJQUVGLEtBQUssb0JBQUw7TUFDRUgsUUFBUSxDQUFDQyxlQUFULENBQXlCQyxLQUF6QixDQUErQkMsV0FBL0IsQ0FDRSxrQkFERixFQUVFLGNBRkY7TUFJQTs7SUFFRixLQUFLLG9CQUFMO01BQ0VILFFBQVEsQ0FBQ0MsZUFBVCxDQUF5QkMsS0FBekIsQ0FBK0JDLFdBQS9CLENBQ0Usa0JBREYsRUFFRSxjQUZGO01BSUE7O0lBRUYsS0FBSyxvQkFBTDtNQUNFSCxRQUFRLENBQUNDLGVBQVQsQ0FBeUJDLEtBQXpCLENBQStCQyxXQUEvQixDQUNFLGtCQURGLEVBRUUsY0FGRjtNQUlBOztJQUVGO01BQ0VILFFBQVEsQ0FBQ0MsZUFBVCxDQUF5QkMsS0FBekIsQ0FBK0JDLFdBQS9CLENBQTJDLGtCQUEzQyxFQUErRCxFQUEvRDtFQTFESjtBQTRERDs7QUFDRFIsVUFBVSIsImZpbGUiOiIuL3Jlc291cmNlcy9qcy9wYWdlcy90aGVtZS1zdHlsZS5pbml0LmpzLmpzIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./resources/js/pages/theme-style.init.js\n");
 
-    case "customizer-color02":
-      document.documentElement.style.setProperty("--bs-primary-rgb", "4, 135, 101");
-      break;
+/***/ })
 
-    case "customizer-color03":
-      document.documentElement.style.setProperty("--bs-primary-rgb", "48, 197, 210");
-      break;
-
-    case "customizer-color04":
-      document.documentElement.style.setProperty("--bs-primary-rgb", "25, 176, 236");
-      break;
-
-    case "customizer-color05":
-      document.documentElement.style.setProperty("--bs-primary-rgb", "117, 76, 195");
-      break;
-
-    case "customizer-color06":
-      document.documentElement.style.setProperty("--bs-primary-rgb", "226, 148, 50");
-      break;
-
-    case "customizer-color07":
-      document.documentElement.style.setProperty("--bs-primary-rgb", "14, 126, 211");
-      break;
-
-    case "customizer-color08":
-      document.documentElement.style.setProperty("--bs-primary-rgb", "31, 196, 171");
-      break;
-
-    default:
-      document.documentElement.style.setProperty("--bs-primary-rgb", "");
-  }
-}
-
-themeColor();
+/******/ 	});
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module can't be inlined because the eval-source-map devtool is used.
+/******/ 	var __webpack_exports__ = {};
+/******/ 	__webpack_modules__["./resources/js/pages/theme-style.init.js"]();
+/******/ 	
 /******/ })()
 ;

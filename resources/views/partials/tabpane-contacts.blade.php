@@ -17,7 +17,7 @@
 
         <form>
             <div class="input-group search-panel mb-4">
-                <input type="text" class="form-control bg-light border-0" id="searchContact" onkeyup="searchContacts()" placeholder="Search contacts..." aria-label="Search Contacts..." 
+                <input type="text" class="form-control bg-light border-0" name='searchQuery' id="searchContact"  placeholder="Search contacts..." aria-label="Search Contacts..." 
                 aria-describedby="button-searchcontactsaddon" autocomplete="off">
                 <button class="btn btn-light p-0" type="button" id="button-searchcontactsaddon"><i class='bx bx-search align-middle'></i></button>
             </div>
