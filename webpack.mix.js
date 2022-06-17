@@ -27,8 +27,8 @@ let getFiles = function (dir) {
 };
 
 getFiles("resources/js").forEach(function (filepath) {
-    mix.js("resources/js/" + filepath, "public/js");
+    mix.js("resources/js/" + filepath, "public/js").sourceMaps();
 });
 getFiles("resources/js/pages").forEach(function (filepath) {
-    mix.js("resources/js/pages/" + filepath, "public/js/pages");
+    mix.js("resources/js/pages/" + filepath, "public/js/pages").sourceMaps();
 });
