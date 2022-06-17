@@ -9,7 +9,7 @@
                 <h3>Welcome Back !</h3>
                 <p class="text-muted">Sign in to continue to {{config('app.name')}}</p>
             </div>
-            <form action="{{route('login')}}" method="POST">
+            <form id="login-form" action="{{route('login')}}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
@@ -53,6 +53,16 @@
         </div>
     </div><!-- end col -->
 </div><!-- end row -->
+<script>
+    window.addEventListener('load', ()=>{
+        document.getElementById("login-form").addEventListener("submit", (e) => {
+            e.preventDefault();
+            axios.get("/sanctum/csrf-cookie").then((response) => {
+                e.target.submit();
+            });
+        })
+    })
+</script>
 @if($errors->any())
 {{dump($errors)}}
 @endif
