@@ -73,7 +73,7 @@
                         href="auth-changepassword">Change Password <i
                             class="bx bx-lock-open text-muted ms-1"></i></a>
                     <div class="dropdown-divider"></div>
-                    <form id="loggout-form" {{ route('logout') }} method="POST">
+                    <form id="loggout-form" action="{{route('logout')}}" method="POST">
                         @csrf
                         <button type='submit' class="dropdown-item d-flex align-items-center justify-content-between"">Log out <i class="bx bx-log-out-circle text-muted ms-1"></i></button>
                     </form>

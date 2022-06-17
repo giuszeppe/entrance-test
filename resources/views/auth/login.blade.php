@@ -12,9 +12,9 @@
             <form action="{{route('login')}}" method="POST">
                 @csrf
                 <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input name="name" type="text" class="form-control" id="username"
-                        placeholder="Enter username">
+                    <label for="email" class="form-label">Email</label>
+                    <input name="email" type="text" class="form-control" id="email"
+                        placeholder="Enter email">
                 </div>
 
                 <div class="mb-3">
@@ -24,7 +24,7 @@
                     <label for="userpassword" class="form-label">Password</label>
                     <div class="position-relative auth-pass-inputgroup mb-3">
                         <input type="password" class="form-control pe-5"
-                            placeholder="Enter Password" id="password-input">
+                            name="password" placeholder="Enter Password" id="password-input">
                         <button
                             class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted"
                             type="button" id="password-addon"><i
@@ -53,4 +53,7 @@
         </div>
     </div><!-- end col -->
 </div><!-- end row -->
+@if($errors->any())
+{{dump($errors)}}
+@endif
 @endsection
