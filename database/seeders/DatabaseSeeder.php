@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
                 $idsToAttach
             );
         });
-        Message::all()->each(function ($message) use ($users) {
+        $messages->each(function ($message) use ($users) {
             do {
                 $sender = $users->random(1)->pluck('uuid');
                 $receiver = $users->random(1)->pluck('uuid');

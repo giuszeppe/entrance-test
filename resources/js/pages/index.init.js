@@ -5,6 +5,7 @@ Website: https://themesbrand.com/
 Contact: themesbrand@gmail.com
 File: Index init js
 */
+import {axios} from '../request';
 
 (function () {
     var isreplyMessage = false;
@@ -457,7 +458,7 @@ File: Index init js
         if (err !== null) {
             console.log("Something went wrong: " + err);
         } else {
-            callList = data;
+            let callList = data;
             callList.forEach(function (calls, index) {
                 var callIcon =
                     calls.callVideo === true
@@ -520,8 +521,10 @@ File: Index init js
             .querySelectorAll(".sort-contact ul li")
             .forEach(function (item) {
                 item.addEventListener("click", function (event) {
+                    item.
                     currentSelectedChat = "users";
                     updateSelectedChat();
+                    let uuid = item.querySelector('._user-uuid').value
                     var contactName = item.querySelector("li .fs-14").innerHTML;
                     document.querySelector(
                         ".text-truncate .user-profile-show"
@@ -595,7 +598,9 @@ File: Index init js
                                     .setAttribute("src", dummyImage);
                             }
                         });
-                    window.stop();
+                    toggleSelected()
+                    fetchMessages(uuid)
+                    //window.stop();
                 });
             });
     }
@@ -1192,7 +1197,7 @@ File: Index init js
 
     var imageurls = [];
 
-    removeimg = 1;
+    let removeimg = 1;
 
     var indexing = 0;
 
@@ -2086,7 +2091,9 @@ File: Index init js
         <p class="mb-0 ctext-content">' +
                 msg +
                 "</p></div>";
-        } else if (has_images && has_images.length > 0) {
+        } 
+        /*
+        else if (has_images && has_images.length > 0) {
             msgHTML += '<div class="message-img mb-0">';
             for (i = 0; i < has_images.length; i++) {
                 msgHTML +=
@@ -2268,9 +2275,10 @@ File: Index init js
               </div>\
           </div>';
         }
+        */
         if (has_dropDown === true) {
             msgHTML +=
-                '<div class="align-self-start message-box-drop d-flex">\
+        '<div class="align-self-start message-box-drop d-flex">\
             <div class="dropdown">\
                 <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
                   <i class="ri-emotion-happy-line"></i>\
@@ -2296,12 +2304,9 @@ File: Index init js
                     <a class="dropdown-item d-flex align-items-center justify-content-between reply-message" href="#" id="reply-message-' +
                 messageIds +
                 '" data-bs-toggle="collapse" data-bs-target=".replyCollapse">Reply <i class="bx bx-share ms-2 text-muted"></i></a>\
-                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="#" data-bs-toggle="modal" data-bs-target=".forwardModal">Forward <i class="bx bx-share-alt ms-2 text-muted"></i></a>\
                     <a class="dropdown-item d-flex align-items-center justify-content-between copy-message" href="#" id="copy-message-' +
                 messageIds +
                 '">Copy <i class="bx bx-copy text-muted ms-2"></i></a>\
-                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Bookmark <i class="bx bx-bookmarks text-muted ms-2"></i></a>\
-                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Mark as Unread <i class="bx bx-message-error text-muted ms-2"></i></a>\
                     <a class="dropdown-item d-flex align-items-center justify-content-between delete-item" href="#">Delete <i class="bx bx-trash text-muted ms-2"></i></a>\
                 </div>\
             </div>\
@@ -2408,7 +2413,6 @@ File: Index init js
             title: false,
         });
     }
-})();
 
 var input, filter, ul, li, a, i, j, div;
 // Search User
@@ -2431,21 +2435,23 @@ function searchUser() {
 //Search Contacts
 
 function searchContacts() {
-    input = document.getElementById("searchContact");
-    filter = input.value.toUpperCase();
-    list = document.querySelector(".sort-contact");
-    li = list.querySelectorAll(".mt-3 li");
-    div = list.querySelectorAll(".mt-3 .contact-list-title");
+    let input = document.getElementById("searchContact");
+    let filter = input.value.toUpperCase();
+    let list = document.querySelector(".sort-contact");
+    let li = list.querySelectorAll(".mt-3 li");
+    let div = list.querySelectorAll(".mt-3 .contact-list-title");
     let userUUID = document.querySelector('meta[name="uuid"]').content;
     // Fetching users from remote
 
     axios
         .get("/api/user/contacts", { params: { searchQuery: input.value } })
-        .then((response) => {});
+        .then((response) => {
+            updateContacts(JSON.parse(response.data));
+        });
 
     for (j = 0; j < div.length; j++) {
         var contactTitle = div[j];
-        txtValue = contactTitle.innerText;
+        let txtValue = contactTitle.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
             div[j].style.display = "";
         } else {
@@ -2454,8 +2460,8 @@ function searchContacts() {
     }
 
     for (i = 0; i < li.length; i++) {
-        contactName = li[i];
-        txtValue = contactName.querySelector("h5").innerText;
+        let contactName = li[i];
+        let txtValue = contactName.querySelector("h5").innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
             li[i].style.display = "";
         } else {
@@ -2466,6 +2472,161 @@ function searchContacts() {
 document
     .getElementById("searchContact")
     .addEventListener("keyup", searchContacts);
+
+function resetOldContacts(){
+    document.getElementsByClassName(
+        "sort-contact"
+        )[0].innerHTML = "";
+
+}
+
+function updateContacts(data){
+    resetOldContacts()
+    data.contacts.forEach((user) =>{
+        let profile = user.profile
+            ? '<img src="' +
+            user.profile +
+            '" class="img-fluid rounded-circle" alt="">'
+            : '<span class="avatar-title rounded-circle bg-primary fs-10">' +
+            user.nickname +
+            "</span>";
+        profile += `<input type="hidden" class="_user-uuid" value="${user.uuid}" \>`
+        let msgHTML =
+            '<li>\
+                <div class="d-flex align-items-center">\
+                    <div class="flex-shrink-0 me-2">\
+                        <div class="avatar-xs">\
+                        ' +
+                            profile +
+                        '\
+                        </div>\
+                    </div>\
+                    <div class="flex-grow-1">\
+                        <h5 class="fs-14 m-0" >' +
+                            user.name +
+                        '</h5>\
+                    </div>\
+                    <div class="flex-shrink-0">\
+                        <div class="dropdown">\
+                            <a href="#" class="text-muted dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
+                                <i class="bx bx-dots-vertical-rounded align-middle"></i>\
+                            </a>\
+                            <div class="dropdown-menu dropdown-menu-end">\
+                                <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Edit <i class="bx bx-pencil ms-2 text-muted"></i></a>\
+                                <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Block <i class="bx bx-block ms-2 text-muted"></i></a>\
+                                <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Remove <i class="bx bx-trash ms-2 text-muted"></i></a>\
+                            </div>\
+                        </div>\
+                    </div>\
+                </div>\
+            </li>';
+        let isSortContact =
+            '<div class="mt-3" >\
+                <div class="contact-list-title">' +
+                    user.name.charAt(0).toUpperCase() +
+                    '\
+                </div>\
+                <ul id="contact-sort-' + user.name.charAt(0) +'" class="list-unstyled contact-list" >';
+        if (!document.getElementById('contact-sort-' + user.name.charAt(0))) {
+            document.getElementsByClassName(
+            "sort-contact"
+            )[0].innerHTML += isSortContact;
+        }
+        document.getElementById("contact-sort-" + user.name.charAt(0)).innerHTML = 
+            document.getElementById("contact-sort-" + user.name.charAt(0)).innerHTML + msgHTML +"</ul>" + "</div>";
+    })
+    contactList()
+}
+
+function fetchMessages(uuid){
+    axios.get('/api/messages', {params:{ 'uuid' : uuid}})
+        .then((response) => {
+            //console.log(JSON.parse(response.data));
+            updateChats(JSON.parse(response.data));
+        })
+}
+function resetOldChats(){
+    document.getElementById('users-conversation').innerHTML = "";
+}
+function updateChats(chatData){
+    console.log(chatData);
+    resetOldChats()
+    var {lenght,messages,sender}  = chatData
+    let currentSelectedChat = 'users'
+        let  isContinue = 0;
+        messages.forEach(function (message, index) {
+
+            
+            let userChatUuid = sender.uuid
+            console.log(isContinue);
+            /*if (isContinue > 0) {
+                isContinue = isContinue - 1;
+                return;
+            }*/
+            let  isAlighn =
+                message.from_id == userChatUuid ? " right" : " left";
+
+            let  msgHTML =
+                '<li class="chat-list' +
+                isAlighn +
+                '" id=' +
+                message.id +
+                '>\
+                <div class="conversation-list">';
+            if (userChatUuid != message.from_id && sender)
+                msgHTML +=
+                    '<div class="chat-avatar"><img src="' +
+                   'images/users/user-dummy-img.jpg' +
+                    '" alt=""></div>';
+
+            msgHTML += '<div class="user-chat-content">';
+            msgHTML += getMsg(
+                message.id,
+                message.content,
+                // message.has_images,
+                // message.has_files,
+                // message.has_audios,
+                // message.has_videos,
+                // message.has_dropDown
+            );
+            if (
+                messages[index + 1] &&
+                message.from_id == messages[index + 1]["from_id"]
+            ) {
+                isContinue = getNextMsgCounts(
+                    messages,
+                    index,
+                    message.from_id
+                );
+                msgHTML += getNextMsgs(
+                    messages,
+                    index,
+                    message.from_id,
+                    isContinue
+                );
+            }
+            msgHTML +=
+                '<div class="conversation-name"><small class="text-muted time">' +
+                message.created_at +
+                '</small> <span class="text-success check-message-icon"><i class="bx bx-check-double"></i></span></div>';
+            msgHTML +=
+                "</div>\
+        </div>\
+    </li>";
+
+            document.getElementById(
+                currentSelectedChat + "-conversation"
+            ).innerHTML += msgHTML;
+        });
+    
+    deleteMessage();
+    deleteImage();
+    copyMessage();
+    scrollToBottom("users-chat");
+    updateLightbox();
+    copyClipboard();
+    replyMessage();
+}
 
 //Search contact on contactModalList
 function searchContactOnModal() {
@@ -2589,11 +2750,11 @@ function themeColor(primaryColor) {
                 .getComputedStyle(elementsColor[0], null)
                 .getPropertyValue("background-image");
 
-            rgbColorSecondary = color.substring(
+            let rgbColorSecondary = color.substring(
                 color.indexOf("b") + 2,
                 color.indexOf(")")
             );
-            rgbColorPrimary = color.substring(
+            let rgbColorPrimary = color.substring(
                 color.lastIndexOf("(") + 1,
                 color.lastIndexOf(")") - 1
             );
@@ -2618,11 +2779,11 @@ function themeColor(primaryColor) {
                         .getComputedStyle(elementsColor[0], null)
                         .getPropertyValue("background-image");
 
-                    rgbColorSecondary = color.substring(
+                    let rgbColorSecondary = color.substring(
                         color.indexOf("b") + 2,
                         color.indexOf(")")
                     );
-                    rgbColorPrimary = color.substring(
+                    let rgbColorPrimary = color.substring(
                         color.lastIndexOf("(") + 1,
                         color.lastIndexOf(")") - 1
                     );
@@ -2695,7 +2856,7 @@ function themeColor(primaryColor) {
                     .toRGBA()
                     .toString(0);
 
-                rgbColorsPrimary = primaryColorValue.substring(
+                let rgbColorsPrimary = primaryColorValue.substring(
                     primaryColorValue.indexOf("(") + 1,
                     primaryColorValue.lastIndexOf(",")
                 );
@@ -2754,7 +2915,7 @@ function themeColor(primaryColor) {
                     .toRGBA()
                     .toString(0);
 
-                rgbColorSecondary = secondaryColorValue.substring(
+                let rgbColorSecondary = secondaryColorValue.substring(
                     secondaryColorValue.lastIndexOf("(") + 1,
                     secondaryColorValue.lastIndexOf(",")
                 );
@@ -2814,3 +2975,5 @@ function removeAudioFile() {
         document.querySelector(".file_Upload ").classList.remove("show");
     });
 }
+
+})();
