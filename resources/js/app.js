@@ -6,8 +6,6 @@ Website: https://Themesbrand.com/
 Contact: Themesbrand@gmail.com
 File: Main Js File
 */
-const axios = require("axios");
-axios.defaults.withCredentials = true;
 (function () {
     "use strict";
 
