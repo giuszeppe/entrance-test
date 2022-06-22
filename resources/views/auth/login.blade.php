@@ -53,9 +53,8 @@
         </div>
     </div><!-- end col -->
 </div><!-- end row -->
-<script>
+<script src="js/pages/login.js"> </script>
 
-</script>
 @if($errors->any())
 {{dump($errors)}}
 @endif
