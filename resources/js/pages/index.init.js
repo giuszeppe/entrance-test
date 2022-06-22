@@ -1681,6 +1681,7 @@ import {axios} from '../request';
         //add an item to the List, including to local storage
         chatForm.addEventListener("submit", function (e) {
             e.preventDefault();
+
             var chatId = currentChatId;
             var chatId1 = currentChatId;
             var chatId2 = currentChatId;
@@ -1717,6 +1718,14 @@ import {axios} from '../request';
                     isreplyMessage = false;
                 } else {
                     getChatList(chatId, chatInputValue);
+                    const params = new URLSearchParams()
+                    let uuid = document.getElementById('userChatUuid').value
+                    params.append('uuid',uuid)
+                    params.append('content',chatInputValue)
+                    axios.post('/api/message/', params)
+                    .then((response)=>{
+                        
+                    })
                 }
             }
 
@@ -2446,7 +2455,14 @@ function searchContacts() {
     axios
         .get("/api/user/contacts", { params: { searchQuery: input.value } })
         .then((response) => {
-            updateContacts(JSON.parse(response.data));
+            try {
+                console.log(response.data);
+                const contacts = JSON.parse(response.data);
+                updateContacts(contacts);
+            } catch (err) {
+                // 👇️ This runs
+                console.log('Error: ', err.message);
+            }
         });
 
     for (j = 0; j < div.length; j++) {
@@ -2549,14 +2565,15 @@ function resetOldChats(){
     document.getElementById('users-conversation').innerHTML = "";
 }
 function updateChats(chatData){
-    console.log(chatData);
     resetOldChats()
+    console.log(chatData);
     var {lenght,messages,sender}  = chatData
     let currentSelectedChat = 'users'
         let  isContinue = 0;
+        console.log(messages);
         messages.forEach(function (message, index) {
 
-            
+            console.log(message.from_id);
             let userChatUuid = sender.uuid
             console.log(isContinue);
             /*if (isContinue > 0) {
@@ -2564,8 +2581,8 @@ function updateChats(chatData){
                 return;
             }*/
             let  isAlighn =
-                message.from_id == userChatUuid ? " right" : " left";
-
+                message.from_id != userChatUuid ? " right" : " left";
+            console.log(isAlighn);
             let  msgHTML =
                 '<li class="chat-list' +
                 isAlighn +
@@ -2573,16 +2590,21 @@ function updateChats(chatData){
                 message.id +
                 '>\
                 <div class="conversation-list">';
-            if (userChatUuid != message.from_id && sender)
+            if (userChatUuid == message.from_id && sender)
                 msgHTML +=
                     '<div class="chat-avatar"><img src="' +
                    'images/users/user-dummy-img.jpg' +
                     '" alt=""></div>';
 
-            msgHTML += '<div class="user-chat-content">';
+            msgHTML += '<div class="user-chat-content"> <input type="hidden" id="userChatUuid" value="' + userChatUuid + '">';
             msgHTML += getMsg(
                 message.id,
                 message.content,
+                false,
+                false,
+                false,
+                false,
+                true
                 // message.has_images,
                 // message.has_files,
                 // message.has_audios,

@@ -6,6 +6,7 @@ use App\Models\Message;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -42,13 +43,11 @@ class DatabaseSeeder extends Seeder
                 $receiver = $users->random(1)->pluck('uuid');
 
             } while ($sender[0] == $receiver[0]);
-            $message->receiver()->associate(
-                $receiver[0]
-            );
-            $message->sender()->associate(
-                $sender[0]
-            );
+            $message->to_id = $receiver[0];
+            $message->from_id = $sender[0];
             $message->save();
         });
+
+        
     }
 }

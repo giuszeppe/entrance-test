@@ -5,5 +5,6 @@
 <meta name="keywords" content="Chat application"/>
 <meta content="social" name="author" />
 <meta name="uuid" content="{{Auth::user()->uuid ?? null}}">
+<meta name="csrf" content="{{csrf_token()}}">
 <!-- App favicon -->
 <link rel="shortcut icon" href="images/favicon.ico" id="tabIcon">

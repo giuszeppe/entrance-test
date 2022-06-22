@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('user/contacts', [UserController::class, 'getUserFromContacts'])->middleware('auth:sanctum')->name('contacts');
 Route::get('messages', [UserController::class, 'getMessages'])->middleware('auth:sanctum')->name('messages');
+Route::post('message', [UserController::class, 'postMessage'])->middleware('auth:sanctum')->name('sendMessage');
