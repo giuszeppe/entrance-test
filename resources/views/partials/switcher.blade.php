@@ -1,5 +1,5 @@
 <!-- Style switcher -->
-<div id="style-switcher">
+<div id="style-switcher" style="display:none">
     <ul class="list-unstyled mb-0 vstack gap-2">
         <li>
             <a data-bs-toggle="offcanvas" href="#theme-settings-offcanvas"

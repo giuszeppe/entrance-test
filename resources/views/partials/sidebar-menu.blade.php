@@ -42,25 +42,15 @@
                     <i class="ri-contacts-book-line"></i>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" id="pills-bookmark-tab" data-bs-toggle="pill" href="#pills-bookmark" role="tab">
-                    <i class="ri-bookmark-3-line"></i>
-                </a>
-            </li>
             <li class="nav-item d-none d-lg-block">
                 <a class="nav-link" id="pills-setting-tab" data-bs-toggle="pill" href="#pills-setting" role="tab">
                     <i class="ri-settings-4-line"></i>
                 </a>
             </li>
-            <li class="nav-item mt-lg-auto">
-                <a class="nav-link light-dark-mode" href="#">
-                    <i class="ri-moon-line"></i>
-                </a>
-            </li>
             <li class="nav-item dropdown profile-user-dropdown">
                 <a class="nav-link dropdown-toggle bg-light" href="#" role="button" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    <img src="images/users/avatar-1.jpg" alt="" class="profile-user rounded-circle">
+                    <img src="{{auth()->user()->profile}}" alt="" class="profile-user rounded-circle">
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item d-flex align-items-center justify-content-between" id="pills-user-tab"
@@ -69,9 +59,6 @@
                     <a class="dropdown-item d-flex align-items-center justify-content-between" id="pills-setting-tab"
                         data-bs-toggle="pill" href="#pills-setting" role="tab">Setting <i
                             class="bx bx-cog text-muted ms-1"></i></a>
-                    <a class="dropdown-item d-flex align-items-center justify-content-between"
-                        href="auth-changepassword">Change Password <i
-                            class="bx bx-lock-open text-muted ms-1"></i></a>
                     <div class="dropdown-divider"></div>
                     <form id="loggout-form" action="{{route('logout')}}" method="POST">
                         @csrf

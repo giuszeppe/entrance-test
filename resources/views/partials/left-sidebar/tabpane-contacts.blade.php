@@ -5,14 +5,6 @@
             <div class="flex-grow-1">
                 <h4 class="mb-4">Contacts</h4>
             </div>
-            <div class="flex-shrink-0">
-                <div>
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-soft-success btn-sm" data-bs-toggle="modal" data-bs-target="#addContact-exampleModal">
-                        <i class="bx bx-plus"></i>
-                    </button>
-                </div>
-            </div>
         </div>
 
         <form>

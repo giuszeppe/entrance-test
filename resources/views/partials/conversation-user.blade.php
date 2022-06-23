@@ -28,65 +28,11 @@
                         <div class="dropdown">
                             <button class="btn nav-btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                                <i class='bx bx-search'></i>
-                            </button>
-                            <div class="dropdown-menu p-0 dropdown-menu-end dropdown-menu-lg">
-                                <div class="search-box p-2">
-                                    <input type="text" class="form-control" placeholder="Search.."
-                                        id="searchChatMessage">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="list-inline-item d-none d-lg-inline-block me-2 ms-0">
-                        <button type="button" class="btn nav-btn" data-bs-toggle="modal"
-                            data-bs-target=".audiocallModal">
-                            <i class='bx bxs-phone-call'></i>
-                        </button>
-                    </li>
-
-                    <li class="list-inline-item d-none d-lg-inline-block me-2 ms-0">
-                        <button type="button" class="btn nav-btn" data-bs-toggle="modal"
-                            data-bs-target=".videocallModal">
-                            <i class='bx bx-video'></i>
-                        </button>
-                    </li>
-
-                    <li class="list-inline-item d-none d-lg-inline-block me-2 ms-0">
-                        <button type="button" class="btn nav-btn" data-bs-toggle="modal"
-                            data-bs-target=".pinnedtabModal">
-                            <i class='bx bx-bookmark'></i>
-                        </button>
-                    </li>
-
-                    <li class="list-inline-item d-none d-lg-inline-block me-2 ms-0">
-                        <button type="button" class="btn nav-btn user-profile-show">
-                            <i class='bx bxs-info-circle'></i>
-                        </button>
-                    </li>
-
-                    <li class="list-inline-item">
-                        <div class="dropdown">
-                            <button class="btn nav-btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
                                 <i class='bx bx-dots-vertical-rounded'></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <a class="dropdown-item d-flex justify-content-between align-items-center d-lg-none user-profile-show"
                                     href="#">View Profile <i class="bx bx-user text-muted"></i></a>
-                                <a class="dropdown-item d-flex justify-content-between align-items-center d-lg-none"
-                                    href="#" data-bs-toggle="modal" data-bs-target=".audiocallModal">Audio <i
-                                        class="bx bxs-phone-call text-muted"></i></a>
-                                <a class="dropdown-item d-flex justify-content-between align-items-center d-lg-none"
-                                    href="#" data-bs-toggle="modal" data-bs-target=".videocallModal">Video <i
-                                        class="bx bx-video text-muted"></i></a>
-                                <a class="dropdown-item d-flex justify-content-between align-items-center"
-                                    href="#">Archive <i class="bx bx-archive text-muted"></i></a>
-                                <a class="dropdown-item d-flex justify-content-between align-items-center"
-                                    href="#">Muted <i class="bx bx-microphone-off text-muted"></i></a>
-                                <a class="dropdown-item d-flex justify-content-between align-items-center"
-                                    href="#">Delete <i class="bx bx-trash text-muted"></i></a>
                             </div>
                         </div>
                     </li>
@@ -102,86 +48,6 @@
     <div class="chat-conversation p-3 p-lg-4 " id="chat-conversation" data-simplebar>
         <ul class="list-unstyled chat-conversation-list" id="users-conversation">
         </ul>
-
-        <!-- <div class="chat-list left" id="10">
-            <div class="conversation-list">
-                <div class="chat-avatar">
-                    <img src="images/users/avatar-2.jpg" alt="">
-                </div>
-                <div class="user-chat-content">
-                    <div class="ctext-wrap">
-                        <div class="message-img mb-0">
-                            <div class="message-img-list">
-                                <div>
-                                    <iframe src="https://www.youtube.com/embed/PHcgN1GTjdU" title="YouTube video"
-                                        class="w-100 rounded" autoplay allowfullscreen></iframe>
-                                </div>
-
-                                <div class="message-img-link">
-                                    <ul class="list-inline mb-0">
-                                        <li class="list-inline-item dropdown">
-                                            <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                                aria-haspopup="true" aria-expanded="false">
-                                                <i class="bx bx-dots-horizontal-rounded"></i>
-                                            </a>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item d-flex align-items-center justify-content-between"
-                                                    href="images/small/img-1.jpg" download="">
-                                                    Download <i class="bx bx-download ms-2 text-muted"></i>
-                                                </a>
-                                                <a class="dropdown-item d-flex align-items-center justify-content-between"
-                                                    href="#" data-bs-toggle="collapse" data-bs-target=".replyCollapse">
-                                                    Reply <i class="bx bx-share ms-2 text-muted"></i>
-                                                </a>
-                                                <a class="dropdown-item d-flex align-items-center justify-content-between"
-                                                    href="#" data-bs-toggle="modal" data-bs-target=".forwardModal">
-                                                    Forward <i class="bx bx-share-alt ms-2 text-muted"></i>
-                                                </a>
-                                                <a class="dropdown-item d-flex align-items-center justify-content-between"
-                                                    href="#">
-                                                    Bookmark <i class="bx bx-bookmarks text-muted ms-2"></i>
-                                                </a>
-                                                <a class="dropdown-item d-flex align-items-center justify-content-between delete-image"
-                                                    href="#">
-                                                    Delete <i class="bx bx-trash ms-2 text-muted"></i>
-                                                </a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="conversation-name">
-                        <small class="text-muted time">11:45 am</small>
-                        <span class="text-success check-message-icon"><i class="bx bx-check-double"></i></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="chat-list left" id="11">
-            <div class="conversation-list">
-                <div class="chat-avatar">
-                    <img src="images/users/avatar-2.jpg" alt="">
-                </div>
-                <div class="user-chat-content">
-                    <div class="ctext-wrap">
-                        <div class="message-img mb-0">
-                            <div class="message-img-list">
-                                <audio controls>
-                                    <source src="http://w3codegenerator.com/audio/audio.mp3" type="audio/mpeg">
-                                </audio>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="conversation-name">
-                        <small class="text-muted time">11:45 am</small>
-                        <span class="text-success check-message-icon"><i class="bx bx-check-double"></i></span>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </div>
 
     <div class="alert alert-warning alert-dismissible copyclipboard-alert px-4 fade show" id="copyClipBoard"
