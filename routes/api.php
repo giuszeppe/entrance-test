@@ -19,5 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('user/contacts', [UserController::class, 'getUserFromContacts'])->middleware('auth:sanctum')->name('contacts');
-Route::get('messages', [UserController::class, 'getMessages'])->middleware('auth:sanctum')->name('messages');
+Route::get('chatMessages', [UserController::class, 'getMessagesForUser'])->middleware('auth:sanctum')->name('chatMessages');
 Route::post('message', [UserController::class, 'postMessage'])->middleware('auth:sanctum')->name('sendMessage');
+Route::get('messages', [UserController::class, 'getMessages'])->middleware('auth:sanctum')->name('messages');
