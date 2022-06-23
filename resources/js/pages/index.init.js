@@ -62,137 +62,64 @@ import { formatTimeForMessages, getChatList } from './chat';
 
     // single to channel and channel to single chat conversation
    
-
     //user list by json
-    var getJSON = function (jsonurl, callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", url + jsonurl, true);
-        xhr.responseType = "json";
-        xhr.onload = function () {
-            var status = xhr.status;
-            if (status === 200) {
-                callback(null, xhr.response);
-            } else {
-                callback(status, xhr.response);
-            }
-        };
-        xhr.send();
-    };
+    const getUsersList = () =>{
+        var users = data[0].users;
+        users.forEach(function (userData, index) {
+            var isUserProfile = userData.profile
+                ? '<img src="' +
+                  userData.profile +
+                  '" class="rounded-circle avatar-xs" alt=""><span class="user-status"></span>'
+                : '<div class="avatar-xs"><span class="avatar-title rounded-circle bg-primary text-white"><span class="username">JL</span><span class="user-status"></span></span></div>';
 
-    getJSON("users.json", function (err, data) {
-        if (err !== null) {
-            console.log("Something went wrong: " + err);
-        } else {
-            // set favourite users list
-            var fav = data[0].favorites;
-            fav.forEach(function (user, index) {
-                var profile = user.profile
-                    ? '<img src="' +
-                      user.profile +
-                      '" class="rounded-circle avatar-xs" alt=""><span class="user-status"></span>'
-                    : '<div class="avatar-xs"><span class="avatar-title rounded-circle bg-primary text-white"><span class="username">' +
-                      user.nickname +
-                      '</span><span class="user-status"></span></span></div>';
-
-                var isMessageCount = user.messagecount
-                    ? '<div class="ms-auto"><span class="badge badge-soft-danger rounded p-1 fs-10">' +
-                      user.messagecount +
-                      "</span></div>"
-                    : "";
-                var messageCount = user.messagecount
-                    ? '<a href="javascript: void(0);" class="unread-msg-user">'
-                    : '<a href="javascript: void(0);">';
-
-                var activeClass = user.id === 1 ? "active" : "";
-                document.getElementById("favourite-users").innerHTML +=
-                    '<li id="contact-id-' +
-                    user.id +
-                    '" data-name="favorite" class="' +
-                    activeClass +
-                    '">\
-                  ' +
-                    messageCount +
-                    ' \
-                      <div class="d-flex align-items-center">\
-                          <div class="chat-user-img online align-self-center me-2 ms-0">\
-                              ' +
-                    profile +
-                    '\
-                          </div>\
-                          <div class="overflow-hidden me-2">\
-                              <p class="text-truncate chat-username mb-0">' +
-                    user.name +
-                    '</p>\
-                              <p class="text-truncate text-muted fs-13 mb-0">' +
-                    user.lastmessage +
-                    "</p>\
-                          </div>\
-                          " +
-                    isMessageCount +
-                    "\
-                      </div>\
-                  </a>\
-              </li>";
-            });
-
-            // set users message list
-            var users = data[0].users;
-            users.forEach(function (userData, index) {
-                var isUserProfile = userData.profile
-                    ? '<img src="' +
-                      userData.profile +
-                      '" class="rounded-circle avatar-xs" alt=""><span class="user-status"></span>'
-                    : '<div class="avatar-xs"><span class="avatar-title rounded-circle bg-primary text-white"><span class="username">JL</span><span class="user-status"></span></span></div>';
-
-                var isMessageCount = userData.messagecount
-                    ? '<div class="ms-auto"><span class="badge badge-soft-danger rounded p-1 fs-10">' +
-                      userData.messagecount +
-                      "</span></div>"
-                    : "";
-                var messageCount = userData.messagecount
-                    ? '<a href="javascript: void(0);" class="unread-msg-user">'
-                    : '<a href="javascript: void(0);">';
-                var activeClass = userData.id === 1 ? "active" : "";
-                var profile = userData.profile
-                    ? '<img src="' +
-                      userData.profile +
-                      '" class="rounded-circle avatar-xs" alt=""><span class="user-status"></span>'
-                    : '<div class="avatar-xs"><span class="avatar-title rounded-circle bg-primary text-white"><span class="username">' +
-                      userData.nickname +
-                      '</span><span class="user-status"></span></span></div>';
-                document.getElementById("usersList").innerHTML +=
-                    '<li id="contact-id-' +
+            var isMessageCount = userData.messagecount
+                ? '<div class="ms-auto"><span class="badge badge-soft-danger rounded p-1 fs-10">' +
+                  userData.messagecount +
+                  "</span></div>"
+                : "";
+            var messageCount = userData.messagecount
+                ? '<a href="javascript: void(0);" class="unread-msg-user">'
+                : '<a href="javascript: void(0);">';
+            var activeClass = userData.id === 1 ? "active" : "";
+            var profile = userData.profile
+                ? '<img src="' +
+                  userData.profile +
+                  '" class="rounded-circle avatar-xs" alt=""><span class="user-status"></span>'
+                : '<div class="avatar-xs"><span class="avatar-title rounded-circle bg-primary text-white"><span class="username">' +
+                  userData.nickname +
+                  '</span><span class="user-status"></span></span></div>';
+            document.getElementById("usersList").innerHTML +=
+                '<li id="contact-id-' +
                     userData.id +
                     '" data-name="favorite" class="' +
                     activeClass +
-                    '">\
-        ' +
+                '">\
+    ' +
                     messageCount +
-                    ' \
-            <div class="d-flex align-items-center">\
-                <div class="chat-user-img online align-self-center me-2 ms-0">\
-                    ' +
-                    profile +
-                    '\
-                </div>\
-                <div class="overflow-hidden me-2">\
-                    <p class="text-truncate chat-username mb-0">' +
-                    userData.name +
-                    '</p>\
-                    <p class="text-truncate text-muted fs-13 mb-0">' +
-                    userData.lastmessage +
-                    "</p>\
-                </div>\
-                " +
-                    isMessageCount +
-                    "\
-            </div>\
-        </a>\
-    </li>";
-            });
-        }
+                ' \
+                        <div class="d-flex align-items-center">\
+                            <div class="chat-user-img online align-self-center me-2 ms-0">\
+                                ' +
+                                profile +
+                                '\
+                            </div>\
+                            <div class="overflow-hidden me-2">\
+                                <p class="text-truncate chat-username mb-0">' +
+                                userData.name +
+                                '</p>\
+                                <p class="text-truncate text-muted fs-13 mb-0">' +
+                                userData.lastmessage +
+                                "</p>\
+                            </div>\
+                            " +
+                                isMessageCount +
+                                "\
+                        </div>\
+                    </a>\
+                </li>";
         toggleSelected();
-    });
+    })
+}
 
     //Contact List dynamic Details
     function contactList() {
@@ -357,15 +284,7 @@ import { formatTimeForMessages, getChatList } from './chat';
 
     //Auto Focus curser to Text Box Area
 
-    document.getElementById("favourite-users").onclick = function () {
-        document.getElementById("chat-input").focus();
-    };
-
     document.getElementById("usersList").onclick = function () {
-        document.getElementById("chat-input").focus();
-    };
-
-    document.getElementById("channelList").onclick = function () {
         document.getElementById("chat-input").focus();
     };
 
