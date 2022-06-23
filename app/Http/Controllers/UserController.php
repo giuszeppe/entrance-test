@@ -50,6 +50,8 @@ class UserController extends Controller
 
         
         $messages = collect([$received,$sent])->flatten();
+        $ids = $messages->where('to_id',auth()->user()->uuid)->pluck('id');
+        Message::find($ids)->each(function($item){$item->read = true;$item->save();});
         $messages = $messages->sortBy('created_at')->values()->all();
         return response()->json([
             'lenght' => count($messages),
@@ -68,26 +70,44 @@ class UserController extends Controller
         MessageSent::dispatch([
             'content' => $message->content,
             'to_id' => $message->to_id,
-            'timestamp' => $message->created_at
+            'timestamp' => $message->created_at,
+            'from_id' => auth()->user()->uuid
         ]);
     }
     public function getMessages()
     {
-        $received = Message::where('to_id', auth()->user()->uuid)->orderByDesc('created_at')->get();
-        $messages = [];
+        $received = Message::where('to_id', auth()->user()->uuid)
+            ->orWhere('from_id',auth()->user()->uuid)
+            ->orderByDesc('created_at')->get();
+        $messages = collect();
         $ids = [];
         foreach ($received as $message => $item) {
-            if(!in_array($item->from_id,$ids)){
-                array_push($ids,$item->from_id);
-                array_push($messages,[
+            if(!in_array($item->from_id,$ids) && !in_array($item->to_id,$ids)){
+                if($item->from_id == auth()->user()->uuid){
+                    array_push($ids,$item->to_id);
+                } else {
+                    array_push($ids,$item->from_id);
+                }
+                $notReadCount = Message::where('from_id',$item->from_id)
+                    ->where('to_id',auth()->user()->uuid)
+                    ->where('read',false)->count();
+                $messages->push([
                     'message' => Message::findOrFail($item->id),
-                    'sender' => User::where('uuid',$item->from_id)->first()
+                    'sender' => User::where('uuid',$item->from_id == auth()->user()->uuid ? $item->to_id : $item->from_id)->first(),
+                    'notReadCount' => $notReadCount
                 ]);
             }
         }
+        
         return response()->json([
             'messages' => $messages
         ]);
+    }
+    public function readMessage(Request $request)
+    {
+        $chatId = $request->get('chatId');
+        Message::where('from_id',$chatId)->where('to_id', auth()->user()->uuid)->update(['read' => true]);
+        return response()->json([]);
     }
     //
 }

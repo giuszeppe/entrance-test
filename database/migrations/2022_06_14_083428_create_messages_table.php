@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('content');
             $table->foreignUuid('from_id')->references('uuid')->on('users');
             $table->foreignUuid('to_id')->references('uuid')->on('users');
+            $table->boolean('read')->default(false);
         });
     }
 

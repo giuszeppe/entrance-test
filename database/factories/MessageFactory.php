@@ -20,7 +20,8 @@ class MessageFactory extends Factory
             'content' => $this->faker->text(30),
             'from_id' => \App\Models\User::all()->random(1)[0]->uuid,
             'to_id' => \App\Models\User::all()->random(1)[0]->uuid,
-            'created_at' => $this->faker->dateTimeBetween('-1 years','now')
+            'created_at' => $this->faker->dateTimeBetween('-1 years','now'),
+            'read' => 1
         ];
     }
 }
