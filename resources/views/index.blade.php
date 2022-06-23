@@ -102,9 +102,7 @@
 
 <!-- page init -->
 <script src="js/pages/index.init.js"></script>
-<script src="js/pages/chat.js"></script>
 
-<script src="js/app.js"></script>
 </body>
 
 </html>

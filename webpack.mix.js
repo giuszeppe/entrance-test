@@ -16,19 +16,13 @@ const mix = require("laravel-mix");
 // .sass("resources/scss/app.scss", "public/css")
 // .sourceMaps();
 
-let fs = require("fs");
-
-let getFiles = function (dir) {
-    // get all 'files' in this directory
-    // filter directories
-    return fs.readdirSync(dir).filter((file) => {
-        return fs.statSync(`${dir}/${file}`).isFile();
-    });
-};
-
-getFiles("resources/js").forEach(function (filepath) {
-    mix.js("resources/js/" + filepath, "public/js").sourceMaps();
-});
-getFiles("resources/js/pages").forEach(function (filepath) {
-    mix.js("resources/js/pages/" + filepath, "public/js/pages").sourceMaps();
-});
+mix.js('resources/js/pages/login.js','public/js/login.js')
+    .js('resources/js/dir/messageTemplate.js','public/js/dir')
+    .js('resources/js/pages/password-addon.init.js','public/js/pages')
+    .js('resources/js/pages/theme-style.init.js','public/js/pages')
+    .js('resources/js/pages/validation.init.js','public/js/pages')
+    .js('resources/js/app.js','public/js')
+    .js('resources/js/request.js','public/js')
+    .js('resources/js/pages/chat.js','public/js/pages')
+    .js('resources/js/pages/users.js','public/js/pages')
+    .js('resources/js/pages/index.init.js','public/js/pages');

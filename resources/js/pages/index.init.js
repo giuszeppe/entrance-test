@@ -6,8 +6,11 @@ Contact: themesbrand@gmail.com
 File: Index init js
 */
 import { getDropdownContact, getDropdownMessage } from '../dir/messageTemplate';
+import { scrollToBottom } from '../helpers';
 import {axios} from '../request';
-import { formatTimeForMessages, getChatList } from './chat';
+import { formatTimeForMessages, getChatList, getMsg, updateSelectedChat } from './chat';
+import { toggleSelected } from './chat';
+import { getUsersList } from './users';
 
 (function () {
     var isreplyMessage = false;
@@ -22,294 +25,19 @@ import { formatTimeForMessages, getChatList } from './chat';
     document.getElementById("copyClipBoardChannel").style.display = "none";
 
     // chat user responsive hide show
-    function toggleSelected() {
-        var userChatElement = document.getElementsByClassName("user-chat");
-        document
-            .querySelectorAll(".chat-user-list li a")
-            .forEach(function (item) {
-                item.addEventListener("click", function (event) {
-                    userChatElement.forEach(function (elm) {
-                        elm.classList.add("user-chat-show");
-                    });
-
-                    // chat user list link active
-                    var chatUserList = document.querySelector(
-                        ".chat-user-list li.active"
-                    );
-                    if (chatUserList) chatUserList.classList.remove("active");
-                    this.parentNode.classList.add("active");
-                });
-            });
-
-        document
-            .querySelectorAll(".sort-contact ul li")
-            .forEach(function (item2) {
-                item2.addEventListener("click", function (event) {
-                    userChatElement.forEach(function (elm) {
-                        elm.classList.add("user-chat-show");
-                    });
-                });
-            });
-        // user-chat-remove
-        document.querySelectorAll(".user-chat-remove").forEach(function (item) {
-            item.addEventListener("click", function (event) {
-                userChatElement.forEach(function (elm) {
-                    elm.classList.remove("user-chat-show");
-                });
-            });
-        });
-    }
+    
 
     // single to channel and channel to single chat conversation
    
     //user list by json
-    const getUsersList = () =>{
-        axios.get('/api/messages')
-            .then((response)=>{
-                let users = JSON.parse(response.data).messages;
-                users.forEach(function (userData, index) {
-                    let message = userData.message;
-                    let sender = userData.sender;
-                    var isUserProfile = sender.profile
-                        ? '<img src="' +
-                          sender.profile +
-                          '" class="rounded-circle avatar-xs" alt=""><span class="user-status"></span>'
-                        : '<div class="avatar-xs"><span class="avatar-title rounded-circle bg-primary text-white"><span class="username">JL</span><span class="user-status"></span></span></div>';
-                    // TODO
-                    var isMessageCount = sender.messagecount
-                        ? '<div class="ms-auto"><span class="badge badge-soft-danger rounded p-1 fs-10">' +
-                          sender.messagecount +
-                          "</span></div>"
-                        : "";
-                    var messageCount = sender.messagecount
-                        ? '<a href="javascript: void(0);" class="unread-msg-user">'
-                        : '<a href="javascript: void(0);">';
-                    // END TODO
-                    //var activeClass = sender.id === 1 ? "active" : "";
-                    var profile = sender.profile
-                        ? '<img src="' +
-                          sender.profile +
-                          '" class="rounded-circle avatar-xs" alt=""><span class="user-status"></span>'
-                        : '<div class="avatar-xs"><span class="avatar-title rounded-circle bg-primary text-white"><span class="username">' +
-                          sender.name +
-                          '</span><span class="user-status"></span></span></div>';
-                    profile += `<input type="hidden" class="_user-uuid" value="${sender.uuid}" \>`
-                    document.getElementById("usersList").innerHTML +=
-                        '<li id="contact-id-' +
-                            sender.id +
-                            '" data-name="favorite">\
-            ' +
-                            messageCount +
-                        ' \
-                                <div class="d-flex align-items-center">\
-                                    <div class="chat-user-img online align-self-center me-2 ms-0">\
-                                        ' +
-                                        profile +
-                                        '\
-                                    </div>\
-                                    <div class="overflow-hidden me-2">\
-                                        <p class="text-truncate chat-username mb-0">' +
-                                        sender.name +
-                                        '</p>\
-                                        <p class="text-truncate text-muted fs-13 mb-0">' +
-                                        message.content +
-                                        "</p>\
-                                    </div>\
-                                    " +
-                                        isMessageCount +
-                                        "\
-                                </div>\
-                            </a>\
-                        </li>";
-                toggleSelected();
-                })
-                document.querySelectorAll('#usersList li').forEach((item) =>{
-                    item.addEventListener("click", function (event) {
-                        item.
-                        currentSelectedChat = "users";
-                        updateSelectedChat();
-                        let uuid = item.querySelector('._user-uuid').value
-                        var contactName = item.querySelector(".chat-username").innerHTML;
-                        document.querySelector(
-                            ".text-truncate .user-profile-show"
-                        ).innerHTML = contactName;
-                        document.querySelector(
-                            ".user-profile-desc .text-truncate"
-                        ).innerHTML = contactName;
-                        document.querySelector(
-                            ".audiocallModal .text-truncate"
-                        ).innerHTML = contactName;
-                        document.querySelector(
-                            ".videocallModal .text-truncate"
-                        ).innerHTML = contactName;
-                        document.querySelector(
-                            ".user-profile-sidebar .user-name"
-                        ).innerHTML = contactName;
-                        document.querySelector(".chat-input-typing").style.display =
-                            "block";
-                        document.querySelector(
-                            ".user-profile-status"
-                        ).style.display = "block";
-                        document.querySelector(
-                            ".chat-input-typing .typing-user"
-                        ).innerHTML =
-                            contactName +
-                            ' is Typing<span class="typing ms-2"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>';
-
-                        var contactImg = item
-                            .querySelector(".avatar-xs")
-                            .getAttribute("src");
-                        if (contactImg) {
-                            document
-                                .querySelector(".user-own-img .avatar-sm")
-                                .setAttribute("src", contactImg);
-                            document
-                                .querySelector(".user-profile-sidebar .profile-img")
-                                .setAttribute("src", contactImg);
-                            document
-                                .querySelector(".audiocallModal .img-thumbnail")
-                                .setAttribute("src", contactImg);
-                            document
-                                .querySelector(".videocallModal .videocallModal-bg")
-                                .setAttribute("src", contactImg);
-                        } else {
-                            document
-                                .querySelector(".user-own-img .avatar-sm")
-                                .setAttribute("src", dummyImage);
-                            document
-                                .querySelector(".user-profile-sidebar .profile-img")
-                                .setAttribute("src", dummyImage);
-                            document
-                                .querySelector(".audiocallModal .img-thumbnail")
-                                .setAttribute("src", dummyImage);
-                            document
-                                .querySelector(".videocallModal .videocallModal-bg")
-                                .setAttribute("src", dummyImage);
-                        }
-                        var conversationImg =
-                            document.getElementById("users-conversation");
-                        conversationImg
-                            .querySelectorAll(".left .chat-avatar")
-                            .forEach(function (item3) {
-                                if (contactImg) {
-                                    item3
-                                        .querySelector("img")
-                                        .setAttribute("src", contactImg);
-                                } else {
-                                    item3
-                                        .querySelector("img")
-                                        .setAttribute("src", dummyImage);
-                                }
-                            });
-                        fetchMessages(uuid);
-                    })
-                })
-            })
-        
-    }
-getUsersList();
+    
+    getUsersList();
 
 
     //Contact List dynamic Details
-    function contactList() {
-        document
-            .querySelectorAll(".sort-contact ul li")
-            .forEach(function (item) {
-                item.addEventListener("click", function (event) {
-                    item.
-                    currentSelectedChat = "users";
-                    updateSelectedChat();
-                    let uuid = item.querySelector('._user-uuid').value
-                    var contactName = item.querySelector("li .fs-14").innerHTML;
-                    document.querySelector(
-                        ".text-truncate .user-profile-show"
-                    ).innerHTML = contactName;
-                    document.querySelector(
-                        ".user-profile-desc .text-truncate"
-                    ).innerHTML = contactName;
-                    document.querySelector(
-                        ".audiocallModal .text-truncate"
-                    ).innerHTML = contactName;
-                    document.querySelector(
-                        ".videocallModal .text-truncate"
-                    ).innerHTML = contactName;
-                    document.querySelector(
-                        ".user-profile-sidebar .user-name"
-                    ).innerHTML = contactName;
-                    document.querySelector(".chat-input-typing").style.display =
-                        "block";
-                    document.querySelector(
-                        ".user-profile-status"
-                    ).style.display = "block";
-                    document.querySelector(
-                        ".chat-input-typing .typing-user"
-                    ).innerHTML =
-                        contactName +
-                        ' is Typing<span class="typing ms-2"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>';
+    
 
-                    var contactImg = item
-                        .querySelector("li .align-items-center")
-                        .querySelector(".avatar-xs .rounded-circle")
-                        .getAttribute("src");
-                    if (contactImg) {
-                        document
-                            .querySelector(".user-own-img .avatar-sm")
-                            .setAttribute("src", contactImg);
-                        document
-                            .querySelector(".user-profile-sidebar .profile-img")
-                            .setAttribute("src", contactImg);
-                        document
-                            .querySelector(".audiocallModal .img-thumbnail")
-                            .setAttribute("src", contactImg);
-                        document
-                            .querySelector(".videocallModal .videocallModal-bg")
-                            .setAttribute("src", contactImg);
-                    } else {
-                        document
-                            .querySelector(".user-own-img .avatar-sm")
-                            .setAttribute("src", dummyImage);
-                        document
-                            .querySelector(".user-profile-sidebar .profile-img")
-                            .setAttribute("src", dummyImage);
-                        document
-                            .querySelector(".audiocallModal .img-thumbnail")
-                            .setAttribute("src", dummyImage);
-                        document
-                            .querySelector(".videocallModal .videocallModal-bg")
-                            .setAttribute("src", dummyImage);
-                    }
-                    var conversationImg =
-                        document.getElementById("users-conversation");
-                    conversationImg
-                        .querySelectorAll(".left .chat-avatar")
-                        .forEach(function (item3) {
-                            if (contactImg) {
-                                item3
-                                    .querySelector("img")
-                                    .setAttribute("src", contactImg);
-                            } else {
-                                item3
-                                    .querySelector("img")
-                                    .setAttribute("src", dummyImage);
-                            }
-                        });
-                    toggleSelected()
-                    fetchMessages(uuid)
-                    //window.stop();
-                });
-            });
-    }
-
-    function updateSelectedChat() {
-        if (currentSelectedChat == "users") {
-            document.getElementById("channel-chat").style.display = "none";
-            document.getElementById("users-chat").style.display = "block";
-        } else {
-            document.getElementById("channel-chat").style.display = "block";
-            document.getElementById("users-chat").style.display = "none";
-        }
-    }
-    updateSelectedChat();
+    updateSelectedChat()
 
     // Profile hide/show
     var userProfileSidebar = document.querySelector(".user-profile-sidebar");
@@ -378,23 +106,7 @@ getUsersList();
     };
 
     // Scroll to Bottom
-    function scrollToBottom(id) {
-        var simpleBar = document
-            .getElementById(id)
-            .querySelector("#chat-conversation .simplebar-content-wrapper");
-        var offsetHeight = document.getElementsByClassName(
-            "chat-conversation-list"
-        )[0]
-            ? document
-                  .getElementById(id)
-                  .getElementsByClassName("chat-conversation-list")[0]
-                  .scrollHeight -
-              window.innerHeight +
-              250
-            : 0;
-        if (offsetHeight)
-            simpleBar.scrollTo({ top: offsetHeight, behavior: "smooth" });
-    }
+    
 
     //add an eventListener to the from
     var chatForm = document.querySelector("#chatinput-form");
@@ -615,8 +327,9 @@ getUsersList();
                     isreplyMessage = false;
                 } else {
                     getChatList(chatId, chatInputValue,null,'right');
+                    getUsersList()
                     const params = new URLSearchParams()
-                    let uuid = document.getElementById('userChatUuid').value
+                    let uuid = document.getElementById('users-conversation').getAttribute('selected-chat')
                     params.append('uuid',uuid)
                     params.append('content',chatInputValue)
                     axios.post('/api/message/', params)
@@ -634,89 +347,6 @@ getUsersList();
             document.getElementById("close_toggle").click();
         });
     }
-
-    // remove chat list
-    function deleteMessage() {
-        var deleteItems = itemList.querySelectorAll(".delete-item");
-        deleteItems.forEach(function (item) {
-            item.addEventListener("click", function () {
-                item.closest(".user-chat-content").childElementCount == 2
-                    ? item.closest(".chat-list").remove()
-                    : item.closest(".ctext-wrap").remove();
-            });
-        });
-    }
-
- 
-    //Copy ClipBoard Alert
-    function copyClipboard() {
-        var copyClipboardAlert = document.querySelectorAll(".copy-message");
-        copyClipboardAlert.forEach(function (item) {
-            item.addEventListener("click", function () {
-                document.getElementById("copyClipBoard").style.display =
-                    "block";
-                document.getElementById("copyClipBoardChannel").style.display =
-                    "block";
-                setTimeout(hideclipboard, 1000);
-                function hideclipboard() {
-                    document.getElementById("copyClipBoard").style.display =
-                        "none";
-                    document.getElementById(
-                        "copyClipBoardChannel"
-                    ).style.display = "none";
-                }
-            });
-        });
-    }
-
-    //Copy Messages
-    function copyMessage() {
-        var copyMessage = itemList.querySelectorAll(".copy-message");
-        copyMessage.forEach(function (item) {
-            item.addEventListener("click", function () {
-                var isText = item.closest(".ctext-wrap").children[0]
-                    ? item.closest(".ctext-wrap").children[0].children[0]
-                          .innerText
-                    : "";
-                navigator.clipboard.writeText(isText);
-            });
-        });
-    }
-
-    //reply message
-    function replyMessage() {
-        var replyMessage = itemList.querySelectorAll(".reply-message");
-        var replyToggleOpen = document.querySelector(".replyCard");
-        var replyToggleClose = document.querySelector("#close_toggle");
-
-        replyMessage.forEach(function (item) {
-            item.addEventListener("click", function () {
-                isreplyMessage = true;
-                replyToggleOpen.classList.add("show");
-                replyToggleClose.addEventListener("click", function () {
-                    replyToggleOpen.classList.remove("show");
-                });
-
-                var replyMsg =
-                    item.closest(".ctext-wrap").children[0].children[0]
-                        .innerText;
-                document.querySelector(
-                    ".replyCard .replymessage-block .flex-grow-1 .mb-0"
-                ).innerText = replyMsg;
-                var replyuser =
-                    document.querySelector(".user-profile-show").innerHTML;
-                var msgWwnerName = item.closest(".chat-list")
-                    ? item.closest(".chat-list").classList.contains("left")
-                        ? replyuser
-                        : "You"
-                    : replyuser;
-                document.querySelector(
-                    ".replyCard .replymessage-block .flex-grow-1 .conversation-name"
-                ).innerText = msgWwnerName;
-            });
-        });
-    }
-
     // Profile Foreground Img
     document
         .querySelector("#profile-foreground-img-file-input")
@@ -837,64 +467,6 @@ getUsersList();
     }
 
     // getNextMsgCounts
-    function getNextMsgCounts(chatsData, i, from_id) {
-        var counts = 0;
-        while (chatsData[i]) {
-            if (chatsData[i + 1] && chatsData[i + 1]["from_id"] == from_id) {
-                counts++;
-                i++;
-            } else {
-                break;
-            }
-        }
-        return counts;
-    }
-
-    //getNextMsgs
-    function getNextMsgs(chatsData, i, from_id, isContinue) {
-        var msgs = 0;
-        while (chatsData[i]) {
-            if (chatsData[i + 1] && chatsData[i + 1]["from_id"] == from_id) {
-                msgs = getMsg(
-                    chatsData[i + 1].id,
-                    chatsData[i + 1].msg,
-                    chatsData[i + 1].has_images,
-                    chatsData[i + 1].has_files,
-                    chatsData[i + 1].has_audios,
-                    chatsData[i + 1].has_videos,
-                    chatsData[i + 1].has_dropDown
-                );
-                i++;
-            } else {
-                break;
-            }
-        }
-        return msgs;
-    }
-
-    // getMsg
-    function getMsg(
-        id,
-        msg,
-        has_dropDown
-    ) {
-        var msgHTML = '<div class="ctext-wrap">';
-        if (msg != null) {
-            msgHTML +=
-                '<div class="ctext-wrap-content" id=' +
-                id +
-                '>\
-        <p class="mb-0 ctext-content">' +
-                msg +
-                "</p></div>";
-        } 
-        if (has_dropDown === true) {
-            msgHTML += getDropdownMessage()
-        ;
-        }
-        msgHTML += "</div>";
-        return msgHTML;
-    }
 
 var input, filter, ul, li, a, i, j, div;
 // Search User
@@ -997,87 +569,8 @@ function updateContacts(data){
     contactList()
 }
 
-function fetchMessages(uuid){
-    axios.get('/api/chatMessages', {params:{ 'uuid' : uuid}})
-        .then((response) => {
-            updateChats(JSON.parse(response.data));
-        })
-}
-function resetOldChats(){
-    document.getElementById('users-conversation').innerHTML = "";
-}
-function updateChats(chatData){
-    resetOldChats()
-    var {lenght,messages,sender}  = chatData
-    var itemList = document.getElementById("users-conversation");
-    let messageIds = itemList.childElementCount;
-    let currentSelectedChat = 'users'
-        let  isContinue = 0;
-        messages.forEach(function (message, index) {
-            messageIds++;
 
-            let userChatUuid = sender.uuid
-            /*if (isContinue > 0) {
-                isContinue = isContinue - 1;
-                return;
-            }*/
-            let  isAlighn =
-                message.from_id != userChatUuid ? " right" : " left";
-            let  msgHTML =
-                '<li class="chat-list' +
-                isAlighn +
-                '" id=chat-list-' +
-                messageIds +
-                '>\
-                <div class="conversation-list">';
-            if (userChatUuid == message.from_id && sender)
-                msgHTML +=
-                    '<div class="chat-avatar"><img src="' +
-                   'images/users/user-dummy-img.jpg' +
-                    '" alt=""></div>';
 
-            msgHTML += '<div class="user-chat-content"> <input type="hidden" id="userChatUuid" value="' + userChatUuid + '">';
-            msgHTML += getMsg(
-                message.id,
-                message.content,
-                true
-            );
-            if (
-                messages[index + 1] &&
-                message.from_id == messages[index + 1]["from_id"]
-            ) {
-                isContinue = getNextMsgCounts(
-                    messages,
-                    index,
-                    message.from_id
-                );
-                msgHTML += getNextMsgs(
-                    messages,
-                    index,
-                    message.from_id,
-                    isContinue
-                );
-            }
-            msgHTML +=
-                '<div class="conversation-name"><small class="text-muted time">' +
-                formatTimeForMessages(message.created_at) +
-                '</small> <span class="text-success check-message-icon"><i class="bx bx-check-double"></i></span></div>';
-            msgHTML +=
-                "</div>\
-        </div>\
-    </li>";
-
-            document.getElementById(
-                currentSelectedChat + "-conversation"
-            ).innerHTML += msgHTML;
-        });
-    
-    deleteMessage();
-    copyMessage();
-    scrollToBottom("users-chat");
-    copyClipboard();
-    replyMessage();
-}
 
 //Search contact on contactModalList
 function searchContactOnModal() {

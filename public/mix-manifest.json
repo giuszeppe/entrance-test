@@ -1,11 +1,12 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/js/bootstrap.js": "/js/bootstrap.js",
-    "/js/request.js": "/js/request.js",
-    "/js/pages/chat.js": "/js/pages/chat.js",
-    "/js/pages/index.init.js": "/js/pages/index.init.js",
-    "/js/pages/login.js": "/js/pages/login.js",
+    "/js/login.js": "/js/login.js",
     "/js/pages/password-addon.init.js": "/js/pages/password-addon.init.js",
     "/js/pages/theme-style.init.js": "/js/pages/theme-style.init.js",
-    "/js/pages/validation.init.js": "/js/pages/validation.init.js"
+    "/js/pages/validation.init.js": "/js/pages/validation.init.js",
+    "/js/app.js": "/js/app.js",
+    "/js/request.js": "/js/request.js",
+    "/js/pages/chat.js": "/js/pages/chat.js",
+    "/js/pages/users.js": "/js/pages/users.js",
+    "/js/dir/messageTemplate.js": "/js/dir/messageTemplate.js",
+    "/js/pages/index.init.js": "/js/pages/index.init.js"
 }
