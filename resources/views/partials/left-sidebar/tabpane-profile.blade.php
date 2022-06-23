@@ -35,7 +35,7 @@
 
     <div class="text-center border-bottom border-bottom-dashed pt-2 pb-4 mt-n5 position-relative">
         <div class="mb-lg-3 mb-2">
-            <img src="images/users/avatar-1.jpg" class="rounded-circle avatar-lg img-thumbnail" alt="">
+            <img src="{{auth()->user()->profile}}" class="rounded-circle avatar-lg img-thumbnail" alt="">
         </div>
 
         <h5 class="fs-17 mb-1 text-truncate">{{Auth::user()->name}}</h5>

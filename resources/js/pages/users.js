@@ -14,7 +14,6 @@ export const getUsersList = () =>{
                 document.getElementById('usersList').innerHTML = ""
                 
                 users.forEach(function (userData, index) {
-                    console.log(userData.notReadCount);
                     let notReadCount = userData.notReadCount
                     let message = userData.message;
                     let sender = userData.sender;
@@ -74,7 +73,6 @@ export const getUsersList = () =>{
                 document.querySelectorAll('#usersList li').forEach((item) =>{
                     item.addEventListener("click", function (event) {
                         let unreadMessage = item.querySelector('.d-flex .ms-auto')
-                        console.log(unreadMessage);
                         if(unreadMessage){
                             unreadMessage.style.display = 'none'
                         }
@@ -99,15 +97,10 @@ export const getUsersList = () =>{
                             ".user-profile-sidebar .user-name"
                         ).innerHTML = contactName;
                         document.querySelector(".chat-input-typing").style.display =
-                            "block";
+                            "none";
                         document.querySelector(
                             ".user-profile-status"
-                        ).style.display = "block";
-                        document.querySelector(
-                            ".chat-input-typing .typing-user"
-                        ).innerHTML =
-                            contactName +
-                            ' is Typing<span class="typing ms-2"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>';
+                        ).style.display = "none";
 
                         var contactImg = item
                             .querySelector(".avatar-xs")
@@ -158,6 +151,12 @@ export const getUsersList = () =>{
                     })
                 })
             })
+            .finally(() =>{
+                if(!document.getElementById("users-conversation").getAttribute('selected-chat')){
+                    document.querySelector('#usersList li').click()
+                }
+                
+            })
         
     }
 export const contactList = () => {
@@ -186,15 +185,11 @@ export const contactList = () => {
                     ".user-profile-sidebar .user-name"
                 ).innerHTML = contactName;
                 document.querySelector(".chat-input-typing").style.display =
-                    "block";
+                    "none";
                 document.querySelector(
                     ".user-profile-status"
-                ).style.display = "block";
-                document.querySelector(
-                    ".chat-input-typing .typing-user"
-                ).innerHTML =
-                    contactName +
-                    ' is Typing<span class="typing ms-2"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>';
+                ).style.display = "none";
+
 
                 var contactImg = item
                     .querySelector("li .align-items-center")
@@ -248,3 +243,31 @@ export const contactList = () => {
             });
         });
 }
+
+window.addEventListener('load',() => {
+    // profile user edit
+    document
+        .getElementById("user-profile-edit-btn")
+        .addEventListener("click", function (e) {
+            document
+                .querySelectorAll(".edit-input .form-control")
+                .forEach(function (item) {
+                    var editIcon = document.getElementById("edit-icon");
+                    if (item.disabled) {
+                        editIcon.classList.replace("bxs-pencil", "bxs-save");
+                        item.disabled = false;
+                    } else {
+                        let name = document.getElementById('editName').value;
+                        let email = document.getElementById('editEmail').value;
+                        const formData = new FormData();
+                        formData.append('name',name)
+                        formData.append('email',email)
+                        axios.post('/api/user/update', formData);
+                        editIcon.classList.replace("bxs-save", "bxs-pencil");
+                        item.disabled = true;
+                    }
+                });
+        });
+
+
+})

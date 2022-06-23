@@ -204,7 +204,7 @@ export const updateChats = (chatData) => {
             if (userChatUuid == message.from_id && sender)
                 msgHTML +=
                     '<div class="chat-avatar"><img src="' +
-                   'images/users/user-dummy-img.jpg' +
+                   sender.profile +
                     '" alt=""></div>';
 
             msgHTML += '<div class="user-chat-content">';

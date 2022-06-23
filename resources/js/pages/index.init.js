@@ -5,31 +5,21 @@ Website: https://themesbrand.com/
 Contact: themesbrand@gmail.com
 File: Index init js
 */
-import { getDropdownContact, getDropdownMessage } from '../dir/messageTemplate';
+import { getDropdownContact } from '../dir/messageTemplate';
 import { scrollToBottom } from '../helpers';
 import {axios} from '../request';
-import { formatTimeForMessages, getChatList, getMsg, updateSelectedChat } from './chat';
-import { toggleSelected } from './chat';
-import { getUsersList } from './users';
+import {  getChatList,  updateSelectedChat } from './chat';
+import { contactList, getUsersList } from './users';
 
 (function () {
     var isreplyMessage = false;
     var currentChatId = "users-chat";
-    var dummyImage = "images/users/user-dummy-img.jpg";
-
-    var currentSelectedChat = "users";
-    var url = window.location.origin + "/js/dir/";
-    var usersList = [];
-    var userChatId = 1;
     document.getElementById("copyClipBoard").style.display = "none";
     document.getElementById("copyClipBoardChannel").style.display = "none";
 
-    // chat user responsive hide show
     
 
-    // single to channel and channel to single chat conversation
    
-    //user list by json
     
     getUsersList();
 
@@ -56,21 +46,6 @@ import { getUsersList } from './users';
         conversationScroll.scrollTop = conversationScroll.scrollHeight;
     });
 
-    // body click hide collapse
-    var myCollapse = document.getElementById("chatinputmorecollapse");
-    document.body.addEventListener("click", function () {
-        var bsCollapse = new bootstrap.Collapse(myCollapse, {
-            toggle: false,
-        });
-        bsCollapse.hide();
-    });
-
-    // chat conversation swiper
-    if (myCollapse) {
-        myCollapse.addEventListener("shown.bs.collapse", function () {
-            initSwiper();
-        });
-    }
 
     function initSwiper() {
         var swiper = new Swiper(".chatinput-links", {
@@ -387,6 +362,9 @@ import { getUsersList } from './users';
             );
             if (file) {
                 reader.readAsDataURL(file);
+                const formData = new FormData();
+                formData.append('profile',file)
+                axios.post('/api/user/update', formData);
             }
         });
 
@@ -419,74 +397,11 @@ import { getUsersList } from './users';
         };
     }
 
-    // chat emojiPicker input
-    var emojiPicker = new FgEmojiPicker({
-        trigger: [".emoji-btn"],
-        removeOnSelection: false,
-        closeButton: true,
-        position: ["top", "right"],
-        preFetch: true,
-        dir: "js/dir/json",
-        insertInto: document.querySelector(".chat-input"),
-    });
+   
 
-    // emojiPicker position
-    var emojiBtn = document.getElementById("emoji-btn");
-    emojiBtn.addEventListener("click", function () {
-        setTimeout(function () {
-            var fgEmojiPicker =
-                document.getElementsByClassName("fg-emoji-picker")[0];
-            if (fgEmojiPicker) {
-                var leftEmoji = window.getComputedStyle(fgEmojiPicker)
-                    ? window
-                          .getComputedStyle(fgEmojiPicker)
-                          .getPropertyValue("left")
-                    : "";
-                if (leftEmoji) {
-                    leftEmoji = leftEmoji.replace("px", "");
-                    leftEmoji = leftEmoji - 40 + "px";
-                    fgEmojiPicker.style.left = leftEmoji;
-                }
-            }
-        }, 0);
-    });
-
-    function getJSONFile(jsonurl, callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", jsonurl, true);
-        xhr.responseType = "json";
-        xhr.onload = function () {
-            var status = xhr.status;
-            if (status === 200) {
-                callback(null, xhr.response);
-            } else {
-                callback(status, xhr.response);
-            }
-        };
-        xhr.send();
-    }
-
-    // getNextMsgCounts
 
 var input, filter, ul, li, a, i, j, div;
-// Search User
-function searchUser() {
-    input = document.getElementById("searchChatUser");
-    filter = input.value.toUpperCase();
-    ul = document.querySelector(".chat-room-list");
-    li = ul.getElementsByTagName("li");
-    for (i = 0; i < li.length; i++) {
-        var item = li[i];
-        var txtValue = item.querySelector("p").innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
-    }
-}
 
-//Search Contacts
 
 function searchContacts() {
     let input = document.getElementById("searchContact");
@@ -572,80 +487,7 @@ function updateContacts(data){
 
 
 
-//Search contact on contactModalList
-function searchContactOnModal() {
-    input = document.getElementById("searchContactModal");
-    filter = input.value.toUpperCase();
-    list = document.querySelector(".contact-modal-list");
-    li = list.querySelectorAll(".mt-2 li");
-    div = list.querySelectorAll(".mt-2 .contact-list-title");
 
-    for (j = 0; j < div.length; j++) {
-        var contactTitle = div[j];
-        txtValue = contactTitle.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            div[j].style.display = "";
-        } else {
-            div[j].style.display = "none";
-        }
-    }
-
-    for (i = 0; i < li.length; i++) {
-        contactName = li[i];
-        txtValue = contactName.querySelector("h5").innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
-    }
-}
-
-//Location Permission
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-}
-
-function showPosition(position) {
-    x.innerHTML =
-        "Latitude: " +
-        position.coords.latitude +
-        "<br>Longitude: " +
-        position.coords.longitude;
-}
-
-//Camera Permission
-function cameraPermission() {
-    if (navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices
-            .getUserMedia({ video: true })
-            .then(function (s) {
-                video.srcObject = s;
-            })
-            .catch(function (err) {
-                console.log(err);
-            });
-    } else {
-        console.log("No");
-    }
-}
-
-//Audio(Mic) Permission
-function audioPermission() {
-    navigator.mediaDevices
-        .getUserMedia({ audio: true })
-        .then(function (stream) {
-            window.localStream = stream;
-            window.localAudio.srcObject = stream;
-            window.localAudio.autoplay = true;
-        });
-}
-
-//get color
 
 document.documentElement.style.setProperty(
     "--bs-primary-rgb",
@@ -859,4 +701,7 @@ var primaryColor = window
     .getComputedStyle(document.body, null)
     .getPropertyValue("--bs-primary-rgb");
 themeColor(primaryColor);
+document.getElementById('pills-contacts-tab').addEventListener('click',() => {
+    searchContacts()
+})
 })();

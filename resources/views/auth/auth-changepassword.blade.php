@@ -25,7 +25,7 @@
                                         <h3>Change Password</h3>
                                     </div>
                                     <div class="user-thumb text-center mb-4">
-                                        <img src="images/users/avatar-1.jpg"
+                                        <img src="{{auth()->user()->profile}}"
                                             class="rounded-circle img-thumbnail avatar-lg" alt="thumbnail">
                                         <h5 class="fs-15 mt-3">{{Auth::user()->name}}</h5>
                                     </div>
