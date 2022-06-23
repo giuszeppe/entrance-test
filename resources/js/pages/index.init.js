@@ -64,62 +64,151 @@ import { formatTimeForMessages, getChatList } from './chat';
    
     //user list by json
     const getUsersList = () =>{
-        var users = data[0].users;
-        users.forEach(function (userData, index) {
-            var isUserProfile = userData.profile
-                ? '<img src="' +
-                  userData.profile +
-                  '" class="rounded-circle avatar-xs" alt=""><span class="user-status"></span>'
-                : '<div class="avatar-xs"><span class="avatar-title rounded-circle bg-primary text-white"><span class="username">JL</span><span class="user-status"></span></span></div>';
+        axios.get('/api/messages')
+            .then((response)=>{
+                let users = JSON.parse(response.data).messages;
+                users.forEach(function (userData, index) {
+                    let message = userData.message;
+                    let sender = userData.sender;
+                    var isUserProfile = sender.profile
+                        ? '<img src="' +
+                          sender.profile +
+                          '" class="rounded-circle avatar-xs" alt=""><span class="user-status"></span>'
+                        : '<div class="avatar-xs"><span class="avatar-title rounded-circle bg-primary text-white"><span class="username">JL</span><span class="user-status"></span></span></div>';
+                    // TODO
+                    var isMessageCount = sender.messagecount
+                        ? '<div class="ms-auto"><span class="badge badge-soft-danger rounded p-1 fs-10">' +
+                          sender.messagecount +
+                          "</span></div>"
+                        : "";
+                    var messageCount = sender.messagecount
+                        ? '<a href="javascript: void(0);" class="unread-msg-user">'
+                        : '<a href="javascript: void(0);">';
+                    // END TODO
+                    //var activeClass = sender.id === 1 ? "active" : "";
+                    var profile = sender.profile
+                        ? '<img src="' +
+                          sender.profile +
+                          '" class="rounded-circle avatar-xs" alt=""><span class="user-status"></span>'
+                        : '<div class="avatar-xs"><span class="avatar-title rounded-circle bg-primary text-white"><span class="username">' +
+                          sender.name +
+                          '</span><span class="user-status"></span></span></div>';
+                    profile += `<input type="hidden" class="_user-uuid" value="${sender.uuid}" \>`
+                    document.getElementById("usersList").innerHTML +=
+                        '<li id="contact-id-' +
+                            sender.id +
+                            '" data-name="favorite">\
+            ' +
+                            messageCount +
+                        ' \
+                                <div class="d-flex align-items-center">\
+                                    <div class="chat-user-img online align-self-center me-2 ms-0">\
+                                        ' +
+                                        profile +
+                                        '\
+                                    </div>\
+                                    <div class="overflow-hidden me-2">\
+                                        <p class="text-truncate chat-username mb-0">' +
+                                        sender.name +
+                                        '</p>\
+                                        <p class="text-truncate text-muted fs-13 mb-0">' +
+                                        message.content +
+                                        "</p>\
+                                    </div>\
+                                    " +
+                                        isMessageCount +
+                                        "\
+                                </div>\
+                            </a>\
+                        </li>";
+                toggleSelected();
+                })
+                document.querySelectorAll('#usersList li').forEach((item) =>{
+                    item.addEventListener("click", function (event) {
+                        item.
+                        currentSelectedChat = "users";
+                        updateSelectedChat();
+                        let uuid = item.querySelector('._user-uuid').value
+                        var contactName = item.querySelector(".chat-username").innerHTML;
+                        document.querySelector(
+                            ".text-truncate .user-profile-show"
+                        ).innerHTML = contactName;
+                        document.querySelector(
+                            ".user-profile-desc .text-truncate"
+                        ).innerHTML = contactName;
+                        document.querySelector(
+                            ".audiocallModal .text-truncate"
+                        ).innerHTML = contactName;
+                        document.querySelector(
+                            ".videocallModal .text-truncate"
+                        ).innerHTML = contactName;
+                        document.querySelector(
+                            ".user-profile-sidebar .user-name"
+                        ).innerHTML = contactName;
+                        document.querySelector(".chat-input-typing").style.display =
+                            "block";
+                        document.querySelector(
+                            ".user-profile-status"
+                        ).style.display = "block";
+                        document.querySelector(
+                            ".chat-input-typing .typing-user"
+                        ).innerHTML =
+                            contactName +
+                            ' is Typing<span class="typing ms-2"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>';
 
-            var isMessageCount = userData.messagecount
-                ? '<div class="ms-auto"><span class="badge badge-soft-danger rounded p-1 fs-10">' +
-                  userData.messagecount +
-                  "</span></div>"
-                : "";
-            var messageCount = userData.messagecount
-                ? '<a href="javascript: void(0);" class="unread-msg-user">'
-                : '<a href="javascript: void(0);">';
-            var activeClass = userData.id === 1 ? "active" : "";
-            var profile = userData.profile
-                ? '<img src="' +
-                  userData.profile +
-                  '" class="rounded-circle avatar-xs" alt=""><span class="user-status"></span>'
-                : '<div class="avatar-xs"><span class="avatar-title rounded-circle bg-primary text-white"><span class="username">' +
-                  userData.nickname +
-                  '</span><span class="user-status"></span></span></div>';
-            document.getElementById("usersList").innerHTML +=
-                '<li id="contact-id-' +
-                    userData.id +
-                    '" data-name="favorite" class="' +
-                    activeClass +
-                '">\
-    ' +
-                    messageCount +
-                ' \
-                        <div class="d-flex align-items-center">\
-                            <div class="chat-user-img online align-self-center me-2 ms-0">\
-                                ' +
-                                profile +
-                                '\
-                            </div>\
-                            <div class="overflow-hidden me-2">\
-                                <p class="text-truncate chat-username mb-0">' +
-                                userData.name +
-                                '</p>\
-                                <p class="text-truncate text-muted fs-13 mb-0">' +
-                                userData.lastmessage +
-                                "</p>\
-                            </div>\
-                            " +
-                                isMessageCount +
-                                "\
-                        </div>\
-                    </a>\
-                </li>";
-        toggleSelected();
-    })
-}
+                        var contactImg = item
+                            .querySelector(".avatar-xs")
+                            .getAttribute("src");
+                        if (contactImg) {
+                            document
+                                .querySelector(".user-own-img .avatar-sm")
+                                .setAttribute("src", contactImg);
+                            document
+                                .querySelector(".user-profile-sidebar .profile-img")
+                                .setAttribute("src", contactImg);
+                            document
+                                .querySelector(".audiocallModal .img-thumbnail")
+                                .setAttribute("src", contactImg);
+                            document
+                                .querySelector(".videocallModal .videocallModal-bg")
+                                .setAttribute("src", contactImg);
+                        } else {
+                            document
+                                .querySelector(".user-own-img .avatar-sm")
+                                .setAttribute("src", dummyImage);
+                            document
+                                .querySelector(".user-profile-sidebar .profile-img")
+                                .setAttribute("src", dummyImage);
+                            document
+                                .querySelector(".audiocallModal .img-thumbnail")
+                                .setAttribute("src", dummyImage);
+                            document
+                                .querySelector(".videocallModal .videocallModal-bg")
+                                .setAttribute("src", dummyImage);
+                        }
+                        var conversationImg =
+                            document.getElementById("users-conversation");
+                        conversationImg
+                            .querySelectorAll(".left .chat-avatar")
+                            .forEach(function (item3) {
+                                if (contactImg) {
+                                    item3
+                                        .querySelector("img")
+                                        .setAttribute("src", contactImg);
+                                } else {
+                                    item3
+                                        .querySelector("img")
+                                        .setAttribute("src", dummyImage);
+                                }
+                            });
+                        fetchMessages(uuid);
+                    })
+                })
+            })
+        
+    }
+getUsersList();
+
 
     //Contact List dynamic Details
     function contactList() {
@@ -525,7 +614,7 @@ import { formatTimeForMessages, getChatList } from './chat';
                     getReplyChatList(chatReplyId, chatInputValue);
                     isreplyMessage = false;
                 } else {
-                    getChatList(chatId, chatInputValue);
+                    getChatList(chatId, chatInputValue,null,'right');
                     const params = new URLSearchParams()
                     let uuid = document.getElementById('userChatUuid').value
                     params.append('uuid',uuid)
@@ -839,7 +928,6 @@ function searchContacts() {
         .get("/api/user/contacts", { params: { searchQuery: input.value } })
         .then((response) => {
             try {
-                console.log(response.data);
                 const contacts = JSON.parse(response.data);
                 updateContacts(contacts);
             } catch (err) {
@@ -887,7 +975,7 @@ function updateContacts(data){
             user.profile +
             '" class="img-fluid rounded-circle" alt="">'
             : '<span class="avatar-title rounded-circle bg-primary fs-10">' +
-            user.nickname +
+            user.name +
             "</span>";
         profile += `<input type="hidden" class="_user-uuid" value="${user.uuid}" \>`
         let msgHTML = getDropdownContact(profile,user);
@@ -910,7 +998,7 @@ function updateContacts(data){
 }
 
 function fetchMessages(uuid){
-    axios.get('/api/messages', {params:{ 'uuid' : uuid}})
+    axios.get('/api/chatMessages', {params:{ 'uuid' : uuid}})
         .then((response) => {
             updateChats(JSON.parse(response.data));
         })
@@ -920,13 +1008,11 @@ function resetOldChats(){
 }
 function updateChats(chatData){
     resetOldChats()
-    console.log(chatData);
     var {lenght,messages,sender}  = chatData
     var itemList = document.getElementById("users-conversation");
     let messageIds = itemList.childElementCount;
     let currentSelectedChat = 'users'
         let  isContinue = 0;
-        console.log(messages);
         messages.forEach(function (message, index) {
             messageIds++;
 
@@ -937,7 +1023,6 @@ function updateChats(chatData){
             }*/
             let  isAlighn =
                 message.from_id != userChatUuid ? " right" : " left";
-            console.log(isAlighn);
             let  msgHTML =
                 '<li class="chat-list' +
                 isAlighn +

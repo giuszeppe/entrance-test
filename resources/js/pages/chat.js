@@ -11,7 +11,9 @@ window.Echo = new Echo({
 });
 
 export const formatTimeForMessages = (time) => {
-    if(!(time instanceof Date)){
+    if(time === null ){
+        time = new Date()
+    } else if(!(time instanceof Date)){
         time = new Date(time)
     }
     var date = time.getDate();
@@ -23,20 +25,19 @@ export const formatTimeForMessages = (time) => {
 }
 
 
-export const getChatList = function (chatid, content,time = new Date()) {
+export const getChatList = function (chatid, content,time = new Date(),position) {
         time = formatTimeForMessages(time)
-        console.log(time);
         var itemList = document.getElementById("users-conversation");
         let messageIds = itemList.childElementCount;
         messageIds++;
         if (content != null) {
             itemList.insertAdjacentHTML(
                 "beforeend",
-                getNewMessage(messageIds,content,time)
+                getNewMessage(messageIds,content,time,position)
             );
         }
-        // remove chat list
         console.log(messageIds);
+        // remove chat list
         var newChatList = document.getElementById("chat-list-" + messageIds);
         newChatList
             .querySelectorAll(".delete-item")
@@ -113,6 +114,5 @@ let userUUID = document.querySelector('meta[name="uuid"]').content;
 
 window.Echo.private(`message.${userUUID}`)
     .listen('MessageSent',(e)=>{
-        console.log(e.message.content);
-        getChatList(null,e.message);
+        getChatList(null,e.message.content);
     })

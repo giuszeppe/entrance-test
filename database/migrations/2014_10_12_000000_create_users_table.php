@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('profile')->default(public_path('images/default_profile.jpg'));
+            $table->string('profile')->default('images/users/user-dummy-img.jpg');
             $table->rememberToken();
             $table->timestamps();
         });

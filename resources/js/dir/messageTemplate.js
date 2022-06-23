@@ -1,6 +1,7 @@
 
-export const getNewMessage = (messageIds,content,time) =>{
-    return '<li class="chat-list right" id="chat-list-' +
+export const getNewMessage = (messageIds,content,time,position = 'left') =>{
+
+    return `<li class="chat-list ${position}" id="chat-list-` +
                     messageIds +
                     '" >\
                 <div class="conversation-list">\
