@@ -5,7 +5,9 @@ Website: https://themesbrand.com/
 Contact: themesbrand@gmail.com
 File: Index init js
 */
+import { getDropdownContact, getDropdownMessage } from '../dir/messageTemplate';
 import {axios} from '../request';
+import { formatTimeForMessages, getChatList } from './chat';
 
 (function () {
     var isreplyMessage = false;
@@ -59,176 +61,7 @@ import {axios} from '../request';
     }
 
     // single to channel and channel to single chat conversation
-    function chatSwap() {
-        document.querySelectorAll("#favourite-users li, #usersList li") &&
-            document
-                .querySelectorAll("#favourite-users li, #usersList li")
-                .forEach(function (item) {
-                    item.addEventListener("click", function (event) {
-                        currentSelectedChat = "users";
-                        updateSelectedChat();
-                        currentChatId = "users-chat";
-                        var contactId = item.getAttribute("id");
-                        var username =
-                            item.querySelector(".text-truncate").innerHTML;
-
-                        document.querySelector(
-                            ".user-profile-sidebar .user-name"
-                        ).innerHTML = username;
-                        var contactImagesWithName =
-                            document.getElementById("users-chat");
-                        contactImagesWithName.querySelector(
-                            ".text-truncate .user-profile-show"
-                        ).innerHTML = username;
-                        document.querySelector(
-                            ".user-profile-desc .text-truncate"
-                        ).innerHTML = username;
-                        document.querySelector(
-                            ".chat-input-typing"
-                        ).style.display = "block";
-                        document.querySelector(
-                            ".user-profile-status"
-                        ).style.display = "block";
-                        document.querySelector(
-                            ".chat-input-typing .typing-user"
-                        ).innerHTML =
-                            username +
-                            ' is Typing<span class="typing ms-2"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>';
-
-                        document.querySelector(
-                            ".audiocallModal .text-truncate"
-                        ).innerHTML = username;
-                        document.querySelector(
-                            ".videocallModal .text-truncate"
-                        ).innerHTML = username;
-                        var img = document
-                            .getElementById(contactId)
-                            .querySelector(".avatar-xs")
-                            .getAttribute("src");
-
-                        if (img) {
-                            document
-                                .querySelector(".user-own-img .avatar-sm")
-                                .setAttribute("src", img);
-                            document
-                                .querySelector(
-                                    ".user-profile-sidebar .profile-img"
-                                )
-                                .setAttribute("src", img);
-                            document
-                                .querySelector(".audiocallModal .img-thumbnail")
-                                .setAttribute("src", img);
-                            document
-                                .querySelector(
-                                    ".videocallModal .videocallModal-bg"
-                                )
-                                .setAttribute("src", img);
-                        } else {
-                            document
-                                .querySelector(".user-own-img .avatar-sm")
-                                .setAttribute("src", dummyImage);
-                            document
-                                .querySelector(
-                                    ".user-profile-sidebar .profile-img"
-                                )
-                                .setAttribute("src", dummyImage);
-                            document
-                                .querySelector(".audiocallModal .img-thumbnail")
-                                .setAttribute("src", dummyImage);
-                            document
-                                .querySelector(
-                                    ".videocallModal .videocallModal-bg"
-                                )
-                                .setAttribute("src", dummyImage);
-                        }
-
-                        var chatImg = item
-                            .querySelector(".avatar-xs")
-                            .getAttribute("src");
-                        var conversationImg =
-                            document.getElementById("users-conversation");
-                        conversationImg
-                            .querySelectorAll(".left .chat-avatar")
-                            .forEach(function (item3) {
-                                if (chatImg) {
-                                    item3
-                                        .querySelector("img")
-                                        .setAttribute("src", chatImg);
-                                } else {
-                                    item3
-                                        .querySelector("img")
-                                        .setAttribute("src", dummyImage);
-                                }
-                            });
-                        window.stop();
-                    });
-                });
-
-        document.querySelectorAll("#channelList li").forEach(function (item) {
-            item.addEventListener("click", function (event) {
-                currentChatId = "channel-chat";
-                currentSelectedChat = "channel";
-                updateSelectedChat();
-                var channelId = item.getAttribute("id");
-                var channelName =
-                    item.querySelector(".text-truncate").innerHTML;
-                var changeChannelName = document.getElementById("channel-chat");
-
-                changeChannelName.querySelector(
-                    ".text-truncate .user-profile-show"
-                ).innerHTML = channelName;
-                document.querySelector(
-                    ".user-profile-desc .text-truncate"
-                ).innerHTML = channelName;
-                document.querySelector(
-                    ".audiocallModal .text-truncate"
-                ).innerHTML = channelName;
-                document.querySelector(
-                    ".videocallModal .text-truncate"
-                ).innerHTML = channelName;
-                document.querySelector(
-                    ".user-profile-sidebar .user-name"
-                ).innerHTML = channelName;
-
-                document.querySelector(".chat-input-typing").style.display =
-                    "none";
-                document.querySelector(".user-profile-status").style.display =
-                    "none";
-                var channelImg = document
-                    .getElementById(channelId)
-                    .querySelector(".avatar-xs")
-                    .getAttribute("src");
-
-                if (channelImg !== null) {
-                    document
-                        .querySelector("#channel-chat .user-own-img .avatar-sm")
-                        .setAttribute("src", channelImg);
-                    document
-                        .querySelector(".user-profile-sidebar .profile-img")
-                        .setAttribute("src", channelImg);
-                    document
-                        .querySelector(".audiocallModal .img-thumbnail")
-                        .setAttribute("src", channelImg);
-                    document
-                        .querySelector(".videocallModal .videocallModal-bg")
-                        .setAttribute("src", channelImg);
-                } else {
-                    document
-                        .querySelector("#channel-chat .user-own-img .avatar-sm")
-                        .setAttribute("src", dummyImage);
-                    document
-                        .querySelector(".user-profile-sidebar .profile-img")
-                        .setAttribute("src", dummyImage);
-                    document
-                        .querySelector(".audiocallModal .img-thumbnail")
-                        .setAttribute("src", dummyImage);
-                    document
-                        .querySelector(".videocallModal .videocallModal-bg")
-                        .setAttribute("src", dummyImage);
-                }
-            });
-        });
-    }
+   
 
     //user list by json
     var getJSON = function (jsonurl, callback) {
@@ -357,162 +190,8 @@ import {axios} from '../request';
         </a>\
     </li>";
             });
-
-            // set channels list
-            var channelsData = data[0].channels;
-            channelsData.forEach(function (isChannel, index) {
-                var profile = isChannel.profile
-                    ? '<img src="' +
-                      isChannel.profile +
-                      '" class="rounded-circle avatar-xs" alt="">'
-                    : '<div class="avatar-xs"><span class="avatar-title rounded-circle bg-primary text-white"><span class="username">JL</span><span class="user-status"></span></span></div>';
-
-                var isMessage = isChannel.messagecount
-                    ? '<div class="flex-shrink-0 ms-2"><span class="badge badge-soft-danger rounded p-1 fs-10">' +
-                      isChannel.messagecount +
-                      "</span></div>"
-                    : "";
-                var messageCount = isChannel.messagecount
-                    ? '<a href="javascript: void(0);" class="unread-msg-user">'
-                    : '<a href="javascript: void(0);">';
-                var profile = isChannel.profile
-                    ? '<img src="' +
-                      isChannel.profile +
-                      '" class="rounded-circle avatar-xs" alt="">'
-                    : '<div class="avatar-xs"><span class="avatar-title rounded-circle bg-primary text-white"><span class="username">' +
-                      isChannel.nickname +
-                      "</span></span></div>";
-                document.getElementById("channelList").innerHTML +=
-                    '<li id="contact-id-' +
-                    isChannel.id +
-                    '" data-name="channel">\
-                ' +
-                    messageCount +
-                    ' \
-                    <div class="d-flex align-items-center">\
-                        <div class="flex-shrink-0 me-2">\
-                            <div class="chat-user-img online align-self-center">\
-                            ' +
-                    profile +
-                    '\
-                            </div>\
-                        </div>\
-                        <div class="flex-grow-1 overflow-hidden">\
-                            <h6 class="text-truncate mb-0">' +
-                    isChannel.name +
-                    '</h6>\
-                            <p class="text-truncate text-muted fs-13 mb-0">' +
-                    isChannel.lastmessage +
-                    "</p>\
-                        </div>\
-                        <div>" +
-                    isMessage +
-                    "</div>\
-                    </div>\
-                </a>\
-            </li>";
-            });
         }
         toggleSelected();
-        chatSwap();
-    });
-
-    //CallList userDetails
-    function callsList() {
-        document.querySelectorAll("#callList li").forEach(function (item) {
-            item.addEventListener("click", function (event) {
-                var callsId = item.getAttribute("id");
-                var callUser = item.querySelector(".text-truncate").innerHTML;
-                document.querySelector(
-                    ".videocallModal .text-truncate"
-                ).innerHTML = callUser;
-                document.querySelector(
-                    ".audiocallModal .text-truncate"
-                ).innerHTML = callUser;
-
-                var callImg = document
-                    .getElementById(callsId)
-                    .querySelector(".avatar-xs")
-                    .getAttribute("src");
-                if (callImg) {
-                    document
-                        .querySelector(".audiocallModal .img-thumbnail")
-                        .setAttribute("src", callImg);
-                    document
-                        .querySelector(".videocallModal .videocallModal-bg")
-                        .setAttribute("src", callImg);
-                } else {
-                    document
-                        .querySelector(".audiocallModal .img-thumbnail")
-                        .setAttribute("src", dummyImage);
-                    document
-                        .querySelector(".videocallModal .videocallModal-bg")
-                        .setAttribute("src", dummyImage);
-                }
-            });
-        });
-    }
-
-    //Call list
-    getJSON("callList.json", function (err, data) {
-        if (err !== null) {
-            console.log("Something went wrong: " + err);
-        } else {
-            let callList = data;
-            callList.forEach(function (calls, index) {
-                var callIcon =
-                    calls.callVideo === true
-                        ? '<button type="button" class="btn btn-link p-0 fs-20 stretched-link" data-bs-toggle="modal" data-bs-target=".videocallModal"><i class="' +
-                          calls.callTypeIcon +
-                          '"></i></button>'
-                        : '<button type="button" class="btn btn-link p-0 fs-20 stretched-link" data-bs-toggle="modal" data-bs-target=".audiocallModal"><i class="' +
-                          calls.callTypeIcon +
-                          '"></i></button>';
-
-                var profile = calls.profile
-                    ? '<img src="' +
-                      calls.profile +
-                      '" class="rounded-circle avatar-xs" alt="">'
-                    : '<div class="avatar-xs"><span class="avatar-title rounded-circle bg-danger text-white">RL</span></div>';
-                document.getElementById("callList").innerHTML +=
-                    '<li id="calls-id-' +
-                    calls.id +
-                    '" >\
-        <div class="d-flex align-items-center">\
-        <div class="chat-user-img flex-shrink-0 me-2">\
-            ' +
-                    profile +
-                    '\
-        </div>\
-            <div class="flex-grow-1 overflow-hidden">\
-                <p class="text-truncate mb-0">' +
-                    calls.name +
-                    '</p>\
-                <div class="text-muted fs-12 text-truncate"><i class="' +
-                    calls.callArrowType +
-                    '"></i> ' +
-                    calls.dateTime +
-                    '</div>\
-            </div>\
-            <div class="flex-shrink-0 ms-3">\
-                <div class="d-flex align-items-center gap-3">\
-                    <div>\
-                        <h5 class="mb-0 fs-12 text-muted">' +
-                    calls.callTime +
-                    "</h5>\
-                    </div>\
-                    <div>\
-                       " +
-                    callIcon +
-                    "\
-                    </div>\
-                </div>\
-            </div>\
-        </div>\
-      </li>";
-            });
-        }
-        callsList();
     });
 
     //Contact List dynamic Details
@@ -605,95 +284,13 @@ import {axios} from '../request';
             });
     }
 
-    // get contacts list
-    getJSON("contacts.json", function (err, data) {
-        if (err !== null) {
-            console.log("Something went wrong: " + err);
-        } else {
-            usersList = data;
-            data.sort(function (a, b) {
-                return a.name.localeCompare(b.name);
-            });
-            // set favourite users list
-            var msgHTML = "";
-            var userNameCharAt = "";
-
-            usersList.forEach(function (user, index) {
-                var profile = user.profile
-                    ? '<img src="' +
-                      user.profile +
-                      '" class="img-fluid rounded-circle" alt="">'
-                    : '<span class="avatar-title rounded-circle bg-primary fs-10">' +
-                      user.nickname +
-                      "</span>";
-
-                msgHTML =
-                    '<li>\
-              <div class="d-flex align-items-center">\
-                  <div class="flex-shrink-0 me-2">\
-                      <div class="avatar-xs">\
-                          ' +
-                    profile +
-                    '\
-                      </div>\
-                  </div>\
-                  <div class="flex-grow-1">\
-                      <h5 class="fs-14 m-0" >' +
-                    user.name +
-                    '</h5>\
-                  </div>\
-                  <div class="flex-shrink-0">\
-                      <div class="dropdown">\
-                          <a href="#" class="text-muted dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                              <i class="bx bx-dots-vertical-rounded align-middle"></i>\
-                          </a>\
-                          <div class="dropdown-menu dropdown-menu-end">\
-                              <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Edit <i class="bx bx-pencil ms-2 text-muted"></i></a>\
-                              <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Block <i class="bx bx-block ms-2 text-muted"></i></a>\
-                              <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Remove <i class="bx bx-trash ms-2 text-muted"></i></a>\
-                          </div>\
-                      </div>\
-                  </div>\
-              </div>\
-          </li>';
-                var isSortContact =
-                    '<div class="mt-3" >\
-              <div class="contact-list-title">' +
-                    user.name.charAt(0).toUpperCase() +
-                    '\
-                </div>\
-          <ul id="contact-sort-' +
-                    user.name.charAt(0) +
-                    '" class="list-unstyled contact-list" >';
-
-                if (userNameCharAt != user.name.charAt(0)) {
-                    document.getElementsByClassName(
-                        "sort-contact"
-                    )[0].innerHTML += isSortContact;
-                }
-                document.getElementById(
-                    "contact-sort-" + user.name.charAt(0)
-                ).innerHTML =
-                    document.getElementById(
-                        "contact-sort-" + user.name.charAt(0)
-                    ).innerHTML + msgHTML;
-                userNameCharAt = user.name.charAt(0);
-                +"</ul>" + "</div>";
-            });
-        }
-        contactList();
-        toggleSelected();
-    });
-
     function updateSelectedChat() {
         if (currentSelectedChat == "users") {
             document.getElementById("channel-chat").style.display = "none";
             document.getElementById("users-chat").style.display = "block";
-            getChatMessages(url + "chats.json");
         } else {
             document.getElementById("channel-chat").style.display = "block";
             document.getElementById("users-chat").style.display = "none";
-            getChatMessages(url + "chats.json");
         }
     }
     updateSelectedChat();
@@ -816,700 +413,6 @@ import {axios} from '../request';
     setInterval(currentTime, 1000);
 
     var messageIds = 0;
-
-    //Audio file
-    var audiofilename;
-    var audiofileSize;
-    var audioFile = "";
-    var afiling = [];
-    var fileNumberAudio = 1;
-    var audiourl = "";
-    document
-        .querySelector("#audiofile-input")
-        .addEventListener("change", function () {
-            var preview = document.querySelector(".file_Upload");
-            audioFile = document.querySelector("#audiofile-input").files[0];
-
-            audiourl = URL.createObjectURL(audioFile);
-
-            // remove-audioFile
-
-            var reader = new FileReader();
-            reader.readAsDataURL(audioFile);
-            if (preview) {
-                preview.classList.add("show");
-            }
-
-            reader.addEventListener(
-                "load",
-                function () {
-                    // Array.push(preview).forEach((gallery, index) => {
-                    var filename = audioFile.name;
-                    var fileSize = Math.round(audioFile.size / 1000000).toFixed(
-                        2
-                    );
-
-                    preview.innerHTML =
-                        '<div class="card p-2 border mb-2 audiofile_pre d-inline-block position-relative">\
-            <div class="d-flex align-items-center">\
-                <div class="flex-shrink-0 avatar-xs ms-1 me-3">\
-                    <div class="avatar-title bg-soft-primary text-primary rounded-circle">\
-                        <i class="bx bx-headphone"></i>\
-                    </div>\
-                </div>\
-                <div class="flex-grow-1 overflow-hidden">\
-                <h5 class="fs-14 text-truncate mb-1">' +
-                        filename +
-                        '</h5>\
-                  <input type="hidden" name="downloadaudiodata" value="' +
-                        audiourl +
-                        '"/>\
-                        <p class="text-muted text-truncate fs-13 mb-0">' +
-                        fileSize +
-                        'mb</p>\
-                </div>\
-                <div class="flex-shrink-0 ms-3">\
-                    <div class="d-flex gap-2">\
-                        <div>\
-                        <i class="ri-close-line text-danger audioFile-remove"  id="remove-audioFile"></i>\
-                        </div>\
-                    </div>\
-                </div>\
-            </div>\
-          </div>';
-                    audiofilename = filename;
-                    audiofileSize = fileSize;
-                    removeAudioFile();
-                    afiling[fileNumberAudio] = audioFile;
-                },
-                false
-            );
-            fileNumberAudio++;
-        });
-
-    var getAudioFiles = function (chatid3, newAdioItems, newAdioItemSize) {
-        var newAdioItems = audiofilename;
-        var newAdioItemSize = audiofileSize;
-        messageIds++;
-        var chatConList3 = document.getElementById(chatid3);
-        var itemList3 = chatConList3.querySelector(".chat-conversation-list");
-        if (newAdioItems != null) {
-            itemList3.insertAdjacentHTML(
-                "beforeend",
-
-                '<li class="chat-list right" id="chat-list-' +
-                    messageIds +
-                    '" >\
-          <div class="conversation-list">\
-              <div class="user-chat-content">\
-                  <div class="ctext-wrap">\
-                  <div class="audio-file-elem">\
-                              <audio controls>\
-                                  <source src="' +
-                    audiourl +
-                    '" type="audio/mpeg">\
-                              </audio>\
-                          </div>\
-                      <div class="align-self-start message-box-drop d-flex">\
-                      <div class="dropdown">\
-                        <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                          <i class="ri-emotion-happy-line"></i>\
-                        </a>\
-                        <div class="dropdown-menu emoji-dropdown-menu">\
-                          <div class="hstack align-items-center gap-2 px-2 fs-25">\
-                            <a href="javascript:void(0);">💛</a>\
-                            <a href="javascript:void(0);">🤣</a>\
-                            <a href="javascript:void(0);">😜</a>\
-                            <a href="javascript:void(0);">😘</a>\
-                            <a href="javascript:void(0);">😍</a>\
-                            <div class="avatar-xs">\
-                            <a href="javascript:void(0);" class="avatar-title bg-soft-primary rounded-circle fs-19 text-primary">+</a>\
-                            </div>\
-                          </div>\
-                        </div>\
-                      </div>\
-                        <div class="dropdown">\
-                            <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="ri-more-2-fill"></i> </a>\
-                            <div class="dropdown-menu">\
-            <a class="dropdown-item d-flex align-items-center justify-content-between" href="' +
-                    newAdioItems +
-                    '" download>Download <i class="bx bx-download ms-2 text-muted"></i></a>\
-            <a class="dropdown-item d-flex align-items-center justify-content-between" href="#" data-bs-toggle="collapse" data-bs-target=".replyCollapse">Reply <i class="bx bx-share ms-2 text-muted"></i></a>\
-            <a class="dropdown-item d-flex align-items-center justify-content-between" href="#" data-bs-toggle="modal" data-bs-target=".forwardModal">Forward <i class="bx bx-share-alt ms-2 text-muted"></i></a>\
-            <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Bookmark <i class="bx bx-bookmarks text-muted ms-2"></i></a>\
-                                <a class="dropdown-item d-flex align-items-center justify-content-between delete-item" id="delete-item-' +
-                    messageIds +
-                    '" href="#">Delete <i class="bx bx-trash text-muted ms-2"></i></a>\
-                            </div>\
-                        </div>\
-                      </div>\
-                      </div>\
-                      <div class="conversation-name">\
-                          <small class="text-muted time">' +
-                    currentTime() +
-                    '</small>\
-                            <span class="text-success check-message-icon"><i class="bx bx-check"></i></span>\
-                          </div>\
-                        </div>\
-                      </div>\
-                    </li>'
-            );
-        }
-        var newChatList = document.getElementById("chat-list-" + messageIds);
-        newChatList
-            .querySelectorAll(".delete-item")
-            .forEach(function (subitem) {
-                subitem.addEventListener("click", function () {
-                    itemList.removeChild(newChatList);
-                });
-            });
-
-        document
-            .querySelectorAll(".download-file")
-            .forEach(function (subitem2) {
-                subitem2.addEventListener("click", function (event) {
-                    event.preventDefault();
-
-                    var audiofiledataid = subitem2.getAttribute("data-id");
-
-                    if (
-                        !window.File ||
-                        !window.FileReader ||
-                        !window.FileList ||
-                        !window.Blob
-                    ) {
-                        alert(
-                            "The File APIs are not fully supported in this browser."
-                        );
-                        return;
-                    }
-                    var blob = new Blob([filing[audiofiledataid]], {
-                        type: "application/mp3",
-                    });
-                    var link = document.createElement("a");
-                    link.href = window.URL.createObjectURL(blob);
-                    link.download = afiling[audiofiledataid]["name"];
-                    link.click();
-                });
-            });
-        document.querySelector(".file_Upload ").classList.remove("show");
-    };
-
-    //Attached file Append
-    var filename2;
-    var filesize2;
-
-    var file = "";
-    var filing = [];
-    var fileNumber = 1;
-
-    document
-        .querySelector("#attachedfile-input")
-        .addEventListener("change", function () {
-            var preview = document.querySelector(".file_Upload");
-            file = document.querySelector("#attachedfile-input").files[0];
-
-            fr = new FileReader();
-
-            fr.readAsDataURL(file);
-
-            if (preview) {
-                preview.classList.add("show");
-            }
-
-            fr.addEventListener(
-                "load",
-                function () {
-                    var filename = file.name;
-                    var fileSize = Math.round(file.size / 1000000).toFixed(2);
-
-                    preview.innerHTML =
-                        '<div class="card p-2 border attchedfile_pre d-inline-block position-relative">\
-            <div class="d-flex align-items-center">\
-                <div class="flex-shrink-0 avatar-xs ms-1 me-3">\
-                    <div class="avatar-title bg-soft-primary text-primary rounded-circle">\
-                        <i class="ri-attachment-2"></i>\
-                    </div>\
-                </div>\
-                <div class="flex-grow-1 overflow-hidden">\
-                <a href="" id="a"></a>\
-                    <h5 class="fs-14 text-truncate mb-1">' +
-                        filename +
-                        '</h5>\
-                    <input type="hidden" name="downloaddata" value="' +
-                        file +
-                        '"/>\
-                    <p class="text-muted text-truncate fs-13 mb-0">' +
-                        fileSize +
-                        'mb</p>\
-                </div>\
-                <div class="flex-shrink-0 align-self-start ms-3">\
-                    <div class="d-flex gap-2">\
-                        <div>\
-                        <i class="ri-close-line text-muted attechedFile-remove"  id="remove-attechedFile"></i>\
-                        </div>\
-                    </div>\
-                </div>\
-            </div>\
-          </div>';
-                    filename2 = filename;
-                    filesize2 = fileSize;
-                    filing[fileNumber] = file;
-                    removeAttachedFile();
-                },
-                false
-            );
-            fileNumber++;
-        });
-
-    var getAttachedFiles = function (
-        chatid2,
-        newAttchedItems,
-        newAttchedItemSize
-    ) {
-        var newAttchedItems = filename2;
-        var newAttchedItemSize = filesize2;
-        messageIds++;
-        var chatConList2 = document.getElementById(chatid2);
-        var itemList2 = chatConList2.querySelector(".chat-conversation-list");
-
-        if (newAttchedItems != null) {
-            itemList2.insertAdjacentHTML(
-                "beforeend",
-                '<li class="chat-list right" id="chat-list-' +
-                    messageIds +
-                    '" >\
-          <div class="conversation-list">\
-              <div class="user-chat-content">\
-                  <div class="ctext-wrap">\
-                      <div class="ctext-wrap-content">\
-                          <div class="p-3 border rounded-3">\
-                              <div class="d-flex align-items-center attached-file">\
-                                  <div class="flex-shrink-0 avatar-sm me-3 ms-0 attached-file-avatar">\
-                                      <div class="avatar-title bg-soft-light rounded-circle fs-20"><i class="ri-attachment-2"></i></div>\
-                                  </div>\
-                                  <div class="flex-grow-1 overflow-hidden">\
-                                      <div class="text-start">\
-                                          <h5 class="fs-14 text-white mb-1">' +
-                    newAttchedItems +
-                    '</h5>\
-                                          <p class="text-white-50 text-truncate fs-13 mb-0">' +
-                    newAttchedItemSize +
-                    'mb</p>\
-                                      </div>\
-                                  </div>\
-                                  <div class="flex-shrink-0 ms-4">\
-                                      <div class="d-flex gap-2 fs-20 d-flex align-items-start">\
-                                          <div>\
-                                              <a href="#" class="text-white-50 download-file" data-id="' +
-                    fileNumber +
-                    '"> <i class="bx bxs-download"></i> </a>\
-                                          </div>\
-                                      </div>\
-                                  </div>\
-                              </div>\
-                          </div>\
-                      </div>\
-                      <div class="align-self-start message-box-drop d-flex">\
-                      <div class="dropdown">\
-                        <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                          <i class="ri-emotion-happy-line"></i>\
-                        </a>\
-                        <div class="dropdown-menu emoji-dropdown-menu">\
-                          <div class="hstack align-items-center gap-2 px-2 fs-25">\
-                            <a href="javascript:void(0);">💛</a>\
-                            <a href="javascript:void(0);">🤣</a>\
-                            <a href="javascript:void(0);">😜</a>\
-                            <a href="javascript:void(0);">😘</a>\
-                            <a href="javascript:void(0);">😍</a>\
-                            <div class="avatar-xs">\
-                            <a href="javascript:void(0);" class="avatar-title bg-soft-primary rounded-circle fs-19 text-primary">+</a>\
-                            </div>\
-                          </div>\
-                        </div>\
-                      </div>\
-                      <div class="dropdown">\
-                          <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="ri-more-2-fill"></i> </a>\
-                          <div class="dropdown-menu">\
-            <a class="dropdown-item d-flex align-items-center justify-content-between" href="' +
-                    newAttchedItems +
-                    '" download>Download <i class="bx bx-download ms-2 text-muted"></i></a>\
-            <a class="dropdown-item d-flex align-items-center justify-content-between" href="#" data-bs-toggle="collapse" data-bs-target=".replyCollapse">Reply <i class="bx bx-share ms-2 text-muted"></i></a>\
-            <a class="dropdown-item d-flex align-items-center justify-content-between" href="#" data-bs-toggle="modal" data-bs-target=".forwardModal">Forward <i class="bx bx-share-alt ms-2 text-muted"></i></a>\
-            <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Bookmark <i class="bx bx-bookmarks text-muted ms-2"></i></a>\
-                          <a class="dropdown-item d-flex align-items-center justify-content-between delete-item" id="delete-item-' +
-                    messageIds +
-                    '" href="#">Delete <i class="bx bx-trash text-muted ms-2"></i></a>\
-                      </div>\
-                    </div>\
-                    </div>\
-                  </div>\
-                <div class="conversation-name">\
-                    <small class="text-muted time">' +
-                    currentTime() +
-                    '</small>\
-                      <span class="text-success check-message-icon"><i class="bx bx-check"></i></span>\
-                    </div>\
-                </div>\
-              </div>\
-            </li>'
-            );
-        }
-        // remove File
-        var newChatList = document.getElementById("chat-list-" + messageIds);
-        newChatList
-            .querySelectorAll(".delete-item")
-            .forEach(function (subitem) {
-                subitem.addEventListener("click", function () {
-                    itemList.removeChild(newChatList);
-                });
-            });
-
-        //Download attached file
-        newChatList
-            .querySelectorAll(".download-file")
-            .forEach(function (subitem1) {
-                subitem1.addEventListener("click", function (event) {
-                    event.preventDefault();
-                    var dataid = subitem1.getAttribute("data-id");
-                    if (
-                        !window.File ||
-                        !window.FileReader ||
-                        !window.FileList ||
-                        !window.Blob
-                    ) {
-                        alert(
-                            "The File APIs are not fully supported in this browser."
-                        );
-                        return;
-                    }
-                    var blob = new Blob([filing[dataid]], {
-                        type: "application/pdf",
-                    }); // change resultByte to bytes
-                    var link = document.createElement("a");
-                    link.href = window.URL.createObjectURL(blob);
-                    link.download = filing[dataid]["name"];
-                    link.click();
-                });
-            });
-        document.querySelector(".file_Upload ").classList.remove("show");
-    };
-
-    var imageurls = [];
-
-    let removeimg = 1;
-
-    var indexing = 0;
-
-    document
-        .querySelector("#galleryfile-input")
-        .addEventListener("change", previewImages);
-
-    function previewImages() {
-        var preview = document.querySelector(".file_Upload");
-
-        preview.insertAdjacentHTML(
-            "beforeend",
-            '<div class="profile-media-img image_pre"></div>'
-        );
-
-        var imageselector = document.querySelector(
-            ".file_Upload .profile-media-img"
-        );
-
-        if (this.files) {
-            [].forEach.call(this.files, readAndPreview);
-        }
-
-        function readAndPreview(file) {
-            // Make sure `file.name` matches our extensions criteria
-            if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
-                return alert(file.name + " is not an image");
-            } // else...
-
-            var reader = new FileReader();
-
-            var createImage = "";
-
-            reader.addEventListener("load", function () {
-                removeimg++;
-                if (preview) {
-                    preview.classList.add("show");
-                }
-
-                imageurls.push(reader.result);
-
-                createImage +=
-                    '<div class="media-img-list" id="remove-image-' +
-                    removeimg +
-                    '">\
-          <a href="#">\
-              <img src="' +
-                    this.result +
-                    '" alt="' +
-                    file.name +
-                    '" class="img-fluid">\
-          </a>\
-            <i class="ri-close-line image-remove" onclick="removeImage(`remove-image-' +
-                    removeimg +
-                    '`)"></i>\
-          </div>';
-
-                imageselector.insertAdjacentHTML("afterbegin", createImage);
-                indexing++;
-            });
-            reader.readAsDataURL(file);
-        }
-    }
-
-    //append images
-    var getImages = function (chatid1, newImage) {
-        var newImages = imageurls;
-
-        var chatConList1 = document.getElementById(chatid1);
-
-        var itemList1 = chatConList1.querySelector(".chat-conversation-list");
-
-        var multiimg = "";
-
-        newImages.forEach(function (newImage) {
-            messageIds++;
-            multiimg +=
-                '<div class="message-img-list">\
-          <div>\
-            <a class="popup-img d-inline-block" href="' +
-                newImage +
-                '" target="_blank">\
-                <img src="' +
-                newImage +
-                '" alt="" class="rounded border img-thumbnail" width="200" />\
-            </a>\
-          </div>\
-          <div class="message-img-link">\
-            <ul class="list-inline mb-0">\
-              <li class="list-inline-item dropdown">\
-                <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                    <i class="bx bx-dots-horizontal-rounded"></i>\
-                </a>\
-          <div class="dropdown-menu">\
-            <a class="dropdown-item d-flex align-items-center justify-content-between" href="' +
-                newImage +
-                '" download>Download <i class="bx bx-download ms-2 text-muted"></i></a>\
-            <a class="dropdown-item d-flex align-items-center justify-content-between" href="#" data-bs-toggle="collapse" data-bs-target=".replyCollapse">Reply <i class="bx bx-share ms-2 text-muted"></i></a>\
-            <a class="dropdown-item d-flex align-items-center justify-content-between" href="#" data-bs-toggle="modal" data-bs-target=".forwardModal">Forward <i class="bx bx-share-alt ms-2 text-muted"></i></a>\
-            <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Bookmark <i class="bx bx-bookmarks text-muted ms-2"></i></a>\
-            <a class="dropdown-item d-flex align-items-center justify-content-between delete-image" id="delete-item-' +
-                messageIds +
-                '" href="#">Delete <i class="bx bx-trash text-muted ms-2"></i></a>\
-          </div>\
-        </li>\
-      </ul>\
-    </div>\
-    </div>';
-        });
-
-        if (newImages != null) {
-            itemList1.insertAdjacentHTML(
-                "beforeend",
-                '<li class="chat-list right" id="chat-list-' +
-                    messageIds +
-                    '" >\
-        <div class="conversation-list">\
-            <div class="user-chat-content">\
-                <div class="ctext-wrap">\
-                        <div class="message-img mb-0">' +
-                    multiimg +
-                    '\
-                    </div>\
-                    </div>\
-                  <div class="conversation-name">\
-                    <small class="text-muted time">' +
-                    currentTime() +
-                    '</small>\
-                    <span class="text-success check-message-icon"><i class="bx bx-check"></i></span>\
-                </div>\
-          </div>\
-        </li>'
-            );
-            updateLightbox();
-            indexing = 0;
-
-            //Delete appended images(single user)
-            var deleteImages = itemList.querySelectorAll(".chat-list");
-            deleteImages.forEach(function (item) {
-                item.querySelectorAll(".delete-image").forEach(function (
-                    subitem
-                ) {
-                    subitem.addEventListener("click", function () {
-                        subitem.closest(".message-img").childElementCount == 1
-                            ? subitem.closest(".chat-list").remove()
-                            : subitem.closest(".message-img-list").remove();
-                    });
-                });
-            });
-
-            //Delete appended images(Channel chat)
-            var deleteChannelImages =
-                channelItemList.querySelectorAll(".chat-list");
-            deleteChannelImages.forEach(function (item) {
-                item.querySelectorAll(".delete-image").forEach(function (
-                    subitem
-                ) {
-                    subitem.addEventListener("click", function () {
-                        subitem.closest(".message-img").childElementCount == 1
-                            ? subitem.closest(".chat-list").remove()
-                            : subitem.closest(".message-img-list").remove();
-                    });
-                });
-            });
-        }
-
-        document.querySelector(".file_Upload").classList.remove("show");
-        imageurls = [];
-    };
-
-    //Append New Message
-    var getChatList = function (chatid, chatItems) {
-        messageIds++;
-
-        var chatConList = document.getElementById(chatid);
-        var itemList = chatConList.querySelector(".chat-conversation-list");
-        if (chatItems != null) {
-            itemList.insertAdjacentHTML(
-                "beforeend",
-                '<li class="chat-list right" id="chat-list-' +
-                    messageIds +
-                    '" >\
-                <div class="conversation-list">\
-                    <div class="user-chat-content">\
-                        <div class="ctext-wrap">\
-                            <div class="ctext-wrap-content">\
-                                <p class="mb-0 ctext-content">' +
-                    chatItems +
-                    '</p>\
-                            </div>\
-                            <div class="align-self-start message-box-drop d-flex">\
-                            <div class="dropdown">\
-                              <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                                <i class="ri-emotion-happy-line"></i>\
-                              </a>\
-                              <div class="dropdown-menu emoji-dropdown-menu">\
-                                <div class="hstack align-items-center gap-2 px-2 fs-25">\
-                                  <a href="javascript:void(0);">💛</a>\
-                                  <a href="javascript:void(0);">🤣</a>\
-                                  <a href="javascript:void(0);">😜</a>\
-                                  <a href="javascript:void(0);">😘</a>\
-                                  <a href="javascript:void(0);">😍</a>\
-                                  <div class="avatar-xs">\
-                                  <a href="javascript:void(0);" class="avatar-title bg-soft-primary rounded-circle fs-19 text-primary">+</a>\
-                                  </div>\
-                                </div>\
-                              </div>\
-                            </div>\
-                              <div class="dropdown">\
-                                  <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                                      <i class="ri-more-2-fill"></i>\
-                                  </a>\
-                                  <div class="dropdown-menu">\
-                                      <a class="dropdown-item d-flex align-items-center justify-content-between reply-message" href="#" data-bs-toggle="collapse" data-bs-target=".replyCollapse">Reply <i class="bx bx-share ms-2 text-muted"></i></a>\
-                                      <a class="dropdown-item d-flex align-items-center justify-content-between" href="#" data-bs-toggle="modal" data-bs-target=".forwardModal">Forward <i class="bx bx-share-alt ms-2 text-muted"></i></a>\
-                                      <a class="dropdown-item d-flex align-items-center justify-content-between copy-message" href="#" id="copy-message-' +
-                    messageIds +
-                    '">Copy <i class="bx bx-copy text-muted ms-2"></i></a>\
-                                      <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Bookmark <i class="bx bx-bookmarks text-muted ms-2"></i></a>\
-                                      <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Mark as Unread <i class="bx bx-message-error text-muted ms-2"></i></a>\
-                                      <a class="dropdown-item d-flex align-items-center justify-content-between delete-item" id="delete-item-' +
-                    messageIds +
-                    '" href="#">Delete <i class="bx bx-trash text-muted ms-2"></i></a>\
-                              </div>\
-                            </div>\
-                        </div>\
-                    </div>\
-                    <div class="conversation-name">\
-                        <small class="text-muted time">' +
-                    currentTime() +
-                    '</small>\
-                        <span class="text-success check-message-icon"><i class="bx bx-check"></i></span>\
-                    </div>\
-                </div>\
-            </div>\
-        </li>'
-            );
-        }
-
-        // remove chat list
-        var newChatList = document.getElementById("chat-list-" + messageIds);
-        newChatList
-            .querySelectorAll(".delete-item")
-            .forEach(function (subitem) {
-                subitem.addEventListener("click", function () {
-                    itemList.removeChild(newChatList);
-                });
-            });
-
-        //Copy Clipboard alert
-        newChatList
-            .querySelectorAll(".copy-message")
-            .forEach(function (subitem) {
-                subitem.addEventListener("click", function () {
-                    document.getElementById("copyClipBoard").style.display =
-                        "block";
-                    document.getElementById(
-                        "copyClipBoardChannel"
-                    ).style.display = "block";
-                    setTimeout(hideclipboardNew, 1000);
-                    function hideclipboardNew() {
-                        document.getElementById("copyClipBoard").style.display =
-                            "none";
-                        document.getElementById(
-                            "copyClipBoardChannel"
-                        ).style.display = "none";
-                    }
-                });
-            });
-
-        //reply Message model
-        newChatList
-            .querySelectorAll(".reply-message")
-            .forEach(function (subitem) {
-                subitem.addEventListener("click", function () {
-                    var replyToggleOpenNew =
-                        document.querySelector(".replyCard");
-                    var replyToggleCloseNew =
-                        document.querySelector("#close_toggle");
-                    var replyMessageNew =
-                        subitem.closest(".ctext-wrap").children[0].children[0]
-                            .innerText;
-                    var replyUserNew =
-                        document.querySelector(".user-profile-show").innerHTML;
-                    isreplyMessage = true;
-                    replyToggleOpenNew.classList.add("show");
-                    replyToggleCloseNew.addEventListener("click", function () {
-                        replyToggleOpenNew.classList.remove("show");
-                    });
-
-                    document.querySelector(
-                        ".replyCard .replymessage-block .flex-grow-1 .mb-0"
-                    ).innerText = replyMessageNew;
-                    document.querySelector(
-                        ".replyCard .replymessage-block .flex-grow-1 .conversation-name"
-                    ).innerText = replyUserNew;
-                });
-            });
-
-        //Copy Message
-        newChatList
-            .querySelectorAll(".copy-message")
-            .forEach(function (subitem) {
-                subitem.addEventListener("click", function () {
-                    var currentValue =
-                        newChatList.childNodes[1].firstElementChild
-                            .firstElementChild.firstElementChild
-                            .firstElementChild.innerText;
-                    navigator.clipboard.writeText(currentValue);
-                });
-            });
-    };
 
     var messageboxcollapse = 1;
 
@@ -1689,10 +592,6 @@ import {axios} from '../request';
             var chatReplyId = currentChatId;
 
             var chatInputValue = chatInput.value;
-            var imagepreview = document.querySelector(".image_pre");
-            var attachedFilePreview =
-                document.querySelector(".attchedfile_pre");
-            var audioFilePreview = document.querySelector(".audiofile_pre");
             var chatInputfeedback = document.querySelector(
                 ".chat-input-feedback"
             );
@@ -1702,16 +601,6 @@ import {axios} from '../request';
                 setTimeout(function () {
                     chatInputfeedback.classList.remove("show");
                 }, 2000);
-                if (imagepreview != null) {
-                    chatInputfeedback.classList.remove("show");
-                    getImages(chatId1, chatInputValue);
-                } else if (attachedFilePreview != null) {
-                    chatInputfeedback.classList.remove("show");
-                    getAttachedFiles(chatId2, chatInputValue);
-                } else if (audioFilePreview != null) {
-                    chatInputfeedback.classList.remove("show");
-                    getAudioFiles(chatId3, chatInputValue);
-                }
             } else {
                 if (isreplyMessage == true) {
                     getReplyChatList(chatReplyId, chatInputValue);
@@ -1732,27 +621,7 @@ import {axios} from '../request';
             scrollToBottom(
                 chatId || chatId1 || chatId2 || chatId3 || chatReplyId
             );
-
             chatInput.value = "";
-
-            //Images input text area null
-            document.querySelector(".image_pre")
-                ? document.querySelector(".image_pre").remove()
-                : "";
-            document.getElementById("galleryfile-input").value = "";
-
-            //attached input text area null
-            document.querySelector(".attchedfile_pre")
-                ? document.querySelector(".attchedfile_pre").remove()
-                : "";
-            document.getElementById("attachedfile-input").value = "";
-
-            //audio input text area null
-            document.querySelector(".audiofile_pre")
-                ? document.querySelector(".audiofile_pre").remove()
-                : "";
-            document.getElementById("audiofile-input").value = "";
-
             //reply msg remove textarea
             document.getElementById("close_toggle").click();
         });
@@ -1770,33 +639,7 @@ import {axios} from '../request';
         });
     }
 
-    //remove chat images
-    function deleteImage() {
-        var deleteImage = itemList.querySelectorAll(".chat-list");
-        deleteImage.forEach(function (item) {
-            item.querySelectorAll(".delete-image").forEach(function (subitem) {
-                subitem.addEventListener("click", function () {
-                    subitem.closest(".message-img").childElementCount == 1
-                        ? subitem.closest(".chat-list").remove()
-                        : subitem.closest(".message-img-list").remove();
-                });
-            });
-        });
-    }
-
-    //Delete Channel Message
-    var channelItemList = document.querySelector("#channel-conversation");
-    function deleteChannelMessage() {
-        var channelChatList = channelItemList.querySelectorAll(".delete-item");
-        channelChatList.forEach(function (item) {
-            item.addEventListener("click", function () {
-                item.closest(".user-chat-content").childElementCount == 2
-                    ? item.closest(".chat-list").remove()
-                    : item.closest(".ctext-wrap").remove();
-            });
-        });
-    }
-
+ 
     //Copy ClipBoard Alert
     function copyClipboard() {
         var copyClipboardAlert = document.querySelectorAll(".copy-message");
@@ -1822,20 +665,6 @@ import {axios} from '../request';
     function copyMessage() {
         var copyMessage = itemList.querySelectorAll(".copy-message");
         copyMessage.forEach(function (item) {
-            item.addEventListener("click", function () {
-                var isText = item.closest(".ctext-wrap").children[0]
-                    ? item.closest(".ctext-wrap").children[0].children[0]
-                          .innerText
-                    : "";
-                navigator.clipboard.writeText(isText);
-            });
-        });
-    }
-
-    function copyChannelMessage() {
-        var copyChannelMessage =
-            channelItemList.querySelectorAll(".copy-message");
-        copyChannelMessage.forEach(function (item) {
             item.addEventListener("click", function () {
                 var isText = item.closest(".ctext-wrap").children[0]
                     ? item.closest(".ctext-wrap").children[0].children[0]
@@ -1880,53 +709,7 @@ import {axios} from '../request';
         });
     }
 
-    //reply Channelmessage
-    function replyChannelMessage() {
-        var replyChannelMessage =
-            channelItemList.querySelectorAll(".reply-message");
-        var replyChannelToggleOpen = document.querySelector(".replyCard");
-        var replyChannelToggleClose = document.querySelector("#close_toggle");
-
-        replyChannelMessage.forEach(function (item) {
-            item.addEventListener("click", function () {
-                isreplyMessage = true;
-                replyChannelToggleOpen.classList.add("show");
-                replyChannelToggleClose.addEventListener("click", function () {
-                    replyChannelToggleOpen.classList.remove("show");
-                });
-
-                var replyChannelMsg =
-                    item.closest(".ctext-wrap").children[0].children[0]
-                        .innerText;
-                document.querySelector(
-                    ".replyCard .replymessage-block .flex-grow-1 .mb-0"
-                ).innerText = replyChannelMsg;
-                var replyChanneluser =
-                    document.querySelector(".user-profile-show").innerHTML;
-                document.querySelector(
-                    ".replyCard .replymessage-block .flex-grow-1 .conversation-name"
-                ).innerText = replyChanneluser;
-            });
-        });
-    }
-
-    //Copy Channel Messages
-    function copyChannelMessage() {
-        var copyChannelMessage =
-            channelItemList.querySelectorAll(".copy-message");
-        copyChannelMessage.forEach(function (item) {
-            item.addEventListener("click", function () {
-                var isText = item.closest(".ctext-wrap").children[0]
-                    ? item.closest(".ctext-wrap").children[0].children[0]
-                          .innerText
-                    : "";
-                navigator.clipboard.writeText(isText);
-            });
-        });
-    }
-
     // Profile Foreground Img
-
     document
         .querySelector("#profile-foreground-img-file-input")
         .addEventListener("change", function () {
@@ -2085,10 +868,6 @@ import {axios} from '../request';
     function getMsg(
         id,
         msg,
-        has_images,
-        has_files,
-        has_audios,
-        has_videos,
         has_dropDown
     ) {
         var msgHTML = '<div class="ctext-wrap">';
@@ -2101,326 +880,12 @@ import {axios} from '../request';
                 msg +
                 "</p></div>";
         } 
-        /*
-        else if (has_images && has_images.length > 0) {
-            msgHTML += '<div class="message-img mb-0">';
-            for (i = 0; i < has_images.length; i++) {
-                msgHTML +=
-                    '<div class="message-img-list">\
-            <div>\
-              <a class="popup-img d-inline-block" href="' +
-                    has_images[i] +
-                    '">\
-                <img src="' +
-                    has_images[i] +
-                    '" alt="" class="rounded border img-thumbnail">\
-              </a>\
-            </div>\
-            <div class="message-img-link">\
-              <ul class="list-inline mb-0">\
-                <li class="list-inline-item dropdown">\
-                  <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                      <i class="bx bx-dots-horizontal-rounded"></i>\
-                  </a>\
-                <div class="dropdown-menu">\
-                  <a class="dropdown-item d-flex align-items-center justify-content-between" href="' +
-                    has_images[i] +
-                    '" download>Download <i class="bx bx-download ms-2 text-muted"></i></a>\
-                  <a class="dropdown-item d-flex align-items-center justify-content-between"  href="#" data-bs-toggle="collapse" data-bs-target=".replyCollapse">Reply <i class="bx bx-share ms-2 text-muted"></i></a>\
-                  <a class="dropdown-item d-flex align-items-center justify-content-between" href="#" data-bs-toggle="modal" data-bs-target=".forwardModal">Forward <i class="bx bx-share-alt ms-2 text-muted"></i></a>\
-                  <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Bookmark <i class="bx bx-bookmarks text-muted ms-2"></i></a>\
-                  <a class="dropdown-item d-flex align-items-center justify-content-between delete-image" href="#">Delete <i class="bx bx-trash ms-2 text-muted"></i></a>\
-                </div>\
-              </li>\
-          </ul>\
-        </div>\
-      </div>';
-            }
-            msgHTML += "</div>";
-        } else if (has_files.length > 0) {
-            msgHTML +=
-                '<div class="ctext-wrap-content">\
-            <div class="p-3 border rounded-3">\
-            <div class="d-flex align-items-center attached-file">\
-                <div class="flex-shrink-0 avatar-sm me-3 ms-0 attached-file-avatar">\
-                    <div class="avatar-title bg-soft-light rounded-circle fs-20">\
-                        <i class="ri-attachment-2"></i>\
-                    </div>\
-                </div>\
-                <div class="flex-grow-1 overflow-hidden">\
-                    <div class="text-start">\
-                        <h5 class="fs-14 text-white mb-1">design-phase-1-approved.pdf</h5>\
-                        <p class="text-white-50 text-truncate fs-13 mb-0">12.5 MB</p>\
-                    </div>\
-                </div>\
-                <div class="flex-shrink-0 ms-4">\
-                    <div class="d-flex gap-2 fs-20 d-flex align-items-start">\
-                        <div>\
-                            <a href="#" class="text-white-50">\
-                                <i class="bx bxs-download"></i>\
-                            </a>\
-                        </div>\
-                    </div>\
-                </div>\
-             </div>\
-            </div>\
-            </div>\
-            <div class="emoji-icon">\
-                <a class="dropdown-toggle" href="#">👍</a>\
-            </div>\
-            <div class="align-self-start message-box-drop d-flex">\
-              <div class="dropdown">\
-                <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                  <i class="ri-emotion-happy-line"></i>\
-                </a>\
-                <div class="dropdown-menu emoji-dropdown-menu">\
-                  <div class="hstack align-items-center gap-2 px-2 fs-25">\
-                    <a href="javascript:void(0);">💛</a>\
-                    <a href="javascript:void(0);">🤣</a>\
-                    <a href="javascript:void(0);">😜</a>\
-                    <a href="javascript:void(0);">😘</a>\
-                    <a href="javascript:void(0);">😍</a>\
-                    <div class="avatar-xs">\
-                    <a href="javascript:void(0);" class="avatar-title bg-soft-primary rounded-circle fs-19 text-primary">+</a>\
-                    </div>\
-                  </div>\
-                </div>\
-              </div>\
-              <div class="dropdown">\
-                <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                    <i class="ri-more-2-fill"></i>\
-                </a>\
-                <div class="dropdown-menu">\
-                  <a class="dropdown-item d-flex align-items-center justify-content-between"  href="' +
-                has_files +
-                '" download>Download <i class="bx bx-download ms-2 text-muted"></i></a>\
-                  <a class="dropdown-item d-flex align-items-center justify-content-between" href="#" data-bs-toggle="collapse" data-bs-target=".replyCollapse">Reply <i class="bx bx-share ms-2 text-muted"></i></a>\
-                  <a class="dropdown-item d-flex align-items-center justify-content-between" href="#" data-bs-toggle="modal" data-bs-target=".forwardModal">Forward <i class="bx bx-share-alt ms-2 text-muted"></i></a>\
-                  <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Bookmark <i class="bx bx-bookmarks text-muted ms-2"></i></a>\
-                  <a class="dropdown-item d-flex align-items-center justify-content-between delete-item" href="#">Delete <i class="bx bx-trash text-muted ms-2"></i></a>\
-                </div>\
-              </div>\
-          </div>';
-        } else if (has_audios && has_audios.length > 0) {
-            msgHTML +=
-                '<div class="audio-file-elem">\
-                              <audio controls>\
-                                  <source src="' +
-                has_audios +
-                '" type="audio/mpeg">\
-                              </audio>\
-                          </div>\
-                  <div class="align-self-start message-box-drop d-flex">\
-              <div class="dropdown">\
-                <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                  <i class="ri-emotion-happy-line"></i>\
-                </a>\
-                <div class="dropdown-menu emoji-dropdown-menu">\
-                  <div class="hstack align-items-center gap-2 px-2 fs-25">\
-                    <a href="javascript:void(0);">💛</a>\
-                    <a href="javascript:void(0);">🤣</a>\
-                    <a href="javascript:void(0);">😜</a>\
-                    <a href="javascript:void(0);">😘</a>\
-                    <a href="javascript:void(0);">😍</a>\
-                    <div class="avatar-xs">\
-                    <a href="javascript:void(0);" class="avatar-title bg-soft-primary rounded-circle fs-19 text-primary">+</a>\
-                    </div>\
-                  </div>\
-                </div>\
-              </div>\
-              <div class="dropdown">\
-                <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                    <i class="ri-more-2-fill"></i>\
-                </a>\
-                <div class="dropdown-menu">\
-                  <a class="dropdown-item d-flex align-items-center justify-content-between"  href="' +
-                has_audios +
-                '" download>Download <i class="bx bx-download ms-2 text-muted"></i></a>\
-                  <a class="dropdown-item d-flex align-items-center justify-content-between" href="#" data-bs-toggle="collapse" data-bs-target=".replyCollapse">Reply <i class="bx bx-share ms-2 text-muted"></i></a>\
-                  <a class="dropdown-item d-flex align-items-center justify-content-between" href="#" data-bs-toggle="modal" data-bs-target=".forwardModal">Forward <i class="bx bx-share-alt ms-2 text-muted"></i></a>\
-                  <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Bookmark <i class="bx bx-bookmarks text-muted ms-2"></i></a>\
-                  <a class="dropdown-item d-flex align-items-center justify-content-between delete-item" href="#">Delete <i class="bx bx-trash text-muted ms-2"></i></a>\
-                </div>\
-              </div>\
-          </div>';
-        } else if (has_videos && has_videos.length > 0) {
-            msgHTML +=
-                '<div>\
-        <iframe src="' +
-                has_videos +
-                '" title="YouTube video" class="w-100 rounded" autoplay allowfullscreen></iframe>\
-      </div>\
-                  <div class="align-self-start message-box-drop d-flex">\
-              <div class="dropdown">\
-                <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                  <i class="ri-emotion-happy-line"></i>\
-                </a>\
-                <div class="dropdown-menu emoji-dropdown-menu">\
-                  <div class="hstack align-items-center gap-2 px-2 fs-25">\
-                    <a href="javascript:void(0);">💛</a>\
-                    <a href="javascript:void(0);">🤣</a>\
-                    <a href="javascript:void(0);">😜</a>\
-                    <a href="javascript:void(0);">😘</a>\
-                    <a href="javascript:void(0);">😍</a>\
-                    <div class="avatar-xs">\
-                    <a href="javascript:void(0);" class="avatar-title bg-soft-primary rounded-circle fs-19 text-primary">+</a>\
-                    </div>\
-                  </div>\
-                </div>\
-              </div>\
-              <div class="dropdown">\
-                <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                    <i class="ri-more-2-fill"></i>\
-                </a>\
-                <div class="dropdown-menu">\
-                  <a class="dropdown-item d-flex align-items-center justify-content-between"  href="' +
-                has_videos +
-                '" download>Download <i class="bx bx-download ms-2 text-muted"></i></a>\
-                  <a class="dropdown-item d-flex align-items-center justify-content-between" href="#" data-bs-toggle="collapse" data-bs-target=".replyCollapse">Reply <i class="bx bx-share ms-2 text-muted"></i></a>\
-                  <a class="dropdown-item d-flex align-items-center justify-content-between" href="#" data-bs-toggle="modal" data-bs-target=".forwardModal">Forward <i class="bx bx-share-alt ms-2 text-muted"></i></a>\
-                  <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Bookmark <i class="bx bx-bookmarks text-muted ms-2"></i></a>\
-                  <a class="dropdown-item d-flex align-items-center justify-content-between delete-item" href="#">Delete <i class="bx bx-trash text-muted ms-2"></i></a>\
-                </div>\
-              </div>\
-          </div>';
-        }
-        */
         if (has_dropDown === true) {
-            msgHTML +=
-        '<div class="align-self-start message-box-drop d-flex">\
-            <div class="dropdown">\
-                <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                  <i class="ri-emotion-happy-line"></i>\
-                </a>\
-                <div class="dropdown-menu emoji-dropdown-menu">\
-                  <div class="hstack align-items-center gap-2 px-2 fs-25">\
-                    <a href="javascript:void(0);">💛</a>\
-                    <a href="javascript:void(0);">🤣</a>\
-                    <a href="javascript:void(0);">😜</a>\
-                    <a href="javascript:void(0);">😘</a>\
-                    <a href="javascript:void(0);">😍</a>\
-                    <div class="avatar-xs">\
-                    <a href="javascript:void(0);" class="avatar-title bg-soft-primary rounded-circle fs-19 text-primary">+</a>\
-                    </div>\
-                  </div>\
-                </div>\
-            </div>\
-            <div class="dropdown">\
-                <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                    <i class="ri-more-2-fill"></i>\
-                </a>\
-                <div class="dropdown-menu">\
-                    <a class="dropdown-item d-flex align-items-center justify-content-between reply-message" href="#" id="reply-message-' +
-                messageIds +
-                '" data-bs-toggle="collapse" data-bs-target=".replyCollapse">Reply <i class="bx bx-share ms-2 text-muted"></i></a>\
-                    <a class="dropdown-item d-flex align-items-center justify-content-between copy-message" href="#" id="copy-message-' +
-                messageIds +
-                '">Copy <i class="bx bx-copy text-muted ms-2"></i></a>\
-                    <a class="dropdown-item d-flex align-items-center justify-content-between delete-item" href="#">Delete <i class="bx bx-trash text-muted ms-2"></i></a>\
-                </div>\
-            </div>\
-        </div>';
+            msgHTML += getDropdownMessage()
+        ;
         }
         msgHTML += "</div>";
         return msgHTML;
-    }
-
-    //Chat Message
-    function getChatMessages(jsonFileUrl) {
-        getJSONFile(jsonFileUrl, function (err, data) {
-            if (err !== null) {
-                console.log("Something went wrong: " + err);
-            } else {
-                var chatsData =
-                    currentSelectedChat == "users"
-                        ? data[0].chats
-                        : data[0].channel_chat;
-                document.getElementById(
-                    currentSelectedChat + "-conversation"
-                ).innerHTML = "";
-                var isContinue = 0;
-                chatsData.forEach(function (isChat, index) {
-                    if (isContinue > 0) {
-                        isContinue = isContinue - 1;
-                        return;
-                    }
-                    var isAlighn =
-                        isChat.from_id == userChatId ? " right" : " left";
-
-                    var user = usersList.find(function (list) {
-                        return list.id == isChat.from_id;
-                    });
-                    var msgHTML =
-                        '<li class="chat-list' +
-                        isAlighn +
-                        '" id=' +
-                        isChat.id +
-                        '>\
-                        <div class="conversation-list">';
-                    if (userChatId != isChat.from_id && user)
-                        msgHTML +=
-                            '<div class="chat-avatar"><img src="' +
-                            user.profile +
-                            '" alt=""></div>';
-
-                    msgHTML += '<div class="user-chat-content">';
-                    msgHTML += getMsg(
-                        isChat.id,
-                        isChat.msg,
-                        isChat.has_images,
-                        isChat.has_files,
-                        isChat.has_audios,
-                        isChat.has_videos,
-                        isChat.has_dropDown
-                    );
-                    if (
-                        chatsData[index + 1] &&
-                        isChat.from_id == chatsData[index + 1]["from_id"]
-                    ) {
-                        isContinue = getNextMsgCounts(
-                            chatsData,
-                            index,
-                            isChat.from_id
-                        );
-                        msgHTML += getNextMsgs(
-                            chatsData,
-                            index,
-                            isChat.from_id,
-                            isContinue
-                        );
-                    }
-                    msgHTML +=
-                        '<div class="conversation-name"><small class="text-muted time">' +
-                        isChat.datetime +
-                        '</small> <span class="text-success check-message-icon"><i class="bx bx-check-double"></i></span></div>';
-                    msgHTML +=
-                        "</div>\
-                </div>\
-            </li>";
-
-                    document.getElementById(
-                        currentSelectedChat + "-conversation"
-                    ).innerHTML += msgHTML;
-                });
-            }
-            deleteMessage();
-            deleteChannelMessage();
-            deleteImage();
-            copyMessage();
-            copyChannelMessage();
-            scrollToBottom("users-chat");
-            updateLightbox();
-            copyClipboard();
-            replyMessage();
-            replyChannelMessage();
-        });
-    }
-    // GLightbox Popup
-    function updateLightbox() {
-        var lightbox = GLightbox({
-            selector: ".popup-img",
-            title: false,
-        });
     }
 
 var input, filter, ul, li, a, i, j, div;
@@ -2449,7 +914,6 @@ function searchContacts() {
     let list = document.querySelector(".sort-contact");
     let li = list.querySelectorAll(".mt-3 li");
     let div = list.querySelectorAll(".mt-3 .contact-list-title");
-    let userUUID = document.querySelector('meta[name="uuid"]').content;
     // Fetching users from remote
 
     axios
@@ -2507,35 +971,7 @@ function updateContacts(data){
             user.nickname +
             "</span>";
         profile += `<input type="hidden" class="_user-uuid" value="${user.uuid}" \>`
-        let msgHTML =
-            '<li>\
-                <div class="d-flex align-items-center">\
-                    <div class="flex-shrink-0 me-2">\
-                        <div class="avatar-xs">\
-                        ' +
-                            profile +
-                        '\
-                        </div>\
-                    </div>\
-                    <div class="flex-grow-1">\
-                        <h5 class="fs-14 m-0" >' +
-                            user.name +
-                        '</h5>\
-                    </div>\
-                    <div class="flex-shrink-0">\
-                        <div class="dropdown">\
-                            <a href="#" class="text-muted dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                                <i class="bx bx-dots-vertical-rounded align-middle"></i>\
-                            </a>\
-                            <div class="dropdown-menu dropdown-menu-end">\
-                                <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Edit <i class="bx bx-pencil ms-2 text-muted"></i></a>\
-                                <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Block <i class="bx bx-block ms-2 text-muted"></i></a>\
-                                <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Remove <i class="bx bx-trash ms-2 text-muted"></i></a>\
-                            </div>\
-                        </div>\
-                    </div>\
-                </div>\
-            </li>';
+        let msgHTML = getDropdownContact(profile,user);
         let isSortContact =
             '<div class="mt-3" >\
                 <div class="contact-list-title">' +
@@ -2557,7 +993,6 @@ function updateContacts(data){
 function fetchMessages(uuid){
     axios.get('/api/messages', {params:{ 'uuid' : uuid}})
         .then((response) => {
-            //console.log(JSON.parse(response.data));
             updateChats(JSON.parse(response.data));
         })
 }
@@ -2568,14 +1003,15 @@ function updateChats(chatData){
     resetOldChats()
     console.log(chatData);
     var {lenght,messages,sender}  = chatData
+    var itemList = document.getElementById("users-conversation");
+    let messageIds = itemList.childElementCount;
     let currentSelectedChat = 'users'
         let  isContinue = 0;
         console.log(messages);
         messages.forEach(function (message, index) {
+            messageIds++;
 
-            console.log(message.from_id);
             let userChatUuid = sender.uuid
-            console.log(isContinue);
             /*if (isContinue > 0) {
                 isContinue = isContinue - 1;
                 return;
@@ -2586,8 +1022,8 @@ function updateChats(chatData){
             let  msgHTML =
                 '<li class="chat-list' +
                 isAlighn +
-                '" id=' +
-                message.id +
+                '" id=chat-list-' +
+                messageIds +
                 '>\
                 <div class="conversation-list">';
             if (userChatUuid == message.from_id && sender)
@@ -2600,16 +1036,7 @@ function updateChats(chatData){
             msgHTML += getMsg(
                 message.id,
                 message.content,
-                false,
-                false,
-                false,
-                false,
                 true
-                // message.has_images,
-                // message.has_files,
-                // message.has_audios,
-                // message.has_videos,
-                // message.has_dropDown
             );
             if (
                 messages[index + 1] &&
@@ -2629,7 +1056,7 @@ function updateChats(chatData){
             }
             msgHTML +=
                 '<div class="conversation-name"><small class="text-muted time">' +
-                message.created_at +
+                formatTimeForMessages(message.created_at) +
                 '</small> <span class="text-success check-message-icon"><i class="bx bx-check-double"></i></span></div>';
             msgHTML +=
                 "</div>\
@@ -2642,10 +1069,8 @@ function updateChats(chatData){
         });
     
     deleteMessage();
-    deleteImage();
     copyMessage();
     scrollToBottom("users-chat");
-    updateLightbox();
     copyClipboard();
     replyMessage();
 }
@@ -2671,24 +1096,6 @@ function searchContactOnModal() {
     for (i = 0; i < li.length; i++) {
         contactName = li[i];
         txtValue = contactName.querySelector("h5").innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
-    }
-}
-
-// bookmark serach
-function searchBookmark() {
-    var input, filter, ul, li, a, i, txtValue;
-    input = document.getElementById("searchbookmark");
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("chat-bookmark-list");
-    li = ul.getElementsByTagName("li");
-    for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        txtValue = a.textContent || a.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
             li[i].style.display = "";
         } else {
@@ -2955,47 +1362,4 @@ var primaryColor = window
     .getComputedStyle(document.body, null)
     .getPropertyValue("--bs-primary-rgb");
 themeColor(primaryColor);
-
-//Remove image
-function removeImage(id) {
-    document.querySelector("#" + id).remove();
-    if (document.querySelectorAll(".image-remove").length == 0) {
-        document.querySelector(".file_Upload").classList.remove("show");
-    }
-}
-
-//Remove Attached Files
-function removeAttachedFile() {
-    if (document.getElementById("remove-attechedFile")) {
-        document.getElementsByClassName("attechedFile-remove")[0];
-        // Delete Upload Preview Attached Files
-        document
-            .getElementById("remove-attechedFile")
-            .addEventListener("click", function (e) {
-                e.target.closest(".attchedfile_pre").remove();
-            });
-    }
-    var removeButton = document.querySelector("#remove-attechedFile");
-    removeButton.addEventListener("click", function () {
-        document.querySelector(".file_Upload ").classList.remove("show");
-    });
-}
-
-//Remove Audio Files
-function removeAudioFile() {
-    if (document.getElementById("remove-audioFile")) {
-        document.getElementsByClassName("audioFile-remove")[0];
-        // Delete Upload Preview Attached Files
-        document
-            .getElementById("remove-audioFile")
-            .addEventListener("click", function (e) {
-                e.target.closest(".audiofile_pre").remove();
-            });
-    }
-    var removeButton = document.querySelector("#remove-audioFile");
-    removeButton.addEventListener("click", function () {
-        document.querySelector(".file_Upload ").classList.remove("show");
-    });
-}
-
 })();
