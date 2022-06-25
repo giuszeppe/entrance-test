@@ -307,7 +307,11 @@ import { contactList, getUsersList } from './users';
                     let uuid = document.getElementById('users-conversation').getAttribute('selected-chat')
                     params.append('uuid',uuid)
                     params.append('content',chatInputValue)
-                    axios.post('/api/message/', params)
+                    axios.post('/api/message/', params,{
+                        headers : {
+                            'Content-type' : 'application/json'
+                        }
+                    })
                     .then((response)=>{
                         
                     })
