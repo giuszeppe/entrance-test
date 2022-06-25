@@ -1,6 +1,7 @@
 /node_modules
 /public/hot
-/public/libs
+/public/js/*.js
+/public/js/
 /public/storage
 /public/storage
 /storage/*.key

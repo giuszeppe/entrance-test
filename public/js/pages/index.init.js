@@ -1,32 +1,9929 @@
-/*
- * ATTENTION: An "eval-source-map" devtool has been used.
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./resources/js/pages/index.init.js":
-/*!******************************************!*\
-  !*** ./resources/js/pages/index.init.js ***!
-  \******************************************/
-/***/ (() => {
+/***/ "./node_modules/axios/index.js":
+/*!*************************************!*\
+  !*** ./node_modules/axios/index.js ***!
+  \*************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("/*\r\nTemplate Name: Vhato - Responsive Bootstrap 5 Chat App\r\nAuthor: Themesbrand\r\nWebsite: https://themesbrand.com/\r\nContact: themesbrand@gmail.com\r\nFile: Index init js\r\n*/\n(function () {\n  var isreplyMessage = false;\n  var currentChatId = \"users-chat\";\n  var dummyImage = \"images/users/user-dummy-img.jpg\";\n  var currentSelectedChat = \"users\";\n  var url = window.location.origin + \"/js/dir/\";\n  var usersList = [];\n  var userChatId = 1;\n  document.getElementById(\"copyClipBoard\").style.display = \"none\";\n  document.getElementById(\"copyClipBoardChannel\").style.display = \"none\"; // chat user responsive hide show\n\n  function toggleSelected() {\n    var userChatElement = document.getElementsByClassName(\"user-chat\");\n    document.querySelectorAll(\".chat-user-list li a\").forEach(function (item) {\n      item.addEventListener(\"click\", function (event) {\n        userChatElement.forEach(function (elm) {\n          elm.classList.add(\"user-chat-show\");\n        }); // chat user list link active\n\n        var chatUserList = document.querySelector(\".chat-user-list li.active\");\n        if (chatUserList) chatUserList.classList.remove(\"active\");\n        this.parentNode.classList.add(\"active\");\n      });\n    });\n    document.querySelectorAll(\".sort-contact ul li\").forEach(function (item2) {\n      item2.addEventListener(\"click\", function (event) {\n        userChatElement.forEach(function (elm) {\n          elm.classList.add(\"user-chat-show\");\n        });\n      });\n    }); // user-chat-remove\n\n    document.querySelectorAll(\".user-chat-remove\").forEach(function (item) {\n      item.addEventListener(\"click\", function (event) {\n        userChatElement.forEach(function (elm) {\n          elm.classList.remove(\"user-chat-show\");\n        });\n      });\n    });\n  } // single to channel and channel to single chat conversation\n\n\n  function chatSwap() {\n    document.querySelectorAll(\"#favourite-users li, #usersList li\") && document.querySelectorAll(\"#favourite-users li, #usersList li\").forEach(function (item) {\n      item.addEventListener(\"click\", function (event) {\n        currentSelectedChat = \"users\";\n        updateSelectedChat();\n        currentChatId = \"users-chat\";\n        var contactId = item.getAttribute(\"id\");\n        var username = item.querySelector(\".text-truncate\").innerHTML;\n        document.querySelector(\".user-profile-sidebar .user-name\").innerHTML = username;\n        var contactImagesWithName = document.getElementById(\"users-chat\");\n        contactImagesWithName.querySelector(\".text-truncate .user-profile-show\").innerHTML = username;\n        document.querySelector(\".user-profile-desc .text-truncate\").innerHTML = username;\n        document.querySelector(\".chat-input-typing\").style.display = \"block\";\n        document.querySelector(\".user-profile-status\").style.display = \"block\";\n        document.querySelector(\".chat-input-typing .typing-user\").innerHTML = username + ' is Typing<span class=\"typing ms-2\"><span class=\"dot\"></span><span class=\"dot\"></span><span class=\"dot\"></span></span>';\n        document.querySelector(\".audiocallModal .text-truncate\").innerHTML = username;\n        document.querySelector(\".videocallModal .text-truncate\").innerHTML = username;\n        var img = document.getElementById(contactId).querySelector(\".avatar-xs\").getAttribute(\"src\");\n\n        if (img) {\n          document.querySelector(\".user-own-img .avatar-sm\").setAttribute(\"src\", img);\n          document.querySelector(\".user-profile-sidebar .profile-img\").setAttribute(\"src\", img);\n          document.querySelector(\".audiocallModal .img-thumbnail\").setAttribute(\"src\", img);\n          document.querySelector(\".videocallModal .videocallModal-bg\").setAttribute(\"src\", img);\n        } else {\n          document.querySelector(\".user-own-img .avatar-sm\").setAttribute(\"src\", dummyImage);\n          document.querySelector(\".user-profile-sidebar .profile-img\").setAttribute(\"src\", dummyImage);\n          document.querySelector(\".audiocallModal .img-thumbnail\").setAttribute(\"src\", dummyImage);\n          document.querySelector(\".videocallModal .videocallModal-bg\").setAttribute(\"src\", dummyImage);\n        }\n\n        var chatImg = item.querySelector(\".avatar-xs\").getAttribute(\"src\");\n        var conversationImg = document.getElementById(\"users-conversation\");\n        conversationImg.querySelectorAll(\".left .chat-avatar\").forEach(function (item3) {\n          if (chatImg) {\n            item3.querySelector(\"img\").setAttribute(\"src\", chatImg);\n          } else {\n            item3.querySelector(\"img\").setAttribute(\"src\", dummyImage);\n          }\n        });\n        window.stop();\n      });\n    });\n    document.querySelectorAll(\"#channelList li\").forEach(function (item) {\n      item.addEventListener(\"click\", function (event) {\n        currentChatId = \"channel-chat\";\n        currentSelectedChat = \"channel\";\n        updateSelectedChat();\n        var channelId = item.getAttribute(\"id\");\n        var channelName = item.querySelector(\".text-truncate\").innerHTML;\n        var changeChannelName = document.getElementById(\"channel-chat\");\n        changeChannelName.querySelector(\".text-truncate .user-profile-show\").innerHTML = channelName;\n        document.querySelector(\".user-profile-desc .text-truncate\").innerHTML = channelName;\n        document.querySelector(\".audiocallModal .text-truncate\").innerHTML = channelName;\n        document.querySelector(\".videocallModal .text-truncate\").innerHTML = channelName;\n        document.querySelector(\".user-profile-sidebar .user-name\").innerHTML = channelName;\n        document.querySelector(\".chat-input-typing\").style.display = \"none\";\n        document.querySelector(\".user-profile-status\").style.display = \"none\";\n        var channelImg = document.getElementById(channelId).querySelector(\".avatar-xs\").getAttribute(\"src\");\n\n        if (channelImg !== null) {\n          document.querySelector(\"#channel-chat .user-own-img .avatar-sm\").setAttribute(\"src\", channelImg);\n          document.querySelector(\".user-profile-sidebar .profile-img\").setAttribute(\"src\", channelImg);\n          document.querySelector(\".audiocallModal .img-thumbnail\").setAttribute(\"src\", channelImg);\n          document.querySelector(\".videocallModal .videocallModal-bg\").setAttribute(\"src\", channelImg);\n        } else {\n          document.querySelector(\"#channel-chat .user-own-img .avatar-sm\").setAttribute(\"src\", dummyImage);\n          document.querySelector(\".user-profile-sidebar .profile-img\").setAttribute(\"src\", dummyImage);\n          document.querySelector(\".audiocallModal .img-thumbnail\").setAttribute(\"src\", dummyImage);\n          document.querySelector(\".videocallModal .videocallModal-bg\").setAttribute(\"src\", dummyImage);\n        }\n      });\n    });\n  } //user list by json\n\n\n  var getJSON = function getJSON(jsonurl, callback) {\n    var xhr = new XMLHttpRequest();\n    xhr.open(\"GET\", url + jsonurl, true);\n    xhr.responseType = \"json\";\n\n    xhr.onload = function () {\n      var status = xhr.status;\n\n      if (status === 200) {\n        callback(null, xhr.response);\n      } else {\n        callback(status, xhr.response);\n      }\n    };\n\n    xhr.send();\n  };\n\n  getJSON(\"users.json\", function (err, data) {\n    if (err !== null) {\n      console.log(\"Something went wrong: \" + err);\n    } else {\n      // set favourite users list\n      var fav = data[0].favorites;\n      fav.forEach(function (user, index) {\n        var profile = user.profile ? '<img src=\"' + user.profile + '\" class=\"rounded-circle avatar-xs\" alt=\"\"><span class=\"user-status\"></span>' : '<div class=\"avatar-xs\"><span class=\"avatar-title rounded-circle bg-primary text-white\"><span class=\"username\">' + user.nickname + '</span><span class=\"user-status\"></span></span></div>';\n        var isMessageCount = user.messagecount ? '<div class=\"ms-auto\"><span class=\"badge badge-soft-danger rounded p-1 fs-10\">' + user.messagecount + \"</span></div>\" : \"\";\n        var messageCount = user.messagecount ? '<a href=\"javascript: void(0);\" class=\"unread-msg-user\">' : '<a href=\"javascript: void(0);\">';\n        var activeClass = user.id === 1 ? \"active\" : \"\";\n        document.getElementById(\"favourite-users\").innerHTML += '<li id=\"contact-id-' + user.id + '\" data-name=\"favorite\" class=\"' + activeClass + '\">\\\r\n                  ' + messageCount + ' \\\r\n                      <div class=\"d-flex align-items-center\">\\\r\n                          <div class=\"chat-user-img online align-self-center me-2 ms-0\">\\\r\n                              ' + profile + '\\\r\n                          </div>\\\r\n                          <div class=\"overflow-hidden me-2\">\\\r\n                              <p class=\"text-truncate chat-username mb-0\">' + user.name + '</p>\\\r\n                              <p class=\"text-truncate text-muted fs-13 mb-0\">' + user.lastmessage + \"</p>\\\r\n                          </div>\\\r\n                          \" + isMessageCount + \"\\\r\n                      </div>\\\r\n                  </a>\\\r\n              </li>\";\n      }); // set users message list\n\n      var users = data[0].users;\n      users.forEach(function (userData, index) {\n        var isUserProfile = userData.profile ? '<img src=\"' + userData.profile + '\" class=\"rounded-circle avatar-xs\" alt=\"\"><span class=\"user-status\"></span>' : '<div class=\"avatar-xs\"><span class=\"avatar-title rounded-circle bg-primary text-white\"><span class=\"username\">JL</span><span class=\"user-status\"></span></span></div>';\n        var isMessageCount = userData.messagecount ? '<div class=\"ms-auto\"><span class=\"badge badge-soft-danger rounded p-1 fs-10\">' + userData.messagecount + \"</span></div>\" : \"\";\n        var messageCount = userData.messagecount ? '<a href=\"javascript: void(0);\" class=\"unread-msg-user\">' : '<a href=\"javascript: void(0);\">';\n        var activeClass = userData.id === 1 ? \"active\" : \"\";\n        var profile = userData.profile ? '<img src=\"' + userData.profile + '\" class=\"rounded-circle avatar-xs\" alt=\"\"><span class=\"user-status\"></span>' : '<div class=\"avatar-xs\"><span class=\"avatar-title rounded-circle bg-primary text-white\"><span class=\"username\">' + userData.nickname + '</span><span class=\"user-status\"></span></span></div>';\n        document.getElementById(\"usersList\").innerHTML += '<li id=\"contact-id-' + userData.id + '\" data-name=\"favorite\" class=\"' + activeClass + '\">\\\r\n        ' + messageCount + ' \\\r\n            <div class=\"d-flex align-items-center\">\\\r\n                <div class=\"chat-user-img online align-self-center me-2 ms-0\">\\\r\n                    ' + profile + '\\\r\n                </div>\\\r\n                <div class=\"overflow-hidden me-2\">\\\r\n                    <p class=\"text-truncate chat-username mb-0\">' + userData.name + '</p>\\\r\n                    <p class=\"text-truncate text-muted fs-13 mb-0\">' + userData.lastmessage + \"</p>\\\r\n                </div>\\\r\n                \" + isMessageCount + \"\\\r\n            </div>\\\r\n        </a>\\\r\n    </li>\";\n      }); // set channels list\n\n      var channelsData = data[0].channels;\n      channelsData.forEach(function (isChannel, index) {\n        var profile = isChannel.profile ? '<img src=\"' + isChannel.profile + '\" class=\"rounded-circle avatar-xs\" alt=\"\">' : '<div class=\"avatar-xs\"><span class=\"avatar-title rounded-circle bg-primary text-white\"><span class=\"username\">JL</span><span class=\"user-status\"></span></span></div>';\n        var isMessage = isChannel.messagecount ? '<div class=\"flex-shrink-0 ms-2\"><span class=\"badge badge-soft-danger rounded p-1 fs-10\">' + isChannel.messagecount + \"</span></div>\" : \"\";\n        var messageCount = isChannel.messagecount ? '<a href=\"javascript: void(0);\" class=\"unread-msg-user\">' : '<a href=\"javascript: void(0);\">';\n        var profile = isChannel.profile ? '<img src=\"' + isChannel.profile + '\" class=\"rounded-circle avatar-xs\" alt=\"\">' : '<div class=\"avatar-xs\"><span class=\"avatar-title rounded-circle bg-primary text-white\"><span class=\"username\">' + isChannel.nickname + \"</span></span></div>\";\n        document.getElementById(\"channelList\").innerHTML += '<li id=\"contact-id-' + isChannel.id + '\" data-name=\"channel\">\\\r\n                ' + messageCount + ' \\\r\n                    <div class=\"d-flex align-items-center\">\\\r\n                        <div class=\"flex-shrink-0 me-2\">\\\r\n                            <div class=\"chat-user-img online align-self-center\">\\\r\n                            ' + profile + '\\\r\n                            </div>\\\r\n                        </div>\\\r\n                        <div class=\"flex-grow-1 overflow-hidden\">\\\r\n                            <h6 class=\"text-truncate mb-0\">' + isChannel.name + '</h6>\\\r\n                            <p class=\"text-truncate text-muted fs-13 mb-0\">' + isChannel.lastmessage + \"</p>\\\r\n                        </div>\\\r\n                        <div>\" + isMessage + \"</div>\\\r\n                    </div>\\\r\n                </a>\\\r\n            </li>\";\n      });\n    }\n\n    toggleSelected();\n    chatSwap();\n  }); //CallList userDetails\n\n  function callsList() {\n    document.querySelectorAll(\"#callList li\").forEach(function (item) {\n      item.addEventListener(\"click\", function (event) {\n        var callsId = item.getAttribute(\"id\");\n        var callUser = item.querySelector(\".text-truncate\").innerHTML;\n        document.querySelector(\".videocallModal .text-truncate\").innerHTML = callUser;\n        document.querySelector(\".audiocallModal .text-truncate\").innerHTML = callUser;\n        var callImg = document.getElementById(callsId).querySelector(\".avatar-xs\").getAttribute(\"src\");\n\n        if (callImg) {\n          document.querySelector(\".audiocallModal .img-thumbnail\").setAttribute(\"src\", callImg);\n          document.querySelector(\".videocallModal .videocallModal-bg\").setAttribute(\"src\", callImg);\n        } else {\n          document.querySelector(\".audiocallModal .img-thumbnail\").setAttribute(\"src\", dummyImage);\n          document.querySelector(\".videocallModal .videocallModal-bg\").setAttribute(\"src\", dummyImage);\n        }\n      });\n    });\n  } //Call list\n\n\n  getJSON(\"callList.json\", function (err, data) {\n    if (err !== null) {\n      console.log(\"Something went wrong: \" + err);\n    } else {\n      callList = data;\n      callList.forEach(function (calls, index) {\n        var callIcon = calls.callVideo === true ? '<button type=\"button\" class=\"btn btn-link p-0 fs-20 stretched-link\" data-bs-toggle=\"modal\" data-bs-target=\".videocallModal\"><i class=\"' + calls.callTypeIcon + '\"></i></button>' : '<button type=\"button\" class=\"btn btn-link p-0 fs-20 stretched-link\" data-bs-toggle=\"modal\" data-bs-target=\".audiocallModal\"><i class=\"' + calls.callTypeIcon + '\"></i></button>';\n        var profile = calls.profile ? '<img src=\"' + calls.profile + '\" class=\"rounded-circle avatar-xs\" alt=\"\">' : '<div class=\"avatar-xs\"><span class=\"avatar-title rounded-circle bg-danger text-white\">RL</span></div>';\n        document.getElementById(\"callList\").innerHTML += '<li id=\"calls-id-' + calls.id + '\" >\\\r\n        <div class=\"d-flex align-items-center\">\\\r\n        <div class=\"chat-user-img flex-shrink-0 me-2\">\\\r\n            ' + profile + '\\\r\n        </div>\\\r\n            <div class=\"flex-grow-1 overflow-hidden\">\\\r\n                <p class=\"text-truncate mb-0\">' + calls.name + '</p>\\\r\n                <div class=\"text-muted fs-12 text-truncate\"><i class=\"' + calls.callArrowType + '\"></i> ' + calls.dateTime + '</div>\\\r\n            </div>\\\r\n            <div class=\"flex-shrink-0 ms-3\">\\\r\n                <div class=\"d-flex align-items-center gap-3\">\\\r\n                    <div>\\\r\n                        <h5 class=\"mb-0 fs-12 text-muted\">' + calls.callTime + \"</h5>\\\r\n                    </div>\\\r\n                    <div>\\\r\n                       \" + callIcon + \"\\\r\n                    </div>\\\r\n                </div>\\\r\n            </div>\\\r\n        </div>\\\r\n      </li>\";\n      });\n    }\n\n    callsList();\n  }); //Contact List dynamic Details\n\n  function contactList() {\n    document.querySelectorAll(\".sort-contact ul li\").forEach(function (item) {\n      item.addEventListener(\"click\", function (event) {\n        currentSelectedChat = \"users\";\n        updateSelectedChat();\n        var contactName = item.querySelector(\"li .fs-14\").innerHTML;\n        document.querySelector(\".text-truncate .user-profile-show\").innerHTML = contactName;\n        document.querySelector(\".user-profile-desc .text-truncate\").innerHTML = contactName;\n        document.querySelector(\".audiocallModal .text-truncate\").innerHTML = contactName;\n        document.querySelector(\".videocallModal .text-truncate\").innerHTML = contactName;\n        document.querySelector(\".user-profile-sidebar .user-name\").innerHTML = contactName;\n        document.querySelector(\".chat-input-typing\").style.display = \"block\";\n        document.querySelector(\".user-profile-status\").style.display = \"block\";\n        document.querySelector(\".chat-input-typing .typing-user\").innerHTML = contactName + ' is Typing<span class=\"typing ms-2\"><span class=\"dot\"></span><span class=\"dot\"></span><span class=\"dot\"></span></span>';\n        var contactImg = item.querySelector(\"li .align-items-center\").querySelector(\".avatar-xs .rounded-circle\").getAttribute(\"src\");\n\n        if (contactImg) {\n          document.querySelector(\".user-own-img .avatar-sm\").setAttribute(\"src\", contactImg);\n          document.querySelector(\".user-profile-sidebar .profile-img\").setAttribute(\"src\", contactImg);\n          document.querySelector(\".audiocallModal .img-thumbnail\").setAttribute(\"src\", contactImg);\n          document.querySelector(\".videocallModal .videocallModal-bg\").setAttribute(\"src\", contactImg);\n        } else {\n          document.querySelector(\".user-own-img .avatar-sm\").setAttribute(\"src\", dummyImage);\n          document.querySelector(\".user-profile-sidebar .profile-img\").setAttribute(\"src\", dummyImage);\n          document.querySelector(\".audiocallModal .img-thumbnail\").setAttribute(\"src\", dummyImage);\n          document.querySelector(\".videocallModal .videocallModal-bg\").setAttribute(\"src\", dummyImage);\n        }\n\n        var conversationImg = document.getElementById(\"users-conversation\");\n        conversationImg.querySelectorAll(\".left .chat-avatar\").forEach(function (item3) {\n          if (contactImg) {\n            item3.querySelector(\"img\").setAttribute(\"src\", contactImg);\n          } else {\n            item3.querySelector(\"img\").setAttribute(\"src\", dummyImage);\n          }\n        });\n        window.stop();\n      });\n    });\n  } // get contacts list\n\n\n  getJSON(\"contacts.json\", function (err, data) {\n    if (err !== null) {\n      console.log(\"Something went wrong: \" + err);\n    } else {\n      usersList = data;\n      data.sort(function (a, b) {\n        return a.name.localeCompare(b.name);\n      }); // set favourite users list\n\n      var msgHTML = \"\";\n      var userNameCharAt = \"\";\n      usersList.forEach(function (user, index) {\n        var profile = user.profile ? '<img src=\"' + user.profile + '\" class=\"img-fluid rounded-circle\" alt=\"\">' : '<span class=\"avatar-title rounded-circle bg-primary fs-10\">' + user.nickname + \"</span>\";\n        msgHTML = '<li>\\\r\n              <div class=\"d-flex align-items-center\">\\\r\n                  <div class=\"flex-shrink-0 me-2\">\\\r\n                      <div class=\"avatar-xs\">\\\r\n                          ' + profile + '\\\r\n                      </div>\\\r\n                  </div>\\\r\n                  <div class=\"flex-grow-1\">\\\r\n                      <h5 class=\"fs-14 m-0\" >' + user.name + '</h5>\\\r\n                  </div>\\\r\n                  <div class=\"flex-shrink-0\">\\\r\n                      <div class=\"dropdown\">\\\r\n                          <a href=\"#\" class=\"text-muted dropdown-toggle\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\\\r\n                              <i class=\"bx bx-dots-vertical-rounded align-middle\"></i>\\\r\n                          </a>\\\r\n                          <div class=\"dropdown-menu dropdown-menu-end\">\\\r\n                              <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\">Edit <i class=\"bx bx-pencil ms-2 text-muted\"></i></a>\\\r\n                              <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\">Block <i class=\"bx bx-block ms-2 text-muted\"></i></a>\\\r\n                              <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\">Remove <i class=\"bx bx-trash ms-2 text-muted\"></i></a>\\\r\n                          </div>\\\r\n                      </div>\\\r\n                  </div>\\\r\n              </div>\\\r\n          </li>';\n        var isSortContact = '<div class=\"mt-3\" >\\\r\n              <div class=\"contact-list-title\">' + user.name.charAt(0).toUpperCase() + '\\\r\n                </div>\\\r\n          <ul id=\"contact-sort-' + user.name.charAt(0) + '\" class=\"list-unstyled contact-list\" >';\n\n        if (userNameCharAt != user.name.charAt(0)) {\n          document.getElementsByClassName(\"sort-contact\")[0].innerHTML += isSortContact;\n        }\n\n        document.getElementById(\"contact-sort-\" + user.name.charAt(0)).innerHTML = document.getElementById(\"contact-sort-\" + user.name.charAt(0)).innerHTML + msgHTML;\n        userNameCharAt = user.name.charAt(0);\n        +\"</ul>\" + \"</div>\";\n      });\n    }\n\n    contactList();\n    toggleSelected();\n  });\n\n  function updateSelectedChat() {\n    if (currentSelectedChat == \"users\") {\n      document.getElementById(\"channel-chat\").style.display = \"none\";\n      document.getElementById(\"users-chat\").style.display = \"block\";\n      getChatMessages(url + \"chats.json\");\n    } else {\n      document.getElementById(\"channel-chat\").style.display = \"block\";\n      document.getElementById(\"users-chat\").style.display = \"none\";\n      getChatMessages(url + \"chats.json\");\n    }\n  }\n\n  updateSelectedChat(); // Profile hide/show\n\n  var userProfileSidebar = document.querySelector(\".user-profile-sidebar\");\n  document.querySelectorAll(\".user-profile-show\").forEach(function (item) {\n    item.addEventListener(\"click\", function (event) {\n      userProfileSidebar.classList.toggle(\"d-block\");\n    });\n  }); // chat conversation scroll\n\n  window.addEventListener(\"DOMContentLoaded\", function () {\n    var conversationScroll = document.querySelector(\"#chat-conversation .simplebar-content-wrapper\");\n    conversationScroll.scrollTop = conversationScroll.scrollHeight;\n  }); // body click hide collapse\n\n  var myCollapse = document.getElementById(\"chatinputmorecollapse\");\n  document.body.addEventListener(\"click\", function () {\n    var bsCollapse = new bootstrap.Collapse(myCollapse, {\n      toggle: false\n    });\n    bsCollapse.hide();\n  }); // chat conversation swiper\n\n  if (myCollapse) {\n    myCollapse.addEventListener(\"shown.bs.collapse\", function () {\n      initSwiper();\n    });\n  }\n\n  function initSwiper() {\n    var swiper = new Swiper(\".chatinput-links\", {\n      slidesPerView: 3,\n      spaceBetween: 30,\n      breakpoints: {\n        768: {\n          slidesPerView: 4\n        },\n        1024: {\n          slidesPerView: 6\n        }\n      }\n    });\n  } // contact modal list\n\n\n  var contactModalList = document.querySelectorAll(\".contact-modal-list .contact-list li\");\n  contactModalList.forEach(function (link) {\n    link.addEventListener(\"click\", function () {\n      link.classList.toggle(\"selected\");\n    });\n  }); // Change conversation bg\n  //Auto Focus curser to Text Box Area\n\n  document.getElementById(\"favourite-users\").onclick = function () {\n    document.getElementById(\"chat-input\").focus();\n  };\n\n  document.getElementById(\"usersList\").onclick = function () {\n    document.getElementById(\"chat-input\").focus();\n  };\n\n  document.getElementById(\"channelList\").onclick = function () {\n    document.getElementById(\"chat-input\").focus();\n  }; // Scroll to Bottom\n\n\n  function scrollToBottom(id) {\n    var simpleBar = document.getElementById(id).querySelector(\"#chat-conversation .simplebar-content-wrapper\");\n    var offsetHeight = document.getElementsByClassName(\"chat-conversation-list\")[0] ? document.getElementById(id).getElementsByClassName(\"chat-conversation-list\")[0].scrollHeight - window.innerHeight + 250 : 0;\n    if (offsetHeight) simpleBar.scrollTo({\n      top: offsetHeight,\n      behavior: \"smooth\"\n    });\n  } //add an eventListener to the from\n\n\n  var chatForm = document.querySelector(\"#chatinput-form\");\n  var chatInput = document.querySelector(\"#chat-input\");\n  var itemList = document.querySelector(\".chat-conversation-list\");\n  var chatInputFeedback = document.querySelector(\".chat-input-feedback\");\n\n  function currentTime() {\n    var ampm = new Date().getHours() >= 12 ? \"pm\" : \"am\";\n    var hour = new Date().getHours() > 12 ? new Date().getHours() % 12 : new Date().getHours();\n    var minute = new Date().getMinutes() < 10 ? \"0\" + new Date().getMinutes() : new Date().getMinutes();\n\n    if (hour < 10) {\n      return \"0\" + hour + \":\" + minute + \" \" + ampm;\n    } else {\n      return hour + \":\" + minute + \" \" + ampm;\n    }\n  }\n\n  setInterval(currentTime, 1000);\n  var messageIds = 0; //Audio file\n\n  var audiofilename;\n  var audiofileSize;\n  var audioFile = \"\";\n  var afiling = [];\n  var fileNumberAudio = 1;\n  var audiourl = \"\";\n  document.querySelector(\"#audiofile-input\").addEventListener(\"change\", function () {\n    var preview = document.querySelector(\".file_Upload\");\n    audioFile = document.querySelector(\"#audiofile-input\").files[0];\n    audiourl = URL.createObjectURL(audioFile); // remove-audioFile\n\n    var reader = new FileReader();\n    reader.readAsDataURL(audioFile);\n\n    if (preview) {\n      preview.classList.add(\"show\");\n    }\n\n    reader.addEventListener(\"load\", function () {\n      // Array.push(preview).forEach((gallery, index) => {\n      var filename = audioFile.name;\n      var fileSize = Math.round(audioFile.size / 1000000).toFixed(2);\n      preview.innerHTML = '<div class=\"card p-2 border mb-2 audiofile_pre d-inline-block position-relative\">\\\r\n            <div class=\"d-flex align-items-center\">\\\r\n                <div class=\"flex-shrink-0 avatar-xs ms-1 me-3\">\\\r\n                    <div class=\"avatar-title bg-soft-primary text-primary rounded-circle\">\\\r\n                        <i class=\"bx bx-headphone\"></i>\\\r\n                    </div>\\\r\n                </div>\\\r\n                <div class=\"flex-grow-1 overflow-hidden\">\\\r\n                <h5 class=\"fs-14 text-truncate mb-1\">' + filename + '</h5>\\\r\n                  <input type=\"hidden\" name=\"downloadaudiodata\" value=\"' + audiourl + '\"/>\\\r\n                        <p class=\"text-muted text-truncate fs-13 mb-0\">' + fileSize + 'mb</p>\\\r\n                </div>\\\r\n                <div class=\"flex-shrink-0 ms-3\">\\\r\n                    <div class=\"d-flex gap-2\">\\\r\n                        <div>\\\r\n                        <i class=\"ri-close-line text-danger audioFile-remove\"  id=\"remove-audioFile\"></i>\\\r\n                        </div>\\\r\n                    </div>\\\r\n                </div>\\\r\n            </div>\\\r\n          </div>';\n      audiofilename = filename;\n      audiofileSize = fileSize;\n      removeAudioFile();\n      afiling[fileNumberAudio] = audioFile;\n    }, false);\n    fileNumberAudio++;\n  });\n\n  var getAudioFiles = function getAudioFiles(chatid3, newAdioItems, newAdioItemSize) {\n    var newAdioItems = audiofilename;\n    var newAdioItemSize = audiofileSize;\n    messageIds++;\n    var chatConList3 = document.getElementById(chatid3);\n    var itemList3 = chatConList3.querySelector(\".chat-conversation-list\");\n\n    if (newAdioItems != null) {\n      itemList3.insertAdjacentHTML(\"beforeend\", '<li class=\"chat-list right\" id=\"chat-list-' + messageIds + '\" >\\\r\n          <div class=\"conversation-list\">\\\r\n              <div class=\"user-chat-content\">\\\r\n                  <div class=\"ctext-wrap\">\\\r\n                  <div class=\"audio-file-elem\">\\\r\n                              <audio controls>\\\r\n                                  <source src=\"' + audiourl + '\" type=\"audio/mpeg\">\\\r\n                              </audio>\\\r\n                          </div>\\\r\n                      <div class=\"align-self-start message-box-drop d-flex\">\\\r\n                      <div class=\"dropdown\">\\\r\n                        <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\\\r\n                          <i class=\"ri-emotion-happy-line\"></i>\\\r\n                        </a>\\\r\n                        <div class=\"dropdown-menu emoji-dropdown-menu\">\\\r\n                          <div class=\"hstack align-items-center gap-2 px-2 fs-25\">\\\r\n                            <a href=\"javascript:void(0);\">💛</a>\\\r\n                            <a href=\"javascript:void(0);\">🤣</a>\\\r\n                            <a href=\"javascript:void(0);\">😜</a>\\\r\n                            <a href=\"javascript:void(0);\">😘</a>\\\r\n                            <a href=\"javascript:void(0);\">😍</a>\\\r\n                            <div class=\"avatar-xs\">\\\r\n                            <a href=\"javascript:void(0);\" class=\"avatar-title bg-soft-primary rounded-circle fs-19 text-primary\">+</a>\\\r\n                            </div>\\\r\n                          </div>\\\r\n                        </div>\\\r\n                      </div>\\\r\n                        <div class=\"dropdown\">\\\r\n                            <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"> <i class=\"ri-more-2-fill\"></i> </a>\\\r\n                            <div class=\"dropdown-menu\">\\\r\n            <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"' + newAdioItems + '\" download>Download <i class=\"bx bx-download ms-2 text-muted\"></i></a>\\\r\n            <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\" data-bs-toggle=\"collapse\" data-bs-target=\".replyCollapse\">Reply <i class=\"bx bx-share ms-2 text-muted\"></i></a>\\\r\n            <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\" data-bs-toggle=\"modal\" data-bs-target=\".forwardModal\">Forward <i class=\"bx bx-share-alt ms-2 text-muted\"></i></a>\\\r\n            <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\">Bookmark <i class=\"bx bx-bookmarks text-muted ms-2\"></i></a>\\\r\n                                <a class=\"dropdown-item d-flex align-items-center justify-content-between delete-item\" id=\"delete-item-' + messageIds + '\" href=\"#\">Delete <i class=\"bx bx-trash text-muted ms-2\"></i></a>\\\r\n                            </div>\\\r\n                        </div>\\\r\n                      </div>\\\r\n                      </div>\\\r\n                      <div class=\"conversation-name\">\\\r\n                          <small class=\"text-muted time\">' + currentTime() + '</small>\\\r\n                            <span class=\"text-success check-message-icon\"><i class=\"bx bx-check\"></i></span>\\\r\n                          </div>\\\r\n                        </div>\\\r\n                      </div>\\\r\n                    </li>');\n    }\n\n    var newChatList = document.getElementById(\"chat-list-\" + messageIds);\n    newChatList.querySelectorAll(\".delete-item\").forEach(function (subitem) {\n      subitem.addEventListener(\"click\", function () {\n        itemList.removeChild(newChatList);\n      });\n    });\n    document.querySelectorAll(\".download-file\").forEach(function (subitem2) {\n      subitem2.addEventListener(\"click\", function (event) {\n        event.preventDefault();\n        var audiofiledataid = subitem2.getAttribute(\"data-id\");\n\n        if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {\n          alert(\"The File APIs are not fully supported in this browser.\");\n          return;\n        }\n\n        var blob = new Blob([filing[audiofiledataid]], {\n          type: \"application/mp3\"\n        });\n        var link = document.createElement(\"a\");\n        link.href = window.URL.createObjectURL(blob);\n        link.download = afiling[audiofiledataid][\"name\"];\n        link.click();\n      });\n    });\n    document.querySelector(\".file_Upload \").classList.remove(\"show\");\n  }; //Attached file Append\n\n\n  var filename2;\n  var filesize2;\n  var file = \"\";\n  var filing = [];\n  var fileNumber = 1;\n  document.querySelector(\"#attachedfile-input\").addEventListener(\"change\", function () {\n    var preview = document.querySelector(\".file_Upload\");\n    file = document.querySelector(\"#attachedfile-input\").files[0];\n    fr = new FileReader();\n    fr.readAsDataURL(file);\n\n    if (preview) {\n      preview.classList.add(\"show\");\n    }\n\n    fr.addEventListener(\"load\", function () {\n      var filename = file.name;\n      var fileSize = Math.round(file.size / 1000000).toFixed(2);\n      preview.innerHTML = '<div class=\"card p-2 border attchedfile_pre d-inline-block position-relative\">\\\r\n            <div class=\"d-flex align-items-center\">\\\r\n                <div class=\"flex-shrink-0 avatar-xs ms-1 me-3\">\\\r\n                    <div class=\"avatar-title bg-soft-primary text-primary rounded-circle\">\\\r\n                        <i class=\"ri-attachment-2\"></i>\\\r\n                    </div>\\\r\n                </div>\\\r\n                <div class=\"flex-grow-1 overflow-hidden\">\\\r\n                <a href=\"\" id=\"a\"></a>\\\r\n                    <h5 class=\"fs-14 text-truncate mb-1\">' + filename + '</h5>\\\r\n                    <input type=\"hidden\" name=\"downloaddata\" value=\"' + file + '\"/>\\\r\n                    <p class=\"text-muted text-truncate fs-13 mb-0\">' + fileSize + 'mb</p>\\\r\n                </div>\\\r\n                <div class=\"flex-shrink-0 align-self-start ms-3\">\\\r\n                    <div class=\"d-flex gap-2\">\\\r\n                        <div>\\\r\n                        <i class=\"ri-close-line text-muted attechedFile-remove\"  id=\"remove-attechedFile\"></i>\\\r\n                        </div>\\\r\n                    </div>\\\r\n                </div>\\\r\n            </div>\\\r\n          </div>';\n      filename2 = filename;\n      filesize2 = fileSize;\n      filing[fileNumber] = file;\n      removeAttachedFile();\n    }, false);\n    fileNumber++;\n  });\n\n  var getAttachedFiles = function getAttachedFiles(chatid2, newAttchedItems, newAttchedItemSize) {\n    var newAttchedItems = filename2;\n    var newAttchedItemSize = filesize2;\n    messageIds++;\n    var chatConList2 = document.getElementById(chatid2);\n    var itemList2 = chatConList2.querySelector(\".chat-conversation-list\");\n\n    if (newAttchedItems != null) {\n      itemList2.insertAdjacentHTML(\"beforeend\", '<li class=\"chat-list right\" id=\"chat-list-' + messageIds + '\" >\\\r\n          <div class=\"conversation-list\">\\\r\n              <div class=\"user-chat-content\">\\\r\n                  <div class=\"ctext-wrap\">\\\r\n                      <div class=\"ctext-wrap-content\">\\\r\n                          <div class=\"p-3 border rounded-3\">\\\r\n                              <div class=\"d-flex align-items-center attached-file\">\\\r\n                                  <div class=\"flex-shrink-0 avatar-sm me-3 ms-0 attached-file-avatar\">\\\r\n                                      <div class=\"avatar-title bg-soft-light rounded-circle fs-20\"><i class=\"ri-attachment-2\"></i></div>\\\r\n                                  </div>\\\r\n                                  <div class=\"flex-grow-1 overflow-hidden\">\\\r\n                                      <div class=\"text-start\">\\\r\n                                          <h5 class=\"fs-14 text-white mb-1\">' + newAttchedItems + '</h5>\\\r\n                                          <p class=\"text-white-50 text-truncate fs-13 mb-0\">' + newAttchedItemSize + 'mb</p>\\\r\n                                      </div>\\\r\n                                  </div>\\\r\n                                  <div class=\"flex-shrink-0 ms-4\">\\\r\n                                      <div class=\"d-flex gap-2 fs-20 d-flex align-items-start\">\\\r\n                                          <div>\\\r\n                                              <a href=\"#\" class=\"text-white-50 download-file\" data-id=\"' + fileNumber + '\"> <i class=\"bx bxs-download\"></i> </a>\\\r\n                                          </div>\\\r\n                                      </div>\\\r\n                                  </div>\\\r\n                              </div>\\\r\n                          </div>\\\r\n                      </div>\\\r\n                      <div class=\"align-self-start message-box-drop d-flex\">\\\r\n                      <div class=\"dropdown\">\\\r\n                        <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\\\r\n                          <i class=\"ri-emotion-happy-line\"></i>\\\r\n                        </a>\\\r\n                        <div class=\"dropdown-menu emoji-dropdown-menu\">\\\r\n                          <div class=\"hstack align-items-center gap-2 px-2 fs-25\">\\\r\n                            <a href=\"javascript:void(0);\">💛</a>\\\r\n                            <a href=\"javascript:void(0);\">🤣</a>\\\r\n                            <a href=\"javascript:void(0);\">😜</a>\\\r\n                            <a href=\"javascript:void(0);\">😘</a>\\\r\n                            <a href=\"javascript:void(0);\">😍</a>\\\r\n                            <div class=\"avatar-xs\">\\\r\n                            <a href=\"javascript:void(0);\" class=\"avatar-title bg-soft-primary rounded-circle fs-19 text-primary\">+</a>\\\r\n                            </div>\\\r\n                          </div>\\\r\n                        </div>\\\r\n                      </div>\\\r\n                      <div class=\"dropdown\">\\\r\n                          <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"> <i class=\"ri-more-2-fill\"></i> </a>\\\r\n                          <div class=\"dropdown-menu\">\\\r\n            <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"' + newAttchedItems + '\" download>Download <i class=\"bx bx-download ms-2 text-muted\"></i></a>\\\r\n            <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\" data-bs-toggle=\"collapse\" data-bs-target=\".replyCollapse\">Reply <i class=\"bx bx-share ms-2 text-muted\"></i></a>\\\r\n            <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\" data-bs-toggle=\"modal\" data-bs-target=\".forwardModal\">Forward <i class=\"bx bx-share-alt ms-2 text-muted\"></i></a>\\\r\n            <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\">Bookmark <i class=\"bx bx-bookmarks text-muted ms-2\"></i></a>\\\r\n                          <a class=\"dropdown-item d-flex align-items-center justify-content-between delete-item\" id=\"delete-item-' + messageIds + '\" href=\"#\">Delete <i class=\"bx bx-trash text-muted ms-2\"></i></a>\\\r\n                      </div>\\\r\n                    </div>\\\r\n                    </div>\\\r\n                  </div>\\\r\n                <div class=\"conversation-name\">\\\r\n                    <small class=\"text-muted time\">' + currentTime() + '</small>\\\r\n                      <span class=\"text-success check-message-icon\"><i class=\"bx bx-check\"></i></span>\\\r\n                    </div>\\\r\n                </div>\\\r\n              </div>\\\r\n            </li>');\n    } // remove File\n\n\n    var newChatList = document.getElementById(\"chat-list-\" + messageIds);\n    newChatList.querySelectorAll(\".delete-item\").forEach(function (subitem) {\n      subitem.addEventListener(\"click\", function () {\n        itemList.removeChild(newChatList);\n      });\n    }); //Download attached file\n\n    newChatList.querySelectorAll(\".download-file\").forEach(function (subitem1) {\n      subitem1.addEventListener(\"click\", function (event) {\n        event.preventDefault();\n        var dataid = subitem1.getAttribute(\"data-id\");\n\n        if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {\n          alert(\"The File APIs are not fully supported in this browser.\");\n          return;\n        }\n\n        var blob = new Blob([filing[dataid]], {\n          type: \"application/pdf\"\n        }); // change resultByte to bytes\n\n        var link = document.createElement(\"a\");\n        link.href = window.URL.createObjectURL(blob);\n        link.download = filing[dataid][\"name\"];\n        link.click();\n      });\n    });\n    document.querySelector(\".file_Upload \").classList.remove(\"show\");\n  };\n\n  var imageurls = [];\n  removeimg = 1;\n  var indexing = 0;\n  document.querySelector(\"#galleryfile-input\").addEventListener(\"change\", previewImages);\n\n  function previewImages() {\n    var preview = document.querySelector(\".file_Upload\");\n    preview.insertAdjacentHTML(\"beforeend\", '<div class=\"profile-media-img image_pre\"></div>');\n    var imageselector = document.querySelector(\".file_Upload .profile-media-img\");\n\n    if (this.files) {\n      [].forEach.call(this.files, readAndPreview);\n    }\n\n    function readAndPreview(file) {\n      // Make sure `file.name` matches our extensions criteria\n      if (!/\\.(jpe?g|png|gif)$/i.test(file.name)) {\n        return alert(file.name + \" is not an image\");\n      } // else...\n\n\n      var reader = new FileReader();\n      var createImage = \"\";\n      reader.addEventListener(\"load\", function () {\n        removeimg++;\n\n        if (preview) {\n          preview.classList.add(\"show\");\n        }\n\n        imageurls.push(reader.result);\n        createImage += '<div class=\"media-img-list\" id=\"remove-image-' + removeimg + '\">\\\r\n          <a href=\"#\">\\\r\n              <img src=\"' + this.result + '\" alt=\"' + file.name + '\" class=\"img-fluid\">\\\r\n          </a>\\\r\n            <i class=\"ri-close-line image-remove\" onclick=\"removeImage(`remove-image-' + removeimg + '`)\"></i>\\\r\n          </div>';\n        imageselector.insertAdjacentHTML(\"afterbegin\", createImage);\n        indexing++;\n      });\n      reader.readAsDataURL(file);\n    }\n  } //append images\n\n\n  var getImages = function getImages(chatid1, newImage) {\n    var newImages = imageurls;\n    var chatConList1 = document.getElementById(chatid1);\n    var itemList1 = chatConList1.querySelector(\".chat-conversation-list\");\n    var multiimg = \"\";\n    newImages.forEach(function (newImage) {\n      messageIds++;\n      multiimg += '<div class=\"message-img-list\">\\\r\n          <div>\\\r\n            <a class=\"popup-img d-inline-block\" href=\"' + newImage + '\" target=\"_blank\">\\\r\n                <img src=\"' + newImage + '\" alt=\"\" class=\"rounded border img-thumbnail\" width=\"200\" />\\\r\n            </a>\\\r\n          </div>\\\r\n          <div class=\"message-img-link\">\\\r\n            <ul class=\"list-inline mb-0\">\\\r\n              <li class=\"list-inline-item dropdown\">\\\r\n                <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\\\r\n                    <i class=\"bx bx-dots-horizontal-rounded\"></i>\\\r\n                </a>\\\r\n          <div class=\"dropdown-menu\">\\\r\n            <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"' + newImage + '\" download>Download <i class=\"bx bx-download ms-2 text-muted\"></i></a>\\\r\n            <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\" data-bs-toggle=\"collapse\" data-bs-target=\".replyCollapse\">Reply <i class=\"bx bx-share ms-2 text-muted\"></i></a>\\\r\n            <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\" data-bs-toggle=\"modal\" data-bs-target=\".forwardModal\">Forward <i class=\"bx bx-share-alt ms-2 text-muted\"></i></a>\\\r\n            <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\">Bookmark <i class=\"bx bx-bookmarks text-muted ms-2\"></i></a>\\\r\n            <a class=\"dropdown-item d-flex align-items-center justify-content-between delete-image\" id=\"delete-item-' + messageIds + '\" href=\"#\">Delete <i class=\"bx bx-trash text-muted ms-2\"></i></a>\\\r\n          </div>\\\r\n        </li>\\\r\n      </ul>\\\r\n    </div>\\\r\n    </div>';\n    });\n\n    if (newImages != null) {\n      itemList1.insertAdjacentHTML(\"beforeend\", '<li class=\"chat-list right\" id=\"chat-list-' + messageIds + '\" >\\\r\n        <div class=\"conversation-list\">\\\r\n            <div class=\"user-chat-content\">\\\r\n                <div class=\"ctext-wrap\">\\\r\n                        <div class=\"message-img mb-0\">' + multiimg + '\\\r\n                    </div>\\\r\n                    </div>\\\r\n                  <div class=\"conversation-name\">\\\r\n                    <small class=\"text-muted time\">' + currentTime() + '</small>\\\r\n                    <span class=\"text-success check-message-icon\"><i class=\"bx bx-check\"></i></span>\\\r\n                </div>\\\r\n          </div>\\\r\n        </li>');\n      updateLightbox();\n      indexing = 0; //Delete appended images(single user)\n\n      var deleteImages = itemList.querySelectorAll(\".chat-list\");\n      deleteImages.forEach(function (item) {\n        item.querySelectorAll(\".delete-image\").forEach(function (subitem) {\n          subitem.addEventListener(\"click\", function () {\n            subitem.closest(\".message-img\").childElementCount == 1 ? subitem.closest(\".chat-list\").remove() : subitem.closest(\".message-img-list\").remove();\n          });\n        });\n      }); //Delete appended images(Channel chat)\n\n      var deleteChannelImages = channelItemList.querySelectorAll(\".chat-list\");\n      deleteChannelImages.forEach(function (item) {\n        item.querySelectorAll(\".delete-image\").forEach(function (subitem) {\n          subitem.addEventListener(\"click\", function () {\n            subitem.closest(\".message-img\").childElementCount == 1 ? subitem.closest(\".chat-list\").remove() : subitem.closest(\".message-img-list\").remove();\n          });\n        });\n      });\n    }\n\n    document.querySelector(\".file_Upload\").classList.remove(\"show\");\n    imageurls = [];\n  }; //Append New Message\n\n\n  var getChatList = function getChatList(chatid, chatItems) {\n    messageIds++;\n    var chatConList = document.getElementById(chatid);\n    var itemList = chatConList.querySelector(\".chat-conversation-list\");\n\n    if (chatItems != null) {\n      itemList.insertAdjacentHTML(\"beforeend\", '<li class=\"chat-list right\" id=\"chat-list-' + messageIds + '\" >\\\r\n                <div class=\"conversation-list\">\\\r\n                    <div class=\"user-chat-content\">\\\r\n                        <div class=\"ctext-wrap\">\\\r\n                            <div class=\"ctext-wrap-content\">\\\r\n                                <p class=\"mb-0 ctext-content\">' + chatItems + '</p>\\\r\n                            </div>\\\r\n                            <div class=\"align-self-start message-box-drop d-flex\">\\\r\n                            <div class=\"dropdown\">\\\r\n                              <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\\\r\n                                <i class=\"ri-emotion-happy-line\"></i>\\\r\n                              </a>\\\r\n                              <div class=\"dropdown-menu emoji-dropdown-menu\">\\\r\n                                <div class=\"hstack align-items-center gap-2 px-2 fs-25\">\\\r\n                                  <a href=\"javascript:void(0);\">💛</a>\\\r\n                                  <a href=\"javascript:void(0);\">🤣</a>\\\r\n                                  <a href=\"javascript:void(0);\">😜</a>\\\r\n                                  <a href=\"javascript:void(0);\">😘</a>\\\r\n                                  <a href=\"javascript:void(0);\">😍</a>\\\r\n                                  <div class=\"avatar-xs\">\\\r\n                                  <a href=\"javascript:void(0);\" class=\"avatar-title bg-soft-primary rounded-circle fs-19 text-primary\">+</a>\\\r\n                                  </div>\\\r\n                                </div>\\\r\n                              </div>\\\r\n                            </div>\\\r\n                              <div class=\"dropdown\">\\\r\n                                  <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\\\r\n                                      <i class=\"ri-more-2-fill\"></i>\\\r\n                                  </a>\\\r\n                                  <div class=\"dropdown-menu\">\\\r\n                                      <a class=\"dropdown-item d-flex align-items-center justify-content-between reply-message\" href=\"#\" data-bs-toggle=\"collapse\" data-bs-target=\".replyCollapse\">Reply <i class=\"bx bx-share ms-2 text-muted\"></i></a>\\\r\n                                      <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\" data-bs-toggle=\"modal\" data-bs-target=\".forwardModal\">Forward <i class=\"bx bx-share-alt ms-2 text-muted\"></i></a>\\\r\n                                      <a class=\"dropdown-item d-flex align-items-center justify-content-between copy-message\" href=\"#\" id=\"copy-message-' + messageIds + '\">Copy <i class=\"bx bx-copy text-muted ms-2\"></i></a>\\\r\n                                      <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\">Bookmark <i class=\"bx bx-bookmarks text-muted ms-2\"></i></a>\\\r\n                                      <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\">Mark as Unread <i class=\"bx bx-message-error text-muted ms-2\"></i></a>\\\r\n                                      <a class=\"dropdown-item d-flex align-items-center justify-content-between delete-item\" id=\"delete-item-' + messageIds + '\" href=\"#\">Delete <i class=\"bx bx-trash text-muted ms-2\"></i></a>\\\r\n                              </div>\\\r\n                            </div>\\\r\n                        </div>\\\r\n                    </div>\\\r\n                    <div class=\"conversation-name\">\\\r\n                        <small class=\"text-muted time\">' + currentTime() + '</small>\\\r\n                        <span class=\"text-success check-message-icon\"><i class=\"bx bx-check\"></i></span>\\\r\n                    </div>\\\r\n                </div>\\\r\n            </div>\\\r\n        </li>');\n    } // remove chat list\n\n\n    var newChatList = document.getElementById(\"chat-list-\" + messageIds);\n    newChatList.querySelectorAll(\".delete-item\").forEach(function (subitem) {\n      subitem.addEventListener(\"click\", function () {\n        itemList.removeChild(newChatList);\n      });\n    }); //Copy Clipboard alert\n\n    newChatList.querySelectorAll(\".copy-message\").forEach(function (subitem) {\n      subitem.addEventListener(\"click\", function () {\n        document.getElementById(\"copyClipBoard\").style.display = \"block\";\n        document.getElementById(\"copyClipBoardChannel\").style.display = \"block\";\n        setTimeout(hideclipboardNew, 1000);\n\n        function hideclipboardNew() {\n          document.getElementById(\"copyClipBoard\").style.display = \"none\";\n          document.getElementById(\"copyClipBoardChannel\").style.display = \"none\";\n        }\n      });\n    }); //reply Message model\n\n    newChatList.querySelectorAll(\".reply-message\").forEach(function (subitem) {\n      subitem.addEventListener(\"click\", function () {\n        var replyToggleOpenNew = document.querySelector(\".replyCard\");\n        var replyToggleCloseNew = document.querySelector(\"#close_toggle\");\n        var replyMessageNew = subitem.closest(\".ctext-wrap\").children[0].children[0].innerText;\n        var replyUserNew = document.querySelector(\".user-profile-show\").innerHTML;\n        isreplyMessage = true;\n        replyToggleOpenNew.classList.add(\"show\");\n        replyToggleCloseNew.addEventListener(\"click\", function () {\n          replyToggleOpenNew.classList.remove(\"show\");\n        });\n        document.querySelector(\".replyCard .replymessage-block .flex-grow-1 .mb-0\").innerText = replyMessageNew;\n        document.querySelector(\".replyCard .replymessage-block .flex-grow-1 .conversation-name\").innerText = replyUserNew;\n      });\n    }); //Copy Message\n\n    newChatList.querySelectorAll(\".copy-message\").forEach(function (subitem) {\n      subitem.addEventListener(\"click\", function () {\n        var currentValue = newChatList.childNodes[1].firstElementChild.firstElementChild.firstElementChild.firstElementChild.innerText;\n        navigator.clipboard.writeText(currentValue);\n      });\n    });\n  };\n\n  var messageboxcollapse = 1; //message with reply\n\n  var getReplyChatList = function getReplyChatList(chatReplyId, chatReplyItems) {\n    var chatReplyUser = document.querySelector(\".user-profile-show\").innerHTML;\n    var chatReplyMessage = document.querySelector(\".replyCard .replymessage-block .flex-grow-1 .mb-0\").innerText;\n    messageIds++;\n    var chatreplyConList = document.getElementById(chatReplyId);\n    var itemReplyList = chatreplyConList.querySelector(\".chat-conversation-list\");\n\n    if (chatReplyItems != null) {\n      itemReplyList.insertAdjacentHTML(\"beforeend\", '<li class=\"chat-list right\" id=\"chat-list-' + messageIds + '\" >\\\r\n                <div class=\"conversation-list\">\\\r\n                    <div class=\"user-chat-content\">\\\r\n                        <div class=\"ctext-wrap\">\\\r\n                            <div class=\"ctext-wrap-content\">\\\r\n                            <div class=\"replymessage-block mb-0 d-flex align-items-start\">\\\r\n                        <div class=\"flex-grow-1\">\\\r\n                            <h5 class=\"conversation-name\">' + chatReplyUser + '</h5>\\\r\n                            <p class=\"mb-0\">' + chatReplyMessage + '</p>\\\r\n                        </div>\\\r\n                        <div class=\"flex-shrink-0\">\\\r\n                            <button type=\"button\" class=\"btn btn-sm btn-link mt-n2 me-n3 fs-18\">\\\r\n                            </button>\\\r\n                        </div>\\\r\n                    </div>\\\r\n                                <p class=\"mb-0 ctext-content mt-1\">\\\r\n                                    ' + chatReplyItems + '\\\r\n                                </p>\\\r\n                            </div>\\\r\n                            <div class=\"align-self-start message-box-drop d-flex\">\\\r\n                            <div class=\"dropdown\">\\\r\n                              <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\\\r\n                                <i class=\"ri-emotion-happy-line\"></i>\\\r\n                              </a>\\\r\n                              <div class=\"dropdown-menu emoji-dropdown-menu\">\\\r\n                                <div class=\"hstack align-items-center gap-2 px-2 fs-25\">\\\r\n                                  <a href=\"javascript:void(0);\">💛</a>\\\r\n                                  <a href=\"javascript:void(0);\">🤣</a>\\\r\n                                  <a href=\"javascript:void(0);\">😜</a>\\\r\n                                  <a href=\"javascript:void(0);\">😘</a>\\\r\n                                  <a href=\"javascript:void(0);\">😍</a>\\\r\n                                  <div class=\"avatar-xs\">\\\r\n                                    <a href=\"javascript:void(0);\" class=\"avatar-title bg-soft-primary rounded-circle fs-19 text-primary\">+</a>\\\r\n                                  </div>\\\r\n                                </div>\\\r\n                              </div>\\\r\n                            </div>\\\r\n                              <div class=\"dropdown\">\\\r\n                                  <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\\\r\n                                      <i class=\"ri-more-2-fill\"></i>\\\r\n                                  </a>\\\r\n                                  <div class=\"dropdown-menu\">\\\r\n                                      <a class=\"dropdown-item d-flex align-items-center justify-content-between reply-message\" href=\"#\" data-bs-toggle=\"collapse\" data-bs-target=\".replyCollapse\">Reply <i class=\"bx bx-share ms-2 text-muted\"></i></a>\\\r\n                                      <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\" data-bs-toggle=\"modal\" data-bs-target=\".forwardModal\">Forward <i class=\"bx bx-share-alt ms-2 text-muted\"></i></a>\\\r\n                                      <a class=\"dropdown-item d-flex align-items-center justify-content-between copy-message\" href=\"#\" id=\"copy-message-' + messageIds + '\">Copy <i class=\"bx bx-copy text-muted ms-2\"></i></a>\\\r\n                                      <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\">Bookmark <i class=\"bx bx-bookmarks text-muted ms-2\"></i></a>\\\r\n                                      <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\">Mark as Unread <i class=\"bx bx-message-error text-muted ms-2\"></i></a>\\\r\n                                      <a class=\"dropdown-item d-flex align-items-center justify-content-between delete-item\" id=\"delete-item-' + messageIds + '\" href=\"#\">Delete <i class=\"bx bx-trash text-muted ms-2\"></i></a>\\\r\n                              </div>\\\r\n                            </div>\\\r\n                        </div>\\\r\n                    </div>\\\r\n                    <div class=\"conversation-name\">\\\r\n                        <small class=\"text-muted time\">' + currentTime() + '</small>\\\r\n                        <span class=\"text-success check-message-icon\"><i class=\"bx bx-check\"></i></span>\\\r\n                    </div>\\\r\n                </div>\\\r\n            </div>\\\r\n        </li>');\n      messageboxcollapse++;\n    } // remove chat list\n\n\n    var newChatList = document.getElementById(\"chat-list-\" + messageIds);\n    newChatList.querySelectorAll(\".delete-item\").forEach(function (subitem) {\n      subitem.addEventListener(\"click\", function () {\n        itemList.removeChild(newChatList);\n      });\n    }); //Copy Clipboard alert\n\n    newChatList.querySelectorAll(\".copy-message\").forEach(function (subitem) {\n      subitem.addEventListener(\"click\", function () {\n        document.getElementById(\"copyClipBoard\").style.display = \"block\";\n        document.getElementById(\"copyClipBoardChannel\").style.display = \"block\";\n        setTimeout(hideclipboardNew, 1000);\n\n        function hideclipboardNew() {\n          document.getElementById(\"copyClipBoard\").style.display = \"none\";\n          document.getElementById(\"copyClipBoardChannel\").style.display = \"none\";\n        }\n      });\n    });\n    newChatList.querySelectorAll(\".reply-message\").forEach(function (subitem) {\n      subitem.addEventListener(\"click\", function () {\n        var replyMessage = subitem.closest(\".ctext-wrap\").children[0].children[0].innerText;\n        var replyuser = document.querySelector(\".user-profile-show\").innerHTML;\n        document.querySelector(\".replyCard .replymessage-block .flex-grow-1 .mb-0\").innerText = replyMessage;\n        var msgWwnerName = subitem.closest(\".chat-list\") ? subitem.closest(\".chat-list\").classList.contains(\"left\") ? replyuser : \"You\" : replyuser;\n        document.querySelector(\".replyCard .replymessage-block .flex-grow-1 .conversation-name\").innerText = msgWwnerName;\n      });\n    }); //Copy Message\n\n    newChatList.querySelectorAll(\".copy-message\").forEach(function (subitem) {\n      subitem.addEventListener(\"click\", function () {\n        newChatList.childNodes[1].children[1].firstElementChild.firstElementChild.getAttribute(\"id\");\n        isText = newChatList.childNodes[1].children[1].firstElementChild.firstElementChild.innerText;\n        navigator.clipboard.writeText(isText);\n      });\n    });\n  };\n\n  if (chatForm) {\n    //add an item to the List, including to local storage\n    chatForm.addEventListener(\"submit\", function (e) {\n      e.preventDefault();\n      var chatId = currentChatId;\n      var chatId1 = currentChatId;\n      var chatId2 = currentChatId;\n      var chatId3 = currentChatId;\n      var chatReplyId = currentChatId;\n      var chatInputValue = chatInput.value;\n      var imagepreview = document.querySelector(\".image_pre\");\n      var attachedFilePreview = document.querySelector(\".attchedfile_pre\");\n      var audioFilePreview = document.querySelector(\".audiofile_pre\");\n      var chatInputfeedback = document.querySelector(\".chat-input-feedback\");\n\n      if (chatInputValue.length === 0) {\n        chatInputfeedback.classList.add(\"show\");\n        setTimeout(function () {\n          chatInputfeedback.classList.remove(\"show\");\n        }, 2000);\n\n        if (imagepreview != null) {\n          chatInputfeedback.classList.remove(\"show\");\n          getImages(chatId1, chatInputValue);\n        } else if (attachedFilePreview != null) {\n          chatInputfeedback.classList.remove(\"show\");\n          getAttachedFiles(chatId2, chatInputValue);\n        } else if (audioFilePreview != null) {\n          chatInputfeedback.classList.remove(\"show\");\n          getAudioFiles(chatId3, chatInputValue);\n        }\n      } else {\n        if (isreplyMessage == true) {\n          getReplyChatList(chatReplyId, chatInputValue);\n          isreplyMessage = false;\n        } else {\n          getChatList(chatId, chatInputValue);\n        }\n      }\n\n      scrollToBottom(chatId || chatId1 || chatId2 || chatId3 || chatReplyId);\n      chatInput.value = \"\"; //Images input text area null\n\n      document.querySelector(\".image_pre\") ? document.querySelector(\".image_pre\").remove() : \"\";\n      document.getElementById(\"galleryfile-input\").value = \"\"; //attached input text area null\n\n      document.querySelector(\".attchedfile_pre\") ? document.querySelector(\".attchedfile_pre\").remove() : \"\";\n      document.getElementById(\"attachedfile-input\").value = \"\"; //audio input text area null\n\n      document.querySelector(\".audiofile_pre\") ? document.querySelector(\".audiofile_pre\").remove() : \"\";\n      document.getElementById(\"audiofile-input\").value = \"\"; //reply msg remove textarea\n\n      document.getElementById(\"close_toggle\").click();\n    });\n  } // remove chat list\n\n\n  function deleteMessage() {\n    var deleteItems = itemList.querySelectorAll(\".delete-item\");\n    deleteItems.forEach(function (item) {\n      item.addEventListener(\"click\", function () {\n        item.closest(\".user-chat-content\").childElementCount == 2 ? item.closest(\".chat-list\").remove() : item.closest(\".ctext-wrap\").remove();\n      });\n    });\n  } //remove chat images\n\n\n  function deleteImage() {\n    var deleteImage = itemList.querySelectorAll(\".chat-list\");\n    deleteImage.forEach(function (item) {\n      item.querySelectorAll(\".delete-image\").forEach(function (subitem) {\n        subitem.addEventListener(\"click\", function () {\n          subitem.closest(\".message-img\").childElementCount == 1 ? subitem.closest(\".chat-list\").remove() : subitem.closest(\".message-img-list\").remove();\n        });\n      });\n    });\n  } //Delete Channel Message\n\n\n  var channelItemList = document.querySelector(\"#channel-conversation\");\n\n  function deleteChannelMessage() {\n    var channelChatList = channelItemList.querySelectorAll(\".delete-item\");\n    channelChatList.forEach(function (item) {\n      item.addEventListener(\"click\", function () {\n        item.closest(\".user-chat-content\").childElementCount == 2 ? item.closest(\".chat-list\").remove() : item.closest(\".ctext-wrap\").remove();\n      });\n    });\n  } //Copy ClipBoard Alert\n\n\n  function copyClipboard() {\n    var copyClipboardAlert = document.querySelectorAll(\".copy-message\");\n    copyClipboardAlert.forEach(function (item) {\n      item.addEventListener(\"click\", function () {\n        document.getElementById(\"copyClipBoard\").style.display = \"block\";\n        document.getElementById(\"copyClipBoardChannel\").style.display = \"block\";\n        setTimeout(hideclipboard, 1000);\n\n        function hideclipboard() {\n          document.getElementById(\"copyClipBoard\").style.display = \"none\";\n          document.getElementById(\"copyClipBoardChannel\").style.display = \"none\";\n        }\n      });\n    });\n  } //Copy Messages\n\n\n  function copyMessage() {\n    var copyMessage = itemList.querySelectorAll(\".copy-message\");\n    copyMessage.forEach(function (item) {\n      item.addEventListener(\"click\", function () {\n        var isText = item.closest(\".ctext-wrap\").children[0] ? item.closest(\".ctext-wrap\").children[0].children[0].innerText : \"\";\n        navigator.clipboard.writeText(isText);\n      });\n    });\n  }\n\n  function copyChannelMessage() {\n    var copyChannelMessage = channelItemList.querySelectorAll(\".copy-message\");\n    copyChannelMessage.forEach(function (item) {\n      item.addEventListener(\"click\", function () {\n        var isText = item.closest(\".ctext-wrap\").children[0] ? item.closest(\".ctext-wrap\").children[0].children[0].innerText : \"\";\n        navigator.clipboard.writeText(isText);\n      });\n    });\n  } //reply message\n\n\n  function replyMessage() {\n    var replyMessage = itemList.querySelectorAll(\".reply-message\");\n    var replyToggleOpen = document.querySelector(\".replyCard\");\n    var replyToggleClose = document.querySelector(\"#close_toggle\");\n    replyMessage.forEach(function (item) {\n      item.addEventListener(\"click\", function () {\n        isreplyMessage = true;\n        replyToggleOpen.classList.add(\"show\");\n        replyToggleClose.addEventListener(\"click\", function () {\n          replyToggleOpen.classList.remove(\"show\");\n        });\n        var replyMsg = item.closest(\".ctext-wrap\").children[0].children[0].innerText;\n        document.querySelector(\".replyCard .replymessage-block .flex-grow-1 .mb-0\").innerText = replyMsg;\n        var replyuser = document.querySelector(\".user-profile-show\").innerHTML;\n        var msgWwnerName = item.closest(\".chat-list\") ? item.closest(\".chat-list\").classList.contains(\"left\") ? replyuser : \"You\" : replyuser;\n        document.querySelector(\".replyCard .replymessage-block .flex-grow-1 .conversation-name\").innerText = msgWwnerName;\n      });\n    });\n  } //reply Channelmessage\n\n\n  function replyChannelMessage() {\n    var replyChannelMessage = channelItemList.querySelectorAll(\".reply-message\");\n    var replyChannelToggleOpen = document.querySelector(\".replyCard\");\n    var replyChannelToggleClose = document.querySelector(\"#close_toggle\");\n    replyChannelMessage.forEach(function (item) {\n      item.addEventListener(\"click\", function () {\n        isreplyMessage = true;\n        replyChannelToggleOpen.classList.add(\"show\");\n        replyChannelToggleClose.addEventListener(\"click\", function () {\n          replyChannelToggleOpen.classList.remove(\"show\");\n        });\n        var replyChannelMsg = item.closest(\".ctext-wrap\").children[0].children[0].innerText;\n        document.querySelector(\".replyCard .replymessage-block .flex-grow-1 .mb-0\").innerText = replyChannelMsg;\n        var replyChanneluser = document.querySelector(\".user-profile-show\").innerHTML;\n        document.querySelector(\".replyCard .replymessage-block .flex-grow-1 .conversation-name\").innerText = replyChanneluser;\n      });\n    });\n  } //Copy Channel Messages\n\n\n  function copyChannelMessage() {\n    var copyChannelMessage = channelItemList.querySelectorAll(\".copy-message\");\n    copyChannelMessage.forEach(function (item) {\n      item.addEventListener(\"click\", function () {\n        var isText = item.closest(\".ctext-wrap\").children[0] ? item.closest(\".ctext-wrap\").children[0].children[0].innerText : \"\";\n        navigator.clipboard.writeText(isText);\n      });\n    });\n  } // Profile Foreground Img\n\n\n  document.querySelector(\"#profile-foreground-img-file-input\").addEventListener(\"change\", function () {\n    var preview = document.querySelector(\".profile-foreground-img\");\n    var file = document.querySelector(\".profile-foreground-img-file-input\").files[0];\n    var reader = new FileReader();\n    reader.addEventListener(\"load\", function () {\n      preview.src = reader.result;\n    }, false);\n\n    if (file) {\n      reader.readAsDataURL(file);\n    }\n  }); // user profile img\n\n  document.querySelector(\"#profile-img-file-input\").addEventListener(\"change\", function () {\n    var preview = document.querySelector(\".user-profile-image\");\n    var file = document.querySelector(\".profile-img-file-input\").files[0];\n    var reader = new FileReader();\n    reader.addEventListener(\"load\", function () {\n      preview.src = reader.result;\n    }, false);\n\n    if (file) {\n      reader.readAsDataURL(file);\n    }\n  }); // profile user edit\n\n  document.getElementById(\"user-profile-edit-btn\").addEventListener(\"click\", function (e) {\n    document.querySelectorAll(\".edit-input .form-control\").forEach(function (item) {\n      var editIcon = document.getElementById(\"edit-icon\");\n\n      if (item.disabled) {\n        // If disabled, do this\n        editIcon.classList.replace(\"bxs-pencil\", \"bxs-save\");\n        item.disabled = false;\n      } else {\n        // Enter code here\n        editIcon.classList.replace(\"bxs-save\", \"bxs-pencil\");\n        item.disabled = true;\n      }\n    });\n  }); // favourite btn\n\n  var favouriteBtn = document.getElementsByClassName(\"favourite-btn\");\n\n  for (var i = 0; i < favouriteBtn.length; i++) {\n    var favouriteBtns = favouriteBtn[i];\n\n    favouriteBtns.onclick = function () {\n      favouriteBtns.classList.toggle(\"active\");\n    };\n  } // chat emojiPicker input\n\n\n  var emojiPicker = new FgEmojiPicker({\n    trigger: [\".emoji-btn\"],\n    removeOnSelection: false,\n    closeButton: true,\n    position: [\"top\", \"right\"],\n    preFetch: true,\n    dir: \"js/dir/json\",\n    insertInto: document.querySelector(\".chat-input\")\n  }); // emojiPicker position\n\n  var emojiBtn = document.getElementById(\"emoji-btn\");\n  emojiBtn.addEventListener(\"click\", function () {\n    setTimeout(function () {\n      var fgEmojiPicker = document.getElementsByClassName(\"fg-emoji-picker\")[0];\n\n      if (fgEmojiPicker) {\n        var leftEmoji = window.getComputedStyle(fgEmojiPicker) ? window.getComputedStyle(fgEmojiPicker).getPropertyValue(\"left\") : \"\";\n\n        if (leftEmoji) {\n          leftEmoji = leftEmoji.replace(\"px\", \"\");\n          leftEmoji = leftEmoji - 40 + \"px\";\n          fgEmojiPicker.style.left = leftEmoji;\n        }\n      }\n    }, 0);\n  });\n\n  function getJSONFile(jsonurl, callback) {\n    var xhr = new XMLHttpRequest();\n    xhr.open(\"GET\", jsonurl, true);\n    xhr.responseType = \"json\";\n\n    xhr.onload = function () {\n      var status = xhr.status;\n\n      if (status === 200) {\n        callback(null, xhr.response);\n      } else {\n        callback(status, xhr.response);\n      }\n    };\n\n    xhr.send();\n  } // getNextMsgCounts\n\n\n  function getNextMsgCounts(chatsData, i, from_id) {\n    var counts = 0;\n\n    while (chatsData[i]) {\n      if (chatsData[i + 1] && chatsData[i + 1][\"from_id\"] == from_id) {\n        counts++;\n        i++;\n      } else {\n        break;\n      }\n    }\n\n    return counts;\n  } //getNextMsgs\n\n\n  function getNextMsgs(chatsData, i, from_id, isContinue) {\n    var msgs = 0;\n\n    while (chatsData[i]) {\n      if (chatsData[i + 1] && chatsData[i + 1][\"from_id\"] == from_id) {\n        msgs = getMsg(chatsData[i + 1].id, chatsData[i + 1].msg, chatsData[i + 1].has_images, chatsData[i + 1].has_files, chatsData[i + 1].has_audios, chatsData[i + 1].has_videos, chatsData[i + 1].has_dropDown);\n        i++;\n      } else {\n        break;\n      }\n    }\n\n    return msgs;\n  } // getMsg\n\n\n  function getMsg(id, msg, has_images, has_files, has_audios, has_videos, has_dropDown) {\n    var msgHTML = '<div class=\"ctext-wrap\">';\n\n    if (msg != null) {\n      msgHTML += '<div class=\"ctext-wrap-content\" id=' + id + '>\\\r\n        <p class=\"mb-0 ctext-content\">' + msg + \"</p></div>\";\n    } else if (has_images && has_images.length > 0) {\n      msgHTML += '<div class=\"message-img mb-0\">';\n\n      for (i = 0; i < has_images.length; i++) {\n        msgHTML += '<div class=\"message-img-list\">\\\r\n            <div>\\\r\n              <a class=\"popup-img d-inline-block\" href=\"' + has_images[i] + '\">\\\r\n                <img src=\"' + has_images[i] + '\" alt=\"\" class=\"rounded border img-thumbnail\">\\\r\n              </a>\\\r\n            </div>\\\r\n            <div class=\"message-img-link\">\\\r\n              <ul class=\"list-inline mb-0\">\\\r\n                <li class=\"list-inline-item dropdown\">\\\r\n                  <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\\\r\n                      <i class=\"bx bx-dots-horizontal-rounded\"></i>\\\r\n                  </a>\\\r\n                <div class=\"dropdown-menu\">\\\r\n                  <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"' + has_images[i] + '\" download>Download <i class=\"bx bx-download ms-2 text-muted\"></i></a>\\\r\n                  <a class=\"dropdown-item d-flex align-items-center justify-content-between\"  href=\"#\" data-bs-toggle=\"collapse\" data-bs-target=\".replyCollapse\">Reply <i class=\"bx bx-share ms-2 text-muted\"></i></a>\\\r\n                  <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\" data-bs-toggle=\"modal\" data-bs-target=\".forwardModal\">Forward <i class=\"bx bx-share-alt ms-2 text-muted\"></i></a>\\\r\n                  <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\">Bookmark <i class=\"bx bx-bookmarks text-muted ms-2\"></i></a>\\\r\n                  <a class=\"dropdown-item d-flex align-items-center justify-content-between delete-image\" href=\"#\">Delete <i class=\"bx bx-trash ms-2 text-muted\"></i></a>\\\r\n                </div>\\\r\n              </li>\\\r\n          </ul>\\\r\n        </div>\\\r\n      </div>';\n      }\n\n      msgHTML += \"</div>\";\n    } else if (has_files.length > 0) {\n      msgHTML += '<div class=\"ctext-wrap-content\">\\\r\n            <div class=\"p-3 border rounded-3\">\\\r\n            <div class=\"d-flex align-items-center attached-file\">\\\r\n                <div class=\"flex-shrink-0 avatar-sm me-3 ms-0 attached-file-avatar\">\\\r\n                    <div class=\"avatar-title bg-soft-light rounded-circle fs-20\">\\\r\n                        <i class=\"ri-attachment-2\"></i>\\\r\n                    </div>\\\r\n                </div>\\\r\n                <div class=\"flex-grow-1 overflow-hidden\">\\\r\n                    <div class=\"text-start\">\\\r\n                        <h5 class=\"fs-14 text-white mb-1\">design-phase-1-approved.pdf</h5>\\\r\n                        <p class=\"text-white-50 text-truncate fs-13 mb-0\">12.5 MB</p>\\\r\n                    </div>\\\r\n                </div>\\\r\n                <div class=\"flex-shrink-0 ms-4\">\\\r\n                    <div class=\"d-flex gap-2 fs-20 d-flex align-items-start\">\\\r\n                        <div>\\\r\n                            <a href=\"#\" class=\"text-white-50\">\\\r\n                                <i class=\"bx bxs-download\"></i>\\\r\n                            </a>\\\r\n                        </div>\\\r\n                    </div>\\\r\n                </div>\\\r\n             </div>\\\r\n            </div>\\\r\n            </div>\\\r\n            <div class=\"emoji-icon\">\\\r\n                <a class=\"dropdown-toggle\" href=\"#\">👍</a>\\\r\n            </div>\\\r\n            <div class=\"align-self-start message-box-drop d-flex\">\\\r\n              <div class=\"dropdown\">\\\r\n                <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\\\r\n                  <i class=\"ri-emotion-happy-line\"></i>\\\r\n                </a>\\\r\n                <div class=\"dropdown-menu emoji-dropdown-menu\">\\\r\n                  <div class=\"hstack align-items-center gap-2 px-2 fs-25\">\\\r\n                    <a href=\"javascript:void(0);\">💛</a>\\\r\n                    <a href=\"javascript:void(0);\">🤣</a>\\\r\n                    <a href=\"javascript:void(0);\">😜</a>\\\r\n                    <a href=\"javascript:void(0);\">😘</a>\\\r\n                    <a href=\"javascript:void(0);\">😍</a>\\\r\n                    <div class=\"avatar-xs\">\\\r\n                    <a href=\"javascript:void(0);\" class=\"avatar-title bg-soft-primary rounded-circle fs-19 text-primary\">+</a>\\\r\n                    </div>\\\r\n                  </div>\\\r\n                </div>\\\r\n              </div>\\\r\n              <div class=\"dropdown\">\\\r\n                <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\\\r\n                    <i class=\"ri-more-2-fill\"></i>\\\r\n                </a>\\\r\n                <div class=\"dropdown-menu\">\\\r\n                  <a class=\"dropdown-item d-flex align-items-center justify-content-between\"  href=\"' + has_files + '\" download>Download <i class=\"bx bx-download ms-2 text-muted\"></i></a>\\\r\n                  <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\" data-bs-toggle=\"collapse\" data-bs-target=\".replyCollapse\">Reply <i class=\"bx bx-share ms-2 text-muted\"></i></a>\\\r\n                  <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\" data-bs-toggle=\"modal\" data-bs-target=\".forwardModal\">Forward <i class=\"bx bx-share-alt ms-2 text-muted\"></i></a>\\\r\n                  <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\">Bookmark <i class=\"bx bx-bookmarks text-muted ms-2\"></i></a>\\\r\n                  <a class=\"dropdown-item d-flex align-items-center justify-content-between delete-item\" href=\"#\">Delete <i class=\"bx bx-trash text-muted ms-2\"></i></a>\\\r\n                </div>\\\r\n              </div>\\\r\n          </div>';\n    } else if (has_audios && has_audios.length > 0) {\n      msgHTML += '<div class=\"audio-file-elem\">\\\r\n                              <audio controls>\\\r\n                                  <source src=\"' + has_audios + '\" type=\"audio/mpeg\">\\\r\n                              </audio>\\\r\n                          </div>\\\r\n                  <div class=\"align-self-start message-box-drop d-flex\">\\\r\n              <div class=\"dropdown\">\\\r\n                <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\\\r\n                  <i class=\"ri-emotion-happy-line\"></i>\\\r\n                </a>\\\r\n                <div class=\"dropdown-menu emoji-dropdown-menu\">\\\r\n                  <div class=\"hstack align-items-center gap-2 px-2 fs-25\">\\\r\n                    <a href=\"javascript:void(0);\">💛</a>\\\r\n                    <a href=\"javascript:void(0);\">🤣</a>\\\r\n                    <a href=\"javascript:void(0);\">😜</a>\\\r\n                    <a href=\"javascript:void(0);\">😘</a>\\\r\n                    <a href=\"javascript:void(0);\">😍</a>\\\r\n                    <div class=\"avatar-xs\">\\\r\n                    <a href=\"javascript:void(0);\" class=\"avatar-title bg-soft-primary rounded-circle fs-19 text-primary\">+</a>\\\r\n                    </div>\\\r\n                  </div>\\\r\n                </div>\\\r\n              </div>\\\r\n              <div class=\"dropdown\">\\\r\n                <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\\\r\n                    <i class=\"ri-more-2-fill\"></i>\\\r\n                </a>\\\r\n                <div class=\"dropdown-menu\">\\\r\n                  <a class=\"dropdown-item d-flex align-items-center justify-content-between\"  href=\"' + has_audios + '\" download>Download <i class=\"bx bx-download ms-2 text-muted\"></i></a>\\\r\n                  <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\" data-bs-toggle=\"collapse\" data-bs-target=\".replyCollapse\">Reply <i class=\"bx bx-share ms-2 text-muted\"></i></a>\\\r\n                  <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\" data-bs-toggle=\"modal\" data-bs-target=\".forwardModal\">Forward <i class=\"bx bx-share-alt ms-2 text-muted\"></i></a>\\\r\n                  <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\">Bookmark <i class=\"bx bx-bookmarks text-muted ms-2\"></i></a>\\\r\n                  <a class=\"dropdown-item d-flex align-items-center justify-content-between delete-item\" href=\"#\">Delete <i class=\"bx bx-trash text-muted ms-2\"></i></a>\\\r\n                </div>\\\r\n              </div>\\\r\n          </div>';\n    } else if (has_videos && has_videos.length > 0) {\n      msgHTML += '<div>\\\r\n        <iframe src=\"' + has_videos + '\" title=\"YouTube video\" class=\"w-100 rounded\" autoplay allowfullscreen></iframe>\\\r\n      </div>\\\r\n                  <div class=\"align-self-start message-box-drop d-flex\">\\\r\n              <div class=\"dropdown\">\\\r\n                <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\\\r\n                  <i class=\"ri-emotion-happy-line\"></i>\\\r\n                </a>\\\r\n                <div class=\"dropdown-menu emoji-dropdown-menu\">\\\r\n                  <div class=\"hstack align-items-center gap-2 px-2 fs-25\">\\\r\n                    <a href=\"javascript:void(0);\">💛</a>\\\r\n                    <a href=\"javascript:void(0);\">🤣</a>\\\r\n                    <a href=\"javascript:void(0);\">😜</a>\\\r\n                    <a href=\"javascript:void(0);\">😘</a>\\\r\n                    <a href=\"javascript:void(0);\">😍</a>\\\r\n                    <div class=\"avatar-xs\">\\\r\n                    <a href=\"javascript:void(0);\" class=\"avatar-title bg-soft-primary rounded-circle fs-19 text-primary\">+</a>\\\r\n                    </div>\\\r\n                  </div>\\\r\n                </div>\\\r\n              </div>\\\r\n              <div class=\"dropdown\">\\\r\n                <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\\\r\n                    <i class=\"ri-more-2-fill\"></i>\\\r\n                </a>\\\r\n                <div class=\"dropdown-menu\">\\\r\n                  <a class=\"dropdown-item d-flex align-items-center justify-content-between\"  href=\"' + has_videos + '\" download>Download <i class=\"bx bx-download ms-2 text-muted\"></i></a>\\\r\n                  <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\" data-bs-toggle=\"collapse\" data-bs-target=\".replyCollapse\">Reply <i class=\"bx bx-share ms-2 text-muted\"></i></a>\\\r\n                  <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\" data-bs-toggle=\"modal\" data-bs-target=\".forwardModal\">Forward <i class=\"bx bx-share-alt ms-2 text-muted\"></i></a>\\\r\n                  <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\">Bookmark <i class=\"bx bx-bookmarks text-muted ms-2\"></i></a>\\\r\n                  <a class=\"dropdown-item d-flex align-items-center justify-content-between delete-item\" href=\"#\">Delete <i class=\"bx bx-trash text-muted ms-2\"></i></a>\\\r\n                </div>\\\r\n              </div>\\\r\n          </div>';\n    }\n\n    if (has_dropDown === true) {\n      msgHTML += '<div class=\"align-self-start message-box-drop d-flex\">\\\r\n            <div class=\"dropdown\">\\\r\n                <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\\\r\n                  <i class=\"ri-emotion-happy-line\"></i>\\\r\n                </a>\\\r\n                <div class=\"dropdown-menu emoji-dropdown-menu\">\\\r\n                  <div class=\"hstack align-items-center gap-2 px-2 fs-25\">\\\r\n                    <a href=\"javascript:void(0);\">💛</a>\\\r\n                    <a href=\"javascript:void(0);\">🤣</a>\\\r\n                    <a href=\"javascript:void(0);\">😜</a>\\\r\n                    <a href=\"javascript:void(0);\">😘</a>\\\r\n                    <a href=\"javascript:void(0);\">😍</a>\\\r\n                    <div class=\"avatar-xs\">\\\r\n                    <a href=\"javascript:void(0);\" class=\"avatar-title bg-soft-primary rounded-circle fs-19 text-primary\">+</a>\\\r\n                    </div>\\\r\n                  </div>\\\r\n                </div>\\\r\n            </div>\\\r\n            <div class=\"dropdown\">\\\r\n                <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\\\r\n                    <i class=\"ri-more-2-fill\"></i>\\\r\n                </a>\\\r\n                <div class=\"dropdown-menu\">\\\r\n                    <a class=\"dropdown-item d-flex align-items-center justify-content-between reply-message\" href=\"#\" id=\"reply-message-' + messageIds + '\" data-bs-toggle=\"collapse\" data-bs-target=\".replyCollapse\">Reply <i class=\"bx bx-share ms-2 text-muted\"></i></a>\\\r\n                    <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\" data-bs-toggle=\"modal\" data-bs-target=\".forwardModal\">Forward <i class=\"bx bx-share-alt ms-2 text-muted\"></i></a>\\\r\n                    <a class=\"dropdown-item d-flex align-items-center justify-content-between copy-message\" href=\"#\" id=\"copy-message-' + messageIds + '\">Copy <i class=\"bx bx-copy text-muted ms-2\"></i></a>\\\r\n                    <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\">Bookmark <i class=\"bx bx-bookmarks text-muted ms-2\"></i></a>\\\r\n                    <a class=\"dropdown-item d-flex align-items-center justify-content-between\" href=\"#\">Mark as Unread <i class=\"bx bx-message-error text-muted ms-2\"></i></a>\\\r\n                    <a class=\"dropdown-item d-flex align-items-center justify-content-between delete-item\" href=\"#\">Delete <i class=\"bx bx-trash text-muted ms-2\"></i></a>\\\r\n                </div>\\\r\n            </div>\\\r\n        </div>';\n    }\n\n    msgHTML += \"</div>\";\n    return msgHTML;\n  } //Chat Message\n\n\n  function getChatMessages(jsonFileUrl) {\n    getJSONFile(jsonFileUrl, function (err, data) {\n      if (err !== null) {\n        console.log(\"Something went wrong: \" + err);\n      } else {\n        var chatsData = currentSelectedChat == \"users\" ? data[0].chats : data[0].channel_chat;\n        document.getElementById(currentSelectedChat + \"-conversation\").innerHTML = \"\";\n        var isContinue = 0;\n        chatsData.forEach(function (isChat, index) {\n          if (isContinue > 0) {\n            isContinue = isContinue - 1;\n            return;\n          }\n\n          var isAlighn = isChat.from_id == userChatId ? \" right\" : \" left\";\n          var user = usersList.find(function (list) {\n            return list.id == isChat.from_id;\n          });\n          var msgHTML = '<li class=\"chat-list' + isAlighn + '\" id=' + isChat.id + '>\\\r\n                        <div class=\"conversation-list\">';\n          if (userChatId != isChat.from_id && user) msgHTML += '<div class=\"chat-avatar\"><img src=\"' + user.profile + '\" alt=\"\"></div>';\n          msgHTML += '<div class=\"user-chat-content\">';\n          msgHTML += getMsg(isChat.id, isChat.msg, isChat.has_images, isChat.has_files, isChat.has_audios, isChat.has_videos, isChat.has_dropDown);\n\n          if (chatsData[index + 1] && isChat.from_id == chatsData[index + 1][\"from_id\"]) {\n            isContinue = getNextMsgCounts(chatsData, index, isChat.from_id);\n            msgHTML += getNextMsgs(chatsData, index, isChat.from_id, isContinue);\n          }\n\n          msgHTML += '<div class=\"conversation-name\"><small class=\"text-muted time\">' + isChat.datetime + '</small> <span class=\"text-success check-message-icon\"><i class=\"bx bx-check-double\"></i></span></div>';\n          msgHTML += \"</div>\\\r\n                </div>\\\r\n            </li>\";\n          document.getElementById(currentSelectedChat + \"-conversation\").innerHTML += msgHTML;\n        });\n      }\n\n      deleteMessage();\n      deleteChannelMessage();\n      deleteImage();\n      copyMessage();\n      copyChannelMessage();\n      scrollToBottom(\"users-chat\");\n      updateLightbox();\n      copyClipboard();\n      replyMessage();\n      replyChannelMessage();\n    });\n  } // GLightbox Popup\n\n\n  function updateLightbox() {\n    var lightbox = GLightbox({\n      selector: \".popup-img\",\n      title: false\n    });\n  }\n})();\n\nvar input, filter, ul, li, a, i, j, div; // Search User\n\nfunction searchUser() {\n  input = document.getElementById(\"searchChatUser\");\n  filter = input.value.toUpperCase();\n  ul = document.querySelector(\".chat-room-list\");\n  li = ul.getElementsByTagName(\"li\");\n\n  for (i = 0; i < li.length; i++) {\n    var item = li[i];\n    var txtValue = item.querySelector(\"p\").innerText;\n\n    if (txtValue.toUpperCase().indexOf(filter) > -1) {\n      li[i].style.display = \"\";\n    } else {\n      li[i].style.display = \"none\";\n    }\n  }\n} //Search Contacts\n\n\nfunction searchContacts() {\n  input = document.getElementById(\"searchContact\");\n  filter = input.value.toUpperCase();\n  list = document.querySelector(\".sort-contact\");\n  li = list.querySelectorAll(\".mt-3 li\");\n  div = list.querySelectorAll(\".mt-3 .contact-list-title\");\n  var userUUID = document.querySelector('meta[name=\"uuid\"]').content; // Fetching users from remote\n\n  axios.get(\"/api/user/contacts\", {\n    params: {}\n  }).then(function (response) {});\n\n  for (j = 0; j < div.length; j++) {\n    var contactTitle = div[j];\n    txtValue = contactTitle.innerText;\n\n    if (txtValue.toUpperCase().indexOf(filter) > -1) {\n      div[j].style.display = \"\";\n    } else {\n      div[j].style.display = \"none\";\n    }\n  }\n\n  for (i = 0; i < li.length; i++) {\n    contactName = li[i];\n    txtValue = contactName.querySelector(\"h5\").innerText;\n\n    if (txtValue.toUpperCase().indexOf(filter) > -1) {\n      li[i].style.display = \"\";\n    } else {\n      li[i].style.display = \"none\";\n    }\n  }\n}\n\ndocument.getElementById(\"searchContact\").addEventListener(\"keyup\", searchContacts); //Search contact on contactModalList\n\nfunction searchContactOnModal() {\n  input = document.getElementById(\"searchContactModal\");\n  filter = input.value.toUpperCase();\n  list = document.querySelector(\".contact-modal-list\");\n  li = list.querySelectorAll(\".mt-2 li\");\n  div = list.querySelectorAll(\".mt-2 .contact-list-title\");\n\n  for (j = 0; j < div.length; j++) {\n    var contactTitle = div[j];\n    txtValue = contactTitle.innerText;\n\n    if (txtValue.toUpperCase().indexOf(filter) > -1) {\n      div[j].style.display = \"\";\n    } else {\n      div[j].style.display = \"none\";\n    }\n  }\n\n  for (i = 0; i < li.length; i++) {\n    contactName = li[i];\n    txtValue = contactName.querySelector(\"h5\").innerText;\n\n    if (txtValue.toUpperCase().indexOf(filter) > -1) {\n      li[i].style.display = \"\";\n    } else {\n      li[i].style.display = \"none\";\n    }\n  }\n} // bookmark serach\n\n\nfunction searchBookmark() {\n  var input, filter, ul, li, a, i, txtValue;\n  input = document.getElementById(\"searchbookmark\");\n  filter = input.value.toUpperCase();\n  ul = document.getElementById(\"chat-bookmark-list\");\n  li = ul.getElementsByTagName(\"li\");\n\n  for (i = 0; i < li.length; i++) {\n    a = li[i].getElementsByTagName(\"a\")[0];\n    txtValue = a.textContent || a.innerText;\n\n    if (txtValue.toUpperCase().indexOf(filter) > -1) {\n      li[i].style.display = \"\";\n    } else {\n      li[i].style.display = \"none\";\n    }\n  }\n} //Location Permission\n\n\nfunction getLocation() {\n  if (navigator.geolocation) {\n    navigator.geolocation.getCurrentPosition(showPosition);\n  } else {\n    x.innerHTML = \"Geolocation is not supported by this browser.\";\n  }\n}\n\nfunction showPosition(position) {\n  x.innerHTML = \"Latitude: \" + position.coords.latitude + \"<br>Longitude: \" + position.coords.longitude;\n} //Camera Permission\n\n\nfunction cameraPermission() {\n  if (navigator.mediaDevices.getUserMedia) {\n    navigator.mediaDevices.getUserMedia({\n      video: true\n    }).then(function (s) {\n      video.srcObject = s;\n    })[\"catch\"](function (err) {\n      console.log(err);\n    });\n  } else {\n    console.log(\"No\");\n  }\n} //Audio(Mic) Permission\n\n\nfunction audioPermission() {\n  navigator.mediaDevices.getUserMedia({\n    audio: true\n  }).then(function (stream) {\n    window.localStream = stream;\n    window.localAudio.srcObject = stream;\n    window.localAudio.autoplay = true;\n  });\n} //get color\n\n\ndocument.documentElement.style.setProperty(\"--bs-primary-rgb\", window.localStorage.getItem(\"colorPrimary\"));\ndocument.documentElement.style.setProperty(\"--bs-secondary-rgb\", window.localStorage.getItem(\"colorSecondary\"));\n\nfunction themeColor(primaryColor) {\n  var activeCustomcolor = localStorage.getItem(\"activeCustomcolor\");\n\n  if (activeCustomcolor) {\n    document.getElementById(activeCustomcolor).checked = true;\n  }\n\n  document.querySelectorAll(\".theme-color\").forEach(function (item) {\n    var colorRadioElements = document.querySelector(\"input[name=bgcolor-radio]:checked\");\n\n    if (colorRadioElements) {\n      colorRadioElements = colorRadioElements.id;\n      var elementsColor = document.getElementsByClassName(colorRadioElements);\n      var color = window.getComputedStyle(elementsColor[0], null).getPropertyValue(\"background-image\");\n      rgbColorSecondary = color.substring(color.indexOf(\"b\") + 2, color.indexOf(\")\"));\n      rgbColorPrimary = color.substring(color.lastIndexOf(\"(\") + 1, color.lastIndexOf(\")\") - 1);\n    }\n\n    item.addEventListener(\"click\", function (event) {\n      if (item.id) {\n        localStorage.setItem(\"activeCustomcolor\", item.id);\n      } // choose theme color\n\n\n      var colorRadioElements = document.querySelector(\"input[name=bgcolor-radio]:checked\");\n\n      if (colorRadioElements) {\n        colorRadioElements = colorRadioElements.id;\n        var elementsColor = document.getElementsByClassName(colorRadioElements);\n\n        if (elementsColor) {\n          var color = window.getComputedStyle(elementsColor[0], null).getPropertyValue(\"background-image\");\n          rgbColorSecondary = color.substring(color.indexOf(\"b\") + 2, color.indexOf(\")\"));\n          rgbColorPrimary = color.substring(color.lastIndexOf(\"(\") + 1, color.lastIndexOf(\")\") - 1);\n          window.localStorage.setItem(\"colorPrimary\", rgbColorPrimary);\n          window.localStorage.setItem(\"colorSecondary\", rgbColorSecondary);\n          document.documentElement.style.setProperty(\"--bs-primary-rgb\", window.localStorage.getItem(\"colorPrimary\"));\n          document.documentElement.style.setProperty(\"--bs-secondary-rgb\", window.localStorage.getItem(\"colorSecondary\"));\n        }\n      }\n    });\n  }); // primary color picker\n\n  var classicPickrPrimary = document.querySelectorAll(\".colorpicker-primary\");\n  classicPickrPrimary.forEach(function () {\n    var primarycolor = localStorage.getItem(\"colorPrimary\") ? \"rgba(\" + localStorage.getItem(\"colorPrimary\") + \",1)\" : \"#6153CC\";\n    var primaryPicker = Pickr.create({\n      el: \".colorpicker-primary\",\n      theme: \"nano\",\n      // or 'monolith', or 'nano'\n      \"default\": primarycolor,\n      swatches: null,\n      defaultRepresentation: \"RGBA\",\n      components: {\n        // Main components\n        preview: true,\n        opacity: true,\n        hue: true,\n        // Input / output Options\n        interaction: {\n          hex: false,\n          rgba: false,\n          hsva: false,\n          input: true,\n          clear: true,\n          save: true\n        }\n      }\n    }); // primary colorpicker\n\n    primaryPicker.on(\"clear\", function (instance) {// console.log('Event: \"clear\"', instance);\n    }).on(\"cancel\", function (instance) {// console.log('cancel', primaryPicker.getColor().toRGBA().toString(0));\n    }).on(\"change\", function (color, source, instance) {\n      // console.log('Event: \"change\"', instance, primaryPicker.getColor().toRGBA().toString(0));\n      var primaryColorValue = primaryPicker.getColor().toRGBA().toString(0);\n      rgbColorsPrimary = primaryColorValue.substring(primaryColorValue.indexOf(\"(\") + 1, primaryColorValue.lastIndexOf(\",\"));\n      localStorage.setItem(\"colorPrimary\", rgbColorsPrimary);\n      document.documentElement.style.setProperty(\"--bs-primary-rgb\", window.localStorage.getItem(\"colorPrimary\"));\n    });\n  }); // secondary color picker\n\n  var classicPickrSecondary = document.querySelectorAll(\".colorpicker-secondary\");\n  classicPickrSecondary.forEach(function () {\n    var secondarycolor = localStorage.getItem(\"colorSecondary\") ? \"rgba(\" + localStorage.getItem(\"colorSecondary\") + \",1)\" : \"#b966c1\";\n    var secondaryPicker = Pickr.create({\n      el: \".colorpicker-secondary\",\n      theme: \"nano\",\n      // or 'monolith', or 'nano'\n      \"default\": secondarycolor,\n      swatches: null,\n      defaultRepresentation: \"RGBA\",\n      components: {\n        // Main components\n        preview: true,\n        opacity: true,\n        hue: true,\n        // Input / output Options\n        interaction: {\n          hex: false,\n          rgba: false,\n          hsva: false,\n          input: true,\n          clear: true,\n          save: true\n        }\n      }\n    }); // primary colorpicker\n\n    secondaryPicker.on(\"clear\", function (instance) {// console.log('Event: \"clear\"', instance);\n    }).on(\"cancel\", function (instance) {// console.log('cancel', secondaryPicker.getColor().toRGBA().toString(0));\n    }).on(\"change\", function (color, source, instance) {\n      // console.log('Event: \"change\"', instance, secondaryPicker.getColor().toRGBA().toString(0));\n      var secondaryColorValue = secondaryPicker.getColor().toRGBA().toString(0);\n      rgbColorSecondary = secondaryColorValue.substring(secondaryColorValue.lastIndexOf(\"(\") + 1, secondaryColorValue.lastIndexOf(\",\"));\n      localStorage.setItem(\"colorSecondary\", rgbColorSecondary);\n      document.documentElement.style.setProperty(\"--bs-secondary-rgb\", window.localStorage.getItem(\"colorSecondary\"));\n    });\n  });\n}\n\nvar primaryColor = window.getComputedStyle(document.body, null).getPropertyValue(\"--bs-primary-rgb\");\nthemeColor(primaryColor); //Remove image\n\nfunction removeImage(id) {\n  document.querySelector(\"#\" + id).remove();\n\n  if (document.querySelectorAll(\".image-remove\").length == 0) {\n    document.querySelector(\".file_Upload\").classList.remove(\"show\");\n  }\n} //Remove Attached Files\n\n\nfunction removeAttachedFile() {\n  if (document.getElementById(\"remove-attechedFile\")) {\n    document.getElementsByClassName(\"attechedFile-remove\")[0]; // Delete Upload Preview Attached Files\n\n    document.getElementById(\"remove-attechedFile\").addEventListener(\"click\", function (e) {\n      e.target.closest(\".attchedfile_pre\").remove();\n    });\n  }\n\n  var removeButton = document.querySelector(\"#remove-attechedFile\");\n  removeButton.addEventListener(\"click\", function () {\n    document.querySelector(\".file_Upload \").classList.remove(\"show\");\n  });\n} //Remove Audio Files\n\n\nfunction removeAudioFile() {\n  if (document.getElementById(\"remove-audioFile\")) {\n    document.getElementsByClassName(\"audioFile-remove\")[0]; // Delete Upload Preview Attached Files\n\n    document.getElementById(\"remove-audioFile\").addEventListener(\"click\", function (e) {\n      e.target.closest(\".audiofile_pre\").remove();\n    });\n  }\n\n  var removeButton = document.querySelector(\"#remove-audioFile\");\n  removeButton.addEventListener(\"click\", function () {\n    document.querySelector(\".file_Upload \").classList.remove(\"show\");\n  });\n}//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9yZXNvdXJjZXMvanMvcGFnZXMvaW5kZXguaW5pdC5qcy5qcyIsIm5hbWVzIjpbImlzcmVwbHlNZXNzYWdlIiwiY3VycmVudENoYXRJZCIsImR1bW15SW1hZ2UiLCJjdXJyZW50U2VsZWN0ZWRDaGF0IiwidXJsIiwid2luZG93IiwibG9jYXRpb24iLCJvcmlnaW4iLCJ1c2Vyc0xpc3QiLCJ1c2VyQ2hhdElkIiwiZG9jdW1lbnQiLCJnZXRFbGVtZW50QnlJZCIsInN0eWxlIiwiZGlzcGxheSIsInRvZ2dsZVNlbGVjdGVkIiwidXNlckNoYXRFbGVtZW50IiwiZ2V0RWxlbWVudHNCeUNsYXNzTmFtZSIsInF1ZXJ5U2VsZWN0b3JBbGwiLCJmb3JFYWNoIiwiaXRlbSIsImFkZEV2ZW50TGlzdGVuZXIiLCJldmVudCIsImVsbSIsImNsYXNzTGlzdCIsImFkZCIsImNoYXRVc2VyTGlzdCIsInF1ZXJ5U2VsZWN0b3IiLCJyZW1vdmUiLCJwYXJlbnROb2RlIiwiaXRlbTIiLCJjaGF0U3dhcCIsInVwZGF0ZVNlbGVjdGVkQ2hhdCIsImNvbnRhY3RJZCIsImdldEF0dHJpYnV0ZSIsInVzZXJuYW1lIiwiaW5uZXJIVE1MIiwiY29udGFjdEltYWdlc1dpdGhOYW1lIiwiaW1nIiwic2V0QXR0cmlidXRlIiwiY2hhdEltZyIsImNvbnZlcnNhdGlvbkltZyIsIml0ZW0zIiwic3RvcCIsImNoYW5uZWxJZCIsImNoYW5uZWxOYW1lIiwiY2hhbmdlQ2hhbm5lbE5hbWUiLCJjaGFubmVsSW1nIiwiZ2V0SlNPTiIsImpzb251cmwiLCJjYWxsYmFjayIsInhociIsIlhNTEh0dHBSZXF1ZXN0Iiwib3BlbiIsInJlc3BvbnNlVHlwZSIsIm9ubG9hZCIsInN0YXR1cyIsInJlc3BvbnNlIiwic2VuZCIsImVyciIsImRhdGEiLCJjb25zb2xlIiwibG9nIiwiZmF2IiwiZmF2b3JpdGVzIiwidXNlciIsImluZGV4IiwicHJvZmlsZSIsIm5pY2tuYW1lIiwiaXNNZXNzYWdlQ291bnQiLCJtZXNzYWdlY291bnQiLCJtZXNzYWdlQ291bnQiLCJhY3RpdmVDbGFzcyIsImlkIiwibmFtZSIsImxhc3RtZXNzYWdlIiwidXNlcnMiLCJ1c2VyRGF0YSIsImlzVXNlclByb2ZpbGUiLCJjaGFubmVsc0RhdGEiLCJjaGFubmVscyIsImlzQ2hhbm5lbCIsImlzTWVzc2FnZSIsImNhbGxzTGlzdCIsImNhbGxzSWQiLCJjYWxsVXNlciIsImNhbGxJbWciLCJjYWxsTGlzdCIsImNhbGxzIiwiY2FsbEljb24iLCJjYWxsVmlkZW8iLCJjYWxsVHlwZUljb24iLCJjYWxsQXJyb3dUeXBlIiwiZGF0ZVRpbWUiLCJjYWxsVGltZSIsImNvbnRhY3RMaXN0IiwiY29udGFjdE5hbWUiLCJjb250YWN0SW1nIiwic29ydCIsImEiLCJiIiwibG9jYWxlQ29tcGFyZSIsIm1zZ0hUTUwiLCJ1c2VyTmFtZUNoYXJBdCIsImlzU29ydENvbnRhY3QiLCJjaGFyQXQiLCJ0b1VwcGVyQ2FzZSIsImdldENoYXRNZXNzYWdlcyIsInVzZXJQcm9maWxlU2lkZWJhciIsInRvZ2dsZSIsImNvbnZlcnNhdGlvblNjcm9sbCIsInNjcm9sbFRvcCIsInNjcm9sbEhlaWdodCIsIm15Q29sbGFwc2UiLCJib2R5IiwiYnNDb2xsYXBzZSIsImJvb3RzdHJhcCIsIkNvbGxhcHNlIiwiaGlkZSIsImluaXRTd2lwZXIiLCJzd2lwZXIiLCJTd2lwZXIiLCJzbGlkZXNQZXJWaWV3Iiwic3BhY2VCZXR3ZWVuIiwiYnJlYWtwb2ludHMiLCJjb250YWN0TW9kYWxMaXN0IiwibGluayIsIm9uY2xpY2siLCJmb2N1cyIsInNjcm9sbFRvQm90dG9tIiwic2ltcGxlQmFyIiwib2Zmc2V0SGVpZ2h0IiwiaW5uZXJIZWlnaHQiLCJzY3JvbGxUbyIsInRvcCIsImJlaGF2aW9yIiwiY2hhdEZvcm0iLCJjaGF0SW5wdXQiLCJpdGVtTGlzdCIsImNoYXRJbnB1dEZlZWRiYWNrIiwiY3VycmVudFRpbWUiLCJhbXBtIiwiRGF0ZSIsImdldEhvdXJzIiwiaG91ciIsIm1pbnV0ZSIsImdldE1pbnV0ZXMiLCJzZXRJbnRlcnZhbCIsIm1lc3NhZ2VJZHMiLCJhdWRpb2ZpbGVuYW1lIiwiYXVkaW9maWxlU2l6ZSIsImF1ZGlvRmlsZSIsImFmaWxpbmciLCJmaWxlTnVtYmVyQXVkaW8iLCJhdWRpb3VybCIsInByZXZpZXciLCJmaWxlcyIsIlVSTCIsImNyZWF0ZU9iamVjdFVSTCIsInJlYWRlciIsIkZpbGVSZWFkZXIiLCJyZWFkQXNEYXRhVVJMIiwiZmlsZW5hbWUiLCJmaWxlU2l6ZSIsIk1hdGgiLCJyb3VuZCIsInNpemUiLCJ0b0ZpeGVkIiwicmVtb3ZlQXVkaW9GaWxlIiwiZ2V0QXVkaW9GaWxlcyIsImNoYXRpZDMiLCJuZXdBZGlvSXRlbXMiLCJuZXdBZGlvSXRlbVNpemUiLCJjaGF0Q29uTGlzdDMiLCJpdGVtTGlzdDMiLCJpbnNlcnRBZGphY2VudEhUTUwiLCJuZXdDaGF0TGlzdCIsInN1Yml0ZW0iLCJyZW1vdmVDaGlsZCIsInN1Yml0ZW0yIiwicHJldmVudERlZmF1bHQiLCJhdWRpb2ZpbGVkYXRhaWQiLCJGaWxlIiwiRmlsZUxpc3QiLCJCbG9iIiwiYWxlcnQiLCJibG9iIiwiZmlsaW5nIiwidHlwZSIsImNyZWF0ZUVsZW1lbnQiLCJocmVmIiwiZG93bmxvYWQiLCJjbGljayIsImZpbGVuYW1lMiIsImZpbGVzaXplMiIsImZpbGUiLCJmaWxlTnVtYmVyIiwiZnIiLCJyZW1vdmVBdHRhY2hlZEZpbGUiLCJnZXRBdHRhY2hlZEZpbGVzIiwiY2hhdGlkMiIsIm5ld0F0dGNoZWRJdGVtcyIsIm5ld0F0dGNoZWRJdGVtU2l6ZSIsImNoYXRDb25MaXN0MiIsIml0ZW1MaXN0MiIsInN1Yml0ZW0xIiwiZGF0YWlkIiwiaW1hZ2V1cmxzIiwicmVtb3ZlaW1nIiwiaW5kZXhpbmciLCJwcmV2aWV3SW1hZ2VzIiwiaW1hZ2VzZWxlY3RvciIsImNhbGwiLCJyZWFkQW5kUHJldmlldyIsInRlc3QiLCJjcmVhdGVJbWFnZSIsInB1c2giLCJyZXN1bHQiLCJnZXRJbWFnZXMiLCJjaGF0aWQxIiwibmV3SW1hZ2UiLCJuZXdJbWFnZXMiLCJjaGF0Q29uTGlzdDEiLCJpdGVtTGlzdDEiLCJtdWx0aWltZyIsInVwZGF0ZUxpZ2h0Ym94IiwiZGVsZXRlSW1hZ2VzIiwiY2xvc2VzdCIsImNoaWxkRWxlbWVudENvdW50IiwiZGVsZXRlQ2hhbm5lbEltYWdlcyIsImNoYW5uZWxJdGVtTGlzdCIsImdldENoYXRMaXN0IiwiY2hhdGlkIiwiY2hhdEl0ZW1zIiwiY2hhdENvbkxpc3QiLCJzZXRUaW1lb3V0IiwiaGlkZWNsaXBib2FyZE5ldyIsInJlcGx5VG9nZ2xlT3Blbk5ldyIsInJlcGx5VG9nZ2xlQ2xvc2VOZXciLCJyZXBseU1lc3NhZ2VOZXciLCJjaGlsZHJlbiIsImlubmVyVGV4dCIsInJlcGx5VXNlck5ldyIsImN1cnJlbnRWYWx1ZSIsImNoaWxkTm9kZXMiLCJmaXJzdEVsZW1lbnRDaGlsZCIsIm5hdmlnYXRvciIsImNsaXBib2FyZCIsIndyaXRlVGV4dCIsIm1lc3NhZ2Vib3hjb2xsYXBzZSIsImdldFJlcGx5Q2hhdExpc3QiLCJjaGF0UmVwbHlJZCIsImNoYXRSZXBseUl0ZW1zIiwiY2hhdFJlcGx5VXNlciIsImNoYXRSZXBseU1lc3NhZ2UiLCJjaGF0cmVwbHlDb25MaXN0IiwiaXRlbVJlcGx5TGlzdCIsInJlcGx5TWVzc2FnZSIsInJlcGx5dXNlciIsIm1zZ1d3bmVyTmFtZSIsImNvbnRhaW5zIiwiaXNUZXh0IiwiZSIsImNoYXRJZCIsImNoYXRJZDEiLCJjaGF0SWQyIiwiY2hhdElkMyIsImNoYXRJbnB1dFZhbHVlIiwidmFsdWUiLCJpbWFnZXByZXZpZXciLCJhdHRhY2hlZEZpbGVQcmV2aWV3IiwiYXVkaW9GaWxlUHJldmlldyIsImNoYXRJbnB1dGZlZWRiYWNrIiwibGVuZ3RoIiwiZGVsZXRlTWVzc2FnZSIsImRlbGV0ZUl0ZW1zIiwiZGVsZXRlSW1hZ2UiLCJkZWxldGVDaGFubmVsTWVzc2FnZSIsImNoYW5uZWxDaGF0TGlzdCIsImNvcHlDbGlwYm9hcmQiLCJjb3B5Q2xpcGJvYXJkQWxlcnQiLCJoaWRlY2xpcGJvYXJkIiwiY29weU1lc3NhZ2UiLCJjb3B5Q2hhbm5lbE1lc3NhZ2UiLCJyZXBseVRvZ2dsZU9wZW4iLCJyZXBseVRvZ2dsZUNsb3NlIiwicmVwbHlNc2ciLCJyZXBseUNoYW5uZWxNZXNzYWdlIiwicmVwbHlDaGFubmVsVG9nZ2xlT3BlbiIsInJlcGx5Q2hhbm5lbFRvZ2dsZUNsb3NlIiwicmVwbHlDaGFubmVsTXNnIiwicmVwbHlDaGFubmVsdXNlciIsInNyYyIsImVkaXRJY29uIiwiZGlzYWJsZWQiLCJyZXBsYWNlIiwiZmF2b3VyaXRlQnRuIiwiaSIsImZhdm91cml0ZUJ0bnMiLCJlbW9qaVBpY2tlciIsIkZnRW1vamlQaWNrZXIiLCJ0cmlnZ2VyIiwicmVtb3ZlT25TZWxlY3Rpb24iLCJjbG9zZUJ1dHRvbiIsInBvc2l0aW9uIiwicHJlRmV0Y2giLCJkaXIiLCJpbnNlcnRJbnRvIiwiZW1vamlCdG4iLCJmZ0Vtb2ppUGlja2VyIiwibGVmdEVtb2ppIiwiZ2V0Q29tcHV0ZWRTdHlsZSIsImdldFByb3BlcnR5VmFsdWUiLCJsZWZ0IiwiZ2V0SlNPTkZpbGUiLCJnZXROZXh0TXNnQ291bnRzIiwiY2hhdHNEYXRhIiwiZnJvbV9pZCIsImNvdW50cyIsImdldE5leHRNc2dzIiwiaXNDb250aW51ZSIsIm1zZ3MiLCJnZXRNc2ciLCJtc2ciLCJoYXNfaW1hZ2VzIiwiaGFzX2ZpbGVzIiwiaGFzX2F1ZGlvcyIsImhhc192aWRlb3MiLCJoYXNfZHJvcERvd24iLCJqc29uRmlsZVVybCIsImNoYXRzIiwiY2hhbm5lbF9jaGF0IiwiaXNDaGF0IiwiaXNBbGlnaG4iLCJmaW5kIiwibGlzdCIsImRhdGV0aW1lIiwibGlnaHRib3giLCJHTGlnaHRib3giLCJzZWxlY3RvciIsInRpdGxlIiwiaW5wdXQiLCJmaWx0ZXIiLCJ1bCIsImxpIiwiaiIsImRpdiIsInNlYXJjaFVzZXIiLCJnZXRFbGVtZW50c0J5VGFnTmFtZSIsInR4dFZhbHVlIiwiaW5kZXhPZiIsInNlYXJjaENvbnRhY3RzIiwidXNlclVVSUQiLCJjb250ZW50IiwiYXhpb3MiLCJnZXQiLCJwYXJhbXMiLCJ0aGVuIiwiY29udGFjdFRpdGxlIiwic2VhcmNoQ29udGFjdE9uTW9kYWwiLCJzZWFyY2hCb29rbWFyayIsInRleHRDb250ZW50IiwiZ2V0TG9jYXRpb24iLCJnZW9sb2NhdGlvbiIsImdldEN1cnJlbnRQb3NpdGlvbiIsInNob3dQb3NpdGlvbiIsIngiLCJjb29yZHMiLCJsYXRpdHVkZSIsImxvbmdpdHVkZSIsImNhbWVyYVBlcm1pc3Npb24iLCJtZWRpYURldmljZXMiLCJnZXRVc2VyTWVkaWEiLCJ2aWRlbyIsInMiLCJzcmNPYmplY3QiLCJhdWRpb1Blcm1pc3Npb24iLCJhdWRpbyIsInN0cmVhbSIsImxvY2FsU3RyZWFtIiwibG9jYWxBdWRpbyIsImF1dG9wbGF5IiwiZG9jdW1lbnRFbGVtZW50Iiwic2V0UHJvcGVydHkiLCJsb2NhbFN0b3JhZ2UiLCJnZXRJdGVtIiwidGhlbWVDb2xvciIsInByaW1hcnlDb2xvciIsImFjdGl2ZUN1c3RvbWNvbG9yIiwiY2hlY2tlZCIsImNvbG9yUmFkaW9FbGVtZW50cyIsImVsZW1lbnRzQ29sb3IiLCJjb2xvciIsInJnYkNvbG9yU2Vjb25kYXJ5Iiwic3Vic3RyaW5nIiwicmdiQ29sb3JQcmltYXJ5IiwibGFzdEluZGV4T2YiLCJzZXRJdGVtIiwiY2xhc3NpY1BpY2tyUHJpbWFyeSIsInByaW1hcnljb2xvciIsInByaW1hcnlQaWNrZXIiLCJQaWNrciIsImNyZWF0ZSIsImVsIiwidGhlbWUiLCJzd2F0Y2hlcyIsImRlZmF1bHRSZXByZXNlbnRhdGlvbiIsImNvbXBvbmVudHMiLCJvcGFjaXR5IiwiaHVlIiwiaW50ZXJhY3Rpb24iLCJoZXgiLCJyZ2JhIiwiaHN2YSIsImNsZWFyIiwic2F2ZSIsIm9uIiwiaW5zdGFuY2UiLCJzb3VyY2UiLCJwcmltYXJ5Q29sb3JWYWx1ZSIsImdldENvbG9yIiwidG9SR0JBIiwidG9TdHJpbmciLCJyZ2JDb2xvcnNQcmltYXJ5IiwiY2xhc3NpY1BpY2tyU2Vjb25kYXJ5Iiwic2Vjb25kYXJ5Y29sb3IiLCJzZWNvbmRhcnlQaWNrZXIiLCJzZWNvbmRhcnlDb2xvclZhbHVlIiwicmVtb3ZlSW1hZ2UiLCJ0YXJnZXQiLCJyZW1vdmVCdXR0b24iXSwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3Jlc291cmNlcy9qcy9wYWdlcy9pbmRleC5pbml0LmpzP2U2MTgiXSwic291cmNlc0NvbnRlbnQiOlsiLypcclxuVGVtcGxhdGUgTmFtZTogVmhhdG8gLSBSZXNwb25zaXZlIEJvb3RzdHJhcCA1IENoYXQgQXBwXHJcbkF1dGhvcjogVGhlbWVzYnJhbmRcclxuV2Vic2l0ZTogaHR0cHM6Ly90aGVtZXNicmFuZC5jb20vXHJcbkNvbnRhY3Q6IHRoZW1lc2JyYW5kQGdtYWlsLmNvbVxyXG5GaWxlOiBJbmRleCBpbml0IGpzXHJcbiovXHJcblxyXG4oZnVuY3Rpb24gKCkge1xyXG4gICAgdmFyIGlzcmVwbHlNZXNzYWdlID0gZmFsc2U7XHJcbiAgICB2YXIgY3VycmVudENoYXRJZCA9IFwidXNlcnMtY2hhdFwiO1xyXG4gICAgdmFyIGR1bW15SW1hZ2UgPSBcImltYWdlcy91c2Vycy91c2VyLWR1bW15LWltZy5qcGdcIjtcclxuXHJcbiAgICB2YXIgY3VycmVudFNlbGVjdGVkQ2hhdCA9IFwidXNlcnNcIjtcclxuICAgIHZhciB1cmwgPSB3aW5kb3cubG9jYXRpb24ub3JpZ2luICsgXCIvanMvZGlyL1wiO1xyXG4gICAgdmFyIHVzZXJzTGlzdCA9IFtdO1xyXG4gICAgdmFyIHVzZXJDaGF0SWQgPSAxO1xyXG4gICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJjb3B5Q2xpcEJvYXJkXCIpLnN0eWxlLmRpc3BsYXkgPSBcIm5vbmVcIjtcclxuICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiY29weUNsaXBCb2FyZENoYW5uZWxcIikuc3R5bGUuZGlzcGxheSA9IFwibm9uZVwiO1xyXG5cclxuICAgIC8vIGNoYXQgdXNlciByZXNwb25zaXZlIGhpZGUgc2hvd1xyXG4gICAgZnVuY3Rpb24gdG9nZ2xlU2VsZWN0ZWQoKSB7XHJcbiAgICAgICAgdmFyIHVzZXJDaGF0RWxlbWVudCA9IGRvY3VtZW50LmdldEVsZW1lbnRzQnlDbGFzc05hbWUoXCJ1c2VyLWNoYXRcIik7XHJcbiAgICAgICAgZG9jdW1lbnRcclxuICAgICAgICAgICAgLnF1ZXJ5U2VsZWN0b3JBbGwoXCIuY2hhdC11c2VyLWxpc3QgbGkgYVwiKVxyXG4gICAgICAgICAgICAuZm9yRWFjaChmdW5jdGlvbiAoaXRlbSkge1xyXG4gICAgICAgICAgICAgICAgaXRlbS5hZGRFdmVudExpc3RlbmVyKFwiY2xpY2tcIiwgZnVuY3Rpb24gKGV2ZW50KSB7XHJcbiAgICAgICAgICAgICAgICAgICAgdXNlckNoYXRFbGVtZW50LmZvckVhY2goZnVuY3Rpb24gKGVsbSkge1xyXG4gICAgICAgICAgICAgICAgICAgICAgICBlbG0uY2xhc3NMaXN0LmFkZChcInVzZXItY2hhdC1zaG93XCIpO1xyXG4gICAgICAgICAgICAgICAgICAgIH0pO1xyXG5cclxuICAgICAgICAgICAgICAgICAgICAvLyBjaGF0IHVzZXIgbGlzdCBsaW5rIGFjdGl2ZVxyXG4gICAgICAgICAgICAgICAgICAgIHZhciBjaGF0VXNlckxpc3QgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICAgICAgICAgICAgICBcIi5jaGF0LXVzZXItbGlzdCBsaS5hY3RpdmVcIlxyXG4gICAgICAgICAgICAgICAgICAgICk7XHJcbiAgICAgICAgICAgICAgICAgICAgaWYgKGNoYXRVc2VyTGlzdCkgY2hhdFVzZXJMaXN0LmNsYXNzTGlzdC5yZW1vdmUoXCJhY3RpdmVcIik7XHJcbiAgICAgICAgICAgICAgICAgICAgdGhpcy5wYXJlbnROb2RlLmNsYXNzTGlzdC5hZGQoXCJhY3RpdmVcIik7XHJcbiAgICAgICAgICAgICAgICB9KTtcclxuICAgICAgICAgICAgfSk7XHJcblxyXG4gICAgICAgIGRvY3VtZW50XHJcbiAgICAgICAgICAgIC5xdWVyeVNlbGVjdG9yQWxsKFwiLnNvcnQtY29udGFjdCB1bCBsaVwiKVxyXG4gICAgICAgICAgICAuZm9yRWFjaChmdW5jdGlvbiAoaXRlbTIpIHtcclxuICAgICAgICAgICAgICAgIGl0ZW0yLmFkZEV2ZW50TGlzdGVuZXIoXCJjbGlja1wiLCBmdW5jdGlvbiAoZXZlbnQpIHtcclxuICAgICAgICAgICAgICAgICAgICB1c2VyQ2hhdEVsZW1lbnQuZm9yRWFjaChmdW5jdGlvbiAoZWxtKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGVsbS5jbGFzc0xpc3QuYWRkKFwidXNlci1jaGF0LXNob3dcIik7XHJcbiAgICAgICAgICAgICAgICAgICAgfSk7XHJcbiAgICAgICAgICAgICAgICB9KTtcclxuICAgICAgICAgICAgfSk7XHJcbiAgICAgICAgLy8gdXNlci1jaGF0LXJlbW92ZVxyXG4gICAgICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoXCIudXNlci1jaGF0LXJlbW92ZVwiKS5mb3JFYWNoKGZ1bmN0aW9uIChpdGVtKSB7XHJcbiAgICAgICAgICAgIGl0ZW0uYWRkRXZlbnRMaXN0ZW5lcihcImNsaWNrXCIsIGZ1bmN0aW9uIChldmVudCkge1xyXG4gICAgICAgICAgICAgICAgdXNlckNoYXRFbGVtZW50LmZvckVhY2goZnVuY3Rpb24gKGVsbSkge1xyXG4gICAgICAgICAgICAgICAgICAgIGVsbS5jbGFzc0xpc3QucmVtb3ZlKFwidXNlci1jaGF0LXNob3dcIik7XHJcbiAgICAgICAgICAgICAgICB9KTtcclxuICAgICAgICAgICAgfSk7XHJcbiAgICAgICAgfSk7XHJcbiAgICB9XHJcblxyXG4gICAgLy8gc2luZ2xlIHRvIGNoYW5uZWwgYW5kIGNoYW5uZWwgdG8gc2luZ2xlIGNoYXQgY29udmVyc2F0aW9uXHJcbiAgICBmdW5jdGlvbiBjaGF0U3dhcCgpIHtcclxuICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKFwiI2Zhdm91cml0ZS11c2VycyBsaSwgI3VzZXJzTGlzdCBsaVwiKSAmJlxyXG4gICAgICAgICAgICBkb2N1bWVudFxyXG4gICAgICAgICAgICAgICAgLnF1ZXJ5U2VsZWN0b3JBbGwoXCIjZmF2b3VyaXRlLXVzZXJzIGxpLCAjdXNlcnNMaXN0IGxpXCIpXHJcbiAgICAgICAgICAgICAgICAuZm9yRWFjaChmdW5jdGlvbiAoaXRlbSkge1xyXG4gICAgICAgICAgICAgICAgICAgIGl0ZW0uYWRkRXZlbnRMaXN0ZW5lcihcImNsaWNrXCIsIGZ1bmN0aW9uIChldmVudCkge1xyXG4gICAgICAgICAgICAgICAgICAgICAgICBjdXJyZW50U2VsZWN0ZWRDaGF0ID0gXCJ1c2Vyc1wiO1xyXG4gICAgICAgICAgICAgICAgICAgICAgICB1cGRhdGVTZWxlY3RlZENoYXQoKTtcclxuICAgICAgICAgICAgICAgICAgICAgICAgY3VycmVudENoYXRJZCA9IFwidXNlcnMtY2hhdFwiO1xyXG4gICAgICAgICAgICAgICAgICAgICAgICB2YXIgY29udGFjdElkID0gaXRlbS5nZXRBdHRyaWJ1dGUoXCJpZFwiKTtcclxuICAgICAgICAgICAgICAgICAgICAgICAgdmFyIHVzZXJuYW1lID1cclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGl0ZW0ucXVlcnlTZWxlY3RvcihcIi50ZXh0LXRydW5jYXRlXCIpLmlubmVySFRNTDtcclxuXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIi51c2VyLXByb2ZpbGUtc2lkZWJhciAudXNlci1uYW1lXCJcclxuICAgICAgICAgICAgICAgICAgICAgICAgKS5pbm5lckhUTUwgPSB1c2VybmFtZTtcclxuICAgICAgICAgICAgICAgICAgICAgICAgdmFyIGNvbnRhY3RJbWFnZXNXaXRoTmFtZSA9XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcInVzZXJzLWNoYXRcIik7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGNvbnRhY3RJbWFnZXNXaXRoTmFtZS5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCIudGV4dC10cnVuY2F0ZSAudXNlci1wcm9maWxlLXNob3dcIlxyXG4gICAgICAgICAgICAgICAgICAgICAgICApLmlubmVySFRNTCA9IHVzZXJuYW1lO1xyXG4gICAgICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCIudXNlci1wcm9maWxlLWRlc2MgLnRleHQtdHJ1bmNhdGVcIlxyXG4gICAgICAgICAgICAgICAgICAgICAgICApLmlubmVySFRNTCA9IHVzZXJuYW1lO1xyXG4gICAgICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCIuY2hhdC1pbnB1dC10eXBpbmdcIlxyXG4gICAgICAgICAgICAgICAgICAgICAgICApLnN0eWxlLmRpc3BsYXkgPSBcImJsb2NrXCI7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIi51c2VyLXByb2ZpbGUtc3RhdHVzXCJcclxuICAgICAgICAgICAgICAgICAgICAgICAgKS5zdHlsZS5kaXNwbGF5ID0gXCJibG9ja1wiO1xyXG4gICAgICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCIuY2hhdC1pbnB1dC10eXBpbmcgLnR5cGluZy11c2VyXCJcclxuICAgICAgICAgICAgICAgICAgICAgICAgKS5pbm5lckhUTUwgPVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgdXNlcm5hbWUgK1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgJyBpcyBUeXBpbmc8c3BhbiBjbGFzcz1cInR5cGluZyBtcy0yXCI+PHNwYW4gY2xhc3M9XCJkb3RcIj48L3NwYW4+PHNwYW4gY2xhc3M9XCJkb3RcIj48L3NwYW4+PHNwYW4gY2xhc3M9XCJkb3RcIj48L3NwYW4+PC9zcGFuPic7XHJcblxyXG4gICAgICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCIuYXVkaW9jYWxsTW9kYWwgLnRleHQtdHJ1bmNhdGVcIlxyXG4gICAgICAgICAgICAgICAgICAgICAgICApLmlubmVySFRNTCA9IHVzZXJuYW1lO1xyXG4gICAgICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCIudmlkZW9jYWxsTW9kYWwgLnRleHQtdHJ1bmNhdGVcIlxyXG4gICAgICAgICAgICAgICAgICAgICAgICApLmlubmVySFRNTCA9IHVzZXJuYW1lO1xyXG4gICAgICAgICAgICAgICAgICAgICAgICB2YXIgaW1nID0gZG9jdW1lbnRcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIC5nZXRFbGVtZW50QnlJZChjb250YWN0SWQpXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAucXVlcnlTZWxlY3RvcihcIi5hdmF0YXIteHNcIilcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIC5nZXRBdHRyaWJ1dGUoXCJzcmNcIik7XHJcblxyXG4gICAgICAgICAgICAgICAgICAgICAgICBpZiAoaW1nKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBkb2N1bWVudFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC5xdWVyeVNlbGVjdG9yKFwiLnVzZXItb3duLWltZyAuYXZhdGFyLXNtXCIpXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLnNldEF0dHJpYnV0ZShcInNyY1wiLCBpbWcpO1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnRcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAucXVlcnlTZWxlY3RvcihcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCIudXNlci1wcm9maWxlLXNpZGViYXIgLnByb2ZpbGUtaW1nXCJcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLnNldEF0dHJpYnV0ZShcInNyY1wiLCBpbWcpO1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnRcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAucXVlcnlTZWxlY3RvcihcIi5hdWRpb2NhbGxNb2RhbCAuaW1nLXRodW1ibmFpbFwiKVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC5zZXRBdHRyaWJ1dGUoXCJzcmNcIiwgaW1nKTtcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGRvY3VtZW50XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLnF1ZXJ5U2VsZWN0b3IoXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiLnZpZGVvY2FsbE1vZGFsIC52aWRlb2NhbGxNb2RhbC1iZ1wiXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC5zZXRBdHRyaWJ1dGUoXCJzcmNcIiwgaW1nKTtcclxuICAgICAgICAgICAgICAgICAgICAgICAgfSBlbHNlIHtcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGRvY3VtZW50XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLnF1ZXJ5U2VsZWN0b3IoXCIudXNlci1vd24taW1nIC5hdmF0YXItc21cIilcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAuc2V0QXR0cmlidXRlKFwic3JjXCIsIGR1bW15SW1hZ2UpO1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnRcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAucXVlcnlTZWxlY3RvcihcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCIudXNlci1wcm9maWxlLXNpZGViYXIgLnByb2ZpbGUtaW1nXCJcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLnNldEF0dHJpYnV0ZShcInNyY1wiLCBkdW1teUltYWdlKTtcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGRvY3VtZW50XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLnF1ZXJ5U2VsZWN0b3IoXCIuYXVkaW9jYWxsTW9kYWwgLmltZy10aHVtYm5haWxcIilcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAuc2V0QXR0cmlidXRlKFwic3JjXCIsIGR1bW15SW1hZ2UpO1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnRcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAucXVlcnlTZWxlY3RvcihcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCIudmlkZW9jYWxsTW9kYWwgLnZpZGVvY2FsbE1vZGFsLWJnXCJcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLnNldEF0dHJpYnV0ZShcInNyY1wiLCBkdW1teUltYWdlKTtcclxuICAgICAgICAgICAgICAgICAgICAgICAgfVxyXG5cclxuICAgICAgICAgICAgICAgICAgICAgICAgdmFyIGNoYXRJbWcgPSBpdGVtXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAucXVlcnlTZWxlY3RvcihcIi5hdmF0YXIteHNcIilcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIC5nZXRBdHRyaWJ1dGUoXCJzcmNcIik7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIHZhciBjb252ZXJzYXRpb25JbWcgPVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJ1c2Vycy1jb252ZXJzYXRpb25cIik7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGNvbnZlcnNhdGlvbkltZ1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgLnF1ZXJ5U2VsZWN0b3JBbGwoXCIubGVmdCAuY2hhdC1hdmF0YXJcIilcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIC5mb3JFYWNoKGZ1bmN0aW9uIChpdGVtMykge1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmIChjaGF0SW1nKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGl0ZW0zXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAucXVlcnlTZWxlY3RvcihcImltZ1wiKVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLnNldEF0dHJpYnV0ZShcInNyY1wiLCBjaGF0SW1nKTtcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB9IGVsc2Uge1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpdGVtM1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLnF1ZXJ5U2VsZWN0b3IoXCJpbWdcIilcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC5zZXRBdHRyaWJ1dGUoXCJzcmNcIiwgZHVtbXlJbWFnZSk7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgfSk7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIHdpbmRvdy5zdG9wKCk7XHJcbiAgICAgICAgICAgICAgICAgICAgfSk7XHJcbiAgICAgICAgICAgICAgICB9KTtcclxuXHJcbiAgICAgICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChcIiNjaGFubmVsTGlzdCBsaVwiKS5mb3JFYWNoKGZ1bmN0aW9uIChpdGVtKSB7XHJcbiAgICAgICAgICAgIGl0ZW0uYWRkRXZlbnRMaXN0ZW5lcihcImNsaWNrXCIsIGZ1bmN0aW9uIChldmVudCkge1xyXG4gICAgICAgICAgICAgICAgY3VycmVudENoYXRJZCA9IFwiY2hhbm5lbC1jaGF0XCI7XHJcbiAgICAgICAgICAgICAgICBjdXJyZW50U2VsZWN0ZWRDaGF0ID0gXCJjaGFubmVsXCI7XHJcbiAgICAgICAgICAgICAgICB1cGRhdGVTZWxlY3RlZENoYXQoKTtcclxuICAgICAgICAgICAgICAgIHZhciBjaGFubmVsSWQgPSBpdGVtLmdldEF0dHJpYnV0ZShcImlkXCIpO1xyXG4gICAgICAgICAgICAgICAgdmFyIGNoYW5uZWxOYW1lID1cclxuICAgICAgICAgICAgICAgICAgICBpdGVtLnF1ZXJ5U2VsZWN0b3IoXCIudGV4dC10cnVuY2F0ZVwiKS5pbm5lckhUTUw7XHJcbiAgICAgICAgICAgICAgICB2YXIgY2hhbmdlQ2hhbm5lbE5hbWUgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImNoYW5uZWwtY2hhdFwiKTtcclxuXHJcbiAgICAgICAgICAgICAgICBjaGFuZ2VDaGFubmVsTmFtZS5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICAgICAgICAgIFwiLnRleHQtdHJ1bmNhdGUgLnVzZXItcHJvZmlsZS1zaG93XCJcclxuICAgICAgICAgICAgICAgICkuaW5uZXJIVE1MID0gY2hhbm5lbE5hbWU7XHJcbiAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICAgICAgICAgIFwiLnVzZXItcHJvZmlsZS1kZXNjIC50ZXh0LXRydW5jYXRlXCJcclxuICAgICAgICAgICAgICAgICkuaW5uZXJIVE1MID0gY2hhbm5lbE5hbWU7XHJcbiAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICAgICAgICAgIFwiLmF1ZGlvY2FsbE1vZGFsIC50ZXh0LXRydW5jYXRlXCJcclxuICAgICAgICAgICAgICAgICkuaW5uZXJIVE1MID0gY2hhbm5lbE5hbWU7XHJcbiAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICAgICAgICAgIFwiLnZpZGVvY2FsbE1vZGFsIC50ZXh0LXRydW5jYXRlXCJcclxuICAgICAgICAgICAgICAgICkuaW5uZXJIVE1MID0gY2hhbm5lbE5hbWU7XHJcbiAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICAgICAgICAgIFwiLnVzZXItcHJvZmlsZS1zaWRlYmFyIC51c2VyLW5hbWVcIlxyXG4gICAgICAgICAgICAgICAgKS5pbm5lckhUTUwgPSBjaGFubmVsTmFtZTtcclxuXHJcbiAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLmNoYXQtaW5wdXQtdHlwaW5nXCIpLnN0eWxlLmRpc3BsYXkgPVxyXG4gICAgICAgICAgICAgICAgICAgIFwibm9uZVwiO1xyXG4gICAgICAgICAgICAgICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi51c2VyLXByb2ZpbGUtc3RhdHVzXCIpLnN0eWxlLmRpc3BsYXkgPVxyXG4gICAgICAgICAgICAgICAgICAgIFwibm9uZVwiO1xyXG4gICAgICAgICAgICAgICAgdmFyIGNoYW5uZWxJbWcgPSBkb2N1bWVudFxyXG4gICAgICAgICAgICAgICAgICAgIC5nZXRFbGVtZW50QnlJZChjaGFubmVsSWQpXHJcbiAgICAgICAgICAgICAgICAgICAgLnF1ZXJ5U2VsZWN0b3IoXCIuYXZhdGFyLXhzXCIpXHJcbiAgICAgICAgICAgICAgICAgICAgLmdldEF0dHJpYnV0ZShcInNyY1wiKTtcclxuXHJcbiAgICAgICAgICAgICAgICBpZiAoY2hhbm5lbEltZyAhPT0gbnVsbCkge1xyXG4gICAgICAgICAgICAgICAgICAgIGRvY3VtZW50XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIC5xdWVyeVNlbGVjdG9yKFwiI2NoYW5uZWwtY2hhdCAudXNlci1vd24taW1nIC5hdmF0YXItc21cIilcclxuICAgICAgICAgICAgICAgICAgICAgICAgLnNldEF0dHJpYnV0ZShcInNyY1wiLCBjaGFubmVsSW1nKTtcclxuICAgICAgICAgICAgICAgICAgICBkb2N1bWVudFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAucXVlcnlTZWxlY3RvcihcIi51c2VyLXByb2ZpbGUtc2lkZWJhciAucHJvZmlsZS1pbWdcIilcclxuICAgICAgICAgICAgICAgICAgICAgICAgLnNldEF0dHJpYnV0ZShcInNyY1wiLCBjaGFubmVsSW1nKTtcclxuICAgICAgICAgICAgICAgICAgICBkb2N1bWVudFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAucXVlcnlTZWxlY3RvcihcIi5hdWRpb2NhbGxNb2RhbCAuaW1nLXRodW1ibmFpbFwiKVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAuc2V0QXR0cmlidXRlKFwic3JjXCIsIGNoYW5uZWxJbWcpO1xyXG4gICAgICAgICAgICAgICAgICAgIGRvY3VtZW50XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIC5xdWVyeVNlbGVjdG9yKFwiLnZpZGVvY2FsbE1vZGFsIC52aWRlb2NhbGxNb2RhbC1iZ1wiKVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAuc2V0QXR0cmlidXRlKFwic3JjXCIsIGNoYW5uZWxJbWcpO1xyXG4gICAgICAgICAgICAgICAgfSBlbHNlIHtcclxuICAgICAgICAgICAgICAgICAgICBkb2N1bWVudFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAucXVlcnlTZWxlY3RvcihcIiNjaGFubmVsLWNoYXQgLnVzZXItb3duLWltZyAuYXZhdGFyLXNtXCIpXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIC5zZXRBdHRyaWJ1dGUoXCJzcmNcIiwgZHVtbXlJbWFnZSk7XHJcbiAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnRcclxuICAgICAgICAgICAgICAgICAgICAgICAgLnF1ZXJ5U2VsZWN0b3IoXCIudXNlci1wcm9maWxlLXNpZGViYXIgLnByb2ZpbGUtaW1nXCIpXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIC5zZXRBdHRyaWJ1dGUoXCJzcmNcIiwgZHVtbXlJbWFnZSk7XHJcbiAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnRcclxuICAgICAgICAgICAgICAgICAgICAgICAgLnF1ZXJ5U2VsZWN0b3IoXCIuYXVkaW9jYWxsTW9kYWwgLmltZy10aHVtYm5haWxcIilcclxuICAgICAgICAgICAgICAgICAgICAgICAgLnNldEF0dHJpYnV0ZShcInNyY1wiLCBkdW1teUltYWdlKTtcclxuICAgICAgICAgICAgICAgICAgICBkb2N1bWVudFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAucXVlcnlTZWxlY3RvcihcIi52aWRlb2NhbGxNb2RhbCAudmlkZW9jYWxsTW9kYWwtYmdcIilcclxuICAgICAgICAgICAgICAgICAgICAgICAgLnNldEF0dHJpYnV0ZShcInNyY1wiLCBkdW1teUltYWdlKTtcclxuICAgICAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgfSk7XHJcbiAgICAgICAgfSk7XHJcbiAgICB9XHJcblxyXG4gICAgLy91c2VyIGxpc3QgYnkganNvblxyXG4gICAgdmFyIGdldEpTT04gPSBmdW5jdGlvbiAoanNvbnVybCwgY2FsbGJhY2spIHtcclxuICAgICAgICB2YXIgeGhyID0gbmV3IFhNTEh0dHBSZXF1ZXN0KCk7XHJcbiAgICAgICAgeGhyLm9wZW4oXCJHRVRcIiwgdXJsICsganNvbnVybCwgdHJ1ZSk7XHJcbiAgICAgICAgeGhyLnJlc3BvbnNlVHlwZSA9IFwianNvblwiO1xyXG4gICAgICAgIHhoci5vbmxvYWQgPSBmdW5jdGlvbiAoKSB7XHJcbiAgICAgICAgICAgIHZhciBzdGF0dXMgPSB4aHIuc3RhdHVzO1xyXG4gICAgICAgICAgICBpZiAoc3RhdHVzID09PSAyMDApIHtcclxuICAgICAgICAgICAgICAgIGNhbGxiYWNrKG51bGwsIHhoci5yZXNwb25zZSk7XHJcbiAgICAgICAgICAgIH0gZWxzZSB7XHJcbiAgICAgICAgICAgICAgICBjYWxsYmFjayhzdGF0dXMsIHhoci5yZXNwb25zZSk7XHJcbiAgICAgICAgICAgIH1cclxuICAgICAgICB9O1xyXG4gICAgICAgIHhoci5zZW5kKCk7XHJcbiAgICB9O1xyXG5cclxuICAgIGdldEpTT04oXCJ1c2Vycy5qc29uXCIsIGZ1bmN0aW9uIChlcnIsIGRhdGEpIHtcclxuICAgICAgICBpZiAoZXJyICE9PSBudWxsKSB7XHJcbiAgICAgICAgICAgIGNvbnNvbGUubG9nKFwiU29tZXRoaW5nIHdlbnQgd3Jvbmc6IFwiICsgZXJyKTtcclxuICAgICAgICB9IGVsc2Uge1xyXG4gICAgICAgICAgICAvLyBzZXQgZmF2b3VyaXRlIHVzZXJzIGxpc3RcclxuICAgICAgICAgICAgdmFyIGZhdiA9IGRhdGFbMF0uZmF2b3JpdGVzO1xyXG4gICAgICAgICAgICBmYXYuZm9yRWFjaChmdW5jdGlvbiAodXNlciwgaW5kZXgpIHtcclxuICAgICAgICAgICAgICAgIHZhciBwcm9maWxlID0gdXNlci5wcm9maWxlXHJcbiAgICAgICAgICAgICAgICAgICAgPyAnPGltZyBzcmM9XCInICtcclxuICAgICAgICAgICAgICAgICAgICAgIHVzZXIucHJvZmlsZSArXHJcbiAgICAgICAgICAgICAgICAgICAgICAnXCIgY2xhc3M9XCJyb3VuZGVkLWNpcmNsZSBhdmF0YXIteHNcIiBhbHQ9XCJcIj48c3BhbiBjbGFzcz1cInVzZXItc3RhdHVzXCI+PC9zcGFuPidcclxuICAgICAgICAgICAgICAgICAgICA6ICc8ZGl2IGNsYXNzPVwiYXZhdGFyLXhzXCI+PHNwYW4gY2xhc3M9XCJhdmF0YXItdGl0bGUgcm91bmRlZC1jaXJjbGUgYmctcHJpbWFyeSB0ZXh0LXdoaXRlXCI+PHNwYW4gY2xhc3M9XCJ1c2VybmFtZVwiPicgK1xyXG4gICAgICAgICAgICAgICAgICAgICAgdXNlci5uaWNrbmFtZSArXHJcbiAgICAgICAgICAgICAgICAgICAgICAnPC9zcGFuPjxzcGFuIGNsYXNzPVwidXNlci1zdGF0dXNcIj48L3NwYW4+PC9zcGFuPjwvZGl2Pic7XHJcblxyXG4gICAgICAgICAgICAgICAgdmFyIGlzTWVzc2FnZUNvdW50ID0gdXNlci5tZXNzYWdlY291bnRcclxuICAgICAgICAgICAgICAgICAgICA/ICc8ZGl2IGNsYXNzPVwibXMtYXV0b1wiPjxzcGFuIGNsYXNzPVwiYmFkZ2UgYmFkZ2Utc29mdC1kYW5nZXIgcm91bmRlZCBwLTEgZnMtMTBcIj4nICtcclxuICAgICAgICAgICAgICAgICAgICAgIHVzZXIubWVzc2FnZWNvdW50ICtcclxuICAgICAgICAgICAgICAgICAgICAgIFwiPC9zcGFuPjwvZGl2PlwiXHJcbiAgICAgICAgICAgICAgICAgICAgOiBcIlwiO1xyXG4gICAgICAgICAgICAgICAgdmFyIG1lc3NhZ2VDb3VudCA9IHVzZXIubWVzc2FnZWNvdW50XHJcbiAgICAgICAgICAgICAgICAgICAgPyAnPGEgaHJlZj1cImphdmFzY3JpcHQ6IHZvaWQoMCk7XCIgY2xhc3M9XCJ1bnJlYWQtbXNnLXVzZXJcIj4nXHJcbiAgICAgICAgICAgICAgICAgICAgOiAnPGEgaHJlZj1cImphdmFzY3JpcHQ6IHZvaWQoMCk7XCI+JztcclxuXHJcbiAgICAgICAgICAgICAgICB2YXIgYWN0aXZlQ2xhc3MgPSB1c2VyLmlkID09PSAxID8gXCJhY3RpdmVcIiA6IFwiXCI7XHJcbiAgICAgICAgICAgICAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImZhdm91cml0ZS11c2Vyc1wiKS5pbm5lckhUTUwgKz1cclxuICAgICAgICAgICAgICAgICAgICAnPGxpIGlkPVwiY29udGFjdC1pZC0nICtcclxuICAgICAgICAgICAgICAgICAgICB1c2VyLmlkICtcclxuICAgICAgICAgICAgICAgICAgICAnXCIgZGF0YS1uYW1lPVwiZmF2b3JpdGVcIiBjbGFzcz1cIicgK1xyXG4gICAgICAgICAgICAgICAgICAgIGFjdGl2ZUNsYXNzICtcclxuICAgICAgICAgICAgICAgICAgICAnXCI+XFxcclxuICAgICAgICAgICAgICAgICAgJyArXHJcbiAgICAgICAgICAgICAgICAgICAgbWVzc2FnZUNvdW50ICtcclxuICAgICAgICAgICAgICAgICAgICAnIFxcXHJcbiAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiZC1mbGV4IGFsaWduLWl0ZW1zLWNlbnRlclwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImNoYXQtdXNlci1pbWcgb25saW5lIGFsaWduLXNlbGYtY2VudGVyIG1lLTIgbXMtMFwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICcgK1xyXG4gICAgICAgICAgICAgICAgICAgIHByb2ZpbGUgK1xyXG4gICAgICAgICAgICAgICAgICAgICdcXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cIm92ZXJmbG93LWhpZGRlbiBtZS0yXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHAgY2xhc3M9XCJ0ZXh0LXRydW5jYXRlIGNoYXQtdXNlcm5hbWUgbWItMFwiPicgK1xyXG4gICAgICAgICAgICAgICAgICAgIHVzZXIubmFtZSArXHJcbiAgICAgICAgICAgICAgICAgICAgJzwvcD5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cCBjbGFzcz1cInRleHQtdHJ1bmNhdGUgdGV4dC1tdXRlZCBmcy0xMyBtYi0wXCI+JyArXHJcbiAgICAgICAgICAgICAgICAgICAgdXNlci5sYXN0bWVzc2FnZSArXHJcbiAgICAgICAgICAgICAgICAgICAgXCI8L3A+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgIFwiICtcclxuICAgICAgICAgICAgICAgICAgICBpc01lc3NhZ2VDb3VudCArXHJcbiAgICAgICAgICAgICAgICAgICAgXCJcXFxyXG4gICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgPC9hPlxcXHJcbiAgICAgICAgICAgICAgPC9saT5cIjtcclxuICAgICAgICAgICAgfSk7XHJcblxyXG4gICAgICAgICAgICAvLyBzZXQgdXNlcnMgbWVzc2FnZSBsaXN0XHJcbiAgICAgICAgICAgIHZhciB1c2VycyA9IGRhdGFbMF0udXNlcnM7XHJcbiAgICAgICAgICAgIHVzZXJzLmZvckVhY2goZnVuY3Rpb24gKHVzZXJEYXRhLCBpbmRleCkge1xyXG4gICAgICAgICAgICAgICAgdmFyIGlzVXNlclByb2ZpbGUgPSB1c2VyRGF0YS5wcm9maWxlXHJcbiAgICAgICAgICAgICAgICAgICAgPyAnPGltZyBzcmM9XCInICtcclxuICAgICAgICAgICAgICAgICAgICAgIHVzZXJEYXRhLnByb2ZpbGUgK1xyXG4gICAgICAgICAgICAgICAgICAgICAgJ1wiIGNsYXNzPVwicm91bmRlZC1jaXJjbGUgYXZhdGFyLXhzXCIgYWx0PVwiXCI+PHNwYW4gY2xhc3M9XCJ1c2VyLXN0YXR1c1wiPjwvc3Bhbj4nXHJcbiAgICAgICAgICAgICAgICAgICAgOiAnPGRpdiBjbGFzcz1cImF2YXRhci14c1wiPjxzcGFuIGNsYXNzPVwiYXZhdGFyLXRpdGxlIHJvdW5kZWQtY2lyY2xlIGJnLXByaW1hcnkgdGV4dC13aGl0ZVwiPjxzcGFuIGNsYXNzPVwidXNlcm5hbWVcIj5KTDwvc3Bhbj48c3BhbiBjbGFzcz1cInVzZXItc3RhdHVzXCI+PC9zcGFuPjwvc3Bhbj48L2Rpdj4nO1xyXG5cclxuICAgICAgICAgICAgICAgIHZhciBpc01lc3NhZ2VDb3VudCA9IHVzZXJEYXRhLm1lc3NhZ2Vjb3VudFxyXG4gICAgICAgICAgICAgICAgICAgID8gJzxkaXYgY2xhc3M9XCJtcy1hdXRvXCI+PHNwYW4gY2xhc3M9XCJiYWRnZSBiYWRnZS1zb2Z0LWRhbmdlciByb3VuZGVkIHAtMSBmcy0xMFwiPicgK1xyXG4gICAgICAgICAgICAgICAgICAgICAgdXNlckRhdGEubWVzc2FnZWNvdW50ICtcclxuICAgICAgICAgICAgICAgICAgICAgIFwiPC9zcGFuPjwvZGl2PlwiXHJcbiAgICAgICAgICAgICAgICAgICAgOiBcIlwiO1xyXG4gICAgICAgICAgICAgICAgdmFyIG1lc3NhZ2VDb3VudCA9IHVzZXJEYXRhLm1lc3NhZ2Vjb3VudFxyXG4gICAgICAgICAgICAgICAgICAgID8gJzxhIGhyZWY9XCJqYXZhc2NyaXB0OiB2b2lkKDApO1wiIGNsYXNzPVwidW5yZWFkLW1zZy11c2VyXCI+J1xyXG4gICAgICAgICAgICAgICAgICAgIDogJzxhIGhyZWY9XCJqYXZhc2NyaXB0OiB2b2lkKDApO1wiPic7XHJcbiAgICAgICAgICAgICAgICB2YXIgYWN0aXZlQ2xhc3MgPSB1c2VyRGF0YS5pZCA9PT0gMSA/IFwiYWN0aXZlXCIgOiBcIlwiO1xyXG4gICAgICAgICAgICAgICAgdmFyIHByb2ZpbGUgPSB1c2VyRGF0YS5wcm9maWxlXHJcbiAgICAgICAgICAgICAgICAgICAgPyAnPGltZyBzcmM9XCInICtcclxuICAgICAgICAgICAgICAgICAgICAgIHVzZXJEYXRhLnByb2ZpbGUgK1xyXG4gICAgICAgICAgICAgICAgICAgICAgJ1wiIGNsYXNzPVwicm91bmRlZC1jaXJjbGUgYXZhdGFyLXhzXCIgYWx0PVwiXCI+PHNwYW4gY2xhc3M9XCJ1c2VyLXN0YXR1c1wiPjwvc3Bhbj4nXHJcbiAgICAgICAgICAgICAgICAgICAgOiAnPGRpdiBjbGFzcz1cImF2YXRhci14c1wiPjxzcGFuIGNsYXNzPVwiYXZhdGFyLXRpdGxlIHJvdW5kZWQtY2lyY2xlIGJnLXByaW1hcnkgdGV4dC13aGl0ZVwiPjxzcGFuIGNsYXNzPVwidXNlcm5hbWVcIj4nICtcclxuICAgICAgICAgICAgICAgICAgICAgIHVzZXJEYXRhLm5pY2tuYW1lICtcclxuICAgICAgICAgICAgICAgICAgICAgICc8L3NwYW4+PHNwYW4gY2xhc3M9XCJ1c2VyLXN0YXR1c1wiPjwvc3Bhbj48L3NwYW4+PC9kaXY+JztcclxuICAgICAgICAgICAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwidXNlcnNMaXN0XCIpLmlubmVySFRNTCArPVxyXG4gICAgICAgICAgICAgICAgICAgICc8bGkgaWQ9XCJjb250YWN0LWlkLScgK1xyXG4gICAgICAgICAgICAgICAgICAgIHVzZXJEYXRhLmlkICtcclxuICAgICAgICAgICAgICAgICAgICAnXCIgZGF0YS1uYW1lPVwiZmF2b3JpdGVcIiBjbGFzcz1cIicgK1xyXG4gICAgICAgICAgICAgICAgICAgIGFjdGl2ZUNsYXNzICtcclxuICAgICAgICAgICAgICAgICAgICAnXCI+XFxcclxuICAgICAgICAnICtcclxuICAgICAgICAgICAgICAgICAgICBtZXNzYWdlQ291bnQgK1xyXG4gICAgICAgICAgICAgICAgICAgICcgXFxcclxuICAgICAgICAgICAgPGRpdiBjbGFzcz1cImQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXJcIj5cXFxyXG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImNoYXQtdXNlci1pbWcgb25saW5lIGFsaWduLXNlbGYtY2VudGVyIG1lLTIgbXMtMFwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgJyArXHJcbiAgICAgICAgICAgICAgICAgICAgcHJvZmlsZSArXHJcbiAgICAgICAgICAgICAgICAgICAgJ1xcXHJcbiAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cIm92ZXJmbG93LWhpZGRlbiBtZS0yXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICA8cCBjbGFzcz1cInRleHQtdHJ1bmNhdGUgY2hhdC11c2VybmFtZSBtYi0wXCI+JyArXHJcbiAgICAgICAgICAgICAgICAgICAgdXNlckRhdGEubmFtZSArXHJcbiAgICAgICAgICAgICAgICAgICAgJzwvcD5cXFxyXG4gICAgICAgICAgICAgICAgICAgIDxwIGNsYXNzPVwidGV4dC10cnVuY2F0ZSB0ZXh0LW11dGVkIGZzLTEzIG1iLTBcIj4nICtcclxuICAgICAgICAgICAgICAgICAgICB1c2VyRGF0YS5sYXN0bWVzc2FnZSArXHJcbiAgICAgICAgICAgICAgICAgICAgXCI8L3A+XFxcclxuICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICBcIiArXHJcbiAgICAgICAgICAgICAgICAgICAgaXNNZXNzYWdlQ291bnQgK1xyXG4gICAgICAgICAgICAgICAgICAgIFwiXFxcclxuICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICA8L2E+XFxcclxuICAgIDwvbGk+XCI7XHJcbiAgICAgICAgICAgIH0pO1xyXG5cclxuICAgICAgICAgICAgLy8gc2V0IGNoYW5uZWxzIGxpc3RcclxuICAgICAgICAgICAgdmFyIGNoYW5uZWxzRGF0YSA9IGRhdGFbMF0uY2hhbm5lbHM7XHJcbiAgICAgICAgICAgIGNoYW5uZWxzRGF0YS5mb3JFYWNoKGZ1bmN0aW9uIChpc0NoYW5uZWwsIGluZGV4KSB7XHJcbiAgICAgICAgICAgICAgICB2YXIgcHJvZmlsZSA9IGlzQ2hhbm5lbC5wcm9maWxlXHJcbiAgICAgICAgICAgICAgICAgICAgPyAnPGltZyBzcmM9XCInICtcclxuICAgICAgICAgICAgICAgICAgICAgIGlzQ2hhbm5lbC5wcm9maWxlICtcclxuICAgICAgICAgICAgICAgICAgICAgICdcIiBjbGFzcz1cInJvdW5kZWQtY2lyY2xlIGF2YXRhci14c1wiIGFsdD1cIlwiPidcclxuICAgICAgICAgICAgICAgICAgICA6ICc8ZGl2IGNsYXNzPVwiYXZhdGFyLXhzXCI+PHNwYW4gY2xhc3M9XCJhdmF0YXItdGl0bGUgcm91bmRlZC1jaXJjbGUgYmctcHJpbWFyeSB0ZXh0LXdoaXRlXCI+PHNwYW4gY2xhc3M9XCJ1c2VybmFtZVwiPkpMPC9zcGFuPjxzcGFuIGNsYXNzPVwidXNlci1zdGF0dXNcIj48L3NwYW4+PC9zcGFuPjwvZGl2Pic7XHJcblxyXG4gICAgICAgICAgICAgICAgdmFyIGlzTWVzc2FnZSA9IGlzQ2hhbm5lbC5tZXNzYWdlY291bnRcclxuICAgICAgICAgICAgICAgICAgICA/ICc8ZGl2IGNsYXNzPVwiZmxleC1zaHJpbmstMCBtcy0yXCI+PHNwYW4gY2xhc3M9XCJiYWRnZSBiYWRnZS1zb2Z0LWRhbmdlciByb3VuZGVkIHAtMSBmcy0xMFwiPicgK1xyXG4gICAgICAgICAgICAgICAgICAgICAgaXNDaGFubmVsLm1lc3NhZ2Vjb3VudCArXHJcbiAgICAgICAgICAgICAgICAgICAgICBcIjwvc3Bhbj48L2Rpdj5cIlxyXG4gICAgICAgICAgICAgICAgICAgIDogXCJcIjtcclxuICAgICAgICAgICAgICAgIHZhciBtZXNzYWdlQ291bnQgPSBpc0NoYW5uZWwubWVzc2FnZWNvdW50XHJcbiAgICAgICAgICAgICAgICAgICAgPyAnPGEgaHJlZj1cImphdmFzY3JpcHQ6IHZvaWQoMCk7XCIgY2xhc3M9XCJ1bnJlYWQtbXNnLXVzZXJcIj4nXHJcbiAgICAgICAgICAgICAgICAgICAgOiAnPGEgaHJlZj1cImphdmFzY3JpcHQ6IHZvaWQoMCk7XCI+JztcclxuICAgICAgICAgICAgICAgIHZhciBwcm9maWxlID0gaXNDaGFubmVsLnByb2ZpbGVcclxuICAgICAgICAgICAgICAgICAgICA/ICc8aW1nIHNyYz1cIicgK1xyXG4gICAgICAgICAgICAgICAgICAgICAgaXNDaGFubmVsLnByb2ZpbGUgK1xyXG4gICAgICAgICAgICAgICAgICAgICAgJ1wiIGNsYXNzPVwicm91bmRlZC1jaXJjbGUgYXZhdGFyLXhzXCIgYWx0PVwiXCI+J1xyXG4gICAgICAgICAgICAgICAgICAgIDogJzxkaXYgY2xhc3M9XCJhdmF0YXIteHNcIj48c3BhbiBjbGFzcz1cImF2YXRhci10aXRsZSByb3VuZGVkLWNpcmNsZSBiZy1wcmltYXJ5IHRleHQtd2hpdGVcIj48c3BhbiBjbGFzcz1cInVzZXJuYW1lXCI+JyArXHJcbiAgICAgICAgICAgICAgICAgICAgICBpc0NoYW5uZWwubmlja25hbWUgK1xyXG4gICAgICAgICAgICAgICAgICAgICAgXCI8L3NwYW4+PC9zcGFuPjwvZGl2PlwiO1xyXG4gICAgICAgICAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJjaGFubmVsTGlzdFwiKS5pbm5lckhUTUwgKz1cclxuICAgICAgICAgICAgICAgICAgICAnPGxpIGlkPVwiY29udGFjdC1pZC0nICtcclxuICAgICAgICAgICAgICAgICAgICBpc0NoYW5uZWwuaWQgK1xyXG4gICAgICAgICAgICAgICAgICAgICdcIiBkYXRhLW5hbWU9XCJjaGFubmVsXCI+XFxcclxuICAgICAgICAgICAgICAgICcgK1xyXG4gICAgICAgICAgICAgICAgICAgIG1lc3NhZ2VDb3VudCArXHJcbiAgICAgICAgICAgICAgICAgICAgJyBcXFxyXG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImZsZXgtc2hyaW5rLTAgbWUtMlwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiY2hhdC11c2VyLWltZyBvbmxpbmUgYWxpZ24tc2VsZi1jZW50ZXJcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgJyArXHJcbiAgICAgICAgICAgICAgICAgICAgcHJvZmlsZSArXHJcbiAgICAgICAgICAgICAgICAgICAgJ1xcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiZmxleC1ncm93LTEgb3ZlcmZsb3ctaGlkZGVuXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxoNiBjbGFzcz1cInRleHQtdHJ1bmNhdGUgbWItMFwiPicgK1xyXG4gICAgICAgICAgICAgICAgICAgIGlzQ2hhbm5lbC5uYW1lICtcclxuICAgICAgICAgICAgICAgICAgICAnPC9oNj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgPHAgY2xhc3M9XCJ0ZXh0LXRydW5jYXRlIHRleHQtbXV0ZWQgZnMtMTMgbWItMFwiPicgK1xyXG4gICAgICAgICAgICAgICAgICAgIGlzQ2hhbm5lbC5sYXN0bWVzc2FnZSArXHJcbiAgICAgICAgICAgICAgICAgICAgXCI8L3A+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgPGRpdj5cIiArXHJcbiAgICAgICAgICAgICAgICAgICAgaXNNZXNzYWdlICtcclxuICAgICAgICAgICAgICAgICAgICBcIjwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgIDwvYT5cXFxyXG4gICAgICAgICAgICA8L2xpPlwiO1xyXG4gICAgICAgICAgICB9KTtcclxuICAgICAgICB9XHJcbiAgICAgICAgdG9nZ2xlU2VsZWN0ZWQoKTtcclxuICAgICAgICBjaGF0U3dhcCgpO1xyXG4gICAgfSk7XHJcblxyXG4gICAgLy9DYWxsTGlzdCB1c2VyRGV0YWlsc1xyXG4gICAgZnVuY3Rpb24gY2FsbHNMaXN0KCkge1xyXG4gICAgICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoXCIjY2FsbExpc3QgbGlcIikuZm9yRWFjaChmdW5jdGlvbiAoaXRlbSkge1xyXG4gICAgICAgICAgICBpdGVtLmFkZEV2ZW50TGlzdGVuZXIoXCJjbGlja1wiLCBmdW5jdGlvbiAoZXZlbnQpIHtcclxuICAgICAgICAgICAgICAgIHZhciBjYWxsc0lkID0gaXRlbS5nZXRBdHRyaWJ1dGUoXCJpZFwiKTtcclxuICAgICAgICAgICAgICAgIHZhciBjYWxsVXNlciA9IGl0ZW0ucXVlcnlTZWxlY3RvcihcIi50ZXh0LXRydW5jYXRlXCIpLmlubmVySFRNTDtcclxuICAgICAgICAgICAgICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXHJcbiAgICAgICAgICAgICAgICAgICAgXCIudmlkZW9jYWxsTW9kYWwgLnRleHQtdHJ1bmNhdGVcIlxyXG4gICAgICAgICAgICAgICAgKS5pbm5lckhUTUwgPSBjYWxsVXNlcjtcclxuICAgICAgICAgICAgICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXHJcbiAgICAgICAgICAgICAgICAgICAgXCIuYXVkaW9jYWxsTW9kYWwgLnRleHQtdHJ1bmNhdGVcIlxyXG4gICAgICAgICAgICAgICAgKS5pbm5lckhUTUwgPSBjYWxsVXNlcjtcclxuXHJcbiAgICAgICAgICAgICAgICB2YXIgY2FsbEltZyA9IGRvY3VtZW50XHJcbiAgICAgICAgICAgICAgICAgICAgLmdldEVsZW1lbnRCeUlkKGNhbGxzSWQpXHJcbiAgICAgICAgICAgICAgICAgICAgLnF1ZXJ5U2VsZWN0b3IoXCIuYXZhdGFyLXhzXCIpXHJcbiAgICAgICAgICAgICAgICAgICAgLmdldEF0dHJpYnV0ZShcInNyY1wiKTtcclxuICAgICAgICAgICAgICAgIGlmIChjYWxsSW1nKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnRcclxuICAgICAgICAgICAgICAgICAgICAgICAgLnF1ZXJ5U2VsZWN0b3IoXCIuYXVkaW9jYWxsTW9kYWwgLmltZy10aHVtYm5haWxcIilcclxuICAgICAgICAgICAgICAgICAgICAgICAgLnNldEF0dHJpYnV0ZShcInNyY1wiLCBjYWxsSW1nKTtcclxuICAgICAgICAgICAgICAgICAgICBkb2N1bWVudFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAucXVlcnlTZWxlY3RvcihcIi52aWRlb2NhbGxNb2RhbCAudmlkZW9jYWxsTW9kYWwtYmdcIilcclxuICAgICAgICAgICAgICAgICAgICAgICAgLnNldEF0dHJpYnV0ZShcInNyY1wiLCBjYWxsSW1nKTtcclxuICAgICAgICAgICAgICAgIH0gZWxzZSB7XHJcbiAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnRcclxuICAgICAgICAgICAgICAgICAgICAgICAgLnF1ZXJ5U2VsZWN0b3IoXCIuYXVkaW9jYWxsTW9kYWwgLmltZy10aHVtYm5haWxcIilcclxuICAgICAgICAgICAgICAgICAgICAgICAgLnNldEF0dHJpYnV0ZShcInNyY1wiLCBkdW1teUltYWdlKTtcclxuICAgICAgICAgICAgICAgICAgICBkb2N1bWVudFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAucXVlcnlTZWxlY3RvcihcIi52aWRlb2NhbGxNb2RhbCAudmlkZW9jYWxsTW9kYWwtYmdcIilcclxuICAgICAgICAgICAgICAgICAgICAgICAgLnNldEF0dHJpYnV0ZShcInNyY1wiLCBkdW1teUltYWdlKTtcclxuICAgICAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgfSk7XHJcbiAgICAgICAgfSk7XHJcbiAgICB9XHJcblxyXG4gICAgLy9DYWxsIGxpc3RcclxuICAgIGdldEpTT04oXCJjYWxsTGlzdC5qc29uXCIsIGZ1bmN0aW9uIChlcnIsIGRhdGEpIHtcclxuICAgICAgICBpZiAoZXJyICE9PSBudWxsKSB7XHJcbiAgICAgICAgICAgIGNvbnNvbGUubG9nKFwiU29tZXRoaW5nIHdlbnQgd3Jvbmc6IFwiICsgZXJyKTtcclxuICAgICAgICB9IGVsc2Uge1xyXG4gICAgICAgICAgICBjYWxsTGlzdCA9IGRhdGE7XHJcbiAgICAgICAgICAgIGNhbGxMaXN0LmZvckVhY2goZnVuY3Rpb24gKGNhbGxzLCBpbmRleCkge1xyXG4gICAgICAgICAgICAgICAgdmFyIGNhbGxJY29uID1cclxuICAgICAgICAgICAgICAgICAgICBjYWxscy5jYWxsVmlkZW8gPT09IHRydWVcclxuICAgICAgICAgICAgICAgICAgICAgICAgPyAnPGJ1dHRvbiB0eXBlPVwiYnV0dG9uXCIgY2xhc3M9XCJidG4gYnRuLWxpbmsgcC0wIGZzLTIwIHN0cmV0Y2hlZC1saW5rXCIgZGF0YS1icy10b2dnbGU9XCJtb2RhbFwiIGRhdGEtYnMtdGFyZ2V0PVwiLnZpZGVvY2FsbE1vZGFsXCI+PGkgY2xhc3M9XCInICtcclxuICAgICAgICAgICAgICAgICAgICAgICAgICBjYWxscy5jYWxsVHlwZUljb24gK1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICdcIj48L2k+PC9idXR0b24+J1xyXG4gICAgICAgICAgICAgICAgICAgICAgICA6ICc8YnV0dG9uIHR5cGU9XCJidXR0b25cIiBjbGFzcz1cImJ0biBidG4tbGluayBwLTAgZnMtMjAgc3RyZXRjaGVkLWxpbmtcIiBkYXRhLWJzLXRvZ2dsZT1cIm1vZGFsXCIgZGF0YS1icy10YXJnZXQ9XCIuYXVkaW9jYWxsTW9kYWxcIj48aSBjbGFzcz1cIicgK1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAgIGNhbGxzLmNhbGxUeXBlSWNvbiArXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgJ1wiPjwvaT48L2J1dHRvbj4nO1xyXG5cclxuICAgICAgICAgICAgICAgIHZhciBwcm9maWxlID0gY2FsbHMucHJvZmlsZVxyXG4gICAgICAgICAgICAgICAgICAgID8gJzxpbWcgc3JjPVwiJyArXHJcbiAgICAgICAgICAgICAgICAgICAgICBjYWxscy5wcm9maWxlICtcclxuICAgICAgICAgICAgICAgICAgICAgICdcIiBjbGFzcz1cInJvdW5kZWQtY2lyY2xlIGF2YXRhci14c1wiIGFsdD1cIlwiPidcclxuICAgICAgICAgICAgICAgICAgICA6ICc8ZGl2IGNsYXNzPVwiYXZhdGFyLXhzXCI+PHNwYW4gY2xhc3M9XCJhdmF0YXItdGl0bGUgcm91bmRlZC1jaXJjbGUgYmctZGFuZ2VyIHRleHQtd2hpdGVcIj5STDwvc3Bhbj48L2Rpdj4nO1xyXG4gICAgICAgICAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJjYWxsTGlzdFwiKS5pbm5lckhUTUwgKz1cclxuICAgICAgICAgICAgICAgICAgICAnPGxpIGlkPVwiY2FsbHMtaWQtJyArXHJcbiAgICAgICAgICAgICAgICAgICAgY2FsbHMuaWQgK1xyXG4gICAgICAgICAgICAgICAgICAgICdcIiA+XFxcclxuICAgICAgICA8ZGl2IGNsYXNzPVwiZC1mbGV4IGFsaWduLWl0ZW1zLWNlbnRlclwiPlxcXHJcbiAgICAgICAgPGRpdiBjbGFzcz1cImNoYXQtdXNlci1pbWcgZmxleC1zaHJpbmstMCBtZS0yXCI+XFxcclxuICAgICAgICAgICAgJyArXHJcbiAgICAgICAgICAgICAgICAgICAgcHJvZmlsZSArXHJcbiAgICAgICAgICAgICAgICAgICAgJ1xcXHJcbiAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgPGRpdiBjbGFzcz1cImZsZXgtZ3Jvdy0xIG92ZXJmbG93LWhpZGRlblwiPlxcXHJcbiAgICAgICAgICAgICAgICA8cCBjbGFzcz1cInRleHQtdHJ1bmNhdGUgbWItMFwiPicgK1xyXG4gICAgICAgICAgICAgICAgICAgIGNhbGxzLm5hbWUgK1xyXG4gICAgICAgICAgICAgICAgICAgICc8L3A+XFxcclxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJ0ZXh0LW11dGVkIGZzLTEyIHRleHQtdHJ1bmNhdGVcIj48aSBjbGFzcz1cIicgK1xyXG4gICAgICAgICAgICAgICAgICAgIGNhbGxzLmNhbGxBcnJvd1R5cGUgK1xyXG4gICAgICAgICAgICAgICAgICAgICdcIj48L2k+ICcgK1xyXG4gICAgICAgICAgICAgICAgICAgIGNhbGxzLmRhdGVUaW1lICtcclxuICAgICAgICAgICAgICAgICAgICAnPC9kaXY+XFxcclxuICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgPGRpdiBjbGFzcz1cImZsZXgtc2hyaW5rLTAgbXMtM1wiPlxcXHJcbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiZC1mbGV4IGFsaWduLWl0ZW1zLWNlbnRlciBnYXAtM1wiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPGRpdj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICA8aDUgY2xhc3M9XCJtYi0wIGZzLTEyIHRleHQtbXV0ZWRcIj4nICtcclxuICAgICAgICAgICAgICAgICAgICBjYWxscy5jYWxsVGltZSArXHJcbiAgICAgICAgICAgICAgICAgICAgXCI8L2g1PlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICA8ZGl2PlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgXCIgK1xyXG4gICAgICAgICAgICAgICAgICAgIGNhbGxJY29uICtcclxuICAgICAgICAgICAgICAgICAgICBcIlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgPC9kaXY+XFxcclxuICAgICAgPC9saT5cIjtcclxuICAgICAgICAgICAgfSk7XHJcbiAgICAgICAgfVxyXG4gICAgICAgIGNhbGxzTGlzdCgpO1xyXG4gICAgfSk7XHJcblxyXG4gICAgLy9Db250YWN0IExpc3QgZHluYW1pYyBEZXRhaWxzXHJcbiAgICBmdW5jdGlvbiBjb250YWN0TGlzdCgpIHtcclxuICAgICAgICBkb2N1bWVudFxyXG4gICAgICAgICAgICAucXVlcnlTZWxlY3RvckFsbChcIi5zb3J0LWNvbnRhY3QgdWwgbGlcIilcclxuICAgICAgICAgICAgLmZvckVhY2goZnVuY3Rpb24gKGl0ZW0pIHtcclxuICAgICAgICAgICAgICAgIGl0ZW0uYWRkRXZlbnRMaXN0ZW5lcihcImNsaWNrXCIsIGZ1bmN0aW9uIChldmVudCkge1xyXG4gICAgICAgICAgICAgICAgICAgIGN1cnJlbnRTZWxlY3RlZENoYXQgPSBcInVzZXJzXCI7XHJcbiAgICAgICAgICAgICAgICAgICAgdXBkYXRlU2VsZWN0ZWRDaGF0KCk7XHJcbiAgICAgICAgICAgICAgICAgICAgdmFyIGNvbnRhY3ROYW1lID0gaXRlbS5xdWVyeVNlbGVjdG9yKFwibGkgLmZzLTE0XCIpLmlubmVySFRNTDtcclxuICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICAgICAgICAgICAgICBcIi50ZXh0LXRydW5jYXRlIC51c2VyLXByb2ZpbGUtc2hvd1wiXHJcbiAgICAgICAgICAgICAgICAgICAgKS5pbm5lckhUTUwgPSBjb250YWN0TmFtZTtcclxuICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICAgICAgICAgICAgICBcIi51c2VyLXByb2ZpbGUtZGVzYyAudGV4dC10cnVuY2F0ZVwiXHJcbiAgICAgICAgICAgICAgICAgICAgKS5pbm5lckhUTUwgPSBjb250YWN0TmFtZTtcclxuICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICAgICAgICAgICAgICBcIi5hdWRpb2NhbGxNb2RhbCAudGV4dC10cnVuY2F0ZVwiXHJcbiAgICAgICAgICAgICAgICAgICAgKS5pbm5lckhUTUwgPSBjb250YWN0TmFtZTtcclxuICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICAgICAgICAgICAgICBcIi52aWRlb2NhbGxNb2RhbCAudGV4dC10cnVuY2F0ZVwiXHJcbiAgICAgICAgICAgICAgICAgICAgKS5pbm5lckhUTUwgPSBjb250YWN0TmFtZTtcclxuICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICAgICAgICAgICAgICBcIi51c2VyLXByb2ZpbGUtc2lkZWJhciAudXNlci1uYW1lXCJcclxuICAgICAgICAgICAgICAgICAgICApLmlubmVySFRNTCA9IGNvbnRhY3ROYW1lO1xyXG4gICAgICAgICAgICAgICAgICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIuY2hhdC1pbnB1dC10eXBpbmdcIikuc3R5bGUuZGlzcGxheSA9XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIFwiYmxvY2tcIjtcclxuICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICAgICAgICAgICAgICBcIi51c2VyLXByb2ZpbGUtc3RhdHVzXCJcclxuICAgICAgICAgICAgICAgICAgICApLnN0eWxlLmRpc3BsYXkgPSBcImJsb2NrXCI7XHJcbiAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcclxuICAgICAgICAgICAgICAgICAgICAgICAgXCIuY2hhdC1pbnB1dC10eXBpbmcgLnR5cGluZy11c2VyXCJcclxuICAgICAgICAgICAgICAgICAgICApLmlubmVySFRNTCA9XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGNvbnRhY3ROYW1lICtcclxuICAgICAgICAgICAgICAgICAgICAgICAgJyBpcyBUeXBpbmc8c3BhbiBjbGFzcz1cInR5cGluZyBtcy0yXCI+PHNwYW4gY2xhc3M9XCJkb3RcIj48L3NwYW4+PHNwYW4gY2xhc3M9XCJkb3RcIj48L3NwYW4+PHNwYW4gY2xhc3M9XCJkb3RcIj48L3NwYW4+PC9zcGFuPic7XHJcblxyXG4gICAgICAgICAgICAgICAgICAgIHZhciBjb250YWN0SW1nID0gaXRlbVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAucXVlcnlTZWxlY3RvcihcImxpIC5hbGlnbi1pdGVtcy1jZW50ZXJcIilcclxuICAgICAgICAgICAgICAgICAgICAgICAgLnF1ZXJ5U2VsZWN0b3IoXCIuYXZhdGFyLXhzIC5yb3VuZGVkLWNpcmNsZVwiKVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAuZ2V0QXR0cmlidXRlKFwic3JjXCIpO1xyXG4gICAgICAgICAgICAgICAgICAgIGlmIChjb250YWN0SW1nKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGRvY3VtZW50XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAucXVlcnlTZWxlY3RvcihcIi51c2VyLW93bi1pbWcgLmF2YXRhci1zbVwiKVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgLnNldEF0dHJpYnV0ZShcInNyY1wiLCBjb250YWN0SW1nKTtcclxuICAgICAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnRcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIC5xdWVyeVNlbGVjdG9yKFwiLnVzZXItcHJvZmlsZS1zaWRlYmFyIC5wcm9maWxlLWltZ1wiKVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgLnNldEF0dHJpYnV0ZShcInNyY1wiLCBjb250YWN0SW1nKTtcclxuICAgICAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnRcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIC5xdWVyeVNlbGVjdG9yKFwiLmF1ZGlvY2FsbE1vZGFsIC5pbWctdGh1bWJuYWlsXCIpXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAuc2V0QXR0cmlidXRlKFwic3JjXCIsIGNvbnRhY3RJbWcpO1xyXG4gICAgICAgICAgICAgICAgICAgICAgICBkb2N1bWVudFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgLnF1ZXJ5U2VsZWN0b3IoXCIudmlkZW9jYWxsTW9kYWwgLnZpZGVvY2FsbE1vZGFsLWJnXCIpXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAuc2V0QXR0cmlidXRlKFwic3JjXCIsIGNvbnRhY3RJbWcpO1xyXG4gICAgICAgICAgICAgICAgICAgIH0gZWxzZSB7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGRvY3VtZW50XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAucXVlcnlTZWxlY3RvcihcIi51c2VyLW93bi1pbWcgLmF2YXRhci1zbVwiKVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgLnNldEF0dHJpYnV0ZShcInNyY1wiLCBkdW1teUltYWdlKTtcclxuICAgICAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnRcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIC5xdWVyeVNlbGVjdG9yKFwiLnVzZXItcHJvZmlsZS1zaWRlYmFyIC5wcm9maWxlLWltZ1wiKVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgLnNldEF0dHJpYnV0ZShcInNyY1wiLCBkdW1teUltYWdlKTtcclxuICAgICAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnRcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIC5xdWVyeVNlbGVjdG9yKFwiLmF1ZGlvY2FsbE1vZGFsIC5pbWctdGh1bWJuYWlsXCIpXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAuc2V0QXR0cmlidXRlKFwic3JjXCIsIGR1bW15SW1hZ2UpO1xyXG4gICAgICAgICAgICAgICAgICAgICAgICBkb2N1bWVudFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgLnF1ZXJ5U2VsZWN0b3IoXCIudmlkZW9jYWxsTW9kYWwgLnZpZGVvY2FsbE1vZGFsLWJnXCIpXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAuc2V0QXR0cmlidXRlKFwic3JjXCIsIGR1bW15SW1hZ2UpO1xyXG4gICAgICAgICAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgICAgICAgICB2YXIgY29udmVyc2F0aW9uSW1nID1cclxuICAgICAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJ1c2Vycy1jb252ZXJzYXRpb25cIik7XHJcbiAgICAgICAgICAgICAgICAgICAgY29udmVyc2F0aW9uSW1nXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIC5xdWVyeVNlbGVjdG9yQWxsKFwiLmxlZnQgLmNoYXQtYXZhdGFyXCIpXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIC5mb3JFYWNoKGZ1bmN0aW9uIChpdGVtMykge1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgaWYgKGNvbnRhY3RJbWcpIHtcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpdGVtM1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAucXVlcnlTZWxlY3RvcihcImltZ1wiKVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAuc2V0QXR0cmlidXRlKFwic3JjXCIsIGNvbnRhY3RJbWcpO1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgfSBlbHNlIHtcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpdGVtM1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAucXVlcnlTZWxlY3RvcihcImltZ1wiKVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAuc2V0QXR0cmlidXRlKFwic3JjXCIsIGR1bW15SW1hZ2UpO1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgfVxyXG4gICAgICAgICAgICAgICAgICAgICAgICB9KTtcclxuICAgICAgICAgICAgICAgICAgICB3aW5kb3cuc3RvcCgpO1xyXG4gICAgICAgICAgICAgICAgfSk7XHJcbiAgICAgICAgICAgIH0pO1xyXG4gICAgfVxyXG5cclxuICAgIC8vIGdldCBjb250YWN0cyBsaXN0XHJcbiAgICBnZXRKU09OKFwiY29udGFjdHMuanNvblwiLCBmdW5jdGlvbiAoZXJyLCBkYXRhKSB7XHJcbiAgICAgICAgaWYgKGVyciAhPT0gbnVsbCkge1xyXG4gICAgICAgICAgICBjb25zb2xlLmxvZyhcIlNvbWV0aGluZyB3ZW50IHdyb25nOiBcIiArIGVycik7XHJcbiAgICAgICAgfSBlbHNlIHtcclxuICAgICAgICAgICAgdXNlcnNMaXN0ID0gZGF0YTtcclxuICAgICAgICAgICAgZGF0YS5zb3J0KGZ1bmN0aW9uIChhLCBiKSB7XHJcbiAgICAgICAgICAgICAgICByZXR1cm4gYS5uYW1lLmxvY2FsZUNvbXBhcmUoYi5uYW1lKTtcclxuICAgICAgICAgICAgfSk7XHJcbiAgICAgICAgICAgIC8vIHNldCBmYXZvdXJpdGUgdXNlcnMgbGlzdFxyXG4gICAgICAgICAgICB2YXIgbXNnSFRNTCA9IFwiXCI7XHJcbiAgICAgICAgICAgIHZhciB1c2VyTmFtZUNoYXJBdCA9IFwiXCI7XHJcblxyXG4gICAgICAgICAgICB1c2Vyc0xpc3QuZm9yRWFjaChmdW5jdGlvbiAodXNlciwgaW5kZXgpIHtcclxuICAgICAgICAgICAgICAgIHZhciBwcm9maWxlID0gdXNlci5wcm9maWxlXHJcbiAgICAgICAgICAgICAgICAgICAgPyAnPGltZyBzcmM9XCInICtcclxuICAgICAgICAgICAgICAgICAgICAgIHVzZXIucHJvZmlsZSArXHJcbiAgICAgICAgICAgICAgICAgICAgICAnXCIgY2xhc3M9XCJpbWctZmx1aWQgcm91bmRlZC1jaXJjbGVcIiBhbHQ9XCJcIj4nXHJcbiAgICAgICAgICAgICAgICAgICAgOiAnPHNwYW4gY2xhc3M9XCJhdmF0YXItdGl0bGUgcm91bmRlZC1jaXJjbGUgYmctcHJpbWFyeSBmcy0xMFwiPicgK1xyXG4gICAgICAgICAgICAgICAgICAgICAgdXNlci5uaWNrbmFtZSArXHJcbiAgICAgICAgICAgICAgICAgICAgICBcIjwvc3Bhbj5cIjtcclxuXHJcbiAgICAgICAgICAgICAgICBtc2dIVE1MID1cclxuICAgICAgICAgICAgICAgICAgICAnPGxpPlxcXHJcbiAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXJcIj5cXFxyXG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiZmxleC1zaHJpbmstMCBtZS0yXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJhdmF0YXIteHNcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICcgK1xyXG4gICAgICAgICAgICAgICAgICAgIHByb2ZpbGUgK1xyXG4gICAgICAgICAgICAgICAgICAgICdcXFxyXG4gICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImZsZXgtZ3Jvdy0xXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgIDxoNSBjbGFzcz1cImZzLTE0IG0tMFwiID4nICtcclxuICAgICAgICAgICAgICAgICAgICB1c2VyLm5hbWUgK1xyXG4gICAgICAgICAgICAgICAgICAgICc8L2g1PlxcXHJcbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJmbGV4LXNocmluay0wXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJkcm9wZG93blwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj1cIiNcIiBjbGFzcz1cInRleHQtbXV0ZWQgZHJvcGRvd24tdG9nZ2xlXCIgZGF0YS1icy10b2dnbGU9XCJkcm9wZG93blwiIGFyaWEtaGFzcG9wdXA9XCJ0cnVlXCIgYXJpYS1leHBhbmRlZD1cImZhbHNlXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGkgY2xhc3M9XCJieCBieC1kb3RzLXZlcnRpY2FsLXJvdW5kZWQgYWxpZ24tbWlkZGxlXCI+PC9pPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgPC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImRyb3Bkb3duLW1lbnUgZHJvcGRvd24tbWVudS1lbmRcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLWl0ZW0gZC1mbGV4IGFsaWduLWl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNvbnRlbnQtYmV0d2VlblwiIGhyZWY9XCIjXCI+RWRpdCA8aSBjbGFzcz1cImJ4IGJ4LXBlbmNpbCBtcy0yIHRleHQtbXV0ZWRcIj48L2k+PC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24taXRlbSBkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyIGp1c3RpZnktY29udGVudC1iZXR3ZWVuXCIgaHJlZj1cIiNcIj5CbG9jayA8aSBjbGFzcz1cImJ4IGJ4LWJsb2NrIG1zLTIgdGV4dC1tdXRlZFwiPjwvaT48L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9XCJkcm9wZG93bi1pdGVtIGQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXIganVzdGlmeS1jb250ZW50LWJldHdlZW5cIiBocmVmPVwiI1wiPlJlbW92ZSA8aSBjbGFzcz1cImJ4IGJ4LXRyYXNoIG1zLTIgdGV4dC1tdXRlZFwiPjwvaT48L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgPC9saT4nO1xyXG4gICAgICAgICAgICAgICAgdmFyIGlzU29ydENvbnRhY3QgPVxyXG4gICAgICAgICAgICAgICAgICAgICc8ZGl2IGNsYXNzPVwibXQtM1wiID5cXFxyXG4gICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJjb250YWN0LWxpc3QtdGl0bGVcIj4nICtcclxuICAgICAgICAgICAgICAgICAgICB1c2VyLm5hbWUuY2hhckF0KDApLnRvVXBwZXJDYXNlKCkgK1xyXG4gICAgICAgICAgICAgICAgICAgICdcXFxyXG4gICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgIDx1bCBpZD1cImNvbnRhY3Qtc29ydC0nICtcclxuICAgICAgICAgICAgICAgICAgICB1c2VyLm5hbWUuY2hhckF0KDApICtcclxuICAgICAgICAgICAgICAgICAgICAnXCIgY2xhc3M9XCJsaXN0LXVuc3R5bGVkIGNvbnRhY3QtbGlzdFwiID4nO1xyXG5cclxuICAgICAgICAgICAgICAgIGlmICh1c2VyTmFtZUNoYXJBdCAhPSB1c2VyLm5hbWUuY2hhckF0KDApKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudHNCeUNsYXNzTmFtZShcclxuICAgICAgICAgICAgICAgICAgICAgICAgXCJzb3J0LWNvbnRhY3RcIlxyXG4gICAgICAgICAgICAgICAgICAgIClbMF0uaW5uZXJIVE1MICs9IGlzU29ydENvbnRhY3Q7XHJcbiAgICAgICAgICAgICAgICB9XHJcbiAgICAgICAgICAgICAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcclxuICAgICAgICAgICAgICAgICAgICBcImNvbnRhY3Qtc29ydC1cIiArIHVzZXIubmFtZS5jaGFyQXQoMClcclxuICAgICAgICAgICAgICAgICkuaW5uZXJIVE1MID1cclxuICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcclxuICAgICAgICAgICAgICAgICAgICAgICAgXCJjb250YWN0LXNvcnQtXCIgKyB1c2VyLm5hbWUuY2hhckF0KDApXHJcbiAgICAgICAgICAgICAgICAgICAgKS5pbm5lckhUTUwgKyBtc2dIVE1MO1xyXG4gICAgICAgICAgICAgICAgdXNlck5hbWVDaGFyQXQgPSB1c2VyLm5hbWUuY2hhckF0KDApO1xyXG4gICAgICAgICAgICAgICAgK1wiPC91bD5cIiArIFwiPC9kaXY+XCI7XHJcbiAgICAgICAgICAgIH0pO1xyXG4gICAgICAgIH1cclxuICAgICAgICBjb250YWN0TGlzdCgpO1xyXG4gICAgICAgIHRvZ2dsZVNlbGVjdGVkKCk7XHJcbiAgICB9KTtcclxuXHJcbiAgICBmdW5jdGlvbiB1cGRhdGVTZWxlY3RlZENoYXQoKSB7XHJcbiAgICAgICAgaWYgKGN1cnJlbnRTZWxlY3RlZENoYXQgPT0gXCJ1c2Vyc1wiKSB7XHJcbiAgICAgICAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiY2hhbm5lbC1jaGF0XCIpLnN0eWxlLmRpc3BsYXkgPSBcIm5vbmVcIjtcclxuICAgICAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJ1c2Vycy1jaGF0XCIpLnN0eWxlLmRpc3BsYXkgPSBcImJsb2NrXCI7XHJcbiAgICAgICAgICAgIGdldENoYXRNZXNzYWdlcyh1cmwgKyBcImNoYXRzLmpzb25cIik7XHJcbiAgICAgICAgfSBlbHNlIHtcclxuICAgICAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJjaGFubmVsLWNoYXRcIikuc3R5bGUuZGlzcGxheSA9IFwiYmxvY2tcIjtcclxuICAgICAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJ1c2Vycy1jaGF0XCIpLnN0eWxlLmRpc3BsYXkgPSBcIm5vbmVcIjtcclxuICAgICAgICAgICAgZ2V0Q2hhdE1lc3NhZ2VzKHVybCArIFwiY2hhdHMuanNvblwiKTtcclxuICAgICAgICB9XHJcbiAgICB9XHJcbiAgICB1cGRhdGVTZWxlY3RlZENoYXQoKTtcclxuXHJcbiAgICAvLyBQcm9maWxlIGhpZGUvc2hvd1xyXG4gICAgdmFyIHVzZXJQcm9maWxlU2lkZWJhciA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIudXNlci1wcm9maWxlLXNpZGViYXJcIik7XHJcblxyXG4gICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChcIi51c2VyLXByb2ZpbGUtc2hvd1wiKS5mb3JFYWNoKGZ1bmN0aW9uIChpdGVtKSB7XHJcbiAgICAgICAgaXRlbS5hZGRFdmVudExpc3RlbmVyKFwiY2xpY2tcIiwgZnVuY3Rpb24gKGV2ZW50KSB7XHJcbiAgICAgICAgICAgIHVzZXJQcm9maWxlU2lkZWJhci5jbGFzc0xpc3QudG9nZ2xlKFwiZC1ibG9ja1wiKTtcclxuICAgICAgICB9KTtcclxuICAgIH0pO1xyXG5cclxuICAgIC8vIGNoYXQgY29udmVyc2F0aW9uIHNjcm9sbFxyXG4gICAgd2luZG93LmFkZEV2ZW50TGlzdGVuZXIoXCJET01Db250ZW50TG9hZGVkXCIsIGZ1bmN0aW9uICgpIHtcclxuICAgICAgICB2YXIgY29udmVyc2F0aW9uU2Nyb2xsID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcclxuICAgICAgICAgICAgXCIjY2hhdC1jb252ZXJzYXRpb24gLnNpbXBsZWJhci1jb250ZW50LXdyYXBwZXJcIlxyXG4gICAgICAgICk7XHJcbiAgICAgICAgY29udmVyc2F0aW9uU2Nyb2xsLnNjcm9sbFRvcCA9IGNvbnZlcnNhdGlvblNjcm9sbC5zY3JvbGxIZWlnaHQ7XHJcbiAgICB9KTtcclxuXHJcbiAgICAvLyBib2R5IGNsaWNrIGhpZGUgY29sbGFwc2VcclxuICAgIHZhciBteUNvbGxhcHNlID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJjaGF0aW5wdXRtb3JlY29sbGFwc2VcIik7XHJcbiAgICBkb2N1bWVudC5ib2R5LmFkZEV2ZW50TGlzdGVuZXIoXCJjbGlja1wiLCBmdW5jdGlvbiAoKSB7XHJcbiAgICAgICAgdmFyIGJzQ29sbGFwc2UgPSBuZXcgYm9vdHN0cmFwLkNvbGxhcHNlKG15Q29sbGFwc2UsIHtcclxuICAgICAgICAgICAgdG9nZ2xlOiBmYWxzZSxcclxuICAgICAgICB9KTtcclxuICAgICAgICBic0NvbGxhcHNlLmhpZGUoKTtcclxuICAgIH0pO1xyXG5cclxuICAgIC8vIGNoYXQgY29udmVyc2F0aW9uIHN3aXBlclxyXG4gICAgaWYgKG15Q29sbGFwc2UpIHtcclxuICAgICAgICBteUNvbGxhcHNlLmFkZEV2ZW50TGlzdGVuZXIoXCJzaG93bi5icy5jb2xsYXBzZVwiLCBmdW5jdGlvbiAoKSB7XHJcbiAgICAgICAgICAgIGluaXRTd2lwZXIoKTtcclxuICAgICAgICB9KTtcclxuICAgIH1cclxuXHJcbiAgICBmdW5jdGlvbiBpbml0U3dpcGVyKCkge1xyXG4gICAgICAgIHZhciBzd2lwZXIgPSBuZXcgU3dpcGVyKFwiLmNoYXRpbnB1dC1saW5rc1wiLCB7XHJcbiAgICAgICAgICAgIHNsaWRlc1BlclZpZXc6IDMsXHJcbiAgICAgICAgICAgIHNwYWNlQmV0d2VlbjogMzAsXHJcbiAgICAgICAgICAgIGJyZWFrcG9pbnRzOiB7XHJcbiAgICAgICAgICAgICAgICA3Njg6IHtcclxuICAgICAgICAgICAgICAgICAgICBzbGlkZXNQZXJWaWV3OiA0LFxyXG4gICAgICAgICAgICAgICAgfSxcclxuICAgICAgICAgICAgICAgIDEwMjQ6IHtcclxuICAgICAgICAgICAgICAgICAgICBzbGlkZXNQZXJWaWV3OiA2LFxyXG4gICAgICAgICAgICAgICAgfSxcclxuICAgICAgICAgICAgfSxcclxuICAgICAgICB9KTtcclxuICAgIH1cclxuXHJcbiAgICAvLyBjb250YWN0IG1vZGFsIGxpc3RcclxuICAgIHZhciBjb250YWN0TW9kYWxMaXN0ID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChcclxuICAgICAgICBcIi5jb250YWN0LW1vZGFsLWxpc3QgLmNvbnRhY3QtbGlzdCBsaVwiXHJcbiAgICApO1xyXG4gICAgY29udGFjdE1vZGFsTGlzdC5mb3JFYWNoKGZ1bmN0aW9uIChsaW5rKSB7XHJcbiAgICAgICAgbGluay5hZGRFdmVudExpc3RlbmVyKFwiY2xpY2tcIiwgZnVuY3Rpb24gKCkge1xyXG4gICAgICAgICAgICBsaW5rLmNsYXNzTGlzdC50b2dnbGUoXCJzZWxlY3RlZFwiKTtcclxuICAgICAgICB9KTtcclxuICAgIH0pO1xyXG5cclxuICAgIC8vIENoYW5nZSBjb252ZXJzYXRpb24gYmdcclxuXHJcbiAgICAvL0F1dG8gRm9jdXMgY3Vyc2VyIHRvIFRleHQgQm94IEFyZWFcclxuXHJcbiAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImZhdm91cml0ZS11c2Vyc1wiKS5vbmNsaWNrID0gZnVuY3Rpb24gKCkge1xyXG4gICAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiY2hhdC1pbnB1dFwiKS5mb2N1cygpO1xyXG4gICAgfTtcclxuXHJcbiAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcInVzZXJzTGlzdFwiKS5vbmNsaWNrID0gZnVuY3Rpb24gKCkge1xyXG4gICAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiY2hhdC1pbnB1dFwiKS5mb2N1cygpO1xyXG4gICAgfTtcclxuXHJcbiAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImNoYW5uZWxMaXN0XCIpLm9uY2xpY2sgPSBmdW5jdGlvbiAoKSB7XHJcbiAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJjaGF0LWlucHV0XCIpLmZvY3VzKCk7XHJcbiAgICB9O1xyXG5cclxuICAgIC8vIFNjcm9sbCB0byBCb3R0b21cclxuICAgIGZ1bmN0aW9uIHNjcm9sbFRvQm90dG9tKGlkKSB7XHJcbiAgICAgICAgdmFyIHNpbXBsZUJhciA9IGRvY3VtZW50XHJcbiAgICAgICAgICAgIC5nZXRFbGVtZW50QnlJZChpZClcclxuICAgICAgICAgICAgLnF1ZXJ5U2VsZWN0b3IoXCIjY2hhdC1jb252ZXJzYXRpb24gLnNpbXBsZWJhci1jb250ZW50LXdyYXBwZXJcIik7XHJcbiAgICAgICAgdmFyIG9mZnNldEhlaWdodCA9IGRvY3VtZW50LmdldEVsZW1lbnRzQnlDbGFzc05hbWUoXHJcbiAgICAgICAgICAgIFwiY2hhdC1jb252ZXJzYXRpb24tbGlzdFwiXHJcbiAgICAgICAgKVswXVxyXG4gICAgICAgICAgICA/IGRvY3VtZW50XHJcbiAgICAgICAgICAgICAgICAgIC5nZXRFbGVtZW50QnlJZChpZClcclxuICAgICAgICAgICAgICAgICAgLmdldEVsZW1lbnRzQnlDbGFzc05hbWUoXCJjaGF0LWNvbnZlcnNhdGlvbi1saXN0XCIpWzBdXHJcbiAgICAgICAgICAgICAgICAgIC5zY3JvbGxIZWlnaHQgLVxyXG4gICAgICAgICAgICAgIHdpbmRvdy5pbm5lckhlaWdodCArXHJcbiAgICAgICAgICAgICAgMjUwXHJcbiAgICAgICAgICAgIDogMDtcclxuICAgICAgICBpZiAob2Zmc2V0SGVpZ2h0KVxyXG4gICAgICAgICAgICBzaW1wbGVCYXIuc2Nyb2xsVG8oeyB0b3A6IG9mZnNldEhlaWdodCwgYmVoYXZpb3I6IFwic21vb3RoXCIgfSk7XHJcbiAgICB9XHJcblxyXG4gICAgLy9hZGQgYW4gZXZlbnRMaXN0ZW5lciB0byB0aGUgZnJvbVxyXG4gICAgdmFyIGNoYXRGb3JtID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIiNjaGF0aW5wdXQtZm9ybVwiKTtcclxuICAgIHZhciBjaGF0SW5wdXQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiI2NoYXQtaW5wdXRcIik7XHJcbiAgICB2YXIgaXRlbUxpc3QgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLmNoYXQtY29udmVyc2F0aW9uLWxpc3RcIik7XHJcbiAgICB2YXIgY2hhdElucHV0RmVlZGJhY2sgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLmNoYXQtaW5wdXQtZmVlZGJhY2tcIik7XHJcblxyXG4gICAgZnVuY3Rpb24gY3VycmVudFRpbWUoKSB7XHJcbiAgICAgICAgdmFyIGFtcG0gPSBuZXcgRGF0ZSgpLmdldEhvdXJzKCkgPj0gMTIgPyBcInBtXCIgOiBcImFtXCI7XHJcbiAgICAgICAgdmFyIGhvdXIgPVxyXG4gICAgICAgICAgICBuZXcgRGF0ZSgpLmdldEhvdXJzKCkgPiAxMlxyXG4gICAgICAgICAgICAgICAgPyBuZXcgRGF0ZSgpLmdldEhvdXJzKCkgJSAxMlxyXG4gICAgICAgICAgICAgICAgOiBuZXcgRGF0ZSgpLmdldEhvdXJzKCk7XHJcbiAgICAgICAgdmFyIG1pbnV0ZSA9XHJcbiAgICAgICAgICAgIG5ldyBEYXRlKCkuZ2V0TWludXRlcygpIDwgMTBcclxuICAgICAgICAgICAgICAgID8gXCIwXCIgKyBuZXcgRGF0ZSgpLmdldE1pbnV0ZXMoKVxyXG4gICAgICAgICAgICAgICAgOiBuZXcgRGF0ZSgpLmdldE1pbnV0ZXMoKTtcclxuICAgICAgICBpZiAoaG91ciA8IDEwKSB7XHJcbiAgICAgICAgICAgIHJldHVybiBcIjBcIiArIGhvdXIgKyBcIjpcIiArIG1pbnV0ZSArIFwiIFwiICsgYW1wbTtcclxuICAgICAgICB9IGVsc2Uge1xyXG4gICAgICAgICAgICByZXR1cm4gaG91ciArIFwiOlwiICsgbWludXRlICsgXCIgXCIgKyBhbXBtO1xyXG4gICAgICAgIH1cclxuICAgIH1cclxuICAgIHNldEludGVydmFsKGN1cnJlbnRUaW1lLCAxMDAwKTtcclxuXHJcbiAgICB2YXIgbWVzc2FnZUlkcyA9IDA7XHJcblxyXG4gICAgLy9BdWRpbyBmaWxlXHJcbiAgICB2YXIgYXVkaW9maWxlbmFtZTtcclxuICAgIHZhciBhdWRpb2ZpbGVTaXplO1xyXG4gICAgdmFyIGF1ZGlvRmlsZSA9IFwiXCI7XHJcbiAgICB2YXIgYWZpbGluZyA9IFtdO1xyXG4gICAgdmFyIGZpbGVOdW1iZXJBdWRpbyA9IDE7XHJcbiAgICB2YXIgYXVkaW91cmwgPSBcIlwiO1xyXG4gICAgZG9jdW1lbnRcclxuICAgICAgICAucXVlcnlTZWxlY3RvcihcIiNhdWRpb2ZpbGUtaW5wdXRcIilcclxuICAgICAgICAuYWRkRXZlbnRMaXN0ZW5lcihcImNoYW5nZVwiLCBmdW5jdGlvbiAoKSB7XHJcbiAgICAgICAgICAgIHZhciBwcmV2aWV3ID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5maWxlX1VwbG9hZFwiKTtcclxuICAgICAgICAgICAgYXVkaW9GaWxlID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIiNhdWRpb2ZpbGUtaW5wdXRcIikuZmlsZXNbMF07XHJcblxyXG4gICAgICAgICAgICBhdWRpb3VybCA9IFVSTC5jcmVhdGVPYmplY3RVUkwoYXVkaW9GaWxlKTtcclxuXHJcbiAgICAgICAgICAgIC8vIHJlbW92ZS1hdWRpb0ZpbGVcclxuXHJcbiAgICAgICAgICAgIHZhciByZWFkZXIgPSBuZXcgRmlsZVJlYWRlcigpO1xyXG4gICAgICAgICAgICByZWFkZXIucmVhZEFzRGF0YVVSTChhdWRpb0ZpbGUpO1xyXG4gICAgICAgICAgICBpZiAocHJldmlldykge1xyXG4gICAgICAgICAgICAgICAgcHJldmlldy5jbGFzc0xpc3QuYWRkKFwic2hvd1wiKTtcclxuICAgICAgICAgICAgfVxyXG5cclxuICAgICAgICAgICAgcmVhZGVyLmFkZEV2ZW50TGlzdGVuZXIoXHJcbiAgICAgICAgICAgICAgICBcImxvYWRcIixcclxuICAgICAgICAgICAgICAgIGZ1bmN0aW9uICgpIHtcclxuICAgICAgICAgICAgICAgICAgICAvLyBBcnJheS5wdXNoKHByZXZpZXcpLmZvckVhY2goKGdhbGxlcnksIGluZGV4KSA9PiB7XHJcbiAgICAgICAgICAgICAgICAgICAgdmFyIGZpbGVuYW1lID0gYXVkaW9GaWxlLm5hbWU7XHJcbiAgICAgICAgICAgICAgICAgICAgdmFyIGZpbGVTaXplID0gTWF0aC5yb3VuZChhdWRpb0ZpbGUuc2l6ZSAvIDEwMDAwMDApLnRvRml4ZWQoXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDJcclxuICAgICAgICAgICAgICAgICAgICApO1xyXG5cclxuICAgICAgICAgICAgICAgICAgICBwcmV2aWV3LmlubmVySFRNTCA9XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICc8ZGl2IGNsYXNzPVwiY2FyZCBwLTIgYm9yZGVyIG1iLTIgYXVkaW9maWxlX3ByZSBkLWlubGluZS1ibG9jayBwb3NpdGlvbi1yZWxhdGl2ZVwiPlxcXHJcbiAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyXCI+XFxcclxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJmbGV4LXNocmluay0wIGF2YXRhci14cyBtcy0xIG1lLTNcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJhdmF0YXItdGl0bGUgYmctc29mdC1wcmltYXJ5IHRleHQtcHJpbWFyeSByb3VuZGVkLWNpcmNsZVwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDxpIGNsYXNzPVwiYnggYngtaGVhZHBob25lXCI+PC9pPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiZmxleC1ncm93LTEgb3ZlcmZsb3ctaGlkZGVuXCI+XFxcclxuICAgICAgICAgICAgICAgIDxoNSBjbGFzcz1cImZzLTE0IHRleHQtdHJ1bmNhdGUgbWItMVwiPicgK1xyXG4gICAgICAgICAgICAgICAgICAgICAgICBmaWxlbmFtZSArXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICc8L2g1PlxcXHJcbiAgICAgICAgICAgICAgICAgIDxpbnB1dCB0eXBlPVwiaGlkZGVuXCIgbmFtZT1cImRvd25sb2FkYXVkaW9kYXRhXCIgdmFsdWU9XCInICtcclxuICAgICAgICAgICAgICAgICAgICAgICAgYXVkaW91cmwgK1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAnXCIvPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDxwIGNsYXNzPVwidGV4dC1tdXRlZCB0ZXh0LXRydW5jYXRlIGZzLTEzIG1iLTBcIj4nICtcclxuICAgICAgICAgICAgICAgICAgICAgICAgZmlsZVNpemUgK1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAnbWI8L3A+XFxcclxuICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiZmxleC1zaHJpbmstMCBtcy0zXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiZC1mbGV4IGdhcC0yXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgPGRpdj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICA8aSBjbGFzcz1cInJpLWNsb3NlLWxpbmUgdGV4dC1kYW5nZXIgYXVkaW9GaWxlLXJlbW92ZVwiICBpZD1cInJlbW92ZS1hdWRpb0ZpbGVcIj48L2k+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgIDwvZGl2Pic7XHJcbiAgICAgICAgICAgICAgICAgICAgYXVkaW9maWxlbmFtZSA9IGZpbGVuYW1lO1xyXG4gICAgICAgICAgICAgICAgICAgIGF1ZGlvZmlsZVNpemUgPSBmaWxlU2l6ZTtcclxuICAgICAgICAgICAgICAgICAgICByZW1vdmVBdWRpb0ZpbGUoKTtcclxuICAgICAgICAgICAgICAgICAgICBhZmlsaW5nW2ZpbGVOdW1iZXJBdWRpb10gPSBhdWRpb0ZpbGU7XHJcbiAgICAgICAgICAgICAgICB9LFxyXG4gICAgICAgICAgICAgICAgZmFsc2VcclxuICAgICAgICAgICAgKTtcclxuICAgICAgICAgICAgZmlsZU51bWJlckF1ZGlvKys7XHJcbiAgICAgICAgfSk7XHJcblxyXG4gICAgdmFyIGdldEF1ZGlvRmlsZXMgPSBmdW5jdGlvbiAoY2hhdGlkMywgbmV3QWRpb0l0ZW1zLCBuZXdBZGlvSXRlbVNpemUpIHtcclxuICAgICAgICB2YXIgbmV3QWRpb0l0ZW1zID0gYXVkaW9maWxlbmFtZTtcclxuICAgICAgICB2YXIgbmV3QWRpb0l0ZW1TaXplID0gYXVkaW9maWxlU2l6ZTtcclxuICAgICAgICBtZXNzYWdlSWRzKys7XHJcbiAgICAgICAgdmFyIGNoYXRDb25MaXN0MyA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKGNoYXRpZDMpO1xyXG4gICAgICAgIHZhciBpdGVtTGlzdDMgPSBjaGF0Q29uTGlzdDMucXVlcnlTZWxlY3RvcihcIi5jaGF0LWNvbnZlcnNhdGlvbi1saXN0XCIpO1xyXG4gICAgICAgIGlmIChuZXdBZGlvSXRlbXMgIT0gbnVsbCkge1xyXG4gICAgICAgICAgICBpdGVtTGlzdDMuaW5zZXJ0QWRqYWNlbnRIVE1MKFxyXG4gICAgICAgICAgICAgICAgXCJiZWZvcmVlbmRcIixcclxuXHJcbiAgICAgICAgICAgICAgICAnPGxpIGNsYXNzPVwiY2hhdC1saXN0IHJpZ2h0XCIgaWQ9XCJjaGF0LWxpc3QtJyArXHJcbiAgICAgICAgICAgICAgICAgICAgbWVzc2FnZUlkcyArXHJcbiAgICAgICAgICAgICAgICAgICAgJ1wiID5cXFxyXG4gICAgICAgICAgPGRpdiBjbGFzcz1cImNvbnZlcnNhdGlvbi1saXN0XCI+XFxcclxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwidXNlci1jaGF0LWNvbnRlbnRcIj5cXFxyXG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiY3RleHQtd3JhcFwiPlxcXHJcbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJhdWRpby1maWxlLWVsZW1cIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YXVkaW8gY29udHJvbHM+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxzb3VyY2Ugc3JjPVwiJyArXHJcbiAgICAgICAgICAgICAgICAgICAgYXVkaW91cmwgK1xyXG4gICAgICAgICAgICAgICAgICAgICdcIiB0eXBlPVwiYXVkaW8vbXBlZ1wiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvYXVkaW8+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImFsaWduLXNlbGYtc3RhcnQgbWVzc2FnZS1ib3gtZHJvcCBkLWZsZXhcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImRyb3Bkb3duXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9XCJkcm9wZG93bi10b2dnbGVcIiBocmVmPVwiI1wiIHJvbGU9XCJidXR0b25cIiBkYXRhLWJzLXRvZ2dsZT1cImRyb3Bkb3duXCIgYXJpYS1oYXNwb3B1cD1cInRydWVcIiBhcmlhLWV4cGFuZGVkPVwiZmFsc2VcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgIDxpIGNsYXNzPVwicmktZW1vdGlvbi1oYXBweS1saW5lXCI+PC9pPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiZHJvcGRvd24tbWVudSBlbW9qaS1kcm9wZG93bi1tZW51XCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiaHN0YWNrIGFsaWduLWl0ZW1zLWNlbnRlciBnYXAtMiBweC0yIGZzLTI1XCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9XCJqYXZhc2NyaXB0OnZvaWQoMCk7XCI+8J+SmzwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj1cImphdmFzY3JpcHQ6dm9pZCgwKTtcIj7wn6SjPC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBocmVmPVwiamF2YXNjcmlwdDp2b2lkKDApO1wiPvCfmJw8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9XCJqYXZhc2NyaXB0OnZvaWQoMCk7XCI+8J+YmDwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj1cImphdmFzY3JpcHQ6dm9pZCgwKTtcIj7wn5iNPC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYXZhdGFyLXhzXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9XCJqYXZhc2NyaXB0OnZvaWQoMCk7XCIgY2xhc3M9XCJhdmF0YXItdGl0bGUgYmctc29mdC1wcmltYXJ5IHJvdW5kZWQtY2lyY2xlIGZzLTE5IHRleHQtcHJpbWFyeVwiPis8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJkcm9wZG93blwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLXRvZ2dsZVwiIGhyZWY9XCIjXCIgcm9sZT1cImJ1dHRvblwiIGRhdGEtYnMtdG9nZ2xlPVwiZHJvcGRvd25cIiBhcmlhLWhhc3BvcHVwPVwidHJ1ZVwiIGFyaWEtZXhwYW5kZWQ9XCJmYWxzZVwiPiA8aSBjbGFzcz1cInJpLW1vcmUtMi1maWxsXCI+PC9pPiA8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJkcm9wZG93bi1tZW51XCI+XFxcclxuICAgICAgICAgICAgPGEgY2xhc3M9XCJkcm9wZG93bi1pdGVtIGQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXIganVzdGlmeS1jb250ZW50LWJldHdlZW5cIiBocmVmPVwiJyArXHJcbiAgICAgICAgICAgICAgICAgICAgbmV3QWRpb0l0ZW1zICtcclxuICAgICAgICAgICAgICAgICAgICAnXCIgZG93bmxvYWQ+RG93bmxvYWQgPGkgY2xhc3M9XCJieCBieC1kb3dubG9hZCBtcy0yIHRleHQtbXV0ZWRcIj48L2k+PC9hPlxcXHJcbiAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24taXRlbSBkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyIGp1c3RpZnktY29udGVudC1iZXR3ZWVuXCIgaHJlZj1cIiNcIiBkYXRhLWJzLXRvZ2dsZT1cImNvbGxhcHNlXCIgZGF0YS1icy10YXJnZXQ9XCIucmVwbHlDb2xsYXBzZVwiPlJlcGx5IDxpIGNsYXNzPVwiYnggYngtc2hhcmUgbXMtMiB0ZXh0LW11dGVkXCI+PC9pPjwvYT5cXFxyXG4gICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLWl0ZW0gZC1mbGV4IGFsaWduLWl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNvbnRlbnQtYmV0d2VlblwiIGhyZWY9XCIjXCIgZGF0YS1icy10b2dnbGU9XCJtb2RhbFwiIGRhdGEtYnMtdGFyZ2V0PVwiLmZvcndhcmRNb2RhbFwiPkZvcndhcmQgPGkgY2xhc3M9XCJieCBieC1zaGFyZS1hbHQgbXMtMiB0ZXh0LW11dGVkXCI+PC9pPjwvYT5cXFxyXG4gICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLWl0ZW0gZC1mbGV4IGFsaWduLWl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNvbnRlbnQtYmV0d2VlblwiIGhyZWY9XCIjXCI+Qm9va21hcmsgPGkgY2xhc3M9XCJieCBieC1ib29rbWFya3MgdGV4dC1tdXRlZCBtcy0yXCI+PC9pPjwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24taXRlbSBkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyIGp1c3RpZnktY29udGVudC1iZXR3ZWVuIGRlbGV0ZS1pdGVtXCIgaWQ9XCJkZWxldGUtaXRlbS0nICtcclxuICAgICAgICAgICAgICAgICAgICBtZXNzYWdlSWRzICtcclxuICAgICAgICAgICAgICAgICAgICAnXCIgaHJlZj1cIiNcIj5EZWxldGUgPGkgY2xhc3M9XCJieCBieC10cmFzaCB0ZXh0LW11dGVkIG1zLTJcIj48L2k+PC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiY29udmVyc2F0aW9uLW5hbWVcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgIDxzbWFsbCBjbGFzcz1cInRleHQtbXV0ZWQgdGltZVwiPicgK1xyXG4gICAgICAgICAgICAgICAgICAgIGN1cnJlbnRUaW1lKCkgK1xyXG4gICAgICAgICAgICAgICAgICAgICc8L3NtYWxsPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzcz1cInRleHQtc3VjY2VzcyBjaGVjay1tZXNzYWdlLWljb25cIj48aSBjbGFzcz1cImJ4IGJ4LWNoZWNrXCI+PC9pPjwvc3Bhbj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgICAgIDwvbGk+J1xyXG4gICAgICAgICAgICApO1xyXG4gICAgICAgIH1cclxuICAgICAgICB2YXIgbmV3Q2hhdExpc3QgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImNoYXQtbGlzdC1cIiArIG1lc3NhZ2VJZHMpO1xyXG4gICAgICAgIG5ld0NoYXRMaXN0XHJcbiAgICAgICAgICAgIC5xdWVyeVNlbGVjdG9yQWxsKFwiLmRlbGV0ZS1pdGVtXCIpXHJcbiAgICAgICAgICAgIC5mb3JFYWNoKGZ1bmN0aW9uIChzdWJpdGVtKSB7XHJcbiAgICAgICAgICAgICAgICBzdWJpdGVtLmFkZEV2ZW50TGlzdGVuZXIoXCJjbGlja1wiLCBmdW5jdGlvbiAoKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgaXRlbUxpc3QucmVtb3ZlQ2hpbGQobmV3Q2hhdExpc3QpO1xyXG4gICAgICAgICAgICAgICAgfSk7XHJcbiAgICAgICAgICAgIH0pO1xyXG5cclxuICAgICAgICBkb2N1bWVudFxyXG4gICAgICAgICAgICAucXVlcnlTZWxlY3RvckFsbChcIi5kb3dubG9hZC1maWxlXCIpXHJcbiAgICAgICAgICAgIC5mb3JFYWNoKGZ1bmN0aW9uIChzdWJpdGVtMikge1xyXG4gICAgICAgICAgICAgICAgc3ViaXRlbTIuYWRkRXZlbnRMaXN0ZW5lcihcImNsaWNrXCIsIGZ1bmN0aW9uIChldmVudCkge1xyXG4gICAgICAgICAgICAgICAgICAgIGV2ZW50LnByZXZlbnREZWZhdWx0KCk7XHJcblxyXG4gICAgICAgICAgICAgICAgICAgIHZhciBhdWRpb2ZpbGVkYXRhaWQgPSBzdWJpdGVtMi5nZXRBdHRyaWJ1dGUoXCJkYXRhLWlkXCIpO1xyXG5cclxuICAgICAgICAgICAgICAgICAgICBpZiAoXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICF3aW5kb3cuRmlsZSB8fFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAhd2luZG93LkZpbGVSZWFkZXIgfHxcclxuICAgICAgICAgICAgICAgICAgICAgICAgIXdpbmRvdy5GaWxlTGlzdCB8fFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAhd2luZG93LkJsb2JcclxuICAgICAgICAgICAgICAgICAgICApIHtcclxuICAgICAgICAgICAgICAgICAgICAgICAgYWxlcnQoXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIlRoZSBGaWxlIEFQSXMgYXJlIG5vdCBmdWxseSBzdXBwb3J0ZWQgaW4gdGhpcyBicm93c2VyLlwiXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICk7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybjtcclxuICAgICAgICAgICAgICAgICAgICB9XHJcbiAgICAgICAgICAgICAgICAgICAgdmFyIGJsb2IgPSBuZXcgQmxvYihbZmlsaW5nW2F1ZGlvZmlsZWRhdGFpZF1dLCB7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIHR5cGU6IFwiYXBwbGljYXRpb24vbXAzXCIsXHJcbiAgICAgICAgICAgICAgICAgICAgfSk7XHJcbiAgICAgICAgICAgICAgICAgICAgdmFyIGxpbmsgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwiYVwiKTtcclxuICAgICAgICAgICAgICAgICAgICBsaW5rLmhyZWYgPSB3aW5kb3cuVVJMLmNyZWF0ZU9iamVjdFVSTChibG9iKTtcclxuICAgICAgICAgICAgICAgICAgICBsaW5rLmRvd25sb2FkID0gYWZpbGluZ1thdWRpb2ZpbGVkYXRhaWRdW1wibmFtZVwiXTtcclxuICAgICAgICAgICAgICAgICAgICBsaW5rLmNsaWNrKCk7XHJcbiAgICAgICAgICAgICAgICB9KTtcclxuICAgICAgICAgICAgfSk7XHJcbiAgICAgICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5maWxlX1VwbG9hZCBcIikuY2xhc3NMaXN0LnJlbW92ZShcInNob3dcIik7XHJcbiAgICB9O1xyXG5cclxuICAgIC8vQXR0YWNoZWQgZmlsZSBBcHBlbmRcclxuICAgIHZhciBmaWxlbmFtZTI7XHJcbiAgICB2YXIgZmlsZXNpemUyO1xyXG5cclxuICAgIHZhciBmaWxlID0gXCJcIjtcclxuICAgIHZhciBmaWxpbmcgPSBbXTtcclxuICAgIHZhciBmaWxlTnVtYmVyID0gMTtcclxuXHJcbiAgICBkb2N1bWVudFxyXG4gICAgICAgIC5xdWVyeVNlbGVjdG9yKFwiI2F0dGFjaGVkZmlsZS1pbnB1dFwiKVxyXG4gICAgICAgIC5hZGRFdmVudExpc3RlbmVyKFwiY2hhbmdlXCIsIGZ1bmN0aW9uICgpIHtcclxuICAgICAgICAgICAgdmFyIHByZXZpZXcgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLmZpbGVfVXBsb2FkXCIpO1xyXG4gICAgICAgICAgICBmaWxlID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIiNhdHRhY2hlZGZpbGUtaW5wdXRcIikuZmlsZXNbMF07XHJcblxyXG4gICAgICAgICAgICBmciA9IG5ldyBGaWxlUmVhZGVyKCk7XHJcblxyXG4gICAgICAgICAgICBmci5yZWFkQXNEYXRhVVJMKGZpbGUpO1xyXG5cclxuICAgICAgICAgICAgaWYgKHByZXZpZXcpIHtcclxuICAgICAgICAgICAgICAgIHByZXZpZXcuY2xhc3NMaXN0LmFkZChcInNob3dcIik7XHJcbiAgICAgICAgICAgIH1cclxuXHJcbiAgICAgICAgICAgIGZyLmFkZEV2ZW50TGlzdGVuZXIoXHJcbiAgICAgICAgICAgICAgICBcImxvYWRcIixcclxuICAgICAgICAgICAgICAgIGZ1bmN0aW9uICgpIHtcclxuICAgICAgICAgICAgICAgICAgICB2YXIgZmlsZW5hbWUgPSBmaWxlLm5hbWU7XHJcbiAgICAgICAgICAgICAgICAgICAgdmFyIGZpbGVTaXplID0gTWF0aC5yb3VuZChmaWxlLnNpemUgLyAxMDAwMDAwKS50b0ZpeGVkKDIpO1xyXG5cclxuICAgICAgICAgICAgICAgICAgICBwcmV2aWV3LmlubmVySFRNTCA9XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICc8ZGl2IGNsYXNzPVwiY2FyZCBwLTIgYm9yZGVyIGF0dGNoZWRmaWxlX3ByZSBkLWlubGluZS1ibG9jayBwb3NpdGlvbi1yZWxhdGl2ZVwiPlxcXHJcbiAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyXCI+XFxcclxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJmbGV4LXNocmluay0wIGF2YXRhci14cyBtcy0xIG1lLTNcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJhdmF0YXItdGl0bGUgYmctc29mdC1wcmltYXJ5IHRleHQtcHJpbWFyeSByb3VuZGVkLWNpcmNsZVwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDxpIGNsYXNzPVwicmktYXR0YWNobWVudC0yXCI+PC9pPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiZmxleC1ncm93LTEgb3ZlcmZsb3ctaGlkZGVuXCI+XFxcclxuICAgICAgICAgICAgICAgIDxhIGhyZWY9XCJcIiBpZD1cImFcIj48L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICA8aDUgY2xhc3M9XCJmcy0xNCB0ZXh0LXRydW5jYXRlIG1iLTFcIj4nICtcclxuICAgICAgICAgICAgICAgICAgICAgICAgZmlsZW5hbWUgK1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAnPC9oNT5cXFxyXG4gICAgICAgICAgICAgICAgICAgIDxpbnB1dCB0eXBlPVwiaGlkZGVuXCIgbmFtZT1cImRvd25sb2FkZGF0YVwiIHZhbHVlPVwiJyArXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGZpbGUgK1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAnXCIvPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPHAgY2xhc3M9XCJ0ZXh0LW11dGVkIHRleHQtdHJ1bmNhdGUgZnMtMTMgbWItMFwiPicgK1xyXG4gICAgICAgICAgICAgICAgICAgICAgICBmaWxlU2l6ZSArXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICdtYjwvcD5cXFxyXG4gICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJmbGV4LXNocmluay0wIGFsaWduLXNlbGYtc3RhcnQgbXMtM1wiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImQtZmxleCBnYXAtMlwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDxkaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgPGkgY2xhc3M9XCJyaS1jbG9zZS1saW5lIHRleHQtbXV0ZWQgYXR0ZWNoZWRGaWxlLXJlbW92ZVwiICBpZD1cInJlbW92ZS1hdHRlY2hlZEZpbGVcIj48L2k+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgIDwvZGl2Pic7XHJcbiAgICAgICAgICAgICAgICAgICAgZmlsZW5hbWUyID0gZmlsZW5hbWU7XHJcbiAgICAgICAgICAgICAgICAgICAgZmlsZXNpemUyID0gZmlsZVNpemU7XHJcbiAgICAgICAgICAgICAgICAgICAgZmlsaW5nW2ZpbGVOdW1iZXJdID0gZmlsZTtcclxuICAgICAgICAgICAgICAgICAgICByZW1vdmVBdHRhY2hlZEZpbGUoKTtcclxuICAgICAgICAgICAgICAgIH0sXHJcbiAgICAgICAgICAgICAgICBmYWxzZVxyXG4gICAgICAgICAgICApO1xyXG4gICAgICAgICAgICBmaWxlTnVtYmVyKys7XHJcbiAgICAgICAgfSk7XHJcblxyXG4gICAgdmFyIGdldEF0dGFjaGVkRmlsZXMgPSBmdW5jdGlvbiAoXHJcbiAgICAgICAgY2hhdGlkMixcclxuICAgICAgICBuZXdBdHRjaGVkSXRlbXMsXHJcbiAgICAgICAgbmV3QXR0Y2hlZEl0ZW1TaXplXHJcbiAgICApIHtcclxuICAgICAgICB2YXIgbmV3QXR0Y2hlZEl0ZW1zID0gZmlsZW5hbWUyO1xyXG4gICAgICAgIHZhciBuZXdBdHRjaGVkSXRlbVNpemUgPSBmaWxlc2l6ZTI7XHJcbiAgICAgICAgbWVzc2FnZUlkcysrO1xyXG4gICAgICAgIHZhciBjaGF0Q29uTGlzdDIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChjaGF0aWQyKTtcclxuICAgICAgICB2YXIgaXRlbUxpc3QyID0gY2hhdENvbkxpc3QyLnF1ZXJ5U2VsZWN0b3IoXCIuY2hhdC1jb252ZXJzYXRpb24tbGlzdFwiKTtcclxuXHJcbiAgICAgICAgaWYgKG5ld0F0dGNoZWRJdGVtcyAhPSBudWxsKSB7XHJcbiAgICAgICAgICAgIGl0ZW1MaXN0Mi5pbnNlcnRBZGphY2VudEhUTUwoXHJcbiAgICAgICAgICAgICAgICBcImJlZm9yZWVuZFwiLFxyXG4gICAgICAgICAgICAgICAgJzxsaSBjbGFzcz1cImNoYXQtbGlzdCByaWdodFwiIGlkPVwiY2hhdC1saXN0LScgK1xyXG4gICAgICAgICAgICAgICAgICAgIG1lc3NhZ2VJZHMgK1xyXG4gICAgICAgICAgICAgICAgICAgICdcIiA+XFxcclxuICAgICAgICAgIDxkaXYgY2xhc3M9XCJjb252ZXJzYXRpb24tbGlzdFwiPlxcXHJcbiAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cInVzZXItY2hhdC1jb250ZW50XCI+XFxcclxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImN0ZXh0LXdyYXBcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImN0ZXh0LXdyYXAtY29udGVudFwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cInAtMyBib3JkZXIgcm91bmRlZC0zXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXIgYXR0YWNoZWQtZmlsZVwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiZmxleC1zaHJpbmstMCBhdmF0YXItc20gbWUtMyBtcy0wIGF0dGFjaGVkLWZpbGUtYXZhdGFyXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYXZhdGFyLXRpdGxlIGJnLXNvZnQtbGlnaHQgcm91bmRlZC1jaXJjbGUgZnMtMjBcIj48aSBjbGFzcz1cInJpLWF0dGFjaG1lbnQtMlwiPjwvaT48L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJmbGV4LWdyb3ctMSBvdmVyZmxvdy1oaWRkZW5cIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJ0ZXh0LXN0YXJ0XCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGg1IGNsYXNzPVwiZnMtMTQgdGV4dC13aGl0ZSBtYi0xXCI+JyArXHJcbiAgICAgICAgICAgICAgICAgICAgbmV3QXR0Y2hlZEl0ZW1zICtcclxuICAgICAgICAgICAgICAgICAgICAnPC9oNT5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cCBjbGFzcz1cInRleHQtd2hpdGUtNTAgdGV4dC10cnVuY2F0ZSBmcy0xMyBtYi0wXCI+JyArXHJcbiAgICAgICAgICAgICAgICAgICAgbmV3QXR0Y2hlZEl0ZW1TaXplICtcclxuICAgICAgICAgICAgICAgICAgICAnbWI8L3A+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJmbGV4LXNocmluay0wIG1zLTRcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJkLWZsZXggZ2FwLTIgZnMtMjAgZC1mbGV4IGFsaWduLWl0ZW1zLXN0YXJ0XCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj1cIiNcIiBjbGFzcz1cInRleHQtd2hpdGUtNTAgZG93bmxvYWQtZmlsZVwiIGRhdGEtaWQ9XCInICtcclxuICAgICAgICAgICAgICAgICAgICBmaWxlTnVtYmVyICtcclxuICAgICAgICAgICAgICAgICAgICAnXCI+IDxpIGNsYXNzPVwiYnggYnhzLWRvd25sb2FkXCI+PC9pPiA8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJhbGlnbi1zZWxmLXN0YXJ0IG1lc3NhZ2UtYm94LWRyb3AgZC1mbGV4XCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJkcm9wZG93blwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24tdG9nZ2xlXCIgaHJlZj1cIiNcIiByb2xlPVwiYnV0dG9uXCIgZGF0YS1icy10b2dnbGU9XCJkcm9wZG93blwiIGFyaWEtaGFzcG9wdXA9XCJ0cnVlXCIgYXJpYS1leHBhbmRlZD1cImZhbHNlXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICA8aSBjbGFzcz1cInJpLWVtb3Rpb24taGFwcHktbGluZVwiPjwvaT5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICA8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImRyb3Bkb3duLW1lbnUgZW1vamktZHJvcGRvd24tbWVudVwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImhzdGFjayBhbGlnbi1pdGVtcy1jZW50ZXIgZ2FwLTIgcHgtMiBmcy0yNVwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBocmVmPVwiamF2YXNjcmlwdDp2b2lkKDApO1wiPvCfkps8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9XCJqYXZhc2NyaXB0OnZvaWQoMCk7XCI+8J+kozwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj1cImphdmFzY3JpcHQ6dm9pZCgwKTtcIj7wn5icPC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBocmVmPVwiamF2YXNjcmlwdDp2b2lkKDApO1wiPvCfmJg8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9XCJqYXZhc2NyaXB0OnZvaWQoMCk7XCI+8J+YjTwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImF2YXRhci14c1wiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBocmVmPVwiamF2YXNjcmlwdDp2b2lkKDApO1wiIGNsYXNzPVwiYXZhdGFyLXRpdGxlIGJnLXNvZnQtcHJpbWFyeSByb3VuZGVkLWNpcmNsZSBmcy0xOSB0ZXh0LXByaW1hcnlcIj4rPC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImRyb3Bkb3duXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLXRvZ2dsZVwiIGhyZWY9XCIjXCIgcm9sZT1cImJ1dHRvblwiIGRhdGEtYnMtdG9nZ2xlPVwiZHJvcGRvd25cIiBhcmlhLWhhc3BvcHVwPVwidHJ1ZVwiIGFyaWEtZXhwYW5kZWQ9XCJmYWxzZVwiPiA8aSBjbGFzcz1cInJpLW1vcmUtMi1maWxsXCI+PC9pPiA8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiZHJvcGRvd24tbWVudVwiPlxcXHJcbiAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24taXRlbSBkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyIGp1c3RpZnktY29udGVudC1iZXR3ZWVuXCIgaHJlZj1cIicgK1xyXG4gICAgICAgICAgICAgICAgICAgIG5ld0F0dGNoZWRJdGVtcyArXHJcbiAgICAgICAgICAgICAgICAgICAgJ1wiIGRvd25sb2FkPkRvd25sb2FkIDxpIGNsYXNzPVwiYnggYngtZG93bmxvYWQgbXMtMiB0ZXh0LW11dGVkXCI+PC9pPjwvYT5cXFxyXG4gICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLWl0ZW0gZC1mbGV4IGFsaWduLWl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNvbnRlbnQtYmV0d2VlblwiIGhyZWY9XCIjXCIgZGF0YS1icy10b2dnbGU9XCJjb2xsYXBzZVwiIGRhdGEtYnMtdGFyZ2V0PVwiLnJlcGx5Q29sbGFwc2VcIj5SZXBseSA8aSBjbGFzcz1cImJ4IGJ4LXNoYXJlIG1zLTIgdGV4dC1tdXRlZFwiPjwvaT48L2E+XFxcclxuICAgICAgICAgICAgPGEgY2xhc3M9XCJkcm9wZG93bi1pdGVtIGQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXIganVzdGlmeS1jb250ZW50LWJldHdlZW5cIiBocmVmPVwiI1wiIGRhdGEtYnMtdG9nZ2xlPVwibW9kYWxcIiBkYXRhLWJzLXRhcmdldD1cIi5mb3J3YXJkTW9kYWxcIj5Gb3J3YXJkIDxpIGNsYXNzPVwiYnggYngtc2hhcmUtYWx0IG1zLTIgdGV4dC1tdXRlZFwiPjwvaT48L2E+XFxcclxuICAgICAgICAgICAgPGEgY2xhc3M9XCJkcm9wZG93bi1pdGVtIGQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXIganVzdGlmeS1jb250ZW50LWJldHdlZW5cIiBocmVmPVwiI1wiPkJvb2ttYXJrIDxpIGNsYXNzPVwiYnggYngtYm9va21hcmtzIHRleHQtbXV0ZWQgbXMtMlwiPjwvaT48L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLWl0ZW0gZC1mbGV4IGFsaWduLWl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNvbnRlbnQtYmV0d2VlbiBkZWxldGUtaXRlbVwiIGlkPVwiZGVsZXRlLWl0ZW0tJyArXHJcbiAgICAgICAgICAgICAgICAgICAgbWVzc2FnZUlkcyArXHJcbiAgICAgICAgICAgICAgICAgICAgJ1wiIGhyZWY9XCIjXCI+RGVsZXRlIDxpIGNsYXNzPVwiYnggYngtdHJhc2ggdGV4dC1tdXRlZCBtcy0yXCI+PC9pPjwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiY29udmVyc2F0aW9uLW5hbWVcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgIDxzbWFsbCBjbGFzcz1cInRleHQtbXV0ZWQgdGltZVwiPicgK1xyXG4gICAgICAgICAgICAgICAgICAgIGN1cnJlbnRUaW1lKCkgK1xyXG4gICAgICAgICAgICAgICAgICAgICc8L3NtYWxsPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzcz1cInRleHQtc3VjY2VzcyBjaGVjay1tZXNzYWdlLWljb25cIj48aSBjbGFzcz1cImJ4IGJ4LWNoZWNrXCI+PC9pPjwvc3Bhbj5cXFxyXG4gICAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgIDwvbGk+J1xyXG4gICAgICAgICAgICApO1xyXG4gICAgICAgIH1cclxuICAgICAgICAvLyByZW1vdmUgRmlsZVxyXG4gICAgICAgIHZhciBuZXdDaGF0TGlzdCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiY2hhdC1saXN0LVwiICsgbWVzc2FnZUlkcyk7XHJcbiAgICAgICAgbmV3Q2hhdExpc3RcclxuICAgICAgICAgICAgLnF1ZXJ5U2VsZWN0b3JBbGwoXCIuZGVsZXRlLWl0ZW1cIilcclxuICAgICAgICAgICAgLmZvckVhY2goZnVuY3Rpb24gKHN1Yml0ZW0pIHtcclxuICAgICAgICAgICAgICAgIHN1Yml0ZW0uYWRkRXZlbnRMaXN0ZW5lcihcImNsaWNrXCIsIGZ1bmN0aW9uICgpIHtcclxuICAgICAgICAgICAgICAgICAgICBpdGVtTGlzdC5yZW1vdmVDaGlsZChuZXdDaGF0TGlzdCk7XHJcbiAgICAgICAgICAgICAgICB9KTtcclxuICAgICAgICAgICAgfSk7XHJcblxyXG4gICAgICAgIC8vRG93bmxvYWQgYXR0YWNoZWQgZmlsZVxyXG4gICAgICAgIG5ld0NoYXRMaXN0XHJcbiAgICAgICAgICAgIC5xdWVyeVNlbGVjdG9yQWxsKFwiLmRvd25sb2FkLWZpbGVcIilcclxuICAgICAgICAgICAgLmZvckVhY2goZnVuY3Rpb24gKHN1Yml0ZW0xKSB7XHJcbiAgICAgICAgICAgICAgICBzdWJpdGVtMS5hZGRFdmVudExpc3RlbmVyKFwiY2xpY2tcIiwgZnVuY3Rpb24gKGV2ZW50KSB7XHJcbiAgICAgICAgICAgICAgICAgICAgZXZlbnQucHJldmVudERlZmF1bHQoKTtcclxuICAgICAgICAgICAgICAgICAgICB2YXIgZGF0YWlkID0gc3ViaXRlbTEuZ2V0QXR0cmlidXRlKFwiZGF0YS1pZFwiKTtcclxuICAgICAgICAgICAgICAgICAgICBpZiAoXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICF3aW5kb3cuRmlsZSB8fFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAhd2luZG93LkZpbGVSZWFkZXIgfHxcclxuICAgICAgICAgICAgICAgICAgICAgICAgIXdpbmRvdy5GaWxlTGlzdCB8fFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAhd2luZG93LkJsb2JcclxuICAgICAgICAgICAgICAgICAgICApIHtcclxuICAgICAgICAgICAgICAgICAgICAgICAgYWxlcnQoXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIlRoZSBGaWxlIEFQSXMgYXJlIG5vdCBmdWxseSBzdXBwb3J0ZWQgaW4gdGhpcyBicm93c2VyLlwiXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICk7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybjtcclxuICAgICAgICAgICAgICAgICAgICB9XHJcbiAgICAgICAgICAgICAgICAgICAgdmFyIGJsb2IgPSBuZXcgQmxvYihbZmlsaW5nW2RhdGFpZF1dLCB7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIHR5cGU6IFwiYXBwbGljYXRpb24vcGRmXCIsXHJcbiAgICAgICAgICAgICAgICAgICAgfSk7IC8vIGNoYW5nZSByZXN1bHRCeXRlIHRvIGJ5dGVzXHJcbiAgICAgICAgICAgICAgICAgICAgdmFyIGxpbmsgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwiYVwiKTtcclxuICAgICAgICAgICAgICAgICAgICBsaW5rLmhyZWYgPSB3aW5kb3cuVVJMLmNyZWF0ZU9iamVjdFVSTChibG9iKTtcclxuICAgICAgICAgICAgICAgICAgICBsaW5rLmRvd25sb2FkID0gZmlsaW5nW2RhdGFpZF1bXCJuYW1lXCJdO1xyXG4gICAgICAgICAgICAgICAgICAgIGxpbmsuY2xpY2soKTtcclxuICAgICAgICAgICAgICAgIH0pO1xyXG4gICAgICAgICAgICB9KTtcclxuICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLmZpbGVfVXBsb2FkIFwiKS5jbGFzc0xpc3QucmVtb3ZlKFwic2hvd1wiKTtcclxuICAgIH07XHJcblxyXG4gICAgdmFyIGltYWdldXJscyA9IFtdO1xyXG5cclxuICAgIHJlbW92ZWltZyA9IDE7XHJcblxyXG4gICAgdmFyIGluZGV4aW5nID0gMDtcclxuXHJcbiAgICBkb2N1bWVudFxyXG4gICAgICAgIC5xdWVyeVNlbGVjdG9yKFwiI2dhbGxlcnlmaWxlLWlucHV0XCIpXHJcbiAgICAgICAgLmFkZEV2ZW50TGlzdGVuZXIoXCJjaGFuZ2VcIiwgcHJldmlld0ltYWdlcyk7XHJcblxyXG4gICAgZnVuY3Rpb24gcHJldmlld0ltYWdlcygpIHtcclxuICAgICAgICB2YXIgcHJldmlldyA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIuZmlsZV9VcGxvYWRcIik7XHJcblxyXG4gICAgICAgIHByZXZpZXcuaW5zZXJ0QWRqYWNlbnRIVE1MKFxyXG4gICAgICAgICAgICBcImJlZm9yZWVuZFwiLFxyXG4gICAgICAgICAgICAnPGRpdiBjbGFzcz1cInByb2ZpbGUtbWVkaWEtaW1nIGltYWdlX3ByZVwiPjwvZGl2PidcclxuICAgICAgICApO1xyXG5cclxuICAgICAgICB2YXIgaW1hZ2VzZWxlY3RvciA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXHJcbiAgICAgICAgICAgIFwiLmZpbGVfVXBsb2FkIC5wcm9maWxlLW1lZGlhLWltZ1wiXHJcbiAgICAgICAgKTtcclxuXHJcbiAgICAgICAgaWYgKHRoaXMuZmlsZXMpIHtcclxuICAgICAgICAgICAgW10uZm9yRWFjaC5jYWxsKHRoaXMuZmlsZXMsIHJlYWRBbmRQcmV2aWV3KTtcclxuICAgICAgICB9XHJcblxyXG4gICAgICAgIGZ1bmN0aW9uIHJlYWRBbmRQcmV2aWV3KGZpbGUpIHtcclxuICAgICAgICAgICAgLy8gTWFrZSBzdXJlIGBmaWxlLm5hbWVgIG1hdGNoZXMgb3VyIGV4dGVuc2lvbnMgY3JpdGVyaWFcclxuICAgICAgICAgICAgaWYgKCEvXFwuKGpwZT9nfHBuZ3xnaWYpJC9pLnRlc3QoZmlsZS5uYW1lKSkge1xyXG4gICAgICAgICAgICAgICAgcmV0dXJuIGFsZXJ0KGZpbGUubmFtZSArIFwiIGlzIG5vdCBhbiBpbWFnZVwiKTtcclxuICAgICAgICAgICAgfSAvLyBlbHNlLi4uXHJcblxyXG4gICAgICAgICAgICB2YXIgcmVhZGVyID0gbmV3IEZpbGVSZWFkZXIoKTtcclxuXHJcbiAgICAgICAgICAgIHZhciBjcmVhdGVJbWFnZSA9IFwiXCI7XHJcblxyXG4gICAgICAgICAgICByZWFkZXIuYWRkRXZlbnRMaXN0ZW5lcihcImxvYWRcIiwgZnVuY3Rpb24gKCkge1xyXG4gICAgICAgICAgICAgICAgcmVtb3ZlaW1nKys7XHJcbiAgICAgICAgICAgICAgICBpZiAocHJldmlldykge1xyXG4gICAgICAgICAgICAgICAgICAgIHByZXZpZXcuY2xhc3NMaXN0LmFkZChcInNob3dcIik7XHJcbiAgICAgICAgICAgICAgICB9XHJcblxyXG4gICAgICAgICAgICAgICAgaW1hZ2V1cmxzLnB1c2gocmVhZGVyLnJlc3VsdCk7XHJcblxyXG4gICAgICAgICAgICAgICAgY3JlYXRlSW1hZ2UgKz1cclxuICAgICAgICAgICAgICAgICAgICAnPGRpdiBjbGFzcz1cIm1lZGlhLWltZy1saXN0XCIgaWQ9XCJyZW1vdmUtaW1hZ2UtJyArXHJcbiAgICAgICAgICAgICAgICAgICAgcmVtb3ZlaW1nICtcclxuICAgICAgICAgICAgICAgICAgICAnXCI+XFxcclxuICAgICAgICAgIDxhIGhyZWY9XCIjXCI+XFxcclxuICAgICAgICAgICAgICA8aW1nIHNyYz1cIicgK1xyXG4gICAgICAgICAgICAgICAgICAgIHRoaXMucmVzdWx0ICtcclxuICAgICAgICAgICAgICAgICAgICAnXCIgYWx0PVwiJyArXHJcbiAgICAgICAgICAgICAgICAgICAgZmlsZS5uYW1lICtcclxuICAgICAgICAgICAgICAgICAgICAnXCIgY2xhc3M9XCJpbWctZmx1aWRcIj5cXFxyXG4gICAgICAgICAgPC9hPlxcXHJcbiAgICAgICAgICAgIDxpIGNsYXNzPVwicmktY2xvc2UtbGluZSBpbWFnZS1yZW1vdmVcIiBvbmNsaWNrPVwicmVtb3ZlSW1hZ2UoYHJlbW92ZS1pbWFnZS0nICtcclxuICAgICAgICAgICAgICAgICAgICByZW1vdmVpbWcgK1xyXG4gICAgICAgICAgICAgICAgICAgICdgKVwiPjwvaT5cXFxyXG4gICAgICAgICAgPC9kaXY+JztcclxuXHJcbiAgICAgICAgICAgICAgICBpbWFnZXNlbGVjdG9yLmluc2VydEFkamFjZW50SFRNTChcImFmdGVyYmVnaW5cIiwgY3JlYXRlSW1hZ2UpO1xyXG4gICAgICAgICAgICAgICAgaW5kZXhpbmcrKztcclxuICAgICAgICAgICAgfSk7XHJcbiAgICAgICAgICAgIHJlYWRlci5yZWFkQXNEYXRhVVJMKGZpbGUpO1xyXG4gICAgICAgIH1cclxuICAgIH1cclxuXHJcbiAgICAvL2FwcGVuZCBpbWFnZXNcclxuICAgIHZhciBnZXRJbWFnZXMgPSBmdW5jdGlvbiAoY2hhdGlkMSwgbmV3SW1hZ2UpIHtcclxuICAgICAgICB2YXIgbmV3SW1hZ2VzID0gaW1hZ2V1cmxzO1xyXG5cclxuICAgICAgICB2YXIgY2hhdENvbkxpc3QxID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoY2hhdGlkMSk7XHJcblxyXG4gICAgICAgIHZhciBpdGVtTGlzdDEgPSBjaGF0Q29uTGlzdDEucXVlcnlTZWxlY3RvcihcIi5jaGF0LWNvbnZlcnNhdGlvbi1saXN0XCIpO1xyXG5cclxuICAgICAgICB2YXIgbXVsdGlpbWcgPSBcIlwiO1xyXG5cclxuICAgICAgICBuZXdJbWFnZXMuZm9yRWFjaChmdW5jdGlvbiAobmV3SW1hZ2UpIHtcclxuICAgICAgICAgICAgbWVzc2FnZUlkcysrO1xyXG4gICAgICAgICAgICBtdWx0aWltZyArPVxyXG4gICAgICAgICAgICAgICAgJzxkaXYgY2xhc3M9XCJtZXNzYWdlLWltZy1saXN0XCI+XFxcclxuICAgICAgICAgIDxkaXY+XFxcclxuICAgICAgICAgICAgPGEgY2xhc3M9XCJwb3B1cC1pbWcgZC1pbmxpbmUtYmxvY2tcIiBocmVmPVwiJyArXHJcbiAgICAgICAgICAgICAgICBuZXdJbWFnZSArXHJcbiAgICAgICAgICAgICAgICAnXCIgdGFyZ2V0PVwiX2JsYW5rXCI+XFxcclxuICAgICAgICAgICAgICAgIDxpbWcgc3JjPVwiJyArXHJcbiAgICAgICAgICAgICAgICBuZXdJbWFnZSArXHJcbiAgICAgICAgICAgICAgICAnXCIgYWx0PVwiXCIgY2xhc3M9XCJyb3VuZGVkIGJvcmRlciBpbWctdGh1bWJuYWlsXCIgd2lkdGg9XCIyMDBcIiAvPlxcXHJcbiAgICAgICAgICAgIDwvYT5cXFxyXG4gICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgIDxkaXYgY2xhc3M9XCJtZXNzYWdlLWltZy1saW5rXCI+XFxcclxuICAgICAgICAgICAgPHVsIGNsYXNzPVwibGlzdC1pbmxpbmUgbWItMFwiPlxcXHJcbiAgICAgICAgICAgICAgPGxpIGNsYXNzPVwibGlzdC1pbmxpbmUtaXRlbSBkcm9wZG93blwiPlxcXHJcbiAgICAgICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLXRvZ2dsZVwiIGhyZWY9XCIjXCIgcm9sZT1cImJ1dHRvblwiIGRhdGEtYnMtdG9nZ2xlPVwiZHJvcGRvd25cIiBhcmlhLWhhc3BvcHVwPVwidHJ1ZVwiIGFyaWEtZXhwYW5kZWQ9XCJmYWxzZVwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPGkgY2xhc3M9XCJieCBieC1kb3RzLWhvcml6b250YWwtcm91bmRlZFwiPjwvaT5cXFxyXG4gICAgICAgICAgICAgICAgPC9hPlxcXHJcbiAgICAgICAgICA8ZGl2IGNsYXNzPVwiZHJvcGRvd24tbWVudVwiPlxcXHJcbiAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24taXRlbSBkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyIGp1c3RpZnktY29udGVudC1iZXR3ZWVuXCIgaHJlZj1cIicgK1xyXG4gICAgICAgICAgICAgICAgbmV3SW1hZ2UgK1xyXG4gICAgICAgICAgICAgICAgJ1wiIGRvd25sb2FkPkRvd25sb2FkIDxpIGNsYXNzPVwiYnggYngtZG93bmxvYWQgbXMtMiB0ZXh0LW11dGVkXCI+PC9pPjwvYT5cXFxyXG4gICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLWl0ZW0gZC1mbGV4IGFsaWduLWl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNvbnRlbnQtYmV0d2VlblwiIGhyZWY9XCIjXCIgZGF0YS1icy10b2dnbGU9XCJjb2xsYXBzZVwiIGRhdGEtYnMtdGFyZ2V0PVwiLnJlcGx5Q29sbGFwc2VcIj5SZXBseSA8aSBjbGFzcz1cImJ4IGJ4LXNoYXJlIG1zLTIgdGV4dC1tdXRlZFwiPjwvaT48L2E+XFxcclxuICAgICAgICAgICAgPGEgY2xhc3M9XCJkcm9wZG93bi1pdGVtIGQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXIganVzdGlmeS1jb250ZW50LWJldHdlZW5cIiBocmVmPVwiI1wiIGRhdGEtYnMtdG9nZ2xlPVwibW9kYWxcIiBkYXRhLWJzLXRhcmdldD1cIi5mb3J3YXJkTW9kYWxcIj5Gb3J3YXJkIDxpIGNsYXNzPVwiYnggYngtc2hhcmUtYWx0IG1zLTIgdGV4dC1tdXRlZFwiPjwvaT48L2E+XFxcclxuICAgICAgICAgICAgPGEgY2xhc3M9XCJkcm9wZG93bi1pdGVtIGQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXIganVzdGlmeS1jb250ZW50LWJldHdlZW5cIiBocmVmPVwiI1wiPkJvb2ttYXJrIDxpIGNsYXNzPVwiYnggYngtYm9va21hcmtzIHRleHQtbXV0ZWQgbXMtMlwiPjwvaT48L2E+XFxcclxuICAgICAgICAgICAgPGEgY2xhc3M9XCJkcm9wZG93bi1pdGVtIGQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXIganVzdGlmeS1jb250ZW50LWJldHdlZW4gZGVsZXRlLWltYWdlXCIgaWQ9XCJkZWxldGUtaXRlbS0nICtcclxuICAgICAgICAgICAgICAgIG1lc3NhZ2VJZHMgK1xyXG4gICAgICAgICAgICAgICAgJ1wiIGhyZWY9XCIjXCI+RGVsZXRlIDxpIGNsYXNzPVwiYnggYngtdHJhc2ggdGV4dC1tdXRlZCBtcy0yXCI+PC9pPjwvYT5cXFxyXG4gICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICA8L2xpPlxcXHJcbiAgICAgIDwvdWw+XFxcclxuICAgIDwvZGl2PlxcXHJcbiAgICA8L2Rpdj4nO1xyXG4gICAgICAgIH0pO1xyXG5cclxuICAgICAgICBpZiAobmV3SW1hZ2VzICE9IG51bGwpIHtcclxuICAgICAgICAgICAgaXRlbUxpc3QxLmluc2VydEFkamFjZW50SFRNTChcclxuICAgICAgICAgICAgICAgIFwiYmVmb3JlZW5kXCIsXHJcbiAgICAgICAgICAgICAgICAnPGxpIGNsYXNzPVwiY2hhdC1saXN0IHJpZ2h0XCIgaWQ9XCJjaGF0LWxpc3QtJyArXHJcbiAgICAgICAgICAgICAgICAgICAgbWVzc2FnZUlkcyArXHJcbiAgICAgICAgICAgICAgICAgICAgJ1wiID5cXFxyXG4gICAgICAgIDxkaXYgY2xhc3M9XCJjb252ZXJzYXRpb24tbGlzdFwiPlxcXHJcbiAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJ1c2VyLWNoYXQtY29udGVudFwiPlxcXHJcbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiY3RleHQtd3JhcFwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJtZXNzYWdlLWltZyBtYi0wXCI+JyArXHJcbiAgICAgICAgICAgICAgICAgICAgbXVsdGlpbWcgK1xyXG4gICAgICAgICAgICAgICAgICAgICdcXFxyXG4gICAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImNvbnZlcnNhdGlvbi1uYW1lXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICA8c21hbGwgY2xhc3M9XCJ0ZXh0LW11dGVkIHRpbWVcIj4nICtcclxuICAgICAgICAgICAgICAgICAgICBjdXJyZW50VGltZSgpICtcclxuICAgICAgICAgICAgICAgICAgICAnPC9zbWFsbD5cXFxyXG4gICAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzPVwidGV4dC1zdWNjZXNzIGNoZWNrLW1lc3NhZ2UtaWNvblwiPjxpIGNsYXNzPVwiYnggYngtY2hlY2tcIj48L2k+PC9zcGFuPlxcXHJcbiAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICA8L2xpPidcclxuICAgICAgICAgICAgKTtcclxuICAgICAgICAgICAgdXBkYXRlTGlnaHRib3goKTtcclxuICAgICAgICAgICAgaW5kZXhpbmcgPSAwO1xyXG5cclxuICAgICAgICAgICAgLy9EZWxldGUgYXBwZW5kZWQgaW1hZ2VzKHNpbmdsZSB1c2VyKVxyXG4gICAgICAgICAgICB2YXIgZGVsZXRlSW1hZ2VzID0gaXRlbUxpc3QucXVlcnlTZWxlY3RvckFsbChcIi5jaGF0LWxpc3RcIik7XHJcbiAgICAgICAgICAgIGRlbGV0ZUltYWdlcy5mb3JFYWNoKGZ1bmN0aW9uIChpdGVtKSB7XHJcbiAgICAgICAgICAgICAgICBpdGVtLnF1ZXJ5U2VsZWN0b3JBbGwoXCIuZGVsZXRlLWltYWdlXCIpLmZvckVhY2goZnVuY3Rpb24gKFxyXG4gICAgICAgICAgICAgICAgICAgIHN1Yml0ZW1cclxuICAgICAgICAgICAgICAgICkge1xyXG4gICAgICAgICAgICAgICAgICAgIHN1Yml0ZW0uYWRkRXZlbnRMaXN0ZW5lcihcImNsaWNrXCIsIGZ1bmN0aW9uICgpIHtcclxuICAgICAgICAgICAgICAgICAgICAgICAgc3ViaXRlbS5jbG9zZXN0KFwiLm1lc3NhZ2UtaW1nXCIpLmNoaWxkRWxlbWVudENvdW50ID09IDFcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgID8gc3ViaXRlbS5jbG9zZXN0KFwiLmNoYXQtbGlzdFwiKS5yZW1vdmUoKVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgOiBzdWJpdGVtLmNsb3Nlc3QoXCIubWVzc2FnZS1pbWctbGlzdFwiKS5yZW1vdmUoKTtcclxuICAgICAgICAgICAgICAgICAgICB9KTtcclxuICAgICAgICAgICAgICAgIH0pO1xyXG4gICAgICAgICAgICB9KTtcclxuXHJcbiAgICAgICAgICAgIC8vRGVsZXRlIGFwcGVuZGVkIGltYWdlcyhDaGFubmVsIGNoYXQpXHJcbiAgICAgICAgICAgIHZhciBkZWxldGVDaGFubmVsSW1hZ2VzID1cclxuICAgICAgICAgICAgICAgIGNoYW5uZWxJdGVtTGlzdC5xdWVyeVNlbGVjdG9yQWxsKFwiLmNoYXQtbGlzdFwiKTtcclxuICAgICAgICAgICAgZGVsZXRlQ2hhbm5lbEltYWdlcy5mb3JFYWNoKGZ1bmN0aW9uIChpdGVtKSB7XHJcbiAgICAgICAgICAgICAgICBpdGVtLnF1ZXJ5U2VsZWN0b3JBbGwoXCIuZGVsZXRlLWltYWdlXCIpLmZvckVhY2goZnVuY3Rpb24gKFxyXG4gICAgICAgICAgICAgICAgICAgIHN1Yml0ZW1cclxuICAgICAgICAgICAgICAgICkge1xyXG4gICAgICAgICAgICAgICAgICAgIHN1Yml0ZW0uYWRkRXZlbnRMaXN0ZW5lcihcImNsaWNrXCIsIGZ1bmN0aW9uICgpIHtcclxuICAgICAgICAgICAgICAgICAgICAgICAgc3ViaXRlbS5jbG9zZXN0KFwiLm1lc3NhZ2UtaW1nXCIpLmNoaWxkRWxlbWVudENvdW50ID09IDFcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgID8gc3ViaXRlbS5jbG9zZXN0KFwiLmNoYXQtbGlzdFwiKS5yZW1vdmUoKVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgOiBzdWJpdGVtLmNsb3Nlc3QoXCIubWVzc2FnZS1pbWctbGlzdFwiKS5yZW1vdmUoKTtcclxuICAgICAgICAgICAgICAgICAgICB9KTtcclxuICAgICAgICAgICAgICAgIH0pO1xyXG4gICAgICAgICAgICB9KTtcclxuICAgICAgICB9XHJcblxyXG4gICAgICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIuZmlsZV9VcGxvYWRcIikuY2xhc3NMaXN0LnJlbW92ZShcInNob3dcIik7XHJcbiAgICAgICAgaW1hZ2V1cmxzID0gW107XHJcbiAgICB9O1xyXG5cclxuICAgIC8vQXBwZW5kIE5ldyBNZXNzYWdlXHJcbiAgICB2YXIgZ2V0Q2hhdExpc3QgPSBmdW5jdGlvbiAoY2hhdGlkLCBjaGF0SXRlbXMpIHtcclxuICAgICAgICBtZXNzYWdlSWRzKys7XHJcblxyXG4gICAgICAgIHZhciBjaGF0Q29uTGlzdCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKGNoYXRpZCk7XHJcbiAgICAgICAgdmFyIGl0ZW1MaXN0ID0gY2hhdENvbkxpc3QucXVlcnlTZWxlY3RvcihcIi5jaGF0LWNvbnZlcnNhdGlvbi1saXN0XCIpO1xyXG4gICAgICAgIGlmIChjaGF0SXRlbXMgIT0gbnVsbCkge1xyXG4gICAgICAgICAgICBpdGVtTGlzdC5pbnNlcnRBZGphY2VudEhUTUwoXHJcbiAgICAgICAgICAgICAgICBcImJlZm9yZWVuZFwiLFxyXG4gICAgICAgICAgICAgICAgJzxsaSBjbGFzcz1cImNoYXQtbGlzdCByaWdodFwiIGlkPVwiY2hhdC1saXN0LScgK1xyXG4gICAgICAgICAgICAgICAgICAgIG1lc3NhZ2VJZHMgK1xyXG4gICAgICAgICAgICAgICAgICAgICdcIiA+XFxcclxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJjb252ZXJzYXRpb24tbGlzdFwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cInVzZXItY2hhdC1jb250ZW50XCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImN0ZXh0LXdyYXBcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImN0ZXh0LXdyYXAtY29udGVudFwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHAgY2xhc3M9XCJtYi0wIGN0ZXh0LWNvbnRlbnRcIj4nICtcclxuICAgICAgICAgICAgICAgICAgICBjaGF0SXRlbXMgK1xyXG4gICAgICAgICAgICAgICAgICAgICc8L3A+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYWxpZ24tc2VsZi1zdGFydCBtZXNzYWdlLWJveC1kcm9wIGQtZmxleFwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiZHJvcGRvd25cIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLXRvZ2dsZVwiIGhyZWY9XCIjXCIgcm9sZT1cImJ1dHRvblwiIGRhdGEtYnMtdG9nZ2xlPVwiZHJvcGRvd25cIiBhcmlhLWhhc3BvcHVwPVwidHJ1ZVwiIGFyaWEtZXhwYW5kZWQ9XCJmYWxzZVwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGkgY2xhc3M9XCJyaS1lbW90aW9uLWhhcHB5LWxpbmVcIj48L2k+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJkcm9wZG93bi1tZW51IGVtb2ppLWRyb3Bkb3duLW1lbnVcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJoc3RhY2sgYWxpZ24taXRlbXMtY2VudGVyIGdhcC0yIHB4LTIgZnMtMjVcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj1cImphdmFzY3JpcHQ6dm9pZCgwKTtcIj7wn5KbPC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBocmVmPVwiamF2YXNjcmlwdDp2b2lkKDApO1wiPvCfpKM8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9XCJqYXZhc2NyaXB0OnZvaWQoMCk7XCI+8J+YnDwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj1cImphdmFzY3JpcHQ6dm9pZCgwKTtcIj7wn5iYPC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBocmVmPVwiamF2YXNjcmlwdDp2b2lkKDApO1wiPvCfmI08L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJhdmF0YXIteHNcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj1cImphdmFzY3JpcHQ6dm9pZCgwKTtcIiBjbGFzcz1cImF2YXRhci10aXRsZSBiZy1zb2Z0LXByaW1hcnkgcm91bmRlZC1jaXJjbGUgZnMtMTkgdGV4dC1wcmltYXJ5XCI+KzwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImRyb3Bkb3duXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24tdG9nZ2xlXCIgaHJlZj1cIiNcIiByb2xlPVwiYnV0dG9uXCIgZGF0YS1icy10b2dnbGU9XCJkcm9wZG93blwiIGFyaWEtaGFzcG9wdXA9XCJ0cnVlXCIgYXJpYS1leHBhbmRlZD1cImZhbHNlXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8aSBjbGFzcz1cInJpLW1vcmUtMi1maWxsXCI+PC9pPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJkcm9wZG93bi1tZW51XCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLWl0ZW0gZC1mbGV4IGFsaWduLWl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNvbnRlbnQtYmV0d2VlbiByZXBseS1tZXNzYWdlXCIgaHJlZj1cIiNcIiBkYXRhLWJzLXRvZ2dsZT1cImNvbGxhcHNlXCIgZGF0YS1icy10YXJnZXQ9XCIucmVwbHlDb2xsYXBzZVwiPlJlcGx5IDxpIGNsYXNzPVwiYnggYngtc2hhcmUgbXMtMiB0ZXh0LW11dGVkXCI+PC9pPjwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24taXRlbSBkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyIGp1c3RpZnktY29udGVudC1iZXR3ZWVuXCIgaHJlZj1cIiNcIiBkYXRhLWJzLXRvZ2dsZT1cIm1vZGFsXCIgZGF0YS1icy10YXJnZXQ9XCIuZm9yd2FyZE1vZGFsXCI+Rm9yd2FyZCA8aSBjbGFzcz1cImJ4IGJ4LXNoYXJlLWFsdCBtcy0yIHRleHQtbXV0ZWRcIj48L2k+PC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9XCJkcm9wZG93bi1pdGVtIGQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXIganVzdGlmeS1jb250ZW50LWJldHdlZW4gY29weS1tZXNzYWdlXCIgaHJlZj1cIiNcIiBpZD1cImNvcHktbWVzc2FnZS0nICtcclxuICAgICAgICAgICAgICAgICAgICBtZXNzYWdlSWRzICtcclxuICAgICAgICAgICAgICAgICAgICAnXCI+Q29weSA8aSBjbGFzcz1cImJ4IGJ4LWNvcHkgdGV4dC1tdXRlZCBtcy0yXCI+PC9pPjwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24taXRlbSBkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyIGp1c3RpZnktY29udGVudC1iZXR3ZWVuXCIgaHJlZj1cIiNcIj5Cb29rbWFyayA8aSBjbGFzcz1cImJ4IGJ4LWJvb2ttYXJrcyB0ZXh0LW11dGVkIG1zLTJcIj48L2k+PC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9XCJkcm9wZG93bi1pdGVtIGQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXIganVzdGlmeS1jb250ZW50LWJldHdlZW5cIiBocmVmPVwiI1wiPk1hcmsgYXMgVW5yZWFkIDxpIGNsYXNzPVwiYnggYngtbWVzc2FnZS1lcnJvciB0ZXh0LW11dGVkIG1zLTJcIj48L2k+PC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9XCJkcm9wZG93bi1pdGVtIGQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXIganVzdGlmeS1jb250ZW50LWJldHdlZW4gZGVsZXRlLWl0ZW1cIiBpZD1cImRlbGV0ZS1pdGVtLScgK1xyXG4gICAgICAgICAgICAgICAgICAgIG1lc3NhZ2VJZHMgK1xyXG4gICAgICAgICAgICAgICAgICAgICdcIiBocmVmPVwiI1wiPkRlbGV0ZSA8aSBjbGFzcz1cImJ4IGJ4LXRyYXNoIHRleHQtbXV0ZWQgbXMtMlwiPjwvaT48L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiY29udmVyc2F0aW9uLW5hbWVcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICA8c21hbGwgY2xhc3M9XCJ0ZXh0LW11dGVkIHRpbWVcIj4nICtcclxuICAgICAgICAgICAgICAgICAgICBjdXJyZW50VGltZSgpICtcclxuICAgICAgICAgICAgICAgICAgICAnPC9zbWFsbD5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzcz1cInRleHQtc3VjY2VzcyBjaGVjay1tZXNzYWdlLWljb25cIj48aSBjbGFzcz1cImJ4IGJ4LWNoZWNrXCI+PC9pPjwvc3Bhbj5cXFxyXG4gICAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgIDwvbGk+J1xyXG4gICAgICAgICAgICApO1xyXG4gICAgICAgIH1cclxuXHJcbiAgICAgICAgLy8gcmVtb3ZlIGNoYXQgbGlzdFxyXG4gICAgICAgIHZhciBuZXdDaGF0TGlzdCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiY2hhdC1saXN0LVwiICsgbWVzc2FnZUlkcyk7XHJcbiAgICAgICAgbmV3Q2hhdExpc3RcclxuICAgICAgICAgICAgLnF1ZXJ5U2VsZWN0b3JBbGwoXCIuZGVsZXRlLWl0ZW1cIilcclxuICAgICAgICAgICAgLmZvckVhY2goZnVuY3Rpb24gKHN1Yml0ZW0pIHtcclxuICAgICAgICAgICAgICAgIHN1Yml0ZW0uYWRkRXZlbnRMaXN0ZW5lcihcImNsaWNrXCIsIGZ1bmN0aW9uICgpIHtcclxuICAgICAgICAgICAgICAgICAgICBpdGVtTGlzdC5yZW1vdmVDaGlsZChuZXdDaGF0TGlzdCk7XHJcbiAgICAgICAgICAgICAgICB9KTtcclxuICAgICAgICAgICAgfSk7XHJcblxyXG4gICAgICAgIC8vQ29weSBDbGlwYm9hcmQgYWxlcnRcclxuICAgICAgICBuZXdDaGF0TGlzdFxyXG4gICAgICAgICAgICAucXVlcnlTZWxlY3RvckFsbChcIi5jb3B5LW1lc3NhZ2VcIilcclxuICAgICAgICAgICAgLmZvckVhY2goZnVuY3Rpb24gKHN1Yml0ZW0pIHtcclxuICAgICAgICAgICAgICAgIHN1Yml0ZW0uYWRkRXZlbnRMaXN0ZW5lcihcImNsaWNrXCIsIGZ1bmN0aW9uICgpIHtcclxuICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImNvcHlDbGlwQm9hcmRcIikuc3R5bGUuZGlzcGxheSA9XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIFwiYmxvY2tcIjtcclxuICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcclxuICAgICAgICAgICAgICAgICAgICAgICAgXCJjb3B5Q2xpcEJvYXJkQ2hhbm5lbFwiXHJcbiAgICAgICAgICAgICAgICAgICAgKS5zdHlsZS5kaXNwbGF5ID0gXCJibG9ja1wiO1xyXG4gICAgICAgICAgICAgICAgICAgIHNldFRpbWVvdXQoaGlkZWNsaXBib2FyZE5ldywgMTAwMCk7XHJcbiAgICAgICAgICAgICAgICAgICAgZnVuY3Rpb24gaGlkZWNsaXBib2FyZE5ldygpIHtcclxuICAgICAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJjb3B5Q2xpcEJvYXJkXCIpLnN0eWxlLmRpc3BsYXkgPVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJub25lXCI7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJjb3B5Q2xpcEJvYXJkQ2hhbm5lbFwiXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICkuc3R5bGUuZGlzcGxheSA9IFwibm9uZVwiO1xyXG4gICAgICAgICAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgICAgIH0pO1xyXG4gICAgICAgICAgICB9KTtcclxuXHJcbiAgICAgICAgLy9yZXBseSBNZXNzYWdlIG1vZGVsXHJcbiAgICAgICAgbmV3Q2hhdExpc3RcclxuICAgICAgICAgICAgLnF1ZXJ5U2VsZWN0b3JBbGwoXCIucmVwbHktbWVzc2FnZVwiKVxyXG4gICAgICAgICAgICAuZm9yRWFjaChmdW5jdGlvbiAoc3ViaXRlbSkge1xyXG4gICAgICAgICAgICAgICAgc3ViaXRlbS5hZGRFdmVudExpc3RlbmVyKFwiY2xpY2tcIiwgZnVuY3Rpb24gKCkge1xyXG4gICAgICAgICAgICAgICAgICAgIHZhciByZXBseVRvZ2dsZU9wZW5OZXcgPVxyXG4gICAgICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJlcGx5Q2FyZFwiKTtcclxuICAgICAgICAgICAgICAgICAgICB2YXIgcmVwbHlUb2dnbGVDbG9zZU5ldyA9XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIjY2xvc2VfdG9nZ2xlXCIpO1xyXG4gICAgICAgICAgICAgICAgICAgIHZhciByZXBseU1lc3NhZ2VOZXcgPVxyXG4gICAgICAgICAgICAgICAgICAgICAgICBzdWJpdGVtLmNsb3Nlc3QoXCIuY3RleHQtd3JhcFwiKS5jaGlsZHJlblswXS5jaGlsZHJlblswXVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgLmlubmVyVGV4dDtcclxuICAgICAgICAgICAgICAgICAgICB2YXIgcmVwbHlVc2VyTmV3ID1cclxuICAgICAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi51c2VyLXByb2ZpbGUtc2hvd1wiKS5pbm5lckhUTUw7XHJcbiAgICAgICAgICAgICAgICAgICAgaXNyZXBseU1lc3NhZ2UgPSB0cnVlO1xyXG4gICAgICAgICAgICAgICAgICAgIHJlcGx5VG9nZ2xlT3Blbk5ldy5jbGFzc0xpc3QuYWRkKFwic2hvd1wiKTtcclxuICAgICAgICAgICAgICAgICAgICByZXBseVRvZ2dsZUNsb3NlTmV3LmFkZEV2ZW50TGlzdGVuZXIoXCJjbGlja1wiLCBmdW5jdGlvbiAoKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIHJlcGx5VG9nZ2xlT3Blbk5ldy5jbGFzc0xpc3QucmVtb3ZlKFwic2hvd1wiKTtcclxuICAgICAgICAgICAgICAgICAgICB9KTtcclxuXHJcbiAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcclxuICAgICAgICAgICAgICAgICAgICAgICAgXCIucmVwbHlDYXJkIC5yZXBseW1lc3NhZ2UtYmxvY2sgLmZsZXgtZ3Jvdy0xIC5tYi0wXCJcclxuICAgICAgICAgICAgICAgICAgICApLmlubmVyVGV4dCA9IHJlcGx5TWVzc2FnZU5ldztcclxuICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICAgICAgICAgICAgICBcIi5yZXBseUNhcmQgLnJlcGx5bWVzc2FnZS1ibG9jayAuZmxleC1ncm93LTEgLmNvbnZlcnNhdGlvbi1uYW1lXCJcclxuICAgICAgICAgICAgICAgICAgICApLmlubmVyVGV4dCA9IHJlcGx5VXNlck5ldztcclxuICAgICAgICAgICAgICAgIH0pO1xyXG4gICAgICAgICAgICB9KTtcclxuXHJcbiAgICAgICAgLy9Db3B5IE1lc3NhZ2VcclxuICAgICAgICBuZXdDaGF0TGlzdFxyXG4gICAgICAgICAgICAucXVlcnlTZWxlY3RvckFsbChcIi5jb3B5LW1lc3NhZ2VcIilcclxuICAgICAgICAgICAgLmZvckVhY2goZnVuY3Rpb24gKHN1Yml0ZW0pIHtcclxuICAgICAgICAgICAgICAgIHN1Yml0ZW0uYWRkRXZlbnRMaXN0ZW5lcihcImNsaWNrXCIsIGZ1bmN0aW9uICgpIHtcclxuICAgICAgICAgICAgICAgICAgICB2YXIgY3VycmVudFZhbHVlID1cclxuICAgICAgICAgICAgICAgICAgICAgICAgbmV3Q2hhdExpc3QuY2hpbGROb2Rlc1sxXS5maXJzdEVsZW1lbnRDaGlsZFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgLmZpcnN0RWxlbWVudENoaWxkLmZpcnN0RWxlbWVudENoaWxkXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAuZmlyc3RFbGVtZW50Q2hpbGQuaW5uZXJUZXh0O1xyXG4gICAgICAgICAgICAgICAgICAgIG5hdmlnYXRvci5jbGlwYm9hcmQud3JpdGVUZXh0KGN1cnJlbnRWYWx1ZSk7XHJcbiAgICAgICAgICAgICAgICB9KTtcclxuICAgICAgICAgICAgfSk7XHJcbiAgICB9O1xyXG5cclxuICAgIHZhciBtZXNzYWdlYm94Y29sbGFwc2UgPSAxO1xyXG5cclxuICAgIC8vbWVzc2FnZSB3aXRoIHJlcGx5XHJcbiAgICB2YXIgZ2V0UmVwbHlDaGF0TGlzdCA9IGZ1bmN0aW9uIChjaGF0UmVwbHlJZCwgY2hhdFJlcGx5SXRlbXMpIHtcclxuICAgICAgICB2YXIgY2hhdFJlcGx5VXNlciA9XHJcbiAgICAgICAgICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIudXNlci1wcm9maWxlLXNob3dcIikuaW5uZXJIVE1MO1xyXG4gICAgICAgIHZhciBjaGF0UmVwbHlNZXNzYWdlID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcclxuICAgICAgICAgICAgXCIucmVwbHlDYXJkIC5yZXBseW1lc3NhZ2UtYmxvY2sgLmZsZXgtZ3Jvdy0xIC5tYi0wXCJcclxuICAgICAgICApLmlubmVyVGV4dDtcclxuICAgICAgICBtZXNzYWdlSWRzKys7XHJcbiAgICAgICAgdmFyIGNoYXRyZXBseUNvbkxpc3QgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChjaGF0UmVwbHlJZCk7XHJcbiAgICAgICAgdmFyIGl0ZW1SZXBseUxpc3QgPSBjaGF0cmVwbHlDb25MaXN0LnF1ZXJ5U2VsZWN0b3IoXHJcbiAgICAgICAgICAgIFwiLmNoYXQtY29udmVyc2F0aW9uLWxpc3RcIlxyXG4gICAgICAgICk7XHJcbiAgICAgICAgaWYgKGNoYXRSZXBseUl0ZW1zICE9IG51bGwpIHtcclxuICAgICAgICAgICAgaXRlbVJlcGx5TGlzdC5pbnNlcnRBZGphY2VudEhUTUwoXHJcbiAgICAgICAgICAgICAgICBcImJlZm9yZWVuZFwiLFxyXG4gICAgICAgICAgICAgICAgJzxsaSBjbGFzcz1cImNoYXQtbGlzdCByaWdodFwiIGlkPVwiY2hhdC1saXN0LScgK1xyXG4gICAgICAgICAgICAgICAgICAgIG1lc3NhZ2VJZHMgK1xyXG4gICAgICAgICAgICAgICAgICAgICdcIiA+XFxcclxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJjb252ZXJzYXRpb24tbGlzdFwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cInVzZXItY2hhdC1jb250ZW50XCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImN0ZXh0LXdyYXBcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImN0ZXh0LXdyYXAtY29udGVudFwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwicmVwbHltZXNzYWdlLWJsb2NrIG1iLTAgZC1mbGV4IGFsaWduLWl0ZW1zLXN0YXJ0XCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImZsZXgtZ3Jvdy0xXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxoNSBjbGFzcz1cImNvbnZlcnNhdGlvbi1uYW1lXCI+JyArXHJcbiAgICAgICAgICAgICAgICAgICAgY2hhdFJlcGx5VXNlciArXHJcbiAgICAgICAgICAgICAgICAgICAgJzwvaDU+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwIGNsYXNzPVwibWItMFwiPicgK1xyXG4gICAgICAgICAgICAgICAgICAgIGNoYXRSZXBseU1lc3NhZ2UgK1xyXG4gICAgICAgICAgICAgICAgICAgICc8L3A+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImZsZXgtc2hyaW5rLTBcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgPGJ1dHRvbiB0eXBlPVwiYnV0dG9uXCIgY2xhc3M9XCJidG4gYnRuLXNtIGJ0bi1saW5rIG10LW4yIG1lLW4zIGZzLTE4XCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvYnV0dG9uPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cCBjbGFzcz1cIm1iLTAgY3RleHQtY29udGVudCBtdC0xXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJyArXHJcbiAgICAgICAgICAgICAgICAgICAgY2hhdFJlcGx5SXRlbXMgK1xyXG4gICAgICAgICAgICAgICAgICAgICdcXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvcD5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJhbGlnbi1zZWxmLXN0YXJ0IG1lc3NhZ2UtYm94LWRyb3AgZC1mbGV4XCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJkcm9wZG93blwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24tdG9nZ2xlXCIgaHJlZj1cIiNcIiByb2xlPVwiYnV0dG9uXCIgZGF0YS1icy10b2dnbGU9XCJkcm9wZG93blwiIGFyaWEtaGFzcG9wdXA9XCJ0cnVlXCIgYXJpYS1leHBhbmRlZD1cImZhbHNlXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8aSBjbGFzcz1cInJpLWVtb3Rpb24taGFwcHktbGluZVwiPjwvaT5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImRyb3Bkb3duLW1lbnUgZW1vamktZHJvcGRvd24tbWVudVwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImhzdGFjayBhbGlnbi1pdGVtcy1jZW50ZXIgZ2FwLTIgcHgtMiBmcy0yNVwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBocmVmPVwiamF2YXNjcmlwdDp2b2lkKDApO1wiPvCfkps8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9XCJqYXZhc2NyaXB0OnZvaWQoMCk7XCI+8J+kozwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj1cImphdmFzY3JpcHQ6dm9pZCgwKTtcIj7wn5icPC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBocmVmPVwiamF2YXNjcmlwdDp2b2lkKDApO1wiPvCfmJg8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9XCJqYXZhc2NyaXB0OnZvaWQoMCk7XCI+8J+YjTwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImF2YXRhci14c1wiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9XCJqYXZhc2NyaXB0OnZvaWQoMCk7XCIgY2xhc3M9XCJhdmF0YXItdGl0bGUgYmctc29mdC1wcmltYXJ5IHJvdW5kZWQtY2lyY2xlIGZzLTE5IHRleHQtcHJpbWFyeVwiPis8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJkcm9wZG93blwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLXRvZ2dsZVwiIGhyZWY9XCIjXCIgcm9sZT1cImJ1dHRvblwiIGRhdGEtYnMtdG9nZ2xlPVwiZHJvcGRvd25cIiBhcmlhLWhhc3BvcHVwPVwidHJ1ZVwiIGFyaWEtZXhwYW5kZWQ9XCJmYWxzZVwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGkgY2xhc3M9XCJyaS1tb3JlLTItZmlsbFwiPjwvaT5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiZHJvcGRvd24tbWVudVwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9XCJkcm9wZG93bi1pdGVtIGQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXIganVzdGlmeS1jb250ZW50LWJldHdlZW4gcmVwbHktbWVzc2FnZVwiIGhyZWY9XCIjXCIgZGF0YS1icy10b2dnbGU9XCJjb2xsYXBzZVwiIGRhdGEtYnMtdGFyZ2V0PVwiLnJlcGx5Q29sbGFwc2VcIj5SZXBseSA8aSBjbGFzcz1cImJ4IGJ4LXNoYXJlIG1zLTIgdGV4dC1tdXRlZFwiPjwvaT48L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLWl0ZW0gZC1mbGV4IGFsaWduLWl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNvbnRlbnQtYmV0d2VlblwiIGhyZWY9XCIjXCIgZGF0YS1icy10b2dnbGU9XCJtb2RhbFwiIGRhdGEtYnMtdGFyZ2V0PVwiLmZvcndhcmRNb2RhbFwiPkZvcndhcmQgPGkgY2xhc3M9XCJieCBieC1zaGFyZS1hbHQgbXMtMiB0ZXh0LW11dGVkXCI+PC9pPjwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24taXRlbSBkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyIGp1c3RpZnktY29udGVudC1iZXR3ZWVuIGNvcHktbWVzc2FnZVwiIGhyZWY9XCIjXCIgaWQ9XCJjb3B5LW1lc3NhZ2UtJyArXHJcbiAgICAgICAgICAgICAgICAgICAgbWVzc2FnZUlkcyArXHJcbiAgICAgICAgICAgICAgICAgICAgJ1wiPkNvcHkgPGkgY2xhc3M9XCJieCBieC1jb3B5IHRleHQtbXV0ZWQgbXMtMlwiPjwvaT48L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLWl0ZW0gZC1mbGV4IGFsaWduLWl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNvbnRlbnQtYmV0d2VlblwiIGhyZWY9XCIjXCI+Qm9va21hcmsgPGkgY2xhc3M9XCJieCBieC1ib29rbWFya3MgdGV4dC1tdXRlZCBtcy0yXCI+PC9pPjwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24taXRlbSBkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyIGp1c3RpZnktY29udGVudC1iZXR3ZWVuXCIgaHJlZj1cIiNcIj5NYXJrIGFzIFVucmVhZCA8aSBjbGFzcz1cImJ4IGJ4LW1lc3NhZ2UtZXJyb3IgdGV4dC1tdXRlZCBtcy0yXCI+PC9pPjwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24taXRlbSBkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyIGp1c3RpZnktY29udGVudC1iZXR3ZWVuIGRlbGV0ZS1pdGVtXCIgaWQ9XCJkZWxldGUtaXRlbS0nICtcclxuICAgICAgICAgICAgICAgICAgICBtZXNzYWdlSWRzICtcclxuICAgICAgICAgICAgICAgICAgICAnXCIgaHJlZj1cIiNcIj5EZWxldGUgPGkgY2xhc3M9XCJieCBieC10cmFzaCB0ZXh0LW11dGVkIG1zLTJcIj48L2k+PC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImNvbnZlcnNhdGlvbi1uYW1lXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgPHNtYWxsIGNsYXNzPVwidGV4dC1tdXRlZCB0aW1lXCI+JyArXHJcbiAgICAgICAgICAgICAgICAgICAgY3VycmVudFRpbWUoKSArXHJcbiAgICAgICAgICAgICAgICAgICAgJzwvc21hbGw+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3M9XCJ0ZXh0LXN1Y2Nlc3MgY2hlY2stbWVzc2FnZS1pY29uXCI+PGkgY2xhc3M9XCJieCBieC1jaGVja1wiPjwvaT48L3NwYW4+XFxcclxuICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICA8L2xpPidcclxuICAgICAgICAgICAgKTtcclxuICAgICAgICAgICAgbWVzc2FnZWJveGNvbGxhcHNlKys7XHJcbiAgICAgICAgfVxyXG5cclxuICAgICAgICAvLyByZW1vdmUgY2hhdCBsaXN0XHJcbiAgICAgICAgdmFyIG5ld0NoYXRMaXN0ID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJjaGF0LWxpc3QtXCIgKyBtZXNzYWdlSWRzKTtcclxuICAgICAgICBuZXdDaGF0TGlzdFxyXG4gICAgICAgICAgICAucXVlcnlTZWxlY3RvckFsbChcIi5kZWxldGUtaXRlbVwiKVxyXG4gICAgICAgICAgICAuZm9yRWFjaChmdW5jdGlvbiAoc3ViaXRlbSkge1xyXG4gICAgICAgICAgICAgICAgc3ViaXRlbS5hZGRFdmVudExpc3RlbmVyKFwiY2xpY2tcIiwgZnVuY3Rpb24gKCkge1xyXG4gICAgICAgICAgICAgICAgICAgIGl0ZW1MaXN0LnJlbW92ZUNoaWxkKG5ld0NoYXRMaXN0KTtcclxuICAgICAgICAgICAgICAgIH0pO1xyXG4gICAgICAgICAgICB9KTtcclxuXHJcbiAgICAgICAgLy9Db3B5IENsaXBib2FyZCBhbGVydFxyXG4gICAgICAgIG5ld0NoYXRMaXN0XHJcbiAgICAgICAgICAgIC5xdWVyeVNlbGVjdG9yQWxsKFwiLmNvcHktbWVzc2FnZVwiKVxyXG4gICAgICAgICAgICAuZm9yRWFjaChmdW5jdGlvbiAoc3ViaXRlbSkge1xyXG4gICAgICAgICAgICAgICAgc3ViaXRlbS5hZGRFdmVudExpc3RlbmVyKFwiY2xpY2tcIiwgZnVuY3Rpb24gKCkge1xyXG4gICAgICAgICAgICAgICAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiY29weUNsaXBCb2FyZFwiKS5zdHlsZS5kaXNwbGF5ID1cclxuICAgICAgICAgICAgICAgICAgICAgICAgXCJibG9ja1wiO1xyXG4gICAgICAgICAgICAgICAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFxyXG4gICAgICAgICAgICAgICAgICAgICAgICBcImNvcHlDbGlwQm9hcmRDaGFubmVsXCJcclxuICAgICAgICAgICAgICAgICAgICApLnN0eWxlLmRpc3BsYXkgPSBcImJsb2NrXCI7XHJcbiAgICAgICAgICAgICAgICAgICAgc2V0VGltZW91dChoaWRlY2xpcGJvYXJkTmV3LCAxMDAwKTtcclxuICAgICAgICAgICAgICAgICAgICBmdW5jdGlvbiBoaWRlY2xpcGJvYXJkTmV3KCkge1xyXG4gICAgICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImNvcHlDbGlwQm9hcmRcIikuc3R5bGUuZGlzcGxheSA9XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIm5vbmVcIjtcclxuICAgICAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcImNvcHlDbGlwQm9hcmRDaGFubmVsXCJcclxuICAgICAgICAgICAgICAgICAgICAgICAgKS5zdHlsZS5kaXNwbGF5ID0gXCJub25lXCI7XHJcbiAgICAgICAgICAgICAgICAgICAgfVxyXG4gICAgICAgICAgICAgICAgfSk7XHJcbiAgICAgICAgICAgIH0pO1xyXG5cclxuICAgICAgICBuZXdDaGF0TGlzdFxyXG4gICAgICAgICAgICAucXVlcnlTZWxlY3RvckFsbChcIi5yZXBseS1tZXNzYWdlXCIpXHJcbiAgICAgICAgICAgIC5mb3JFYWNoKGZ1bmN0aW9uIChzdWJpdGVtKSB7XHJcbiAgICAgICAgICAgICAgICBzdWJpdGVtLmFkZEV2ZW50TGlzdGVuZXIoXCJjbGlja1wiLCBmdW5jdGlvbiAoKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgdmFyIHJlcGx5TWVzc2FnZSA9XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIHN1Yml0ZW0uY2xvc2VzdChcIi5jdGV4dC13cmFwXCIpLmNoaWxkcmVuWzBdLmNoaWxkcmVuWzBdXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAuaW5uZXJUZXh0O1xyXG4gICAgICAgICAgICAgICAgICAgIHZhciByZXBseXVzZXIgPVxyXG4gICAgICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnVzZXItcHJvZmlsZS1zaG93XCIpLmlubmVySFRNTDtcclxuICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICAgICAgICAgICAgICBcIi5yZXBseUNhcmQgLnJlcGx5bWVzc2FnZS1ibG9jayAuZmxleC1ncm93LTEgLm1iLTBcIlxyXG4gICAgICAgICAgICAgICAgICAgICkuaW5uZXJUZXh0ID0gcmVwbHlNZXNzYWdlO1xyXG4gICAgICAgICAgICAgICAgICAgIHZhciBtc2dXd25lck5hbWUgPSBzdWJpdGVtLmNsb3Nlc3QoXCIuY2hhdC1saXN0XCIpXHJcbiAgICAgICAgICAgICAgICAgICAgICAgID8gc3ViaXRlbVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAuY2xvc2VzdChcIi5jaGF0LWxpc3RcIilcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLmNsYXNzTGlzdC5jb250YWlucyhcImxlZnRcIilcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgID8gcmVwbHl1c2VyXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICA6IFwiWW91XCJcclxuICAgICAgICAgICAgICAgICAgICAgICAgOiByZXBseXVzZXI7XHJcbiAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcclxuICAgICAgICAgICAgICAgICAgICAgICAgXCIucmVwbHlDYXJkIC5yZXBseW1lc3NhZ2UtYmxvY2sgLmZsZXgtZ3Jvdy0xIC5jb252ZXJzYXRpb24tbmFtZVwiXHJcbiAgICAgICAgICAgICAgICAgICAgKS5pbm5lclRleHQgPSBtc2dXd25lck5hbWU7XHJcbiAgICAgICAgICAgICAgICB9KTtcclxuICAgICAgICAgICAgfSk7XHJcblxyXG4gICAgICAgIC8vQ29weSBNZXNzYWdlXHJcbiAgICAgICAgbmV3Q2hhdExpc3RcclxuICAgICAgICAgICAgLnF1ZXJ5U2VsZWN0b3JBbGwoXCIuY29weS1tZXNzYWdlXCIpXHJcbiAgICAgICAgICAgIC5mb3JFYWNoKGZ1bmN0aW9uIChzdWJpdGVtKSB7XHJcbiAgICAgICAgICAgICAgICBzdWJpdGVtLmFkZEV2ZW50TGlzdGVuZXIoXCJjbGlja1wiLCBmdW5jdGlvbiAoKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgbmV3Q2hhdExpc3QuY2hpbGROb2Rlc1sxXS5jaGlsZHJlblsxXS5maXJzdEVsZW1lbnRDaGlsZC5maXJzdEVsZW1lbnRDaGlsZC5nZXRBdHRyaWJ1dGUoXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIFwiaWRcIlxyXG4gICAgICAgICAgICAgICAgICAgICk7XHJcbiAgICAgICAgICAgICAgICAgICAgaXNUZXh0ID1cclxuICAgICAgICAgICAgICAgICAgICAgICAgbmV3Q2hhdExpc3QuY2hpbGROb2Rlc1sxXS5jaGlsZHJlblsxXS5maXJzdEVsZW1lbnRDaGlsZFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgLmZpcnN0RWxlbWVudENoaWxkLmlubmVyVGV4dDtcclxuICAgICAgICAgICAgICAgICAgICBuYXZpZ2F0b3IuY2xpcGJvYXJkLndyaXRlVGV4dChpc1RleHQpO1xyXG4gICAgICAgICAgICAgICAgfSk7XHJcbiAgICAgICAgICAgIH0pO1xyXG4gICAgfTtcclxuXHJcbiAgICBpZiAoY2hhdEZvcm0pIHtcclxuICAgICAgICAvL2FkZCBhbiBpdGVtIHRvIHRoZSBMaXN0LCBpbmNsdWRpbmcgdG8gbG9jYWwgc3RvcmFnZVxyXG4gICAgICAgIGNoYXRGb3JtLmFkZEV2ZW50TGlzdGVuZXIoXCJzdWJtaXRcIiwgZnVuY3Rpb24gKGUpIHtcclxuICAgICAgICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpO1xyXG4gICAgICAgICAgICB2YXIgY2hhdElkID0gY3VycmVudENoYXRJZDtcclxuICAgICAgICAgICAgdmFyIGNoYXRJZDEgPSBjdXJyZW50Q2hhdElkO1xyXG4gICAgICAgICAgICB2YXIgY2hhdElkMiA9IGN1cnJlbnRDaGF0SWQ7XHJcbiAgICAgICAgICAgIHZhciBjaGF0SWQzID0gY3VycmVudENoYXRJZDtcclxuICAgICAgICAgICAgdmFyIGNoYXRSZXBseUlkID0gY3VycmVudENoYXRJZDtcclxuXHJcbiAgICAgICAgICAgIHZhciBjaGF0SW5wdXRWYWx1ZSA9IGNoYXRJbnB1dC52YWx1ZTtcclxuICAgICAgICAgICAgdmFyIGltYWdlcHJldmlldyA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIuaW1hZ2VfcHJlXCIpO1xyXG4gICAgICAgICAgICB2YXIgYXR0YWNoZWRGaWxlUHJldmlldyA9XHJcbiAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLmF0dGNoZWRmaWxlX3ByZVwiKTtcclxuICAgICAgICAgICAgdmFyIGF1ZGlvRmlsZVByZXZpZXcgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLmF1ZGlvZmlsZV9wcmVcIik7XHJcbiAgICAgICAgICAgIHZhciBjaGF0SW5wdXRmZWVkYmFjayA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXHJcbiAgICAgICAgICAgICAgICBcIi5jaGF0LWlucHV0LWZlZWRiYWNrXCJcclxuICAgICAgICAgICAgKTtcclxuXHJcbiAgICAgICAgICAgIGlmIChjaGF0SW5wdXRWYWx1ZS5sZW5ndGggPT09IDApIHtcclxuICAgICAgICAgICAgICAgIGNoYXRJbnB1dGZlZWRiYWNrLmNsYXNzTGlzdC5hZGQoXCJzaG93XCIpO1xyXG4gICAgICAgICAgICAgICAgc2V0VGltZW91dChmdW5jdGlvbiAoKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgY2hhdElucHV0ZmVlZGJhY2suY2xhc3NMaXN0LnJlbW92ZShcInNob3dcIik7XHJcbiAgICAgICAgICAgICAgICB9LCAyMDAwKTtcclxuICAgICAgICAgICAgICAgIGlmIChpbWFnZXByZXZpZXcgIT0gbnVsbCkge1xyXG4gICAgICAgICAgICAgICAgICAgIGNoYXRJbnB1dGZlZWRiYWNrLmNsYXNzTGlzdC5yZW1vdmUoXCJzaG93XCIpO1xyXG4gICAgICAgICAgICAgICAgICAgIGdldEltYWdlcyhjaGF0SWQxLCBjaGF0SW5wdXRWYWx1ZSk7XHJcbiAgICAgICAgICAgICAgICB9IGVsc2UgaWYgKGF0dGFjaGVkRmlsZVByZXZpZXcgIT0gbnVsbCkge1xyXG4gICAgICAgICAgICAgICAgICAgIGNoYXRJbnB1dGZlZWRiYWNrLmNsYXNzTGlzdC5yZW1vdmUoXCJzaG93XCIpO1xyXG4gICAgICAgICAgICAgICAgICAgIGdldEF0dGFjaGVkRmlsZXMoY2hhdElkMiwgY2hhdElucHV0VmFsdWUpO1xyXG4gICAgICAgICAgICAgICAgfSBlbHNlIGlmIChhdWRpb0ZpbGVQcmV2aWV3ICE9IG51bGwpIHtcclxuICAgICAgICAgICAgICAgICAgICBjaGF0SW5wdXRmZWVkYmFjay5jbGFzc0xpc3QucmVtb3ZlKFwic2hvd1wiKTtcclxuICAgICAgICAgICAgICAgICAgICBnZXRBdWRpb0ZpbGVzKGNoYXRJZDMsIGNoYXRJbnB1dFZhbHVlKTtcclxuICAgICAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgfSBlbHNlIHtcclxuICAgICAgICAgICAgICAgIGlmIChpc3JlcGx5TWVzc2FnZSA9PSB0cnVlKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgZ2V0UmVwbHlDaGF0TGlzdChjaGF0UmVwbHlJZCwgY2hhdElucHV0VmFsdWUpO1xyXG4gICAgICAgICAgICAgICAgICAgIGlzcmVwbHlNZXNzYWdlID0gZmFsc2U7XHJcbiAgICAgICAgICAgICAgICB9IGVsc2Uge1xyXG4gICAgICAgICAgICAgICAgICAgIGdldENoYXRMaXN0KGNoYXRJZCwgY2hhdElucHV0VmFsdWUpO1xyXG4gICAgICAgICAgICAgICAgfVxyXG4gICAgICAgICAgICB9XHJcblxyXG4gICAgICAgICAgICBzY3JvbGxUb0JvdHRvbShcclxuICAgICAgICAgICAgICAgIGNoYXRJZCB8fCBjaGF0SWQxIHx8IGNoYXRJZDIgfHwgY2hhdElkMyB8fCBjaGF0UmVwbHlJZFxyXG4gICAgICAgICAgICApO1xyXG5cclxuICAgICAgICAgICAgY2hhdElucHV0LnZhbHVlID0gXCJcIjtcclxuXHJcbiAgICAgICAgICAgIC8vSW1hZ2VzIGlucHV0IHRleHQgYXJlYSBudWxsXHJcbiAgICAgICAgICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIuaW1hZ2VfcHJlXCIpXHJcbiAgICAgICAgICAgICAgICA/IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIuaW1hZ2VfcHJlXCIpLnJlbW92ZSgpXHJcbiAgICAgICAgICAgICAgICA6IFwiXCI7XHJcbiAgICAgICAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZ2FsbGVyeWZpbGUtaW5wdXRcIikudmFsdWUgPSBcIlwiO1xyXG5cclxuICAgICAgICAgICAgLy9hdHRhY2hlZCBpbnB1dCB0ZXh0IGFyZWEgbnVsbFxyXG4gICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLmF0dGNoZWRmaWxlX3ByZVwiKVxyXG4gICAgICAgICAgICAgICAgPyBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLmF0dGNoZWRmaWxlX3ByZVwiKS5yZW1vdmUoKVxyXG4gICAgICAgICAgICAgICAgOiBcIlwiO1xyXG4gICAgICAgICAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImF0dGFjaGVkZmlsZS1pbnB1dFwiKS52YWx1ZSA9IFwiXCI7XHJcblxyXG4gICAgICAgICAgICAvL2F1ZGlvIGlucHV0IHRleHQgYXJlYSBudWxsXHJcbiAgICAgICAgICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIuYXVkaW9maWxlX3ByZVwiKVxyXG4gICAgICAgICAgICAgICAgPyBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLmF1ZGlvZmlsZV9wcmVcIikucmVtb3ZlKClcclxuICAgICAgICAgICAgICAgIDogXCJcIjtcclxuICAgICAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJhdWRpb2ZpbGUtaW5wdXRcIikudmFsdWUgPSBcIlwiO1xyXG5cclxuICAgICAgICAgICAgLy9yZXBseSBtc2cgcmVtb3ZlIHRleHRhcmVhXHJcbiAgICAgICAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiY2xvc2VfdG9nZ2xlXCIpLmNsaWNrKCk7XHJcbiAgICAgICAgfSk7XHJcbiAgICB9XHJcblxyXG4gICAgLy8gcmVtb3ZlIGNoYXQgbGlzdFxyXG4gICAgZnVuY3Rpb24gZGVsZXRlTWVzc2FnZSgpIHtcclxuICAgICAgICB2YXIgZGVsZXRlSXRlbXMgPSBpdGVtTGlzdC5xdWVyeVNlbGVjdG9yQWxsKFwiLmRlbGV0ZS1pdGVtXCIpO1xyXG4gICAgICAgIGRlbGV0ZUl0ZW1zLmZvckVhY2goZnVuY3Rpb24gKGl0ZW0pIHtcclxuICAgICAgICAgICAgaXRlbS5hZGRFdmVudExpc3RlbmVyKFwiY2xpY2tcIiwgZnVuY3Rpb24gKCkge1xyXG4gICAgICAgICAgICAgICAgaXRlbS5jbG9zZXN0KFwiLnVzZXItY2hhdC1jb250ZW50XCIpLmNoaWxkRWxlbWVudENvdW50ID09IDJcclxuICAgICAgICAgICAgICAgICAgICA/IGl0ZW0uY2xvc2VzdChcIi5jaGF0LWxpc3RcIikucmVtb3ZlKClcclxuICAgICAgICAgICAgICAgICAgICA6IGl0ZW0uY2xvc2VzdChcIi5jdGV4dC13cmFwXCIpLnJlbW92ZSgpO1xyXG4gICAgICAgICAgICB9KTtcclxuICAgICAgICB9KTtcclxuICAgIH1cclxuXHJcbiAgICAvL3JlbW92ZSBjaGF0IGltYWdlc1xyXG4gICAgZnVuY3Rpb24gZGVsZXRlSW1hZ2UoKSB7XHJcbiAgICAgICAgdmFyIGRlbGV0ZUltYWdlID0gaXRlbUxpc3QucXVlcnlTZWxlY3RvckFsbChcIi5jaGF0LWxpc3RcIik7XHJcbiAgICAgICAgZGVsZXRlSW1hZ2UuZm9yRWFjaChmdW5jdGlvbiAoaXRlbSkge1xyXG4gICAgICAgICAgICBpdGVtLnF1ZXJ5U2VsZWN0b3JBbGwoXCIuZGVsZXRlLWltYWdlXCIpLmZvckVhY2goZnVuY3Rpb24gKHN1Yml0ZW0pIHtcclxuICAgICAgICAgICAgICAgIHN1Yml0ZW0uYWRkRXZlbnRMaXN0ZW5lcihcImNsaWNrXCIsIGZ1bmN0aW9uICgpIHtcclxuICAgICAgICAgICAgICAgICAgICBzdWJpdGVtLmNsb3Nlc3QoXCIubWVzc2FnZS1pbWdcIikuY2hpbGRFbGVtZW50Q291bnQgPT0gMVxyXG4gICAgICAgICAgICAgICAgICAgICAgICA/IHN1Yml0ZW0uY2xvc2VzdChcIi5jaGF0LWxpc3RcIikucmVtb3ZlKClcclxuICAgICAgICAgICAgICAgICAgICAgICAgOiBzdWJpdGVtLmNsb3Nlc3QoXCIubWVzc2FnZS1pbWctbGlzdFwiKS5yZW1vdmUoKTtcclxuICAgICAgICAgICAgICAgIH0pO1xyXG4gICAgICAgICAgICB9KTtcclxuICAgICAgICB9KTtcclxuICAgIH1cclxuXHJcbiAgICAvL0RlbGV0ZSBDaGFubmVsIE1lc3NhZ2VcclxuICAgIHZhciBjaGFubmVsSXRlbUxpc3QgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiI2NoYW5uZWwtY29udmVyc2F0aW9uXCIpO1xyXG4gICAgZnVuY3Rpb24gZGVsZXRlQ2hhbm5lbE1lc3NhZ2UoKSB7XHJcbiAgICAgICAgdmFyIGNoYW5uZWxDaGF0TGlzdCA9IGNoYW5uZWxJdGVtTGlzdC5xdWVyeVNlbGVjdG9yQWxsKFwiLmRlbGV0ZS1pdGVtXCIpO1xyXG4gICAgICAgIGNoYW5uZWxDaGF0TGlzdC5mb3JFYWNoKGZ1bmN0aW9uIChpdGVtKSB7XHJcbiAgICAgICAgICAgIGl0ZW0uYWRkRXZlbnRMaXN0ZW5lcihcImNsaWNrXCIsIGZ1bmN0aW9uICgpIHtcclxuICAgICAgICAgICAgICAgIGl0ZW0uY2xvc2VzdChcIi51c2VyLWNoYXQtY29udGVudFwiKS5jaGlsZEVsZW1lbnRDb3VudCA9PSAyXHJcbiAgICAgICAgICAgICAgICAgICAgPyBpdGVtLmNsb3Nlc3QoXCIuY2hhdC1saXN0XCIpLnJlbW92ZSgpXHJcbiAgICAgICAgICAgICAgICAgICAgOiBpdGVtLmNsb3Nlc3QoXCIuY3RleHQtd3JhcFwiKS5yZW1vdmUoKTtcclxuICAgICAgICAgICAgfSk7XHJcbiAgICAgICAgfSk7XHJcbiAgICB9XHJcblxyXG4gICAgLy9Db3B5IENsaXBCb2FyZCBBbGVydFxyXG4gICAgZnVuY3Rpb24gY29weUNsaXBib2FyZCgpIHtcclxuICAgICAgICB2YXIgY29weUNsaXBib2FyZEFsZXJ0ID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChcIi5jb3B5LW1lc3NhZ2VcIik7XHJcbiAgICAgICAgY29weUNsaXBib2FyZEFsZXJ0LmZvckVhY2goZnVuY3Rpb24gKGl0ZW0pIHtcclxuICAgICAgICAgICAgaXRlbS5hZGRFdmVudExpc3RlbmVyKFwiY2xpY2tcIiwgZnVuY3Rpb24gKCkge1xyXG4gICAgICAgICAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJjb3B5Q2xpcEJvYXJkXCIpLnN0eWxlLmRpc3BsYXkgPVxyXG4gICAgICAgICAgICAgICAgICAgIFwiYmxvY2tcIjtcclxuICAgICAgICAgICAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiY29weUNsaXBCb2FyZENoYW5uZWxcIikuc3R5bGUuZGlzcGxheSA9XHJcbiAgICAgICAgICAgICAgICAgICAgXCJibG9ja1wiO1xyXG4gICAgICAgICAgICAgICAgc2V0VGltZW91dChoaWRlY2xpcGJvYXJkLCAxMDAwKTtcclxuICAgICAgICAgICAgICAgIGZ1bmN0aW9uIGhpZGVjbGlwYm9hcmQoKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJjb3B5Q2xpcEJvYXJkXCIpLnN0eWxlLmRpc3BsYXkgPVxyXG4gICAgICAgICAgICAgICAgICAgICAgICBcIm5vbmVcIjtcclxuICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcclxuICAgICAgICAgICAgICAgICAgICAgICAgXCJjb3B5Q2xpcEJvYXJkQ2hhbm5lbFwiXHJcbiAgICAgICAgICAgICAgICAgICAgKS5zdHlsZS5kaXNwbGF5ID0gXCJub25lXCI7XHJcbiAgICAgICAgICAgICAgICB9XHJcbiAgICAgICAgICAgIH0pO1xyXG4gICAgICAgIH0pO1xyXG4gICAgfVxyXG5cclxuICAgIC8vQ29weSBNZXNzYWdlc1xyXG4gICAgZnVuY3Rpb24gY29weU1lc3NhZ2UoKSB7XHJcbiAgICAgICAgdmFyIGNvcHlNZXNzYWdlID0gaXRlbUxpc3QucXVlcnlTZWxlY3RvckFsbChcIi5jb3B5LW1lc3NhZ2VcIik7XHJcbiAgICAgICAgY29weU1lc3NhZ2UuZm9yRWFjaChmdW5jdGlvbiAoaXRlbSkge1xyXG4gICAgICAgICAgICBpdGVtLmFkZEV2ZW50TGlzdGVuZXIoXCJjbGlja1wiLCBmdW5jdGlvbiAoKSB7XHJcbiAgICAgICAgICAgICAgICB2YXIgaXNUZXh0ID0gaXRlbS5jbG9zZXN0KFwiLmN0ZXh0LXdyYXBcIikuY2hpbGRyZW5bMF1cclxuICAgICAgICAgICAgICAgICAgICA/IGl0ZW0uY2xvc2VzdChcIi5jdGV4dC13cmFwXCIpLmNoaWxkcmVuWzBdLmNoaWxkcmVuWzBdXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgLmlubmVyVGV4dFxyXG4gICAgICAgICAgICAgICAgICAgIDogXCJcIjtcclxuICAgICAgICAgICAgICAgIG5hdmlnYXRvci5jbGlwYm9hcmQud3JpdGVUZXh0KGlzVGV4dCk7XHJcbiAgICAgICAgICAgIH0pO1xyXG4gICAgICAgIH0pO1xyXG4gICAgfVxyXG5cclxuICAgIGZ1bmN0aW9uIGNvcHlDaGFubmVsTWVzc2FnZSgpIHtcclxuICAgICAgICB2YXIgY29weUNoYW5uZWxNZXNzYWdlID1cclxuICAgICAgICAgICAgY2hhbm5lbEl0ZW1MaXN0LnF1ZXJ5U2VsZWN0b3JBbGwoXCIuY29weS1tZXNzYWdlXCIpO1xyXG4gICAgICAgIGNvcHlDaGFubmVsTWVzc2FnZS5mb3JFYWNoKGZ1bmN0aW9uIChpdGVtKSB7XHJcbiAgICAgICAgICAgIGl0ZW0uYWRkRXZlbnRMaXN0ZW5lcihcImNsaWNrXCIsIGZ1bmN0aW9uICgpIHtcclxuICAgICAgICAgICAgICAgIHZhciBpc1RleHQgPSBpdGVtLmNsb3Nlc3QoXCIuY3RleHQtd3JhcFwiKS5jaGlsZHJlblswXVxyXG4gICAgICAgICAgICAgICAgICAgID8gaXRlbS5jbG9zZXN0KFwiLmN0ZXh0LXdyYXBcIikuY2hpbGRyZW5bMF0uY2hpbGRyZW5bMF1cclxuICAgICAgICAgICAgICAgICAgICAgICAgICAuaW5uZXJUZXh0XHJcbiAgICAgICAgICAgICAgICAgICAgOiBcIlwiO1xyXG4gICAgICAgICAgICAgICAgbmF2aWdhdG9yLmNsaXBib2FyZC53cml0ZVRleHQoaXNUZXh0KTtcclxuICAgICAgICAgICAgfSk7XHJcbiAgICAgICAgfSk7XHJcbiAgICB9XHJcblxyXG4gICAgLy9yZXBseSBtZXNzYWdlXHJcbiAgICBmdW5jdGlvbiByZXBseU1lc3NhZ2UoKSB7XHJcbiAgICAgICAgdmFyIHJlcGx5TWVzc2FnZSA9IGl0ZW1MaXN0LnF1ZXJ5U2VsZWN0b3JBbGwoXCIucmVwbHktbWVzc2FnZVwiKTtcclxuICAgICAgICB2YXIgcmVwbHlUb2dnbGVPcGVuID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXBseUNhcmRcIik7XHJcbiAgICAgICAgdmFyIHJlcGx5VG9nZ2xlQ2xvc2UgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiI2Nsb3NlX3RvZ2dsZVwiKTtcclxuXHJcbiAgICAgICAgcmVwbHlNZXNzYWdlLmZvckVhY2goZnVuY3Rpb24gKGl0ZW0pIHtcclxuICAgICAgICAgICAgaXRlbS5hZGRFdmVudExpc3RlbmVyKFwiY2xpY2tcIiwgZnVuY3Rpb24gKCkge1xyXG4gICAgICAgICAgICAgICAgaXNyZXBseU1lc3NhZ2UgPSB0cnVlO1xyXG4gICAgICAgICAgICAgICAgcmVwbHlUb2dnbGVPcGVuLmNsYXNzTGlzdC5hZGQoXCJzaG93XCIpO1xyXG4gICAgICAgICAgICAgICAgcmVwbHlUb2dnbGVDbG9zZS5hZGRFdmVudExpc3RlbmVyKFwiY2xpY2tcIiwgZnVuY3Rpb24gKCkge1xyXG4gICAgICAgICAgICAgICAgICAgIHJlcGx5VG9nZ2xlT3Blbi5jbGFzc0xpc3QucmVtb3ZlKFwic2hvd1wiKTtcclxuICAgICAgICAgICAgICAgIH0pO1xyXG5cclxuICAgICAgICAgICAgICAgIHZhciByZXBseU1zZyA9XHJcbiAgICAgICAgICAgICAgICAgICAgaXRlbS5jbG9zZXN0KFwiLmN0ZXh0LXdyYXBcIikuY2hpbGRyZW5bMF0uY2hpbGRyZW5bMF1cclxuICAgICAgICAgICAgICAgICAgICAgICAgLmlubmVyVGV4dDtcclxuICAgICAgICAgICAgICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXHJcbiAgICAgICAgICAgICAgICAgICAgXCIucmVwbHlDYXJkIC5yZXBseW1lc3NhZ2UtYmxvY2sgLmZsZXgtZ3Jvdy0xIC5tYi0wXCJcclxuICAgICAgICAgICAgICAgICkuaW5uZXJUZXh0ID0gcmVwbHlNc2c7XHJcbiAgICAgICAgICAgICAgICB2YXIgcmVwbHl1c2VyID1cclxuICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnVzZXItcHJvZmlsZS1zaG93XCIpLmlubmVySFRNTDtcclxuICAgICAgICAgICAgICAgIHZhciBtc2dXd25lck5hbWUgPSBpdGVtLmNsb3Nlc3QoXCIuY2hhdC1saXN0XCIpXHJcbiAgICAgICAgICAgICAgICAgICAgPyBpdGVtLmNsb3Nlc3QoXCIuY2hhdC1saXN0XCIpLmNsYXNzTGlzdC5jb250YWlucyhcImxlZnRcIilcclxuICAgICAgICAgICAgICAgICAgICAgICAgPyByZXBseXVzZXJcclxuICAgICAgICAgICAgICAgICAgICAgICAgOiBcIllvdVwiXHJcbiAgICAgICAgICAgICAgICAgICAgOiByZXBseXVzZXI7XHJcbiAgICAgICAgICAgICAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICAgICAgICAgIFwiLnJlcGx5Q2FyZCAucmVwbHltZXNzYWdlLWJsb2NrIC5mbGV4LWdyb3ctMSAuY29udmVyc2F0aW9uLW5hbWVcIlxyXG4gICAgICAgICAgICAgICAgKS5pbm5lclRleHQgPSBtc2dXd25lck5hbWU7XHJcbiAgICAgICAgICAgIH0pO1xyXG4gICAgICAgIH0pO1xyXG4gICAgfVxyXG5cclxuICAgIC8vcmVwbHkgQ2hhbm5lbG1lc3NhZ2VcclxuICAgIGZ1bmN0aW9uIHJlcGx5Q2hhbm5lbE1lc3NhZ2UoKSB7XHJcbiAgICAgICAgdmFyIHJlcGx5Q2hhbm5lbE1lc3NhZ2UgPVxyXG4gICAgICAgICAgICBjaGFubmVsSXRlbUxpc3QucXVlcnlTZWxlY3RvckFsbChcIi5yZXBseS1tZXNzYWdlXCIpO1xyXG4gICAgICAgIHZhciByZXBseUNoYW5uZWxUb2dnbGVPcGVuID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXBseUNhcmRcIik7XHJcbiAgICAgICAgdmFyIHJlcGx5Q2hhbm5lbFRvZ2dsZUNsb3NlID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIiNjbG9zZV90b2dnbGVcIik7XHJcblxyXG4gICAgICAgIHJlcGx5Q2hhbm5lbE1lc3NhZ2UuZm9yRWFjaChmdW5jdGlvbiAoaXRlbSkge1xyXG4gICAgICAgICAgICBpdGVtLmFkZEV2ZW50TGlzdGVuZXIoXCJjbGlja1wiLCBmdW5jdGlvbiAoKSB7XHJcbiAgICAgICAgICAgICAgICBpc3JlcGx5TWVzc2FnZSA9IHRydWU7XHJcbiAgICAgICAgICAgICAgICByZXBseUNoYW5uZWxUb2dnbGVPcGVuLmNsYXNzTGlzdC5hZGQoXCJzaG93XCIpO1xyXG4gICAgICAgICAgICAgICAgcmVwbHlDaGFubmVsVG9nZ2xlQ2xvc2UuYWRkRXZlbnRMaXN0ZW5lcihcImNsaWNrXCIsIGZ1bmN0aW9uICgpIHtcclxuICAgICAgICAgICAgICAgICAgICByZXBseUNoYW5uZWxUb2dnbGVPcGVuLmNsYXNzTGlzdC5yZW1vdmUoXCJzaG93XCIpO1xyXG4gICAgICAgICAgICAgICAgfSk7XHJcblxyXG4gICAgICAgICAgICAgICAgdmFyIHJlcGx5Q2hhbm5lbE1zZyA9XHJcbiAgICAgICAgICAgICAgICAgICAgaXRlbS5jbG9zZXN0KFwiLmN0ZXh0LXdyYXBcIikuY2hpbGRyZW5bMF0uY2hpbGRyZW5bMF1cclxuICAgICAgICAgICAgICAgICAgICAgICAgLmlubmVyVGV4dDtcclxuICAgICAgICAgICAgICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXHJcbiAgICAgICAgICAgICAgICAgICAgXCIucmVwbHlDYXJkIC5yZXBseW1lc3NhZ2UtYmxvY2sgLmZsZXgtZ3Jvdy0xIC5tYi0wXCJcclxuICAgICAgICAgICAgICAgICkuaW5uZXJUZXh0ID0gcmVwbHlDaGFubmVsTXNnO1xyXG4gICAgICAgICAgICAgICAgdmFyIHJlcGx5Q2hhbm5lbHVzZXIgPVxyXG4gICAgICAgICAgICAgICAgICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIudXNlci1wcm9maWxlLXNob3dcIikuaW5uZXJIVE1MO1xyXG4gICAgICAgICAgICAgICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcclxuICAgICAgICAgICAgICAgICAgICBcIi5yZXBseUNhcmQgLnJlcGx5bWVzc2FnZS1ibG9jayAuZmxleC1ncm93LTEgLmNvbnZlcnNhdGlvbi1uYW1lXCJcclxuICAgICAgICAgICAgICAgICkuaW5uZXJUZXh0ID0gcmVwbHlDaGFubmVsdXNlcjtcclxuICAgICAgICAgICAgfSk7XHJcbiAgICAgICAgfSk7XHJcbiAgICB9XHJcblxyXG4gICAgLy9Db3B5IENoYW5uZWwgTWVzc2FnZXNcclxuICAgIGZ1bmN0aW9uIGNvcHlDaGFubmVsTWVzc2FnZSgpIHtcclxuICAgICAgICB2YXIgY29weUNoYW5uZWxNZXNzYWdlID1cclxuICAgICAgICAgICAgY2hhbm5lbEl0ZW1MaXN0LnF1ZXJ5U2VsZWN0b3JBbGwoXCIuY29weS1tZXNzYWdlXCIpO1xyXG4gICAgICAgIGNvcHlDaGFubmVsTWVzc2FnZS5mb3JFYWNoKGZ1bmN0aW9uIChpdGVtKSB7XHJcbiAgICAgICAgICAgIGl0ZW0uYWRkRXZlbnRMaXN0ZW5lcihcImNsaWNrXCIsIGZ1bmN0aW9uICgpIHtcclxuICAgICAgICAgICAgICAgIHZhciBpc1RleHQgPSBpdGVtLmNsb3Nlc3QoXCIuY3RleHQtd3JhcFwiKS5jaGlsZHJlblswXVxyXG4gICAgICAgICAgICAgICAgICAgID8gaXRlbS5jbG9zZXN0KFwiLmN0ZXh0LXdyYXBcIikuY2hpbGRyZW5bMF0uY2hpbGRyZW5bMF1cclxuICAgICAgICAgICAgICAgICAgICAgICAgICAuaW5uZXJUZXh0XHJcbiAgICAgICAgICAgICAgICAgICAgOiBcIlwiO1xyXG4gICAgICAgICAgICAgICAgbmF2aWdhdG9yLmNsaXBib2FyZC53cml0ZVRleHQoaXNUZXh0KTtcclxuICAgICAgICAgICAgfSk7XHJcbiAgICAgICAgfSk7XHJcbiAgICB9XHJcblxyXG4gICAgLy8gUHJvZmlsZSBGb3JlZ3JvdW5kIEltZ1xyXG5cclxuICAgIGRvY3VtZW50XHJcbiAgICAgICAgLnF1ZXJ5U2VsZWN0b3IoXCIjcHJvZmlsZS1mb3JlZ3JvdW5kLWltZy1maWxlLWlucHV0XCIpXHJcbiAgICAgICAgLmFkZEV2ZW50TGlzdGVuZXIoXCJjaGFuZ2VcIiwgZnVuY3Rpb24gKCkge1xyXG4gICAgICAgICAgICB2YXIgcHJldmlldyA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucHJvZmlsZS1mb3JlZ3JvdW5kLWltZ1wiKTtcclxuICAgICAgICAgICAgdmFyIGZpbGUgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICAgICAgXCIucHJvZmlsZS1mb3JlZ3JvdW5kLWltZy1maWxlLWlucHV0XCJcclxuICAgICAgICAgICAgKS5maWxlc1swXTtcclxuICAgICAgICAgICAgdmFyIHJlYWRlciA9IG5ldyBGaWxlUmVhZGVyKCk7XHJcblxyXG4gICAgICAgICAgICByZWFkZXIuYWRkRXZlbnRMaXN0ZW5lcihcclxuICAgICAgICAgICAgICAgIFwibG9hZFwiLFxyXG4gICAgICAgICAgICAgICAgZnVuY3Rpb24gKCkge1xyXG4gICAgICAgICAgICAgICAgICAgIHByZXZpZXcuc3JjID0gcmVhZGVyLnJlc3VsdDtcclxuICAgICAgICAgICAgICAgIH0sXHJcbiAgICAgICAgICAgICAgICBmYWxzZVxyXG4gICAgICAgICAgICApO1xyXG4gICAgICAgICAgICBpZiAoZmlsZSkge1xyXG4gICAgICAgICAgICAgICAgcmVhZGVyLnJlYWRBc0RhdGFVUkwoZmlsZSk7XHJcbiAgICAgICAgICAgIH1cclxuICAgICAgICB9KTtcclxuXHJcbiAgICAvLyB1c2VyIHByb2ZpbGUgaW1nXHJcbiAgICBkb2N1bWVudFxyXG4gICAgICAgIC5xdWVyeVNlbGVjdG9yKFwiI3Byb2ZpbGUtaW1nLWZpbGUtaW5wdXRcIilcclxuICAgICAgICAuYWRkRXZlbnRMaXN0ZW5lcihcImNoYW5nZVwiLCBmdW5jdGlvbiAoKSB7XHJcbiAgICAgICAgICAgIHZhciBwcmV2aWV3ID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi51c2VyLXByb2ZpbGUtaW1hZ2VcIik7XHJcbiAgICAgICAgICAgIHZhciBmaWxlID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5wcm9maWxlLWltZy1maWxlLWlucHV0XCIpXHJcbiAgICAgICAgICAgICAgICAuZmlsZXNbMF07XHJcbiAgICAgICAgICAgIHZhciByZWFkZXIgPSBuZXcgRmlsZVJlYWRlcigpO1xyXG5cclxuICAgICAgICAgICAgcmVhZGVyLmFkZEV2ZW50TGlzdGVuZXIoXHJcbiAgICAgICAgICAgICAgICBcImxvYWRcIixcclxuICAgICAgICAgICAgICAgIGZ1bmN0aW9uICgpIHtcclxuICAgICAgICAgICAgICAgICAgICBwcmV2aWV3LnNyYyA9IHJlYWRlci5yZXN1bHQ7XHJcbiAgICAgICAgICAgICAgICB9LFxyXG4gICAgICAgICAgICAgICAgZmFsc2VcclxuICAgICAgICAgICAgKTtcclxuICAgICAgICAgICAgaWYgKGZpbGUpIHtcclxuICAgICAgICAgICAgICAgIHJlYWRlci5yZWFkQXNEYXRhVVJMKGZpbGUpO1xyXG4gICAgICAgICAgICB9XHJcbiAgICAgICAgfSk7XHJcblxyXG4gICAgLy8gcHJvZmlsZSB1c2VyIGVkaXRcclxuICAgIGRvY3VtZW50XHJcbiAgICAgICAgLmdldEVsZW1lbnRCeUlkKFwidXNlci1wcm9maWxlLWVkaXQtYnRuXCIpXHJcbiAgICAgICAgLmFkZEV2ZW50TGlzdGVuZXIoXCJjbGlja1wiLCBmdW5jdGlvbiAoZSkge1xyXG4gICAgICAgICAgICBkb2N1bWVudFxyXG4gICAgICAgICAgICAgICAgLnF1ZXJ5U2VsZWN0b3JBbGwoXCIuZWRpdC1pbnB1dCAuZm9ybS1jb250cm9sXCIpXHJcbiAgICAgICAgICAgICAgICAuZm9yRWFjaChmdW5jdGlvbiAoaXRlbSkge1xyXG4gICAgICAgICAgICAgICAgICAgIHZhciBlZGl0SWNvbiA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZWRpdC1pY29uXCIpO1xyXG4gICAgICAgICAgICAgICAgICAgIGlmIChpdGVtLmRpc2FibGVkKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIC8vIElmIGRpc2FibGVkLCBkbyB0aGlzXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGVkaXRJY29uLmNsYXNzTGlzdC5yZXBsYWNlKFwiYnhzLXBlbmNpbFwiLCBcImJ4cy1zYXZlXCIpO1xyXG4gICAgICAgICAgICAgICAgICAgICAgICBpdGVtLmRpc2FibGVkID0gZmFsc2U7XHJcbiAgICAgICAgICAgICAgICAgICAgfSBlbHNlIHtcclxuICAgICAgICAgICAgICAgICAgICAgICAgLy8gRW50ZXIgY29kZSBoZXJlXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGVkaXRJY29uLmNsYXNzTGlzdC5yZXBsYWNlKFwiYnhzLXNhdmVcIiwgXCJieHMtcGVuY2lsXCIpO1xyXG4gICAgICAgICAgICAgICAgICAgICAgICBpdGVtLmRpc2FibGVkID0gdHJ1ZTtcclxuICAgICAgICAgICAgICAgICAgICB9XHJcbiAgICAgICAgICAgICAgICB9KTtcclxuICAgICAgICB9KTtcclxuXHJcbiAgICAvLyBmYXZvdXJpdGUgYnRuXHJcbiAgICB2YXIgZmF2b3VyaXRlQnRuID0gZG9jdW1lbnQuZ2V0RWxlbWVudHNCeUNsYXNzTmFtZShcImZhdm91cml0ZS1idG5cIik7XHJcbiAgICBmb3IgKHZhciBpID0gMDsgaSA8IGZhdm91cml0ZUJ0bi5sZW5ndGg7IGkrKykge1xyXG4gICAgICAgIHZhciBmYXZvdXJpdGVCdG5zID0gZmF2b3VyaXRlQnRuW2ldO1xyXG4gICAgICAgIGZhdm91cml0ZUJ0bnMub25jbGljayA9IGZ1bmN0aW9uICgpIHtcclxuICAgICAgICAgICAgZmF2b3VyaXRlQnRucy5jbGFzc0xpc3QudG9nZ2xlKFwiYWN0aXZlXCIpO1xyXG4gICAgICAgIH07XHJcbiAgICB9XHJcblxyXG4gICAgLy8gY2hhdCBlbW9qaVBpY2tlciBpbnB1dFxyXG4gICAgdmFyIGVtb2ppUGlja2VyID0gbmV3IEZnRW1vamlQaWNrZXIoe1xyXG4gICAgICAgIHRyaWdnZXI6IFtcIi5lbW9qaS1idG5cIl0sXHJcbiAgICAgICAgcmVtb3ZlT25TZWxlY3Rpb246IGZhbHNlLFxyXG4gICAgICAgIGNsb3NlQnV0dG9uOiB0cnVlLFxyXG4gICAgICAgIHBvc2l0aW9uOiBbXCJ0b3BcIiwgXCJyaWdodFwiXSxcclxuICAgICAgICBwcmVGZXRjaDogdHJ1ZSxcclxuICAgICAgICBkaXI6IFwianMvZGlyL2pzb25cIixcclxuICAgICAgICBpbnNlcnRJbnRvOiBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLmNoYXQtaW5wdXRcIiksXHJcbiAgICB9KTtcclxuXHJcbiAgICAvLyBlbW9qaVBpY2tlciBwb3NpdGlvblxyXG4gICAgdmFyIGVtb2ppQnRuID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJlbW9qaS1idG5cIik7XHJcbiAgICBlbW9qaUJ0bi5hZGRFdmVudExpc3RlbmVyKFwiY2xpY2tcIiwgZnVuY3Rpb24gKCkge1xyXG4gICAgICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gKCkge1xyXG4gICAgICAgICAgICB2YXIgZmdFbW9qaVBpY2tlciA9XHJcbiAgICAgICAgICAgICAgICBkb2N1bWVudC5nZXRFbGVtZW50c0J5Q2xhc3NOYW1lKFwiZmctZW1vamktcGlja2VyXCIpWzBdO1xyXG4gICAgICAgICAgICBpZiAoZmdFbW9qaVBpY2tlcikge1xyXG4gICAgICAgICAgICAgICAgdmFyIGxlZnRFbW9qaSA9IHdpbmRvdy5nZXRDb21wdXRlZFN0eWxlKGZnRW1vamlQaWNrZXIpXHJcbiAgICAgICAgICAgICAgICAgICAgPyB3aW5kb3dcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAuZ2V0Q29tcHV0ZWRTdHlsZShmZ0Vtb2ppUGlja2VyKVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgIC5nZXRQcm9wZXJ0eVZhbHVlKFwibGVmdFwiKVxyXG4gICAgICAgICAgICAgICAgICAgIDogXCJcIjtcclxuICAgICAgICAgICAgICAgIGlmIChsZWZ0RW1vamkpIHtcclxuICAgICAgICAgICAgICAgICAgICBsZWZ0RW1vamkgPSBsZWZ0RW1vamkucmVwbGFjZShcInB4XCIsIFwiXCIpO1xyXG4gICAgICAgICAgICAgICAgICAgIGxlZnRFbW9qaSA9IGxlZnRFbW9qaSAtIDQwICsgXCJweFwiO1xyXG4gICAgICAgICAgICAgICAgICAgIGZnRW1vamlQaWNrZXIuc3R5bGUubGVmdCA9IGxlZnRFbW9qaTtcclxuICAgICAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgfVxyXG4gICAgICAgIH0sIDApO1xyXG4gICAgfSk7XHJcblxyXG4gICAgZnVuY3Rpb24gZ2V0SlNPTkZpbGUoanNvbnVybCwgY2FsbGJhY2spIHtcclxuICAgICAgICB2YXIgeGhyID0gbmV3IFhNTEh0dHBSZXF1ZXN0KCk7XHJcbiAgICAgICAgeGhyLm9wZW4oXCJHRVRcIiwganNvbnVybCwgdHJ1ZSk7XHJcbiAgICAgICAgeGhyLnJlc3BvbnNlVHlwZSA9IFwianNvblwiO1xyXG4gICAgICAgIHhoci5vbmxvYWQgPSBmdW5jdGlvbiAoKSB7XHJcbiAgICAgICAgICAgIHZhciBzdGF0dXMgPSB4aHIuc3RhdHVzO1xyXG4gICAgICAgICAgICBpZiAoc3RhdHVzID09PSAyMDApIHtcclxuICAgICAgICAgICAgICAgIGNhbGxiYWNrKG51bGwsIHhoci5yZXNwb25zZSk7XHJcbiAgICAgICAgICAgIH0gZWxzZSB7XHJcbiAgICAgICAgICAgICAgICBjYWxsYmFjayhzdGF0dXMsIHhoci5yZXNwb25zZSk7XHJcbiAgICAgICAgICAgIH1cclxuICAgICAgICB9O1xyXG4gICAgICAgIHhoci5zZW5kKCk7XHJcbiAgICB9XHJcblxyXG4gICAgLy8gZ2V0TmV4dE1zZ0NvdW50c1xyXG4gICAgZnVuY3Rpb24gZ2V0TmV4dE1zZ0NvdW50cyhjaGF0c0RhdGEsIGksIGZyb21faWQpIHtcclxuICAgICAgICB2YXIgY291bnRzID0gMDtcclxuICAgICAgICB3aGlsZSAoY2hhdHNEYXRhW2ldKSB7XHJcbiAgICAgICAgICAgIGlmIChjaGF0c0RhdGFbaSArIDFdICYmIGNoYXRzRGF0YVtpICsgMV1bXCJmcm9tX2lkXCJdID09IGZyb21faWQpIHtcclxuICAgICAgICAgICAgICAgIGNvdW50cysrO1xyXG4gICAgICAgICAgICAgICAgaSsrO1xyXG4gICAgICAgICAgICB9IGVsc2Uge1xyXG4gICAgICAgICAgICAgICAgYnJlYWs7XHJcbiAgICAgICAgICAgIH1cclxuICAgICAgICB9XHJcbiAgICAgICAgcmV0dXJuIGNvdW50cztcclxuICAgIH1cclxuXHJcbiAgICAvL2dldE5leHRNc2dzXHJcbiAgICBmdW5jdGlvbiBnZXROZXh0TXNncyhjaGF0c0RhdGEsIGksIGZyb21faWQsIGlzQ29udGludWUpIHtcclxuICAgICAgICB2YXIgbXNncyA9IDA7XHJcbiAgICAgICAgd2hpbGUgKGNoYXRzRGF0YVtpXSkge1xyXG4gICAgICAgICAgICBpZiAoY2hhdHNEYXRhW2kgKyAxXSAmJiBjaGF0c0RhdGFbaSArIDFdW1wiZnJvbV9pZFwiXSA9PSBmcm9tX2lkKSB7XHJcbiAgICAgICAgICAgICAgICBtc2dzID0gZ2V0TXNnKFxyXG4gICAgICAgICAgICAgICAgICAgIGNoYXRzRGF0YVtpICsgMV0uaWQsXHJcbiAgICAgICAgICAgICAgICAgICAgY2hhdHNEYXRhW2kgKyAxXS5tc2csXHJcbiAgICAgICAgICAgICAgICAgICAgY2hhdHNEYXRhW2kgKyAxXS5oYXNfaW1hZ2VzLFxyXG4gICAgICAgICAgICAgICAgICAgIGNoYXRzRGF0YVtpICsgMV0uaGFzX2ZpbGVzLFxyXG4gICAgICAgICAgICAgICAgICAgIGNoYXRzRGF0YVtpICsgMV0uaGFzX2F1ZGlvcyxcclxuICAgICAgICAgICAgICAgICAgICBjaGF0c0RhdGFbaSArIDFdLmhhc192aWRlb3MsXHJcbiAgICAgICAgICAgICAgICAgICAgY2hhdHNEYXRhW2kgKyAxXS5oYXNfZHJvcERvd25cclxuICAgICAgICAgICAgICAgICk7XHJcbiAgICAgICAgICAgICAgICBpKys7XHJcbiAgICAgICAgICAgIH0gZWxzZSB7XHJcbiAgICAgICAgICAgICAgICBicmVhaztcclxuICAgICAgICAgICAgfVxyXG4gICAgICAgIH1cclxuICAgICAgICByZXR1cm4gbXNncztcclxuICAgIH1cclxuXHJcbiAgICAvLyBnZXRNc2dcclxuICAgIGZ1bmN0aW9uIGdldE1zZyhcclxuICAgICAgICBpZCxcclxuICAgICAgICBtc2csXHJcbiAgICAgICAgaGFzX2ltYWdlcyxcclxuICAgICAgICBoYXNfZmlsZXMsXHJcbiAgICAgICAgaGFzX2F1ZGlvcyxcclxuICAgICAgICBoYXNfdmlkZW9zLFxyXG4gICAgICAgIGhhc19kcm9wRG93blxyXG4gICAgKSB7XHJcbiAgICAgICAgdmFyIG1zZ0hUTUwgPSAnPGRpdiBjbGFzcz1cImN0ZXh0LXdyYXBcIj4nO1xyXG4gICAgICAgIGlmIChtc2cgIT0gbnVsbCkge1xyXG4gICAgICAgICAgICBtc2dIVE1MICs9XHJcbiAgICAgICAgICAgICAgICAnPGRpdiBjbGFzcz1cImN0ZXh0LXdyYXAtY29udGVudFwiIGlkPScgK1xyXG4gICAgICAgICAgICAgICAgaWQgK1xyXG4gICAgICAgICAgICAgICAgJz5cXFxyXG4gICAgICAgIDxwIGNsYXNzPVwibWItMCBjdGV4dC1jb250ZW50XCI+JyArXHJcbiAgICAgICAgICAgICAgICBtc2cgK1xyXG4gICAgICAgICAgICAgICAgXCI8L3A+PC9kaXY+XCI7XHJcbiAgICAgICAgfSBlbHNlIGlmIChoYXNfaW1hZ2VzICYmIGhhc19pbWFnZXMubGVuZ3RoID4gMCkge1xyXG4gICAgICAgICAgICBtc2dIVE1MICs9ICc8ZGl2IGNsYXNzPVwibWVzc2FnZS1pbWcgbWItMFwiPic7XHJcbiAgICAgICAgICAgIGZvciAoaSA9IDA7IGkgPCBoYXNfaW1hZ2VzLmxlbmd0aDsgaSsrKSB7XHJcbiAgICAgICAgICAgICAgICBtc2dIVE1MICs9XHJcbiAgICAgICAgICAgICAgICAgICAgJzxkaXYgY2xhc3M9XCJtZXNzYWdlLWltZy1saXN0XCI+XFxcclxuICAgICAgICAgICAgPGRpdj5cXFxyXG4gICAgICAgICAgICAgIDxhIGNsYXNzPVwicG9wdXAtaW1nIGQtaW5saW5lLWJsb2NrXCIgaHJlZj1cIicgK1xyXG4gICAgICAgICAgICAgICAgICAgIGhhc19pbWFnZXNbaV0gK1xyXG4gICAgICAgICAgICAgICAgICAgICdcIj5cXFxyXG4gICAgICAgICAgICAgICAgPGltZyBzcmM9XCInICtcclxuICAgICAgICAgICAgICAgICAgICBoYXNfaW1hZ2VzW2ldICtcclxuICAgICAgICAgICAgICAgICAgICAnXCIgYWx0PVwiXCIgY2xhc3M9XCJyb3VuZGVkIGJvcmRlciBpbWctdGh1bWJuYWlsXCI+XFxcclxuICAgICAgICAgICAgICA8L2E+XFxcclxuICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgPGRpdiBjbGFzcz1cIm1lc3NhZ2UtaW1nLWxpbmtcIj5cXFxyXG4gICAgICAgICAgICAgIDx1bCBjbGFzcz1cImxpc3QtaW5saW5lIG1iLTBcIj5cXFxyXG4gICAgICAgICAgICAgICAgPGxpIGNsYXNzPVwibGlzdC1pbmxpbmUtaXRlbSBkcm9wZG93blwiPlxcXHJcbiAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24tdG9nZ2xlXCIgaHJlZj1cIiNcIiByb2xlPVwiYnV0dG9uXCIgZGF0YS1icy10b2dnbGU9XCJkcm9wZG93blwiIGFyaWEtaGFzcG9wdXA9XCJ0cnVlXCIgYXJpYS1leHBhbmRlZD1cImZhbHNlXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgIDxpIGNsYXNzPVwiYnggYngtZG90cy1ob3Jpem9udGFsLXJvdW5kZWRcIj48L2k+XFxcclxuICAgICAgICAgICAgICAgICAgPC9hPlxcXHJcbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiZHJvcGRvd24tbWVudVwiPlxcXHJcbiAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24taXRlbSBkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyIGp1c3RpZnktY29udGVudC1iZXR3ZWVuXCIgaHJlZj1cIicgK1xyXG4gICAgICAgICAgICAgICAgICAgIGhhc19pbWFnZXNbaV0gK1xyXG4gICAgICAgICAgICAgICAgICAgICdcIiBkb3dubG9hZD5Eb3dubG9hZCA8aSBjbGFzcz1cImJ4IGJ4LWRvd25sb2FkIG1zLTIgdGV4dC1tdXRlZFwiPjwvaT48L2E+XFxcclxuICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9XCJkcm9wZG93bi1pdGVtIGQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXIganVzdGlmeS1jb250ZW50LWJldHdlZW5cIiAgaHJlZj1cIiNcIiBkYXRhLWJzLXRvZ2dsZT1cImNvbGxhcHNlXCIgZGF0YS1icy10YXJnZXQ9XCIucmVwbHlDb2xsYXBzZVwiPlJlcGx5IDxpIGNsYXNzPVwiYnggYngtc2hhcmUgbXMtMiB0ZXh0LW11dGVkXCI+PC9pPjwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLWl0ZW0gZC1mbGV4IGFsaWduLWl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNvbnRlbnQtYmV0d2VlblwiIGhyZWY9XCIjXCIgZGF0YS1icy10b2dnbGU9XCJtb2RhbFwiIGRhdGEtYnMtdGFyZ2V0PVwiLmZvcndhcmRNb2RhbFwiPkZvcndhcmQgPGkgY2xhc3M9XCJieCBieC1zaGFyZS1hbHQgbXMtMiB0ZXh0LW11dGVkXCI+PC9pPjwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLWl0ZW0gZC1mbGV4IGFsaWduLWl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNvbnRlbnQtYmV0d2VlblwiIGhyZWY9XCIjXCI+Qm9va21hcmsgPGkgY2xhc3M9XCJieCBieC1ib29rbWFya3MgdGV4dC1tdXRlZCBtcy0yXCI+PC9pPjwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLWl0ZW0gZC1mbGV4IGFsaWduLWl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNvbnRlbnQtYmV0d2VlbiBkZWxldGUtaW1hZ2VcIiBocmVmPVwiI1wiPkRlbGV0ZSA8aSBjbGFzcz1cImJ4IGJ4LXRyYXNoIG1zLTIgdGV4dC1tdXRlZFwiPjwvaT48L2E+XFxcclxuICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgPC9saT5cXFxyXG4gICAgICAgICAgPC91bD5cXFxyXG4gICAgICAgIDwvZGl2PlxcXHJcbiAgICAgIDwvZGl2Pic7XHJcbiAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgbXNnSFRNTCArPSBcIjwvZGl2PlwiO1xyXG4gICAgICAgIH0gZWxzZSBpZiAoaGFzX2ZpbGVzLmxlbmd0aCA+IDApIHtcclxuICAgICAgICAgICAgbXNnSFRNTCArPVxyXG4gICAgICAgICAgICAgICAgJzxkaXYgY2xhc3M9XCJjdGV4dC13cmFwLWNvbnRlbnRcIj5cXFxyXG4gICAgICAgICAgICA8ZGl2IGNsYXNzPVwicC0zIGJvcmRlciByb3VuZGVkLTNcIj5cXFxyXG4gICAgICAgICAgICA8ZGl2IGNsYXNzPVwiZC1mbGV4IGFsaWduLWl0ZW1zLWNlbnRlciBhdHRhY2hlZC1maWxlXCI+XFxcclxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJmbGV4LXNocmluay0wIGF2YXRhci1zbSBtZS0zIG1zLTAgYXR0YWNoZWQtZmlsZS1hdmF0YXJcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJhdmF0YXItdGl0bGUgYmctc29mdC1saWdodCByb3VuZGVkLWNpcmNsZSBmcy0yMFwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDxpIGNsYXNzPVwicmktYXR0YWNobWVudC0yXCI+PC9pPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiZmxleC1ncm93LTEgb3ZlcmZsb3ctaGlkZGVuXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwidGV4dC1zdGFydFwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDxoNSBjbGFzcz1cImZzLTE0IHRleHQtd2hpdGUgbWItMVwiPmRlc2lnbi1waGFzZS0xLWFwcHJvdmVkLnBkZjwvaDU+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgPHAgY2xhc3M9XCJ0ZXh0LXdoaXRlLTUwIHRleHQtdHJ1bmNhdGUgZnMtMTMgbWItMFwiPjEyLjUgTUI8L3A+XFxcclxuICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJmbGV4LXNocmluay0wIG1zLTRcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJkLWZsZXggZ2FwLTIgZnMtMjAgZC1mbGV4IGFsaWduLWl0ZW1zLXN0YXJ0XCI+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgPGRpdj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj1cIiNcIiBjbGFzcz1cInRleHQtd2hpdGUtNTBcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxpIGNsYXNzPVwiYnggYnhzLWRvd25sb2FkXCI+PC9pPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJlbW9qaS1pY29uXCI+XFxcclxuICAgICAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24tdG9nZ2xlXCIgaHJlZj1cIiNcIj7wn5GNPC9hPlxcXHJcbiAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJhbGlnbi1zZWxmLXN0YXJ0IG1lc3NhZ2UtYm94LWRyb3AgZC1mbGV4XCI+XFxcclxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiZHJvcGRvd25cIj5cXFxyXG4gICAgICAgICAgICAgICAgPGEgY2xhc3M9XCJkcm9wZG93bi10b2dnbGVcIiBocmVmPVwiI1wiIHJvbGU9XCJidXR0b25cIiBkYXRhLWJzLXRvZ2dsZT1cImRyb3Bkb3duXCIgYXJpYS1oYXNwb3B1cD1cInRydWVcIiBhcmlhLWV4cGFuZGVkPVwiZmFsc2VcIj5cXFxyXG4gICAgICAgICAgICAgICAgICA8aSBjbGFzcz1cInJpLWVtb3Rpb24taGFwcHktbGluZVwiPjwvaT5cXFxyXG4gICAgICAgICAgICAgICAgPC9hPlxcXHJcbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiZHJvcGRvd24tbWVudSBlbW9qaS1kcm9wZG93bi1tZW51XCI+XFxcclxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImhzdGFjayBhbGlnbi1pdGVtcy1jZW50ZXIgZ2FwLTIgcHgtMiBmcy0yNVwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj1cImphdmFzY3JpcHQ6dm9pZCgwKTtcIj7wn5KbPC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj1cImphdmFzY3JpcHQ6dm9pZCgwKTtcIj7wn6SjPC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj1cImphdmFzY3JpcHQ6dm9pZCgwKTtcIj7wn5icPC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj1cImphdmFzY3JpcHQ6dm9pZCgwKTtcIj7wn5iYPC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj1cImphdmFzY3JpcHQ6dm9pZCgwKTtcIj7wn5iNPC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImF2YXRhci14c1wiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj1cImphdmFzY3JpcHQ6dm9pZCgwKTtcIiBjbGFzcz1cImF2YXRhci10aXRsZSBiZy1zb2Z0LXByaW1hcnkgcm91bmRlZC1jaXJjbGUgZnMtMTkgdGV4dC1wcmltYXJ5XCI+KzwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImRyb3Bkb3duXCI+XFxcclxuICAgICAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24tdG9nZ2xlXCIgaHJlZj1cIiNcIiByb2xlPVwiYnV0dG9uXCIgZGF0YS1icy10b2dnbGU9XCJkcm9wZG93blwiIGFyaWEtaGFzcG9wdXA9XCJ0cnVlXCIgYXJpYS1leHBhbmRlZD1cImZhbHNlXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICA8aSBjbGFzcz1cInJpLW1vcmUtMi1maWxsXCI+PC9pPlxcXHJcbiAgICAgICAgICAgICAgICA8L2E+XFxcclxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJkcm9wZG93bi1tZW51XCI+XFxcclxuICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9XCJkcm9wZG93bi1pdGVtIGQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXIganVzdGlmeS1jb250ZW50LWJldHdlZW5cIiAgaHJlZj1cIicgK1xyXG4gICAgICAgICAgICAgICAgaGFzX2ZpbGVzICtcclxuICAgICAgICAgICAgICAgICdcIiBkb3dubG9hZD5Eb3dubG9hZCA8aSBjbGFzcz1cImJ4IGJ4LWRvd25sb2FkIG1zLTIgdGV4dC1tdXRlZFwiPjwvaT48L2E+XFxcclxuICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9XCJkcm9wZG93bi1pdGVtIGQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXIganVzdGlmeS1jb250ZW50LWJldHdlZW5cIiBocmVmPVwiI1wiIGRhdGEtYnMtdG9nZ2xlPVwiY29sbGFwc2VcIiBkYXRhLWJzLXRhcmdldD1cIi5yZXBseUNvbGxhcHNlXCI+UmVwbHkgPGkgY2xhc3M9XCJieCBieC1zaGFyZSBtcy0yIHRleHQtbXV0ZWRcIj48L2k+PC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24taXRlbSBkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyIGp1c3RpZnktY29udGVudC1iZXR3ZWVuXCIgaHJlZj1cIiNcIiBkYXRhLWJzLXRvZ2dsZT1cIm1vZGFsXCIgZGF0YS1icy10YXJnZXQ9XCIuZm9yd2FyZE1vZGFsXCI+Rm9yd2FyZCA8aSBjbGFzcz1cImJ4IGJ4LXNoYXJlLWFsdCBtcy0yIHRleHQtbXV0ZWRcIj48L2k+PC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24taXRlbSBkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyIGp1c3RpZnktY29udGVudC1iZXR3ZWVuXCIgaHJlZj1cIiNcIj5Cb29rbWFyayA8aSBjbGFzcz1cImJ4IGJ4LWJvb2ttYXJrcyB0ZXh0LW11dGVkIG1zLTJcIj48L2k+PC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24taXRlbSBkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyIGp1c3RpZnktY29udGVudC1iZXR3ZWVuIGRlbGV0ZS1pdGVtXCIgaHJlZj1cIiNcIj5EZWxldGUgPGkgY2xhc3M9XCJieCBieC10cmFzaCB0ZXh0LW11dGVkIG1zLTJcIj48L2k+PC9hPlxcXHJcbiAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICA8L2Rpdj4nO1xyXG4gICAgICAgIH0gZWxzZSBpZiAoaGFzX2F1ZGlvcyAmJiBoYXNfYXVkaW9zLmxlbmd0aCA+IDApIHtcclxuICAgICAgICAgICAgbXNnSFRNTCArPVxyXG4gICAgICAgICAgICAgICAgJzxkaXYgY2xhc3M9XCJhdWRpby1maWxlLWVsZW1cIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YXVkaW8gY29udHJvbHM+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxzb3VyY2Ugc3JjPVwiJyArXHJcbiAgICAgICAgICAgICAgICBoYXNfYXVkaW9zICtcclxuICAgICAgICAgICAgICAgICdcIiB0eXBlPVwiYXVkaW8vbXBlZ1wiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvYXVkaW8+XFxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYWxpZ24tc2VsZi1zdGFydCBtZXNzYWdlLWJveC1kcm9wIGQtZmxleFwiPlxcXHJcbiAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImRyb3Bkb3duXCI+XFxcclxuICAgICAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24tdG9nZ2xlXCIgaHJlZj1cIiNcIiByb2xlPVwiYnV0dG9uXCIgZGF0YS1icy10b2dnbGU9XCJkcm9wZG93blwiIGFyaWEtaGFzcG9wdXA9XCJ0cnVlXCIgYXJpYS1leHBhbmRlZD1cImZhbHNlXCI+XFxcclxuICAgICAgICAgICAgICAgICAgPGkgY2xhc3M9XCJyaS1lbW90aW9uLWhhcHB5LWxpbmVcIj48L2k+XFxcclxuICAgICAgICAgICAgICAgIDwvYT5cXFxyXG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImRyb3Bkb3duLW1lbnUgZW1vamktZHJvcGRvd24tbWVudVwiPlxcXHJcbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJoc3RhY2sgYWxpZ24taXRlbXMtY2VudGVyIGdhcC0yIHB4LTIgZnMtMjVcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9XCJqYXZhc2NyaXB0OnZvaWQoMCk7XCI+8J+SmzwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9XCJqYXZhc2NyaXB0OnZvaWQoMCk7XCI+8J+kozwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9XCJqYXZhc2NyaXB0OnZvaWQoMCk7XCI+8J+YnDwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9XCJqYXZhc2NyaXB0OnZvaWQoMCk7XCI+8J+YmDwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9XCJqYXZhc2NyaXB0OnZvaWQoMCk7XCI+8J+YjTwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJhdmF0YXIteHNcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9XCJqYXZhc2NyaXB0OnZvaWQoMCk7XCIgY2xhc3M9XCJhdmF0YXItdGl0bGUgYmctc29mdC1wcmltYXJ5IHJvdW5kZWQtY2lyY2xlIGZzLTE5IHRleHQtcHJpbWFyeVwiPis8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJkcm9wZG93blwiPlxcXHJcbiAgICAgICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLXRvZ2dsZVwiIGhyZWY9XCIjXCIgcm9sZT1cImJ1dHRvblwiIGRhdGEtYnMtdG9nZ2xlPVwiZHJvcGRvd25cIiBhcmlhLWhhc3BvcHVwPVwidHJ1ZVwiIGFyaWEtZXhwYW5kZWQ9XCJmYWxzZVwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPGkgY2xhc3M9XCJyaS1tb3JlLTItZmlsbFwiPjwvaT5cXFxyXG4gICAgICAgICAgICAgICAgPC9hPlxcXHJcbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiZHJvcGRvd24tbWVudVwiPlxcXHJcbiAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24taXRlbSBkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyIGp1c3RpZnktY29udGVudC1iZXR3ZWVuXCIgIGhyZWY9XCInICtcclxuICAgICAgICAgICAgICAgIGhhc19hdWRpb3MgK1xyXG4gICAgICAgICAgICAgICAgJ1wiIGRvd25sb2FkPkRvd25sb2FkIDxpIGNsYXNzPVwiYnggYngtZG93bmxvYWQgbXMtMiB0ZXh0LW11dGVkXCI+PC9pPjwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLWl0ZW0gZC1mbGV4IGFsaWduLWl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNvbnRlbnQtYmV0d2VlblwiIGhyZWY9XCIjXCIgZGF0YS1icy10b2dnbGU9XCJjb2xsYXBzZVwiIGRhdGEtYnMtdGFyZ2V0PVwiLnJlcGx5Q29sbGFwc2VcIj5SZXBseSA8aSBjbGFzcz1cImJ4IGJ4LXNoYXJlIG1zLTIgdGV4dC1tdXRlZFwiPjwvaT48L2E+XFxcclxuICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9XCJkcm9wZG93bi1pdGVtIGQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXIganVzdGlmeS1jb250ZW50LWJldHdlZW5cIiBocmVmPVwiI1wiIGRhdGEtYnMtdG9nZ2xlPVwibW9kYWxcIiBkYXRhLWJzLXRhcmdldD1cIi5mb3J3YXJkTW9kYWxcIj5Gb3J3YXJkIDxpIGNsYXNzPVwiYnggYngtc2hhcmUtYWx0IG1zLTIgdGV4dC1tdXRlZFwiPjwvaT48L2E+XFxcclxuICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9XCJkcm9wZG93bi1pdGVtIGQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXIganVzdGlmeS1jb250ZW50LWJldHdlZW5cIiBocmVmPVwiI1wiPkJvb2ttYXJrIDxpIGNsYXNzPVwiYnggYngtYm9va21hcmtzIHRleHQtbXV0ZWQgbXMtMlwiPjwvaT48L2E+XFxcclxuICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9XCJkcm9wZG93bi1pdGVtIGQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXIganVzdGlmeS1jb250ZW50LWJldHdlZW4gZGVsZXRlLWl0ZW1cIiBocmVmPVwiI1wiPkRlbGV0ZSA8aSBjbGFzcz1cImJ4IGJ4LXRyYXNoIHRleHQtbXV0ZWQgbXMtMlwiPjwvaT48L2E+XFxcclxuICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgIDwvZGl2Pic7XHJcbiAgICAgICAgfSBlbHNlIGlmIChoYXNfdmlkZW9zICYmIGhhc192aWRlb3MubGVuZ3RoID4gMCkge1xyXG4gICAgICAgICAgICBtc2dIVE1MICs9XHJcbiAgICAgICAgICAgICAgICAnPGRpdj5cXFxyXG4gICAgICAgIDxpZnJhbWUgc3JjPVwiJyArXHJcbiAgICAgICAgICAgICAgICBoYXNfdmlkZW9zICtcclxuICAgICAgICAgICAgICAgICdcIiB0aXRsZT1cIllvdVR1YmUgdmlkZW9cIiBjbGFzcz1cInctMTAwIHJvdW5kZWRcIiBhdXRvcGxheSBhbGxvd2Z1bGxzY3JlZW4+PC9pZnJhbWU+XFxcclxuICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImFsaWduLXNlbGYtc3RhcnQgbWVzc2FnZS1ib3gtZHJvcCBkLWZsZXhcIj5cXFxyXG4gICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJkcm9wZG93blwiPlxcXHJcbiAgICAgICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLXRvZ2dsZVwiIGhyZWY9XCIjXCIgcm9sZT1cImJ1dHRvblwiIGRhdGEtYnMtdG9nZ2xlPVwiZHJvcGRvd25cIiBhcmlhLWhhc3BvcHVwPVwidHJ1ZVwiIGFyaWEtZXhwYW5kZWQ9XCJmYWxzZVwiPlxcXHJcbiAgICAgICAgICAgICAgICAgIDxpIGNsYXNzPVwicmktZW1vdGlvbi1oYXBweS1saW5lXCI+PC9pPlxcXHJcbiAgICAgICAgICAgICAgICA8L2E+XFxcclxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJkcm9wZG93bi1tZW51IGVtb2ppLWRyb3Bkb3duLW1lbnVcIj5cXFxyXG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiaHN0YWNrIGFsaWduLWl0ZW1zLWNlbnRlciBnYXAtMiBweC0yIGZzLTI1XCI+XFxcclxuICAgICAgICAgICAgICAgICAgICA8YSBocmVmPVwiamF2YXNjcmlwdDp2b2lkKDApO1wiPvCfkps8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICA8YSBocmVmPVwiamF2YXNjcmlwdDp2b2lkKDApO1wiPvCfpKM8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICA8YSBocmVmPVwiamF2YXNjcmlwdDp2b2lkKDApO1wiPvCfmJw8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICA8YSBocmVmPVwiamF2YXNjcmlwdDp2b2lkKDApO1wiPvCfmJg8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICA8YSBocmVmPVwiamF2YXNjcmlwdDp2b2lkKDApO1wiPvCfmI08L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYXZhdGFyLXhzXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICA8YSBocmVmPVwiamF2YXNjcmlwdDp2b2lkKDApO1wiIGNsYXNzPVwiYXZhdGFyLXRpdGxlIGJnLXNvZnQtcHJpbWFyeSByb3VuZGVkLWNpcmNsZSBmcy0xOSB0ZXh0LXByaW1hcnlcIj4rPC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiZHJvcGRvd25cIj5cXFxyXG4gICAgICAgICAgICAgICAgPGEgY2xhc3M9XCJkcm9wZG93bi10b2dnbGVcIiBocmVmPVwiI1wiIHJvbGU9XCJidXR0b25cIiBkYXRhLWJzLXRvZ2dsZT1cImRyb3Bkb3duXCIgYXJpYS1oYXNwb3B1cD1cInRydWVcIiBhcmlhLWV4cGFuZGVkPVwiZmFsc2VcIj5cXFxyXG4gICAgICAgICAgICAgICAgICAgIDxpIGNsYXNzPVwicmktbW9yZS0yLWZpbGxcIj48L2k+XFxcclxuICAgICAgICAgICAgICAgIDwvYT5cXFxyXG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzcz1cImRyb3Bkb3duLW1lbnVcIj5cXFxyXG4gICAgICAgICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLWl0ZW0gZC1mbGV4IGFsaWduLWl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNvbnRlbnQtYmV0d2VlblwiICBocmVmPVwiJyArXHJcbiAgICAgICAgICAgICAgICBoYXNfdmlkZW9zICtcclxuICAgICAgICAgICAgICAgICdcIiBkb3dubG9hZD5Eb3dubG9hZCA8aSBjbGFzcz1cImJ4IGJ4LWRvd25sb2FkIG1zLTIgdGV4dC1tdXRlZFwiPjwvaT48L2E+XFxcclxuICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9XCJkcm9wZG93bi1pdGVtIGQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXIganVzdGlmeS1jb250ZW50LWJldHdlZW5cIiBocmVmPVwiI1wiIGRhdGEtYnMtdG9nZ2xlPVwiY29sbGFwc2VcIiBkYXRhLWJzLXRhcmdldD1cIi5yZXBseUNvbGxhcHNlXCI+UmVwbHkgPGkgY2xhc3M9XCJieCBieC1zaGFyZSBtcy0yIHRleHQtbXV0ZWRcIj48L2k+PC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24taXRlbSBkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyIGp1c3RpZnktY29udGVudC1iZXR3ZWVuXCIgaHJlZj1cIiNcIiBkYXRhLWJzLXRvZ2dsZT1cIm1vZGFsXCIgZGF0YS1icy10YXJnZXQ9XCIuZm9yd2FyZE1vZGFsXCI+Rm9yd2FyZCA8aSBjbGFzcz1cImJ4IGJ4LXNoYXJlLWFsdCBtcy0yIHRleHQtbXV0ZWRcIj48L2k+PC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24taXRlbSBkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyIGp1c3RpZnktY29udGVudC1iZXR3ZWVuXCIgaHJlZj1cIiNcIj5Cb29rbWFyayA8aSBjbGFzcz1cImJ4IGJ4LWJvb2ttYXJrcyB0ZXh0LW11dGVkIG1zLTJcIj48L2k+PC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24taXRlbSBkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyIGp1c3RpZnktY29udGVudC1iZXR3ZWVuIGRlbGV0ZS1pdGVtXCIgaHJlZj1cIiNcIj5EZWxldGUgPGkgY2xhc3M9XCJieCBieC10cmFzaCB0ZXh0LW11dGVkIG1zLTJcIj48L2k+PC9hPlxcXHJcbiAgICAgICAgICAgICAgICA8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICA8L2Rpdj4nO1xyXG4gICAgICAgIH1cclxuICAgICAgICBpZiAoaGFzX2Ryb3BEb3duID09PSB0cnVlKSB7XHJcbiAgICAgICAgICAgIG1zZ0hUTUwgKz1cclxuICAgICAgICAgICAgICAgICc8ZGl2IGNsYXNzPVwiYWxpZ24tc2VsZi1zdGFydCBtZXNzYWdlLWJveC1kcm9wIGQtZmxleFwiPlxcXHJcbiAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJkcm9wZG93blwiPlxcXHJcbiAgICAgICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLXRvZ2dsZVwiIGhyZWY9XCIjXCIgcm9sZT1cImJ1dHRvblwiIGRhdGEtYnMtdG9nZ2xlPVwiZHJvcGRvd25cIiBhcmlhLWhhc3BvcHVwPVwidHJ1ZVwiIGFyaWEtZXhwYW5kZWQ9XCJmYWxzZVwiPlxcXHJcbiAgICAgICAgICAgICAgICAgIDxpIGNsYXNzPVwicmktZW1vdGlvbi1oYXBweS1saW5lXCI+PC9pPlxcXHJcbiAgICAgICAgICAgICAgICA8L2E+XFxcclxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJkcm9wZG93bi1tZW51IGVtb2ppLWRyb3Bkb3duLW1lbnVcIj5cXFxyXG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiaHN0YWNrIGFsaWduLWl0ZW1zLWNlbnRlciBnYXAtMiBweC0yIGZzLTI1XCI+XFxcclxuICAgICAgICAgICAgICAgICAgICA8YSBocmVmPVwiamF2YXNjcmlwdDp2b2lkKDApO1wiPvCfkps8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICA8YSBocmVmPVwiamF2YXNjcmlwdDp2b2lkKDApO1wiPvCfpKM8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICA8YSBocmVmPVwiamF2YXNjcmlwdDp2b2lkKDApO1wiPvCfmJw8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICA8YSBocmVmPVwiamF2YXNjcmlwdDp2b2lkKDApO1wiPvCfmJg8L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICA8YSBocmVmPVwiamF2YXNjcmlwdDp2b2lkKDApO1wiPvCfmI08L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiYXZhdGFyLXhzXCI+XFxcclxuICAgICAgICAgICAgICAgICAgICA8YSBocmVmPVwiamF2YXNjcmlwdDp2b2lkKDApO1wiIGNsYXNzPVwiYXZhdGFyLXRpdGxlIGJnLXNvZnQtcHJpbWFyeSByb3VuZGVkLWNpcmNsZSBmcy0xOSB0ZXh0LXByaW1hcnlcIj4rPC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgIDwvZGl2PlxcXHJcbiAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJkcm9wZG93blwiPlxcXHJcbiAgICAgICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLXRvZ2dsZVwiIGhyZWY9XCIjXCIgcm9sZT1cImJ1dHRvblwiIGRhdGEtYnMtdG9nZ2xlPVwiZHJvcGRvd25cIiBhcmlhLWhhc3BvcHVwPVwidHJ1ZVwiIGFyaWEtZXhwYW5kZWQ9XCJmYWxzZVwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPGkgY2xhc3M9XCJyaS1tb3JlLTItZmlsbFwiPjwvaT5cXFxyXG4gICAgICAgICAgICAgICAgPC9hPlxcXHJcbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPVwiZHJvcGRvd24tbWVudVwiPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9XCJkcm9wZG93bi1pdGVtIGQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXIganVzdGlmeS1jb250ZW50LWJldHdlZW4gcmVwbHktbWVzc2FnZVwiIGhyZWY9XCIjXCIgaWQ9XCJyZXBseS1tZXNzYWdlLScgK1xyXG4gICAgICAgICAgICAgICAgbWVzc2FnZUlkcyArXHJcbiAgICAgICAgICAgICAgICAnXCIgZGF0YS1icy10b2dnbGU9XCJjb2xsYXBzZVwiIGRhdGEtYnMtdGFyZ2V0PVwiLnJlcGx5Q29sbGFwc2VcIj5SZXBseSA8aSBjbGFzcz1cImJ4IGJ4LXNoYXJlIG1zLTIgdGV4dC1tdXRlZFwiPjwvaT48L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLWl0ZW0gZC1mbGV4IGFsaWduLWl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNvbnRlbnQtYmV0d2VlblwiIGhyZWY9XCIjXCIgZGF0YS1icy10b2dnbGU9XCJtb2RhbFwiIGRhdGEtYnMtdGFyZ2V0PVwiLmZvcndhcmRNb2RhbFwiPkZvcndhcmQgPGkgY2xhc3M9XCJieCBieC1zaGFyZS1hbHQgbXMtMiB0ZXh0LW11dGVkXCI+PC9pPjwvYT5cXFxyXG4gICAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPVwiZHJvcGRvd24taXRlbSBkLWZsZXggYWxpZ24taXRlbXMtY2VudGVyIGp1c3RpZnktY29udGVudC1iZXR3ZWVuIGNvcHktbWVzc2FnZVwiIGhyZWY9XCIjXCIgaWQ9XCJjb3B5LW1lc3NhZ2UtJyArXHJcbiAgICAgICAgICAgICAgICBtZXNzYWdlSWRzICtcclxuICAgICAgICAgICAgICAgICdcIj5Db3B5IDxpIGNsYXNzPVwiYnggYngtY29weSB0ZXh0LW11dGVkIG1zLTJcIj48L2k+PC9hPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9XCJkcm9wZG93bi1pdGVtIGQtZmxleCBhbGlnbi1pdGVtcy1jZW50ZXIganVzdGlmeS1jb250ZW50LWJldHdlZW5cIiBocmVmPVwiI1wiPkJvb2ttYXJrIDxpIGNsYXNzPVwiYnggYngtYm9va21hcmtzIHRleHQtbXV0ZWQgbXMtMlwiPjwvaT48L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLWl0ZW0gZC1mbGV4IGFsaWduLWl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNvbnRlbnQtYmV0d2VlblwiIGhyZWY9XCIjXCI+TWFyayBhcyBVbnJlYWQgPGkgY2xhc3M9XCJieCBieC1tZXNzYWdlLWVycm9yIHRleHQtbXV0ZWQgbXMtMlwiPjwvaT48L2E+XFxcclxuICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz1cImRyb3Bkb3duLWl0ZW0gZC1mbGV4IGFsaWduLWl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNvbnRlbnQtYmV0d2VlbiBkZWxldGUtaXRlbVwiIGhyZWY9XCIjXCI+RGVsZXRlIDxpIGNsYXNzPVwiYnggYngtdHJhc2ggdGV4dC1tdXRlZCBtcy0yXCI+PC9pPjwvYT5cXFxyXG4gICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICA8L2Rpdj4nO1xyXG4gICAgICAgIH1cclxuICAgICAgICBtc2dIVE1MICs9IFwiPC9kaXY+XCI7XHJcbiAgICAgICAgcmV0dXJuIG1zZ0hUTUw7XHJcbiAgICB9XHJcblxyXG4gICAgLy9DaGF0IE1lc3NhZ2VcclxuICAgIGZ1bmN0aW9uIGdldENoYXRNZXNzYWdlcyhqc29uRmlsZVVybCkge1xyXG4gICAgICAgIGdldEpTT05GaWxlKGpzb25GaWxlVXJsLCBmdW5jdGlvbiAoZXJyLCBkYXRhKSB7XHJcbiAgICAgICAgICAgIGlmIChlcnIgIT09IG51bGwpIHtcclxuICAgICAgICAgICAgICAgIGNvbnNvbGUubG9nKFwiU29tZXRoaW5nIHdlbnQgd3Jvbmc6IFwiICsgZXJyKTtcclxuICAgICAgICAgICAgfSBlbHNlIHtcclxuICAgICAgICAgICAgICAgIHZhciBjaGF0c0RhdGEgPVxyXG4gICAgICAgICAgICAgICAgICAgIGN1cnJlbnRTZWxlY3RlZENoYXQgPT0gXCJ1c2Vyc1wiXHJcbiAgICAgICAgICAgICAgICAgICAgICAgID8gZGF0YVswXS5jaGF0c1xyXG4gICAgICAgICAgICAgICAgICAgICAgICA6IGRhdGFbMF0uY2hhbm5lbF9jaGF0O1xyXG4gICAgICAgICAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXHJcbiAgICAgICAgICAgICAgICAgICAgY3VycmVudFNlbGVjdGVkQ2hhdCArIFwiLWNvbnZlcnNhdGlvblwiXHJcbiAgICAgICAgICAgICAgICApLmlubmVySFRNTCA9IFwiXCI7XHJcbiAgICAgICAgICAgICAgICB2YXIgaXNDb250aW51ZSA9IDA7XHJcbiAgICAgICAgICAgICAgICBjaGF0c0RhdGEuZm9yRWFjaChmdW5jdGlvbiAoaXNDaGF0LCBpbmRleCkge1xyXG4gICAgICAgICAgICAgICAgICAgIGlmIChpc0NvbnRpbnVlID4gMCkge1xyXG4gICAgICAgICAgICAgICAgICAgICAgICBpc0NvbnRpbnVlID0gaXNDb250aW51ZSAtIDE7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybjtcclxuICAgICAgICAgICAgICAgICAgICB9XHJcbiAgICAgICAgICAgICAgICAgICAgdmFyIGlzQWxpZ2huID1cclxuICAgICAgICAgICAgICAgICAgICAgICAgaXNDaGF0LmZyb21faWQgPT0gdXNlckNoYXRJZCA/IFwiIHJpZ2h0XCIgOiBcIiBsZWZ0XCI7XHJcblxyXG4gICAgICAgICAgICAgICAgICAgIHZhciB1c2VyID0gdXNlcnNMaXN0LmZpbmQoZnVuY3Rpb24gKGxpc3QpIHtcclxuICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIGxpc3QuaWQgPT0gaXNDaGF0LmZyb21faWQ7XHJcbiAgICAgICAgICAgICAgICAgICAgfSk7XHJcbiAgICAgICAgICAgICAgICAgICAgdmFyIG1zZ0hUTUwgPVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAnPGxpIGNsYXNzPVwiY2hhdC1saXN0JyArXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGlzQWxpZ2huICtcclxuICAgICAgICAgICAgICAgICAgICAgICAgJ1wiIGlkPScgK1xyXG4gICAgICAgICAgICAgICAgICAgICAgICBpc0NoYXQuaWQgK1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAnPlxcXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9XCJjb252ZXJzYXRpb24tbGlzdFwiPic7XHJcbiAgICAgICAgICAgICAgICAgICAgaWYgKHVzZXJDaGF0SWQgIT0gaXNDaGF0LmZyb21faWQgJiYgdXNlcilcclxuICAgICAgICAgICAgICAgICAgICAgICAgbXNnSFRNTCArPVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgJzxkaXYgY2xhc3M9XCJjaGF0LWF2YXRhclwiPjxpbWcgc3JjPVwiJyArXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICB1c2VyLnByb2ZpbGUgK1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgJ1wiIGFsdD1cIlwiPjwvZGl2Pic7XHJcblxyXG4gICAgICAgICAgICAgICAgICAgIG1zZ0hUTUwgKz0gJzxkaXYgY2xhc3M9XCJ1c2VyLWNoYXQtY29udGVudFwiPic7XHJcbiAgICAgICAgICAgICAgICAgICAgbXNnSFRNTCArPSBnZXRNc2coXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGlzQ2hhdC5pZCxcclxuICAgICAgICAgICAgICAgICAgICAgICAgaXNDaGF0Lm1zZyxcclxuICAgICAgICAgICAgICAgICAgICAgICAgaXNDaGF0Lmhhc19pbWFnZXMsXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGlzQ2hhdC5oYXNfZmlsZXMsXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGlzQ2hhdC5oYXNfYXVkaW9zLFxyXG4gICAgICAgICAgICAgICAgICAgICAgICBpc0NoYXQuaGFzX3ZpZGVvcyxcclxuICAgICAgICAgICAgICAgICAgICAgICAgaXNDaGF0Lmhhc19kcm9wRG93blxyXG4gICAgICAgICAgICAgICAgICAgICk7XHJcbiAgICAgICAgICAgICAgICAgICAgaWYgKFxyXG4gICAgICAgICAgICAgICAgICAgICAgICBjaGF0c0RhdGFbaW5kZXggKyAxXSAmJlxyXG4gICAgICAgICAgICAgICAgICAgICAgICBpc0NoYXQuZnJvbV9pZCA9PSBjaGF0c0RhdGFbaW5kZXggKyAxXVtcImZyb21faWRcIl1cclxuICAgICAgICAgICAgICAgICAgICApIHtcclxuICAgICAgICAgICAgICAgICAgICAgICAgaXNDb250aW51ZSA9IGdldE5leHRNc2dDb3VudHMoXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBjaGF0c0RhdGEsXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBpbmRleCxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlzQ2hhdC5mcm9tX2lkXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICk7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIG1zZ0hUTUwgKz0gZ2V0TmV4dE1zZ3MoXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBjaGF0c0RhdGEsXHJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBpbmRleCxcclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlzQ2hhdC5mcm9tX2lkLFxyXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgaXNDb250aW51ZVxyXG4gICAgICAgICAgICAgICAgICAgICAgICApO1xyXG4gICAgICAgICAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgICAgICAgICBtc2dIVE1MICs9XHJcbiAgICAgICAgICAgICAgICAgICAgICAgICc8ZGl2IGNsYXNzPVwiY29udmVyc2F0aW9uLW5hbWVcIj48c21hbGwgY2xhc3M9XCJ0ZXh0LW11dGVkIHRpbWVcIj4nICtcclxuICAgICAgICAgICAgICAgICAgICAgICAgaXNDaGF0LmRhdGV0aW1lICtcclxuICAgICAgICAgICAgICAgICAgICAgICAgJzwvc21hbGw+IDxzcGFuIGNsYXNzPVwidGV4dC1zdWNjZXNzIGNoZWNrLW1lc3NhZ2UtaWNvblwiPjxpIGNsYXNzPVwiYnggYngtY2hlY2stZG91YmxlXCI+PC9pPjwvc3Bhbj48L2Rpdj4nO1xyXG4gICAgICAgICAgICAgICAgICAgIG1zZ0hUTUwgKz1cclxuICAgICAgICAgICAgICAgICAgICAgICAgXCI8L2Rpdj5cXFxyXG4gICAgICAgICAgICAgICAgPC9kaXY+XFxcclxuICAgICAgICAgICAgPC9saT5cIjtcclxuXHJcbiAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGN1cnJlbnRTZWxlY3RlZENoYXQgKyBcIi1jb252ZXJzYXRpb25cIlxyXG4gICAgICAgICAgICAgICAgICAgICkuaW5uZXJIVE1MICs9IG1zZ0hUTUw7XHJcbiAgICAgICAgICAgICAgICB9KTtcclxuICAgICAgICAgICAgfVxyXG4gICAgICAgICAgICBkZWxldGVNZXNzYWdlKCk7XHJcbiAgICAgICAgICAgIGRlbGV0ZUNoYW5uZWxNZXNzYWdlKCk7XHJcbiAgICAgICAgICAgIGRlbGV0ZUltYWdlKCk7XHJcbiAgICAgICAgICAgIGNvcHlNZXNzYWdlKCk7XHJcbiAgICAgICAgICAgIGNvcHlDaGFubmVsTWVzc2FnZSgpO1xyXG4gICAgICAgICAgICBzY3JvbGxUb0JvdHRvbShcInVzZXJzLWNoYXRcIik7XHJcbiAgICAgICAgICAgIHVwZGF0ZUxpZ2h0Ym94KCk7XHJcbiAgICAgICAgICAgIGNvcHlDbGlwYm9hcmQoKTtcclxuICAgICAgICAgICAgcmVwbHlNZXNzYWdlKCk7XHJcbiAgICAgICAgICAgIHJlcGx5Q2hhbm5lbE1lc3NhZ2UoKTtcclxuICAgICAgICB9KTtcclxuICAgIH1cclxuICAgIC8vIEdMaWdodGJveCBQb3B1cFxyXG4gICAgZnVuY3Rpb24gdXBkYXRlTGlnaHRib3goKSB7XHJcbiAgICAgICAgdmFyIGxpZ2h0Ym94ID0gR0xpZ2h0Ym94KHtcclxuICAgICAgICAgICAgc2VsZWN0b3I6IFwiLnBvcHVwLWltZ1wiLFxyXG4gICAgICAgICAgICB0aXRsZTogZmFsc2UsXHJcbiAgICAgICAgfSk7XHJcbiAgICB9XHJcbn0pKCk7XHJcblxyXG52YXIgaW5wdXQsIGZpbHRlciwgdWwsIGxpLCBhLCBpLCBqLCBkaXY7XHJcbi8vIFNlYXJjaCBVc2VyXHJcbmZ1bmN0aW9uIHNlYXJjaFVzZXIoKSB7XHJcbiAgICBpbnB1dCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwic2VhcmNoQ2hhdFVzZXJcIik7XHJcbiAgICBmaWx0ZXIgPSBpbnB1dC52YWx1ZS50b1VwcGVyQ2FzZSgpO1xyXG4gICAgdWwgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLmNoYXQtcm9vbS1saXN0XCIpO1xyXG4gICAgbGkgPSB1bC5nZXRFbGVtZW50c0J5VGFnTmFtZShcImxpXCIpO1xyXG4gICAgZm9yIChpID0gMDsgaSA8IGxpLmxlbmd0aDsgaSsrKSB7XHJcbiAgICAgICAgdmFyIGl0ZW0gPSBsaVtpXTtcclxuICAgICAgICB2YXIgdHh0VmFsdWUgPSBpdGVtLnF1ZXJ5U2VsZWN0b3IoXCJwXCIpLmlubmVyVGV4dDtcclxuICAgICAgICBpZiAodHh0VmFsdWUudG9VcHBlckNhc2UoKS5pbmRleE9mKGZpbHRlcikgPiAtMSkge1xyXG4gICAgICAgICAgICBsaVtpXS5zdHlsZS5kaXNwbGF5ID0gXCJcIjtcclxuICAgICAgICB9IGVsc2Uge1xyXG4gICAgICAgICAgICBsaVtpXS5zdHlsZS5kaXNwbGF5ID0gXCJub25lXCI7XHJcbiAgICAgICAgfVxyXG4gICAgfVxyXG59XHJcblxyXG4vL1NlYXJjaCBDb250YWN0c1xyXG5cclxuZnVuY3Rpb24gc2VhcmNoQ29udGFjdHMoKSB7XHJcbiAgICBpbnB1dCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwic2VhcmNoQ29udGFjdFwiKTtcclxuICAgIGZpbHRlciA9IGlucHV0LnZhbHVlLnRvVXBwZXJDYXNlKCk7XHJcbiAgICBsaXN0ID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5zb3J0LWNvbnRhY3RcIik7XHJcbiAgICBsaSA9IGxpc3QucXVlcnlTZWxlY3RvckFsbChcIi5tdC0zIGxpXCIpO1xyXG4gICAgZGl2ID0gbGlzdC5xdWVyeVNlbGVjdG9yQWxsKFwiLm10LTMgLmNvbnRhY3QtbGlzdC10aXRsZVwiKTtcclxuICAgIGxldCB1c2VyVVVJRCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJ21ldGFbbmFtZT1cInV1aWRcIl0nKS5jb250ZW50O1xyXG4gICAgLy8gRmV0Y2hpbmcgdXNlcnMgZnJvbSByZW1vdGVcclxuXHJcbiAgICBheGlvcy5nZXQoXCIvYXBpL3VzZXIvY29udGFjdHNcIiwgeyBwYXJhbXM6IHt9IH0pLnRoZW4oKHJlc3BvbnNlKSA9PiB7fSk7XHJcblxyXG4gICAgZm9yIChqID0gMDsgaiA8IGRpdi5sZW5ndGg7IGorKykge1xyXG4gICAgICAgIHZhciBjb250YWN0VGl0bGUgPSBkaXZbal07XHJcbiAgICAgICAgdHh0VmFsdWUgPSBjb250YWN0VGl0bGUuaW5uZXJUZXh0O1xyXG4gICAgICAgIGlmICh0eHRWYWx1ZS50b1VwcGVyQ2FzZSgpLmluZGV4T2YoZmlsdGVyKSA+IC0xKSB7XHJcbiAgICAgICAgICAgIGRpdltqXS5zdHlsZS5kaXNwbGF5ID0gXCJcIjtcclxuICAgICAgICB9IGVsc2Uge1xyXG4gICAgICAgICAgICBkaXZbal0uc3R5bGUuZGlzcGxheSA9IFwibm9uZVwiO1xyXG4gICAgICAgIH1cclxuICAgIH1cclxuXHJcbiAgICBmb3IgKGkgPSAwOyBpIDwgbGkubGVuZ3RoOyBpKyspIHtcclxuICAgICAgICBjb250YWN0TmFtZSA9IGxpW2ldO1xyXG4gICAgICAgIHR4dFZhbHVlID0gY29udGFjdE5hbWUucXVlcnlTZWxlY3RvcihcImg1XCIpLmlubmVyVGV4dDtcclxuICAgICAgICBpZiAodHh0VmFsdWUudG9VcHBlckNhc2UoKS5pbmRleE9mKGZpbHRlcikgPiAtMSkge1xyXG4gICAgICAgICAgICBsaVtpXS5zdHlsZS5kaXNwbGF5ID0gXCJcIjtcclxuICAgICAgICB9IGVsc2Uge1xyXG4gICAgICAgICAgICBsaVtpXS5zdHlsZS5kaXNwbGF5ID0gXCJub25lXCI7XHJcbiAgICAgICAgfVxyXG4gICAgfVxyXG59XHJcbmRvY3VtZW50XHJcbiAgICAuZ2V0RWxlbWVudEJ5SWQoXCJzZWFyY2hDb250YWN0XCIpXHJcbiAgICAuYWRkRXZlbnRMaXN0ZW5lcihcImtleXVwXCIsIHNlYXJjaENvbnRhY3RzKTtcclxuXHJcbi8vU2VhcmNoIGNvbnRhY3Qgb24gY29udGFjdE1vZGFsTGlzdFxyXG5mdW5jdGlvbiBzZWFyY2hDb250YWN0T25Nb2RhbCgpIHtcclxuICAgIGlucHV0ID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJzZWFyY2hDb250YWN0TW9kYWxcIik7XHJcbiAgICBmaWx0ZXIgPSBpbnB1dC52YWx1ZS50b1VwcGVyQ2FzZSgpO1xyXG4gICAgbGlzdCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIuY29udGFjdC1tb2RhbC1saXN0XCIpO1xyXG4gICAgbGkgPSBsaXN0LnF1ZXJ5U2VsZWN0b3JBbGwoXCIubXQtMiBsaVwiKTtcclxuICAgIGRpdiA9IGxpc3QucXVlcnlTZWxlY3RvckFsbChcIi5tdC0yIC5jb250YWN0LWxpc3QtdGl0bGVcIik7XHJcblxyXG4gICAgZm9yIChqID0gMDsgaiA8IGRpdi5sZW5ndGg7IGorKykge1xyXG4gICAgICAgIHZhciBjb250YWN0VGl0bGUgPSBkaXZbal07XHJcbiAgICAgICAgdHh0VmFsdWUgPSBjb250YWN0VGl0bGUuaW5uZXJUZXh0O1xyXG4gICAgICAgIGlmICh0eHRWYWx1ZS50b1VwcGVyQ2FzZSgpLmluZGV4T2YoZmlsdGVyKSA+IC0xKSB7XHJcbiAgICAgICAgICAgIGRpdltqXS5zdHlsZS5kaXNwbGF5ID0gXCJcIjtcclxuICAgICAgICB9IGVsc2Uge1xyXG4gICAgICAgICAgICBkaXZbal0uc3R5bGUuZGlzcGxheSA9IFwibm9uZVwiO1xyXG4gICAgICAgIH1cclxuICAgIH1cclxuXHJcbiAgICBmb3IgKGkgPSAwOyBpIDwgbGkubGVuZ3RoOyBpKyspIHtcclxuICAgICAgICBjb250YWN0TmFtZSA9IGxpW2ldO1xyXG4gICAgICAgIHR4dFZhbHVlID0gY29udGFjdE5hbWUucXVlcnlTZWxlY3RvcihcImg1XCIpLmlubmVyVGV4dDtcclxuICAgICAgICBpZiAodHh0VmFsdWUudG9VcHBlckNhc2UoKS5pbmRleE9mKGZpbHRlcikgPiAtMSkge1xyXG4gICAgICAgICAgICBsaVtpXS5zdHlsZS5kaXNwbGF5ID0gXCJcIjtcclxuICAgICAgICB9IGVsc2Uge1xyXG4gICAgICAgICAgICBsaVtpXS5zdHlsZS5kaXNwbGF5ID0gXCJub25lXCI7XHJcbiAgICAgICAgfVxyXG4gICAgfVxyXG59XHJcblxyXG4vLyBib29rbWFyayBzZXJhY2hcclxuZnVuY3Rpb24gc2VhcmNoQm9va21hcmsoKSB7XHJcbiAgICB2YXIgaW5wdXQsIGZpbHRlciwgdWwsIGxpLCBhLCBpLCB0eHRWYWx1ZTtcclxuICAgIGlucHV0ID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJzZWFyY2hib29rbWFya1wiKTtcclxuICAgIGZpbHRlciA9IGlucHV0LnZhbHVlLnRvVXBwZXJDYXNlKCk7XHJcbiAgICB1bCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiY2hhdC1ib29rbWFyay1saXN0XCIpO1xyXG4gICAgbGkgPSB1bC5nZXRFbGVtZW50c0J5VGFnTmFtZShcImxpXCIpO1xyXG4gICAgZm9yIChpID0gMDsgaSA8IGxpLmxlbmd0aDsgaSsrKSB7XHJcbiAgICAgICAgYSA9IGxpW2ldLmdldEVsZW1lbnRzQnlUYWdOYW1lKFwiYVwiKVswXTtcclxuICAgICAgICB0eHRWYWx1ZSA9IGEudGV4dENvbnRlbnQgfHwgYS5pbm5lclRleHQ7XHJcbiAgICAgICAgaWYgKHR4dFZhbHVlLnRvVXBwZXJDYXNlKCkuaW5kZXhPZihmaWx0ZXIpID4gLTEpIHtcclxuICAgICAgICAgICAgbGlbaV0uc3R5bGUuZGlzcGxheSA9IFwiXCI7XHJcbiAgICAgICAgfSBlbHNlIHtcclxuICAgICAgICAgICAgbGlbaV0uc3R5bGUuZGlzcGxheSA9IFwibm9uZVwiO1xyXG4gICAgICAgIH1cclxuICAgIH1cclxufVxyXG5cclxuLy9Mb2NhdGlvbiBQZXJtaXNzaW9uXHJcbmZ1bmN0aW9uIGdldExvY2F0aW9uKCkge1xyXG4gICAgaWYgKG5hdmlnYXRvci5nZW9sb2NhdGlvbikge1xyXG4gICAgICAgIG5hdmlnYXRvci5nZW9sb2NhdGlvbi5nZXRDdXJyZW50UG9zaXRpb24oc2hvd1Bvc2l0aW9uKTtcclxuICAgIH0gZWxzZSB7XHJcbiAgICAgICAgeC5pbm5lckhUTUwgPSBcIkdlb2xvY2F0aW9uIGlzIG5vdCBzdXBwb3J0ZWQgYnkgdGhpcyBicm93c2VyLlwiO1xyXG4gICAgfVxyXG59XHJcblxyXG5mdW5jdGlvbiBzaG93UG9zaXRpb24ocG9zaXRpb24pIHtcclxuICAgIHguaW5uZXJIVE1MID1cclxuICAgICAgICBcIkxhdGl0dWRlOiBcIiArXHJcbiAgICAgICAgcG9zaXRpb24uY29vcmRzLmxhdGl0dWRlICtcclxuICAgICAgICBcIjxicj5Mb25naXR1ZGU6IFwiICtcclxuICAgICAgICBwb3NpdGlvbi5jb29yZHMubG9uZ2l0dWRlO1xyXG59XHJcblxyXG4vL0NhbWVyYSBQZXJtaXNzaW9uXHJcbmZ1bmN0aW9uIGNhbWVyYVBlcm1pc3Npb24oKSB7XHJcbiAgICBpZiAobmF2aWdhdG9yLm1lZGlhRGV2aWNlcy5nZXRVc2VyTWVkaWEpIHtcclxuICAgICAgICBuYXZpZ2F0b3IubWVkaWFEZXZpY2VzXHJcbiAgICAgICAgICAgIC5nZXRVc2VyTWVkaWEoeyB2aWRlbzogdHJ1ZSB9KVxyXG4gICAgICAgICAgICAudGhlbihmdW5jdGlvbiAocykge1xyXG4gICAgICAgICAgICAgICAgdmlkZW8uc3JjT2JqZWN0ID0gcztcclxuICAgICAgICAgICAgfSlcclxuICAgICAgICAgICAgLmNhdGNoKGZ1bmN0aW9uIChlcnIpIHtcclxuICAgICAgICAgICAgICAgIGNvbnNvbGUubG9nKGVycik7XHJcbiAgICAgICAgICAgIH0pO1xyXG4gICAgfSBlbHNlIHtcclxuICAgICAgICBjb25zb2xlLmxvZyhcIk5vXCIpO1xyXG4gICAgfVxyXG59XHJcblxyXG4vL0F1ZGlvKE1pYykgUGVybWlzc2lvblxyXG5mdW5jdGlvbiBhdWRpb1Blcm1pc3Npb24oKSB7XHJcbiAgICBuYXZpZ2F0b3IubWVkaWFEZXZpY2VzXHJcbiAgICAgICAgLmdldFVzZXJNZWRpYSh7IGF1ZGlvOiB0cnVlIH0pXHJcbiAgICAgICAgLnRoZW4oZnVuY3Rpb24gKHN0cmVhbSkge1xyXG4gICAgICAgICAgICB3aW5kb3cubG9jYWxTdHJlYW0gPSBzdHJlYW07XHJcbiAgICAgICAgICAgIHdpbmRvdy5sb2NhbEF1ZGlvLnNyY09iamVjdCA9IHN0cmVhbTtcclxuICAgICAgICAgICAgd2luZG93LmxvY2FsQXVkaW8uYXV0b3BsYXkgPSB0cnVlO1xyXG4gICAgICAgIH0pO1xyXG59XHJcblxyXG4vL2dldCBjb2xvclxyXG5cclxuZG9jdW1lbnQuZG9jdW1lbnRFbGVtZW50LnN0eWxlLnNldFByb3BlcnR5KFxyXG4gICAgXCItLWJzLXByaW1hcnktcmdiXCIsXHJcbiAgICB3aW5kb3cubG9jYWxTdG9yYWdlLmdldEl0ZW0oXCJjb2xvclByaW1hcnlcIilcclxuKTtcclxuZG9jdW1lbnQuZG9jdW1lbnRFbGVtZW50LnN0eWxlLnNldFByb3BlcnR5KFxyXG4gICAgXCItLWJzLXNlY29uZGFyeS1yZ2JcIixcclxuICAgIHdpbmRvdy5sb2NhbFN0b3JhZ2UuZ2V0SXRlbShcImNvbG9yU2Vjb25kYXJ5XCIpXHJcbik7XHJcblxyXG5mdW5jdGlvbiB0aGVtZUNvbG9yKHByaW1hcnlDb2xvcikge1xyXG4gICAgdmFyIGFjdGl2ZUN1c3RvbWNvbG9yID0gbG9jYWxTdG9yYWdlLmdldEl0ZW0oXCJhY3RpdmVDdXN0b21jb2xvclwiKTtcclxuICAgIGlmIChhY3RpdmVDdXN0b21jb2xvcikge1xyXG4gICAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKGFjdGl2ZUN1c3RvbWNvbG9yKS5jaGVja2VkID0gdHJ1ZTtcclxuICAgIH1cclxuICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoXCIudGhlbWUtY29sb3JcIikuZm9yRWFjaChmdW5jdGlvbiAoaXRlbSkge1xyXG4gICAgICAgIHZhciBjb2xvclJhZGlvRWxlbWVudHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICBcImlucHV0W25hbWU9Ymdjb2xvci1yYWRpb106Y2hlY2tlZFwiXHJcbiAgICAgICAgKTtcclxuXHJcbiAgICAgICAgaWYgKGNvbG9yUmFkaW9FbGVtZW50cykge1xyXG4gICAgICAgICAgICBjb2xvclJhZGlvRWxlbWVudHMgPSBjb2xvclJhZGlvRWxlbWVudHMuaWQ7XHJcblxyXG4gICAgICAgICAgICB2YXIgZWxlbWVudHNDb2xvciA9XHJcbiAgICAgICAgICAgICAgICBkb2N1bWVudC5nZXRFbGVtZW50c0J5Q2xhc3NOYW1lKGNvbG9yUmFkaW9FbGVtZW50cyk7XHJcblxyXG4gICAgICAgICAgICB2YXIgY29sb3IgPSB3aW5kb3dcclxuICAgICAgICAgICAgICAgIC5nZXRDb21wdXRlZFN0eWxlKGVsZW1lbnRzQ29sb3JbMF0sIG51bGwpXHJcbiAgICAgICAgICAgICAgICAuZ2V0UHJvcGVydHlWYWx1ZShcImJhY2tncm91bmQtaW1hZ2VcIik7XHJcblxyXG4gICAgICAgICAgICByZ2JDb2xvclNlY29uZGFyeSA9IGNvbG9yLnN1YnN0cmluZyhcclxuICAgICAgICAgICAgICAgIGNvbG9yLmluZGV4T2YoXCJiXCIpICsgMixcclxuICAgICAgICAgICAgICAgIGNvbG9yLmluZGV4T2YoXCIpXCIpXHJcbiAgICAgICAgICAgICk7XHJcbiAgICAgICAgICAgIHJnYkNvbG9yUHJpbWFyeSA9IGNvbG9yLnN1YnN0cmluZyhcclxuICAgICAgICAgICAgICAgIGNvbG9yLmxhc3RJbmRleE9mKFwiKFwiKSArIDEsXHJcbiAgICAgICAgICAgICAgICBjb2xvci5sYXN0SW5kZXhPZihcIilcIikgLSAxXHJcbiAgICAgICAgICAgICk7XHJcbiAgICAgICAgfVxyXG5cclxuICAgICAgICBpdGVtLmFkZEV2ZW50TGlzdGVuZXIoXCJjbGlja1wiLCBmdW5jdGlvbiAoZXZlbnQpIHtcclxuICAgICAgICAgICAgaWYgKGl0ZW0uaWQpIHtcclxuICAgICAgICAgICAgICAgIGxvY2FsU3RvcmFnZS5zZXRJdGVtKFwiYWN0aXZlQ3VzdG9tY29sb3JcIiwgaXRlbS5pZCk7XHJcbiAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgLy8gY2hvb3NlIHRoZW1lIGNvbG9yXHJcbiAgICAgICAgICAgIHZhciBjb2xvclJhZGlvRWxlbWVudHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFxyXG4gICAgICAgICAgICAgICAgXCJpbnB1dFtuYW1lPWJnY29sb3ItcmFkaW9dOmNoZWNrZWRcIlxyXG4gICAgICAgICAgICApO1xyXG5cclxuICAgICAgICAgICAgaWYgKGNvbG9yUmFkaW9FbGVtZW50cykge1xyXG4gICAgICAgICAgICAgICAgY29sb3JSYWRpb0VsZW1lbnRzID0gY29sb3JSYWRpb0VsZW1lbnRzLmlkO1xyXG5cclxuICAgICAgICAgICAgICAgIHZhciBlbGVtZW50c0NvbG9yID1cclxuICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5nZXRFbGVtZW50c0J5Q2xhc3NOYW1lKGNvbG9yUmFkaW9FbGVtZW50cyk7XHJcbiAgICAgICAgICAgICAgICBpZiAoZWxlbWVudHNDb2xvcikge1xyXG4gICAgICAgICAgICAgICAgICAgIHZhciBjb2xvciA9IHdpbmRvd1xyXG4gICAgICAgICAgICAgICAgICAgICAgICAuZ2V0Q29tcHV0ZWRTdHlsZShlbGVtZW50c0NvbG9yWzBdLCBudWxsKVxyXG4gICAgICAgICAgICAgICAgICAgICAgICAuZ2V0UHJvcGVydHlWYWx1ZShcImJhY2tncm91bmQtaW1hZ2VcIik7XHJcblxyXG4gICAgICAgICAgICAgICAgICAgIHJnYkNvbG9yU2Vjb25kYXJ5ID0gY29sb3Iuc3Vic3RyaW5nKFxyXG4gICAgICAgICAgICAgICAgICAgICAgICBjb2xvci5pbmRleE9mKFwiYlwiKSArIDIsXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGNvbG9yLmluZGV4T2YoXCIpXCIpXHJcbiAgICAgICAgICAgICAgICAgICAgKTtcclxuICAgICAgICAgICAgICAgICAgICByZ2JDb2xvclByaW1hcnkgPSBjb2xvci5zdWJzdHJpbmcoXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGNvbG9yLmxhc3RJbmRleE9mKFwiKFwiKSArIDEsXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGNvbG9yLmxhc3RJbmRleE9mKFwiKVwiKSAtIDFcclxuICAgICAgICAgICAgICAgICAgICApO1xyXG5cclxuICAgICAgICAgICAgICAgICAgICB3aW5kb3cubG9jYWxTdG9yYWdlLnNldEl0ZW0oXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIFwiY29sb3JQcmltYXJ5XCIsXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIHJnYkNvbG9yUHJpbWFyeVxyXG4gICAgICAgICAgICAgICAgICAgICk7XHJcbiAgICAgICAgICAgICAgICAgICAgd2luZG93LmxvY2FsU3RvcmFnZS5zZXRJdGVtKFxyXG4gICAgICAgICAgICAgICAgICAgICAgICBcImNvbG9yU2Vjb25kYXJ5XCIsXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIHJnYkNvbG9yU2Vjb25kYXJ5XHJcbiAgICAgICAgICAgICAgICAgICAgKTtcclxuXHJcbiAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnQuZG9jdW1lbnRFbGVtZW50LnN0eWxlLnNldFByb3BlcnR5KFxyXG4gICAgICAgICAgICAgICAgICAgICAgICBcIi0tYnMtcHJpbWFyeS1yZ2JcIixcclxuICAgICAgICAgICAgICAgICAgICAgICAgd2luZG93LmxvY2FsU3RvcmFnZS5nZXRJdGVtKFwiY29sb3JQcmltYXJ5XCIpXHJcbiAgICAgICAgICAgICAgICAgICAgKTtcclxuICAgICAgICAgICAgICAgICAgICBkb2N1bWVudC5kb2N1bWVudEVsZW1lbnQuc3R5bGUuc2V0UHJvcGVydHkoXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIFwiLS1icy1zZWNvbmRhcnktcmdiXCIsXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIHdpbmRvdy5sb2NhbFN0b3JhZ2UuZ2V0SXRlbShcImNvbG9yU2Vjb25kYXJ5XCIpXHJcbiAgICAgICAgICAgICAgICAgICAgKTtcclxuICAgICAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgfVxyXG4gICAgICAgIH0pO1xyXG4gICAgfSk7XHJcblxyXG4gICAgLy8gcHJpbWFyeSBjb2xvciBwaWNrZXJcclxuICAgIHZhciBjbGFzc2ljUGlja3JQcmltYXJ5ID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChcIi5jb2xvcnBpY2tlci1wcmltYXJ5XCIpO1xyXG4gICAgY2xhc3NpY1BpY2tyUHJpbWFyeS5mb3JFYWNoKGZ1bmN0aW9uICgpIHtcclxuICAgICAgICB2YXIgcHJpbWFyeWNvbG9yID0gbG9jYWxTdG9yYWdlLmdldEl0ZW0oXCJjb2xvclByaW1hcnlcIilcclxuICAgICAgICAgICAgPyBcInJnYmEoXCIgKyBsb2NhbFN0b3JhZ2UuZ2V0SXRlbShcImNvbG9yUHJpbWFyeVwiKSArIFwiLDEpXCJcclxuICAgICAgICAgICAgOiBcIiM2MTUzQ0NcIjtcclxuXHJcbiAgICAgICAgdmFyIHByaW1hcnlQaWNrZXIgPSBQaWNrci5jcmVhdGUoe1xyXG4gICAgICAgICAgICBlbDogXCIuY29sb3JwaWNrZXItcHJpbWFyeVwiLFxyXG4gICAgICAgICAgICB0aGVtZTogXCJuYW5vXCIsIC8vIG9yICdtb25vbGl0aCcsIG9yICduYW5vJ1xyXG4gICAgICAgICAgICBkZWZhdWx0OiBwcmltYXJ5Y29sb3IsXHJcbiAgICAgICAgICAgIHN3YXRjaGVzOiBudWxsLFxyXG4gICAgICAgICAgICBkZWZhdWx0UmVwcmVzZW50YXRpb246IFwiUkdCQVwiLFxyXG4gICAgICAgICAgICBjb21wb25lbnRzOiB7XHJcbiAgICAgICAgICAgICAgICAvLyBNYWluIGNvbXBvbmVudHNcclxuICAgICAgICAgICAgICAgIHByZXZpZXc6IHRydWUsXHJcbiAgICAgICAgICAgICAgICBvcGFjaXR5OiB0cnVlLFxyXG4gICAgICAgICAgICAgICAgaHVlOiB0cnVlLFxyXG5cclxuICAgICAgICAgICAgICAgIC8vIElucHV0IC8gb3V0cHV0IE9wdGlvbnNcclxuICAgICAgICAgICAgICAgIGludGVyYWN0aW9uOiB7XHJcbiAgICAgICAgICAgICAgICAgICAgaGV4OiBmYWxzZSxcclxuICAgICAgICAgICAgICAgICAgICByZ2JhOiBmYWxzZSxcclxuICAgICAgICAgICAgICAgICAgICBoc3ZhOiBmYWxzZSxcclxuICAgICAgICAgICAgICAgICAgICBpbnB1dDogdHJ1ZSxcclxuICAgICAgICAgICAgICAgICAgICBjbGVhcjogdHJ1ZSxcclxuICAgICAgICAgICAgICAgICAgICBzYXZlOiB0cnVlLFxyXG4gICAgICAgICAgICAgICAgfSxcclxuICAgICAgICAgICAgfSxcclxuICAgICAgICB9KTtcclxuXHJcbiAgICAgICAgLy8gcHJpbWFyeSBjb2xvcnBpY2tlclxyXG4gICAgICAgIHByaW1hcnlQaWNrZXJcclxuICAgICAgICAgICAgLm9uKFwiY2xlYXJcIiwgZnVuY3Rpb24gKGluc3RhbmNlKSB7XHJcbiAgICAgICAgICAgICAgICAvLyBjb25zb2xlLmxvZygnRXZlbnQ6IFwiY2xlYXJcIicsIGluc3RhbmNlKTtcclxuICAgICAgICAgICAgfSlcclxuICAgICAgICAgICAgLm9uKFwiY2FuY2VsXCIsIGZ1bmN0aW9uIChpbnN0YW5jZSkge1xyXG4gICAgICAgICAgICAgICAgLy8gY29uc29sZS5sb2coJ2NhbmNlbCcsIHByaW1hcnlQaWNrZXIuZ2V0Q29sb3IoKS50b1JHQkEoKS50b1N0cmluZygwKSk7XHJcbiAgICAgICAgICAgIH0pXHJcbiAgICAgICAgICAgIC5vbihcImNoYW5nZVwiLCBmdW5jdGlvbiAoY29sb3IsIHNvdXJjZSwgaW5zdGFuY2UpIHtcclxuICAgICAgICAgICAgICAgIC8vIGNvbnNvbGUubG9nKCdFdmVudDogXCJjaGFuZ2VcIicsIGluc3RhbmNlLCBwcmltYXJ5UGlja2VyLmdldENvbG9yKCkudG9SR0JBKCkudG9TdHJpbmcoMCkpO1xyXG4gICAgICAgICAgICAgICAgdmFyIHByaW1hcnlDb2xvclZhbHVlID0gcHJpbWFyeVBpY2tlclxyXG4gICAgICAgICAgICAgICAgICAgIC5nZXRDb2xvcigpXHJcbiAgICAgICAgICAgICAgICAgICAgLnRvUkdCQSgpXHJcbiAgICAgICAgICAgICAgICAgICAgLnRvU3RyaW5nKDApO1xyXG5cclxuICAgICAgICAgICAgICAgIHJnYkNvbG9yc1ByaW1hcnkgPSBwcmltYXJ5Q29sb3JWYWx1ZS5zdWJzdHJpbmcoXHJcbiAgICAgICAgICAgICAgICAgICAgcHJpbWFyeUNvbG9yVmFsdWUuaW5kZXhPZihcIihcIikgKyAxLFxyXG4gICAgICAgICAgICAgICAgICAgIHByaW1hcnlDb2xvclZhbHVlLmxhc3RJbmRleE9mKFwiLFwiKVxyXG4gICAgICAgICAgICAgICAgKTtcclxuICAgICAgICAgICAgICAgIGxvY2FsU3RvcmFnZS5zZXRJdGVtKFwiY29sb3JQcmltYXJ5XCIsIHJnYkNvbG9yc1ByaW1hcnkpO1xyXG5cclxuICAgICAgICAgICAgICAgIGRvY3VtZW50LmRvY3VtZW50RWxlbWVudC5zdHlsZS5zZXRQcm9wZXJ0eShcclxuICAgICAgICAgICAgICAgICAgICBcIi0tYnMtcHJpbWFyeS1yZ2JcIixcclxuICAgICAgICAgICAgICAgICAgICB3aW5kb3cubG9jYWxTdG9yYWdlLmdldEl0ZW0oXCJjb2xvclByaW1hcnlcIilcclxuICAgICAgICAgICAgICAgICk7XHJcbiAgICAgICAgICAgIH0pO1xyXG4gICAgfSk7XHJcblxyXG4gICAgLy8gc2Vjb25kYXJ5IGNvbG9yIHBpY2tlclxyXG4gICAgdmFyIGNsYXNzaWNQaWNrclNlY29uZGFyeSA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoXHJcbiAgICAgICAgXCIuY29sb3JwaWNrZXItc2Vjb25kYXJ5XCJcclxuICAgICk7XHJcbiAgICBjbGFzc2ljUGlja3JTZWNvbmRhcnkuZm9yRWFjaChmdW5jdGlvbiAoKSB7XHJcbiAgICAgICAgdmFyIHNlY29uZGFyeWNvbG9yID0gbG9jYWxTdG9yYWdlLmdldEl0ZW0oXCJjb2xvclNlY29uZGFyeVwiKVxyXG4gICAgICAgICAgICA/IFwicmdiYShcIiArIGxvY2FsU3RvcmFnZS5nZXRJdGVtKFwiY29sb3JTZWNvbmRhcnlcIikgKyBcIiwxKVwiXHJcbiAgICAgICAgICAgIDogXCIjYjk2NmMxXCI7XHJcbiAgICAgICAgdmFyIHNlY29uZGFyeVBpY2tlciA9IFBpY2tyLmNyZWF0ZSh7XHJcbiAgICAgICAgICAgIGVsOiBcIi5jb2xvcnBpY2tlci1zZWNvbmRhcnlcIixcclxuICAgICAgICAgICAgdGhlbWU6IFwibmFub1wiLCAvLyBvciAnbW9ub2xpdGgnLCBvciAnbmFubydcclxuICAgICAgICAgICAgZGVmYXVsdDogc2Vjb25kYXJ5Y29sb3IsXHJcbiAgICAgICAgICAgIHN3YXRjaGVzOiBudWxsLFxyXG4gICAgICAgICAgICBkZWZhdWx0UmVwcmVzZW50YXRpb246IFwiUkdCQVwiLFxyXG4gICAgICAgICAgICBjb21wb25lbnRzOiB7XHJcbiAgICAgICAgICAgICAgICAvLyBNYWluIGNvbXBvbmVudHNcclxuICAgICAgICAgICAgICAgIHByZXZpZXc6IHRydWUsXHJcbiAgICAgICAgICAgICAgICBvcGFjaXR5OiB0cnVlLFxyXG4gICAgICAgICAgICAgICAgaHVlOiB0cnVlLFxyXG5cclxuICAgICAgICAgICAgICAgIC8vIElucHV0IC8gb3V0cHV0IE9wdGlvbnNcclxuICAgICAgICAgICAgICAgIGludGVyYWN0aW9uOiB7XHJcbiAgICAgICAgICAgICAgICAgICAgaGV4OiBmYWxzZSxcclxuICAgICAgICAgICAgICAgICAgICByZ2JhOiBmYWxzZSxcclxuICAgICAgICAgICAgICAgICAgICBoc3ZhOiBmYWxzZSxcclxuICAgICAgICAgICAgICAgICAgICBpbnB1dDogdHJ1ZSxcclxuICAgICAgICAgICAgICAgICAgICBjbGVhcjogdHJ1ZSxcclxuICAgICAgICAgICAgICAgICAgICBzYXZlOiB0cnVlLFxyXG4gICAgICAgICAgICAgICAgfSxcclxuICAgICAgICAgICAgfSxcclxuICAgICAgICB9KTtcclxuICAgICAgICAvLyBwcmltYXJ5IGNvbG9ycGlja2VyXHJcbiAgICAgICAgc2Vjb25kYXJ5UGlja2VyXHJcbiAgICAgICAgICAgIC5vbihcImNsZWFyXCIsIGZ1bmN0aW9uIChpbnN0YW5jZSkge1xyXG4gICAgICAgICAgICAgICAgLy8gY29uc29sZS5sb2coJ0V2ZW50OiBcImNsZWFyXCInLCBpbnN0YW5jZSk7XHJcbiAgICAgICAgICAgIH0pXHJcbiAgICAgICAgICAgIC5vbihcImNhbmNlbFwiLCBmdW5jdGlvbiAoaW5zdGFuY2UpIHtcclxuICAgICAgICAgICAgICAgIC8vIGNvbnNvbGUubG9nKCdjYW5jZWwnLCBzZWNvbmRhcnlQaWNrZXIuZ2V0Q29sb3IoKS50b1JHQkEoKS50b1N0cmluZygwKSk7XHJcbiAgICAgICAgICAgIH0pXHJcbiAgICAgICAgICAgIC5vbihcImNoYW5nZVwiLCBmdW5jdGlvbiAoY29sb3IsIHNvdXJjZSwgaW5zdGFuY2UpIHtcclxuICAgICAgICAgICAgICAgIC8vIGNvbnNvbGUubG9nKCdFdmVudDogXCJjaGFuZ2VcIicsIGluc3RhbmNlLCBzZWNvbmRhcnlQaWNrZXIuZ2V0Q29sb3IoKS50b1JHQkEoKS50b1N0cmluZygwKSk7XHJcbiAgICAgICAgICAgICAgICB2YXIgc2Vjb25kYXJ5Q29sb3JWYWx1ZSA9IHNlY29uZGFyeVBpY2tlclxyXG4gICAgICAgICAgICAgICAgICAgIC5nZXRDb2xvcigpXHJcbiAgICAgICAgICAgICAgICAgICAgLnRvUkdCQSgpXHJcbiAgICAgICAgICAgICAgICAgICAgLnRvU3RyaW5nKDApO1xyXG5cclxuICAgICAgICAgICAgICAgIHJnYkNvbG9yU2Vjb25kYXJ5ID0gc2Vjb25kYXJ5Q29sb3JWYWx1ZS5zdWJzdHJpbmcoXHJcbiAgICAgICAgICAgICAgICAgICAgc2Vjb25kYXJ5Q29sb3JWYWx1ZS5sYXN0SW5kZXhPZihcIihcIikgKyAxLFxyXG4gICAgICAgICAgICAgICAgICAgIHNlY29uZGFyeUNvbG9yVmFsdWUubGFzdEluZGV4T2YoXCIsXCIpXHJcbiAgICAgICAgICAgICAgICApO1xyXG5cclxuICAgICAgICAgICAgICAgIGxvY2FsU3RvcmFnZS5zZXRJdGVtKFwiY29sb3JTZWNvbmRhcnlcIiwgcmdiQ29sb3JTZWNvbmRhcnkpO1xyXG5cclxuICAgICAgICAgICAgICAgIGRvY3VtZW50LmRvY3VtZW50RWxlbWVudC5zdHlsZS5zZXRQcm9wZXJ0eShcclxuICAgICAgICAgICAgICAgICAgICBcIi0tYnMtc2Vjb25kYXJ5LXJnYlwiLFxyXG4gICAgICAgICAgICAgICAgICAgIHdpbmRvdy5sb2NhbFN0b3JhZ2UuZ2V0SXRlbShcImNvbG9yU2Vjb25kYXJ5XCIpXHJcbiAgICAgICAgICAgICAgICApO1xyXG4gICAgICAgICAgICB9KTtcclxuICAgIH0pO1xyXG59XHJcbnZhciBwcmltYXJ5Q29sb3IgPSB3aW5kb3dcclxuICAgIC5nZXRDb21wdXRlZFN0eWxlKGRvY3VtZW50LmJvZHksIG51bGwpXHJcbiAgICAuZ2V0UHJvcGVydHlWYWx1ZShcIi0tYnMtcHJpbWFyeS1yZ2JcIik7XHJcbnRoZW1lQ29sb3IocHJpbWFyeUNvbG9yKTtcclxuXHJcbi8vUmVtb3ZlIGltYWdlXHJcbmZ1bmN0aW9uIHJlbW92ZUltYWdlKGlkKSB7XHJcbiAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiI1wiICsgaWQpLnJlbW92ZSgpO1xyXG4gICAgaWYgKGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoXCIuaW1hZ2UtcmVtb3ZlXCIpLmxlbmd0aCA9PSAwKSB7XHJcbiAgICAgICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5maWxlX1VwbG9hZFwiKS5jbGFzc0xpc3QucmVtb3ZlKFwic2hvd1wiKTtcclxuICAgIH1cclxufVxyXG5cclxuLy9SZW1vdmUgQXR0YWNoZWQgRmlsZXNcclxuZnVuY3Rpb24gcmVtb3ZlQXR0YWNoZWRGaWxlKCkge1xyXG4gICAgaWYgKGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwicmVtb3ZlLWF0dGVjaGVkRmlsZVwiKSkge1xyXG4gICAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRzQnlDbGFzc05hbWUoXCJhdHRlY2hlZEZpbGUtcmVtb3ZlXCIpWzBdO1xyXG4gICAgICAgIC8vIERlbGV0ZSBVcGxvYWQgUHJldmlldyBBdHRhY2hlZCBGaWxlc1xyXG4gICAgICAgIGRvY3VtZW50XHJcbiAgICAgICAgICAgIC5nZXRFbGVtZW50QnlJZChcInJlbW92ZS1hdHRlY2hlZEZpbGVcIilcclxuICAgICAgICAgICAgLmFkZEV2ZW50TGlzdGVuZXIoXCJjbGlja1wiLCBmdW5jdGlvbiAoZSkge1xyXG4gICAgICAgICAgICAgICAgZS50YXJnZXQuY2xvc2VzdChcIi5hdHRjaGVkZmlsZV9wcmVcIikucmVtb3ZlKCk7XHJcbiAgICAgICAgICAgIH0pO1xyXG4gICAgfVxyXG4gICAgdmFyIHJlbW92ZUJ1dHRvbiA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIjcmVtb3ZlLWF0dGVjaGVkRmlsZVwiKTtcclxuICAgIHJlbW92ZUJ1dHRvbi5hZGRFdmVudExpc3RlbmVyKFwiY2xpY2tcIiwgZnVuY3Rpb24gKCkge1xyXG4gICAgICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIuZmlsZV9VcGxvYWQgXCIpLmNsYXNzTGlzdC5yZW1vdmUoXCJzaG93XCIpO1xyXG4gICAgfSk7XHJcbn1cclxuXHJcbi8vUmVtb3ZlIEF1ZGlvIEZpbGVzXHJcbmZ1bmN0aW9uIHJlbW92ZUF1ZGlvRmlsZSgpIHtcclxuICAgIGlmIChkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcInJlbW92ZS1hdWRpb0ZpbGVcIikpIHtcclxuICAgICAgICBkb2N1bWVudC5nZXRFbGVtZW50c0J5Q2xhc3NOYW1lKFwiYXVkaW9GaWxlLXJlbW92ZVwiKVswXTtcclxuICAgICAgICAvLyBEZWxldGUgVXBsb2FkIFByZXZpZXcgQXR0YWNoZWQgRmlsZXNcclxuICAgICAgICBkb2N1bWVudFxyXG4gICAgICAgICAgICAuZ2V0RWxlbWVudEJ5SWQoXCJyZW1vdmUtYXVkaW9GaWxlXCIpXHJcbiAgICAgICAgICAgIC5hZGRFdmVudExpc3RlbmVyKFwiY2xpY2tcIiwgZnVuY3Rpb24gKGUpIHtcclxuICAgICAgICAgICAgICAgIGUudGFyZ2V0LmNsb3Nlc3QoXCIuYXVkaW9maWxlX3ByZVwiKS5yZW1vdmUoKTtcclxuICAgICAgICAgICAgfSk7XHJcbiAgICB9XHJcbiAgICB2YXIgcmVtb3ZlQnV0dG9uID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIiNyZW1vdmUtYXVkaW9GaWxlXCIpO1xyXG4gICAgcmVtb3ZlQnV0dG9uLmFkZEV2ZW50TGlzdGVuZXIoXCJjbGlja1wiLCBmdW5jdGlvbiAoKSB7XHJcbiAgICAgICAgZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5maWxlX1VwbG9hZCBcIikuY2xhc3NMaXN0LnJlbW92ZShcInNob3dcIik7XHJcbiAgICB9KTtcclxufVxyXG4iXSwibWFwcGluZ3MiOiJBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBRUEsQ0FBQyxZQUFZO0VBQ1QsSUFBSUEsY0FBYyxHQUFHLEtBQXJCO0VBQ0EsSUFBSUMsYUFBYSxHQUFHLFlBQXBCO0VBQ0EsSUFBSUMsVUFBVSxHQUFHLGlDQUFqQjtFQUVBLElBQUlDLG1CQUFtQixHQUFHLE9BQTFCO0VBQ0EsSUFBSUMsR0FBRyxHQUFHQyxNQUFNLENBQUNDLFFBQVAsQ0FBZ0JDLE1BQWhCLEdB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\n//# sourceURL=webpack-internal:///./resources/js/pages/index.init.js\n");
+module.exports = __webpack_require__(/*! ./lib/axios */ "./node_modules/axios/lib/axios.js");
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/adapters/xhr.js":
+/*!************************************************!*\
+  !*** ./node_modules/axios/lib/adapters/xhr.js ***!
+  \************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
+var settle = __webpack_require__(/*! ./../core/settle */ "./node_modules/axios/lib/core/settle.js");
+var cookies = __webpack_require__(/*! ./../helpers/cookies */ "./node_modules/axios/lib/helpers/cookies.js");
+var buildURL = __webpack_require__(/*! ./../helpers/buildURL */ "./node_modules/axios/lib/helpers/buildURL.js");
+var buildFullPath = __webpack_require__(/*! ../core/buildFullPath */ "./node_modules/axios/lib/core/buildFullPath.js");
+var parseHeaders = __webpack_require__(/*! ./../helpers/parseHeaders */ "./node_modules/axios/lib/helpers/parseHeaders.js");
+var isURLSameOrigin = __webpack_require__(/*! ./../helpers/isURLSameOrigin */ "./node_modules/axios/lib/helpers/isURLSameOrigin.js");
+var createError = __webpack_require__(/*! ../core/createError */ "./node_modules/axios/lib/core/createError.js");
+var defaults = __webpack_require__(/*! ../defaults */ "./node_modules/axios/lib/defaults.js");
+var Cancel = __webpack_require__(/*! ../cancel/Cancel */ "./node_modules/axios/lib/cancel/Cancel.js");
+
+module.exports = function xhrAdapter(config) {
+  return new Promise(function dispatchXhrRequest(resolve, reject) {
+    var requestData = config.data;
+    var requestHeaders = config.headers;
+    var responseType = config.responseType;
+    var onCanceled;
+    function done() {
+      if (config.cancelToken) {
+        config.cancelToken.unsubscribe(onCanceled);
+      }
+
+      if (config.signal) {
+        config.signal.removeEventListener('abort', onCanceled);
+      }
+    }
+
+    if (utils.isFormData(requestData)) {
+      delete requestHeaders['Content-Type']; // Let the browser set it
+    }
+
+    var request = new XMLHttpRequest();
+
+    // HTTP basic authentication
+    if (config.auth) {
+      var username = config.auth.username || '';
+      var password = config.auth.password ? unescape(encodeURIComponent(config.auth.password)) : '';
+      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
+    }
+
+    var fullPath = buildFullPath(config.baseURL, config.url);
+    request.open(config.method.toUpperCase(), buildURL(fullPath, config.params, config.paramsSerializer), true);
+
+    // Set the request timeout in MS
+    request.timeout = config.timeout;
+
+    function onloadend() {
+      if (!request) {
+        return;
+      }
+      // Prepare the response
+      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
+      var responseData = !responseType || responseType === 'text' ||  responseType === 'json' ?
+        request.responseText : request.response;
+      var response = {
+        data: responseData,
+        status: request.status,
+        statusText: request.statusText,
+        headers: responseHeaders,
+        config: config,
+        request: request
+      };
+
+      settle(function _resolve(value) {
+        resolve(value);
+        done();
+      }, function _reject(err) {
+        reject(err);
+        done();
+      }, response);
+
+      // Clean up request
+      request = null;
+    }
+
+    if ('onloadend' in request) {
+      // Use onloadend if available
+      request.onloadend = onloadend;
+    } else {
+      // Listen for ready state to emulate onloadend
+      request.onreadystatechange = function handleLoad() {
+        if (!request || request.readyState !== 4) {
+          return;
+        }
+
+        // The request errored out and we didn't get a response, this will be
+        // handled by onerror instead
+        // With one exception: request that using file: protocol, most browsers
+        // will return status as 0 even though it's a successful request
+        if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
+          return;
+        }
+        // readystate handler is calling before onerror or ontimeout handlers,
+        // so we should call onloadend on the next 'tick'
+        setTimeout(onloadend);
+      };
+    }
+
+    // Handle browser request cancellation (as opposed to a manual cancellation)
+    request.onabort = function handleAbort() {
+      if (!request) {
+        return;
+      }
+
+      reject(createError('Request aborted', config, 'ECONNABORTED', request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle low level network errors
+    request.onerror = function handleError() {
+      // Real errors are hidden from us by the browser
+      // onerror should only fire if it's a network error
+      reject(createError('Network Error', config, null, request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle timeout
+    request.ontimeout = function handleTimeout() {
+      var timeoutErrorMessage = config.timeout ? 'timeout of ' + config.timeout + 'ms exceeded' : 'timeout exceeded';
+      var transitional = config.transitional || defaults.transitional;
+      if (config.timeoutErrorMessage) {
+        timeoutErrorMessage = config.timeoutErrorMessage;
+      }
+      reject(createError(
+        timeoutErrorMessage,
+        config,
+        transitional.clarifyTimeoutError ? 'ETIMEDOUT' : 'ECONNABORTED',
+        request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Add xsrf header
+    // This is only done if running in a standard browser environment.
+    // Specifically not if we're in a web worker, or react-native.
+    if (utils.isStandardBrowserEnv()) {
+      // Add xsrf header
+      var xsrfValue = (config.withCredentials || isURLSameOrigin(fullPath)) && config.xsrfCookieName ?
+        cookies.read(config.xsrfCookieName) :
+        undefined;
+
+      if (xsrfValue) {
+        requestHeaders[config.xsrfHeaderName] = xsrfValue;
+      }
+    }
+
+    // Add headers to the request
+    if ('setRequestHeader' in request) {
+      utils.forEach(requestHeaders, function setRequestHeader(val, key) {
+        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
+          // Remove Content-Type if data is undefined
+          delete requestHeaders[key];
+        } else {
+          // Otherwise add header to the request
+          request.setRequestHeader(key, val);
+        }
+      });
+    }
+
+    // Add withCredentials to request if needed
+    if (!utils.isUndefined(config.withCredentials)) {
+      request.withCredentials = !!config.withCredentials;
+    }
+
+    // Add responseType to request if needed
+    if (responseType && responseType !== 'json') {
+      request.responseType = config.responseType;
+    }
+
+    // Handle progress if needed
+    if (typeof config.onDownloadProgress === 'function') {
+      request.addEventListener('progress', config.onDownloadProgress);
+    }
+
+    // Not all browsers support upload events
+    if (typeof config.onUploadProgress === 'function' && request.upload) {
+      request.upload.addEventListener('progress', config.onUploadProgress);
+    }
+
+    if (config.cancelToken || config.signal) {
+      // Handle cancellation
+      // eslint-disable-next-line func-names
+      onCanceled = function(cancel) {
+        if (!request) {
+          return;
+        }
+        reject(!cancel || (cancel && cancel.type) ? new Cancel('canceled') : cancel);
+        request.abort();
+        request = null;
+      };
+
+      config.cancelToken && config.cancelToken.subscribe(onCanceled);
+      if (config.signal) {
+        config.signal.aborted ? onCanceled() : config.signal.addEventListener('abort', onCanceled);
+      }
+    }
+
+    if (!requestData) {
+      requestData = null;
+    }
+
+    // Send the request
+    request.send(requestData);
+  });
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/axios.js":
+/*!*****************************************!*\
+  !*** ./node_modules/axios/lib/axios.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./utils */ "./node_modules/axios/lib/utils.js");
+var bind = __webpack_require__(/*! ./helpers/bind */ "./node_modules/axios/lib/helpers/bind.js");
+var Axios = __webpack_require__(/*! ./core/Axios */ "./node_modules/axios/lib/core/Axios.js");
+var mergeConfig = __webpack_require__(/*! ./core/mergeConfig */ "./node_modules/axios/lib/core/mergeConfig.js");
+var defaults = __webpack_require__(/*! ./defaults */ "./node_modules/axios/lib/defaults.js");
+
+/**
+ * Create an instance of Axios
+ *
+ * @param {Object} defaultConfig The default config for the instance
+ * @return {Axios} A new instance of Axios
+ */
+function createInstance(defaultConfig) {
+  var context = new Axios(defaultConfig);
+  var instance = bind(Axios.prototype.request, context);
+
+  // Copy axios.prototype to instance
+  utils.extend(instance, Axios.prototype, context);
+
+  // Copy context to instance
+  utils.extend(instance, context);
+
+  // Factory for creating new instances
+  instance.create = function create(instanceConfig) {
+    return createInstance(mergeConfig(defaultConfig, instanceConfig));
+  };
+
+  return instance;
+}
+
+// Create the default instance to be exported
+var axios = createInstance(defaults);
+
+// Expose Axios class to allow class inheritance
+axios.Axios = Axios;
+
+// Expose Cancel & CancelToken
+axios.Cancel = __webpack_require__(/*! ./cancel/Cancel */ "./node_modules/axios/lib/cancel/Cancel.js");
+axios.CancelToken = __webpack_require__(/*! ./cancel/CancelToken */ "./node_modules/axios/lib/cancel/CancelToken.js");
+axios.isCancel = __webpack_require__(/*! ./cancel/isCancel */ "./node_modules/axios/lib/cancel/isCancel.js");
+axios.VERSION = (__webpack_require__(/*! ./env/data */ "./node_modules/axios/lib/env/data.js").version);
+
+// Expose all/spread
+axios.all = function all(promises) {
+  return Promise.all(promises);
+};
+axios.spread = __webpack_require__(/*! ./helpers/spread */ "./node_modules/axios/lib/helpers/spread.js");
+
+// Expose isAxiosError
+axios.isAxiosError = __webpack_require__(/*! ./helpers/isAxiosError */ "./node_modules/axios/lib/helpers/isAxiosError.js");
+
+module.exports = axios;
+
+// Allow use of default import syntax in TypeScript
+module.exports["default"] = axios;
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/cancel/Cancel.js":
+/*!*************************************************!*\
+  !*** ./node_modules/axios/lib/cancel/Cancel.js ***!
+  \*************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+/**
+ * A `Cancel` is an object that is thrown when an operation is canceled.
+ *
+ * @class
+ * @param {string=} message The message.
+ */
+function Cancel(message) {
+  this.message = message;
+}
+
+Cancel.prototype.toString = function toString() {
+  return 'Cancel' + (this.message ? ': ' + this.message : '');
+};
+
+Cancel.prototype.__CANCEL__ = true;
+
+module.exports = Cancel;
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/cancel/CancelToken.js":
+/*!******************************************************!*\
+  !*** ./node_modules/axios/lib/cancel/CancelToken.js ***!
+  \******************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var Cancel = __webpack_require__(/*! ./Cancel */ "./node_modules/axios/lib/cancel/Cancel.js");
+
+/**
+ * A `CancelToken` is an object that can be used to request cancellation of an operation.
+ *
+ * @class
+ * @param {Function} executor The executor function.
+ */
+function CancelToken(executor) {
+  if (typeof executor !== 'function') {
+    throw new TypeError('executor must be a function.');
+  }
+
+  var resolvePromise;
+
+  this.promise = new Promise(function promiseExecutor(resolve) {
+    resolvePromise = resolve;
+  });
+
+  var token = this;
+
+  // eslint-disable-next-line func-names
+  this.promise.then(function(cancel) {
+    if (!token._listeners) return;
+
+    var i;
+    var l = token._listeners.length;
+
+    for (i = 0; i < l; i++) {
+      token._listeners[i](cancel);
+    }
+    token._listeners = null;
+  });
+
+  // eslint-disable-next-line func-names
+  this.promise.then = function(onfulfilled) {
+    var _resolve;
+    // eslint-disable-next-line func-names
+    var promise = new Promise(function(resolve) {
+      token.subscribe(resolve);
+      _resolve = resolve;
+    }).then(onfulfilled);
+
+    promise.cancel = function reject() {
+      token.unsubscribe(_resolve);
+    };
+
+    return promise;
+  };
+
+  executor(function cancel(message) {
+    if (token.reason) {
+      // Cancellation has already been requested
+      return;
+    }
+
+    token.reason = new Cancel(message);
+    resolvePromise(token.reason);
+  });
+}
+
+/**
+ * Throws a `Cancel` if cancellation has been requested.
+ */
+CancelToken.prototype.throwIfRequested = function throwIfRequested() {
+  if (this.reason) {
+    throw this.reason;
+  }
+};
+
+/**
+ * Subscribe to the cancel signal
+ */
+
+CancelToken.prototype.subscribe = function subscribe(listener) {
+  if (this.reason) {
+    listener(this.reason);
+    return;
+  }
+
+  if (this._listeners) {
+    this._listeners.push(listener);
+  } else {
+    this._listeners = [listener];
+  }
+};
+
+/**
+ * Unsubscribe from the cancel signal
+ */
+
+CancelToken.prototype.unsubscribe = function unsubscribe(listener) {
+  if (!this._listeners) {
+    return;
+  }
+  var index = this._listeners.indexOf(listener);
+  if (index !== -1) {
+    this._listeners.splice(index, 1);
+  }
+};
+
+/**
+ * Returns an object that contains a new `CancelToken` and a function that, when called,
+ * cancels the `CancelToken`.
+ */
+CancelToken.source = function source() {
+  var cancel;
+  var token = new CancelToken(function executor(c) {
+    cancel = c;
+  });
+  return {
+    token: token,
+    cancel: cancel
+  };
+};
+
+module.exports = CancelToken;
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/cancel/isCancel.js":
+/*!***************************************************!*\
+  !*** ./node_modules/axios/lib/cancel/isCancel.js ***!
+  \***************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+module.exports = function isCancel(value) {
+  return !!(value && value.__CANCEL__);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/Axios.js":
+/*!**********************************************!*\
+  !*** ./node_modules/axios/lib/core/Axios.js ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
+var buildURL = __webpack_require__(/*! ../helpers/buildURL */ "./node_modules/axios/lib/helpers/buildURL.js");
+var InterceptorManager = __webpack_require__(/*! ./InterceptorManager */ "./node_modules/axios/lib/core/InterceptorManager.js");
+var dispatchRequest = __webpack_require__(/*! ./dispatchRequest */ "./node_modules/axios/lib/core/dispatchRequest.js");
+var mergeConfig = __webpack_require__(/*! ./mergeConfig */ "./node_modules/axios/lib/core/mergeConfig.js");
+var validator = __webpack_require__(/*! ../helpers/validator */ "./node_modules/axios/lib/helpers/validator.js");
+
+var validators = validator.validators;
+/**
+ * Create a new instance of Axios
+ *
+ * @param {Object} instanceConfig The default config for the instance
+ */
+function Axios(instanceConfig) {
+  this.defaults = instanceConfig;
+  this.interceptors = {
+    request: new InterceptorManager(),
+    response: new InterceptorManager()
+  };
+}
+
+/**
+ * Dispatch a request
+ *
+ * @param {Object} config The config specific for this request (merged with this.defaults)
+ */
+Axios.prototype.request = function request(configOrUrl, config) {
+  /*eslint no-param-reassign:0*/
+  // Allow for axios('example/url'[, config]) a la fetch API
+  if (typeof configOrUrl === 'string') {
+    config = config || {};
+    config.url = configOrUrl;
+  } else {
+    config = configOrUrl || {};
+  }
+
+  if (!config.url) {
+    throw new Error('Provided config url is not valid');
+  }
+
+  config = mergeConfig(this.defaults, config);
+
+  // Set config.method
+  if (config.method) {
+    config.method = config.method.toLowerCase();
+  } else if (this.defaults.method) {
+    config.method = this.defaults.method.toLowerCase();
+  } else {
+    config.method = 'get';
+  }
+
+  var transitional = config.transitional;
+
+  if (transitional !== undefined) {
+    validator.assertOptions(transitional, {
+      silentJSONParsing: validators.transitional(validators.boolean),
+      forcedJSONParsing: validators.transitional(validators.boolean),
+      clarifyTimeoutError: validators.transitional(validators.boolean)
+    }, false);
+  }
+
+  // filter out skipped interceptors
+  var requestInterceptorChain = [];
+  var synchronousRequestInterceptors = true;
+  this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
+    if (typeof interceptor.runWhen === 'function' && interceptor.runWhen(config) === false) {
+      return;
+    }
+
+    synchronousRequestInterceptors = synchronousRequestInterceptors && interceptor.synchronous;
+
+    requestInterceptorChain.unshift(interceptor.fulfilled, interceptor.rejected);
+  });
+
+  var responseInterceptorChain = [];
+  this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
+    responseInterceptorChain.push(interceptor.fulfilled, interceptor.rejected);
+  });
+
+  var promise;
+
+  if (!synchronousRequestInterceptors) {
+    var chain = [dispatchRequest, undefined];
+
+    Array.prototype.unshift.apply(chain, requestInterceptorChain);
+    chain = chain.concat(responseInterceptorChain);
+
+    promise = Promise.resolve(config);
+    while (chain.length) {
+      promise = promise.then(chain.shift(), chain.shift());
+    }
+
+    return promise;
+  }
+
+
+  var newConfig = config;
+  while (requestInterceptorChain.length) {
+    var onFulfilled = requestInterceptorChain.shift();
+    var onRejected = requestInterceptorChain.shift();
+    try {
+      newConfig = onFulfilled(newConfig);
+    } catch (error) {
+      onRejected(error);
+      break;
+    }
+  }
+
+  try {
+    promise = dispatchRequest(newConfig);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+
+  while (responseInterceptorChain.length) {
+    promise = promise.then(responseInterceptorChain.shift(), responseInterceptorChain.shift());
+  }
+
+  return promise;
+};
+
+Axios.prototype.getUri = function getUri(config) {
+  if (!config.url) {
+    throw new Error('Provided config url is not valid');
+  }
+  config = mergeConfig(this.defaults, config);
+  return buildURL(config.url, config.params, config.paramsSerializer).replace(/^\?/, '');
+};
+
+// Provide aliases for supported request methods
+utils.forEach(['delete', 'get', 'head', 'options'], function forEachMethodNoData(method) {
+  /*eslint func-names:0*/
+  Axios.prototype[method] = function(url, config) {
+    return this.request(mergeConfig(config || {}, {
+      method: method,
+      url: url,
+      data: (config || {}).data
+    }));
+  };
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  /*eslint func-names:0*/
+  Axios.prototype[method] = function(url, data, config) {
+    return this.request(mergeConfig(config || {}, {
+      method: method,
+      url: url,
+      data: data
+    }));
+  };
+});
+
+module.exports = Axios;
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/InterceptorManager.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/axios/lib/core/InterceptorManager.js ***!
+  \***********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
+
+function InterceptorManager() {
+  this.handlers = [];
+}
+
+/**
+ * Add a new interceptor to the stack
+ *
+ * @param {Function} fulfilled The function to handle `then` for a `Promise`
+ * @param {Function} rejected The function to handle `reject` for a `Promise`
+ *
+ * @return {Number} An ID used to remove interceptor later
+ */
+InterceptorManager.prototype.use = function use(fulfilled, rejected, options) {
+  this.handlers.push({
+    fulfilled: fulfilled,
+    rejected: rejected,
+    synchronous: options ? options.synchronous : false,
+    runWhen: options ? options.runWhen : null
+  });
+  return this.handlers.length - 1;
+};
+
+/**
+ * Remove an interceptor from the stack
+ *
+ * @param {Number} id The ID that was returned by `use`
+ */
+InterceptorManager.prototype.eject = function eject(id) {
+  if (this.handlers[id]) {
+    this.handlers[id] = null;
+  }
+};
+
+/**
+ * Iterate over all the registered interceptors
+ *
+ * This method is particularly useful for skipping over any
+ * interceptors that may have become `null` calling `eject`.
+ *
+ * @param {Function} fn The function to call for each interceptor
+ */
+InterceptorManager.prototype.forEach = function forEach(fn) {
+  utils.forEach(this.handlers, function forEachHandler(h) {
+    if (h !== null) {
+      fn(h);
+    }
+  });
+};
+
+module.exports = InterceptorManager;
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/buildFullPath.js":
+/*!******************************************************!*\
+  !*** ./node_modules/axios/lib/core/buildFullPath.js ***!
+  \******************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var isAbsoluteURL = __webpack_require__(/*! ../helpers/isAbsoluteURL */ "./node_modules/axios/lib/helpers/isAbsoluteURL.js");
+var combineURLs = __webpack_require__(/*! ../helpers/combineURLs */ "./node_modules/axios/lib/helpers/combineURLs.js");
+
+/**
+ * Creates a new URL by combining the baseURL with the requestedURL,
+ * only when the requestedURL is not already an absolute URL.
+ * If the requestURL is absolute, this function returns the requestedURL untouched.
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} requestedURL Absolute or relative URL to combine
+ * @returns {string} The combined full path
+ */
+module.exports = function buildFullPath(baseURL, requestedURL) {
+  if (baseURL && !isAbsoluteURL(requestedURL)) {
+    return combineURLs(baseURL, requestedURL);
+  }
+  return requestedURL;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/createError.js":
+/*!****************************************************!*\
+  !*** ./node_modules/axios/lib/core/createError.js ***!
+  \****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var enhanceError = __webpack_require__(/*! ./enhanceError */ "./node_modules/axios/lib/core/enhanceError.js");
+
+/**
+ * Create an Error with the specified message, config, error code, request and response.
+ *
+ * @param {string} message The error message.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ * @param {Object} [request] The request.
+ * @param {Object} [response] The response.
+ * @returns {Error} The created error.
+ */
+module.exports = function createError(message, config, code, request, response) {
+  var error = new Error(message);
+  return enhanceError(error, config, code, request, response);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/dispatchRequest.js":
+/*!********************************************************!*\
+  !*** ./node_modules/axios/lib/core/dispatchRequest.js ***!
+  \********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
+var transformData = __webpack_require__(/*! ./transformData */ "./node_modules/axios/lib/core/transformData.js");
+var isCancel = __webpack_require__(/*! ../cancel/isCancel */ "./node_modules/axios/lib/cancel/isCancel.js");
+var defaults = __webpack_require__(/*! ../defaults */ "./node_modules/axios/lib/defaults.js");
+var Cancel = __webpack_require__(/*! ../cancel/Cancel */ "./node_modules/axios/lib/cancel/Cancel.js");
+
+/**
+ * Throws a `Cancel` if cancellation has been requested.
+ */
+function throwIfCancellationRequested(config) {
+  if (config.cancelToken) {
+    config.cancelToken.throwIfRequested();
+  }
+
+  if (config.signal && config.signal.aborted) {
+    throw new Cancel('canceled');
+  }
+}
+
+/**
+ * Dispatch a request to the server using the configured adapter.
+ *
+ * @param {object} config The config that is to be used for the request
+ * @returns {Promise} The Promise to be fulfilled
+ */
+module.exports = function dispatchRequest(config) {
+  throwIfCancellationRequested(config);
+
+  // Ensure headers exist
+  config.headers = config.headers || {};
+
+  // Transform request data
+  config.data = transformData.call(
+    config,
+    config.data,
+    config.headers,
+    config.transformRequest
+  );
+
+  // Flatten headers
+  config.headers = utils.merge(
+    config.headers.common || {},
+    config.headers[config.method] || {},
+    config.headers
+  );
+
+  utils.forEach(
+    ['delete', 'get', 'head', 'post', 'put', 'patch', 'common'],
+    function cleanHeaderConfig(method) {
+      delete config.headers[method];
+    }
+  );
+
+  var adapter = config.adapter || defaults.adapter;
+
+  return adapter(config).then(function onAdapterResolution(response) {
+    throwIfCancellationRequested(config);
+
+    // Transform response data
+    response.data = transformData.call(
+      config,
+      response.data,
+      response.headers,
+      config.transformResponse
+    );
+
+    return response;
+  }, function onAdapterRejection(reason) {
+    if (!isCancel(reason)) {
+      throwIfCancellationRequested(config);
+
+      // Transform response data
+      if (reason && reason.response) {
+        reason.response.data = transformData.call(
+          config,
+          reason.response.data,
+          reason.response.headers,
+          config.transformResponse
+        );
+      }
+    }
+
+    return Promise.reject(reason);
+  });
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/enhanceError.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/axios/lib/core/enhanceError.js ***!
+  \*****************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+/**
+ * Update an Error with the specified config, error code, and response.
+ *
+ * @param {Error} error The error to update.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ * @param {Object} [request] The request.
+ * @param {Object} [response] The response.
+ * @returns {Error} The error.
+ */
+module.exports = function enhanceError(error, config, code, request, response) {
+  error.config = config;
+  if (code) {
+    error.code = code;
+  }
+
+  error.request = request;
+  error.response = response;
+  error.isAxiosError = true;
+
+  error.toJSON = function toJSON() {
+    return {
+      // Standard
+      message: this.message,
+      name: this.name,
+      // Microsoft
+      description: this.description,
+      number: this.number,
+      // Mozilla
+      fileName: this.fileName,
+      lineNumber: this.lineNumber,
+      columnNumber: this.columnNumber,
+      stack: this.stack,
+      // Axios
+      config: this.config,
+      code: this.code,
+      status: this.response && this.response.status ? this.response.status : null
+    };
+  };
+  return error;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/mergeConfig.js":
+/*!****************************************************!*\
+  !*** ./node_modules/axios/lib/core/mergeConfig.js ***!
+  \****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ../utils */ "./node_modules/axios/lib/utils.js");
+
+/**
+ * Config-specific merge-function which creates a new config-object
+ * by merging two configuration objects together.
+ *
+ * @param {Object} config1
+ * @param {Object} config2
+ * @returns {Object} New object resulting from merging config2 to config1
+ */
+module.exports = function mergeConfig(config1, config2) {
+  // eslint-disable-next-line no-param-reassign
+  config2 = config2 || {};
+  var config = {};
+
+  function getMergedValue(target, source) {
+    if (utils.isPlainObject(target) && utils.isPlainObject(source)) {
+      return utils.merge(target, source);
+    } else if (utils.isPlainObject(source)) {
+      return utils.merge({}, source);
+    } else if (utils.isArray(source)) {
+      return source.slice();
+    }
+    return source;
+  }
+
+  // eslint-disable-next-line consistent-return
+  function mergeDeepProperties(prop) {
+    if (!utils.isUndefined(config2[prop])) {
+      return getMergedValue(config1[prop], config2[prop]);
+    } else if (!utils.isUndefined(config1[prop])) {
+      return getMergedValue(undefined, config1[prop]);
+    }
+  }
+
+  // eslint-disable-next-line consistent-return
+  function valueFromConfig2(prop) {
+    if (!utils.isUndefined(config2[prop])) {
+      return getMergedValue(undefined, config2[prop]);
+    }
+  }
+
+  // eslint-disable-next-line consistent-return
+  function defaultToConfig2(prop) {
+    if (!utils.isUndefined(config2[prop])) {
+      return getMergedValue(undefined, config2[prop]);
+    } else if (!utils.isUndefined(config1[prop])) {
+      return getMergedValue(undefined, config1[prop]);
+    }
+  }
+
+  // eslint-disable-next-line consistent-return
+  function mergeDirectKeys(prop) {
+    if (prop in config2) {
+      return getMergedValue(config1[prop], config2[prop]);
+    } else if (prop in config1) {
+      return getMergedValue(undefined, config1[prop]);
+    }
+  }
+
+  var mergeMap = {
+    'url': valueFromConfig2,
+    'method': valueFromConfig2,
+    'data': valueFromConfig2,
+    'baseURL': defaultToConfig2,
+    'transformRequest': defaultToConfig2,
+    'transformResponse': defaultToConfig2,
+    'paramsSerializer': defaultToConfig2,
+    'timeout': defaultToConfig2,
+    'timeoutMessage': defaultToConfig2,
+    'withCredentials': defaultToConfig2,
+    'adapter': defaultToConfig2,
+    'responseType': defaultToConfig2,
+    'xsrfCookieName': defaultToConfig2,
+    'xsrfHeaderName': defaultToConfig2,
+    'onUploadProgress': defaultToConfig2,
+    'onDownloadProgress': defaultToConfig2,
+    'decompress': defaultToConfig2,
+    'maxContentLength': defaultToConfig2,
+    'maxBodyLength': defaultToConfig2,
+    'transport': defaultToConfig2,
+    'httpAgent': defaultToConfig2,
+    'httpsAgent': defaultToConfig2,
+    'cancelToken': defaultToConfig2,
+    'socketPath': defaultToConfig2,
+    'responseEncoding': defaultToConfig2,
+    'validateStatus': mergeDirectKeys
+  };
+
+  utils.forEach(Object.keys(config1).concat(Object.keys(config2)), function computeConfigValue(prop) {
+    var merge = mergeMap[prop] || mergeDeepProperties;
+    var configValue = merge(prop);
+    (utils.isUndefined(configValue) && merge !== mergeDirectKeys) || (config[prop] = configValue);
+  });
+
+  return config;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/settle.js":
+/*!***********************************************!*\
+  !*** ./node_modules/axios/lib/core/settle.js ***!
+  \***********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var createError = __webpack_require__(/*! ./createError */ "./node_modules/axios/lib/core/createError.js");
+
+/**
+ * Resolve or reject a Promise based on response status.
+ *
+ * @param {Function} resolve A function that resolves the promise.
+ * @param {Function} reject A function that rejects the promise.
+ * @param {object} response The response.
+ */
+module.exports = function settle(resolve, reject, response) {
+  var validateStatus = response.config.validateStatus;
+  if (!response.status || !validateStatus || validateStatus(response.status)) {
+    resolve(response);
+  } else {
+    reject(createError(
+      'Request failed with status code ' + response.status,
+      response.config,
+      null,
+      response.request,
+      response
+    ));
+  }
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/core/transformData.js":
+/*!******************************************************!*\
+  !*** ./node_modules/axios/lib/core/transformData.js ***!
+  \******************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
+var defaults = __webpack_require__(/*! ./../defaults */ "./node_modules/axios/lib/defaults.js");
+
+/**
+ * Transform the data for a request or a response
+ *
+ * @param {Object|String} data The data to be transformed
+ * @param {Array} headers The headers for the request or response
+ * @param {Array|Function} fns A single function or Array of functions
+ * @returns {*} The resulting transformed data
+ */
+module.exports = function transformData(data, headers, fns) {
+  var context = this || defaults;
+  /*eslint no-param-reassign:0*/
+  utils.forEach(fns, function transform(fn) {
+    data = fn.call(context, data, headers);
+  });
+
+  return data;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/defaults.js":
+/*!********************************************!*\
+  !*** ./node_modules/axios/lib/defaults.js ***!
+  \********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
+
+
+var utils = __webpack_require__(/*! ./utils */ "./node_modules/axios/lib/utils.js");
+var normalizeHeaderName = __webpack_require__(/*! ./helpers/normalizeHeaderName */ "./node_modules/axios/lib/helpers/normalizeHeaderName.js");
+var enhanceError = __webpack_require__(/*! ./core/enhanceError */ "./node_modules/axios/lib/core/enhanceError.js");
+
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
+
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
+}
+
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(/*! ./adapters/xhr */ "./node_modules/axios/lib/adapters/xhr.js");
+  } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(/*! ./adapters/http */ "./node_modules/axios/lib/adapters/xhr.js");
+  }
+  return adapter;
+}
+
+function stringifySafely(rawValue, parser, encoder) {
+  if (utils.isString(rawValue)) {
+    try {
+      (parser || JSON.parse)(rawValue);
+      return utils.trim(rawValue);
+    } catch (e) {
+      if (e.name !== 'SyntaxError') {
+        throw e;
+      }
+    }
+  }
+
+  return (encoder || JSON.stringify)(rawValue);
+}
+
+var defaults = {
+
+  transitional: {
+    silentJSONParsing: true,
+    forcedJSONParsing: true,
+    clarifyTimeoutError: false
+  },
+
+  adapter: getDefaultAdapter(),
+
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Accept');
+    normalizeHeaderName(headers, 'Content-Type');
+
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data) || (headers && headers['Content-Type'] === 'application/json')) {
+      setContentTypeIfUnset(headers, 'application/json');
+      return stringifySafely(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    var transitional = this.transitional || defaults.transitional;
+    var silentJSONParsing = transitional && transitional.silentJSONParsing;
+    var forcedJSONParsing = transitional && transitional.forcedJSONParsing;
+    var strictJSONParsing = !silentJSONParsing && this.responseType === 'json';
+
+    if (strictJSONParsing || (forcedJSONParsing && utils.isString(data) && data.length)) {
+      try {
+        return JSON.parse(data);
+      } catch (e) {
+        if (strictJSONParsing) {
+          if (e.name === 'SyntaxError') {
+            throw enhanceError(e, this, 'E_JSON_PARSE');
+          }
+          throw e;
+        }
+      }
+    }
+
+    return data;
+  }],
+
+  /**
+   * A timeout in milliseconds to abort a request. If set to 0 (default) a
+   * timeout is not created.
+   */
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+  maxBodyLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  },
+
+  headers: {
+    common: {
+      'Accept': 'application/json, text/plain, */*'
+    }
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/env/data.js":
+/*!********************************************!*\
+  !*** ./node_modules/axios/lib/env/data.js ***!
+  \********************************************/
+/***/ ((module) => {
+
+module.exports = {
+  "version": "0.25.0"
+};
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/bind.js":
+/*!************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/bind.js ***!
+  \************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+module.exports = function bind(fn, thisArg) {
+  return function wrap() {
+    var args = new Array(arguments.length);
+    for (var i = 0; i < args.length; i++) {
+      args[i] = arguments[i];
+    }
+    return fn.apply(thisArg, args);
+  };
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/buildURL.js":
+/*!****************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/buildURL.js ***!
+  \****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
+
+function encode(val) {
+  return encodeURIComponent(val).
+    replace(/%3A/gi, ':').
+    replace(/%24/g, '$').
+    replace(/%2C/gi, ',').
+    replace(/%20/g, '+').
+    replace(/%5B/gi, '[').
+    replace(/%5D/gi, ']');
+}
+
+/**
+ * Build a URL by appending params to the end
+ *
+ * @param {string} url The base of the url (e.g., http://www.google.com)
+ * @param {object} [params] The params to be appended
+ * @returns {string} The formatted url
+ */
+module.exports = function buildURL(url, params, paramsSerializer) {
+  /*eslint no-param-reassign:0*/
+  if (!params) {
+    return url;
+  }
+
+  var serializedParams;
+  if (paramsSerializer) {
+    serializedParams = paramsSerializer(params);
+  } else if (utils.isURLSearchParams(params)) {
+    serializedParams = params.toString();
+  } else {
+    var parts = [];
+
+    utils.forEach(params, function serialize(val, key) {
+      if (val === null || typeof val === 'undefined') {
+        return;
+      }
+
+      if (utils.isArray(val)) {
+        key = key + '[]';
+      } else {
+        val = [val];
+      }
+
+      utils.forEach(val, function parseValue(v) {
+        if (utils.isDate(v)) {
+          v = v.toISOString();
+        } else if (utils.isObject(v)) {
+          v = JSON.stringify(v);
+        }
+        parts.push(encode(key) + '=' + encode(v));
+      });
+    });
+
+    serializedParams = parts.join('&');
+  }
+
+  if (serializedParams) {
+    var hashmarkIndex = url.indexOf('#');
+    if (hashmarkIndex !== -1) {
+      url = url.slice(0, hashmarkIndex);
+    }
+
+    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;
+  }
+
+  return url;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/combineURLs.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/combineURLs.js ***!
+  \*******************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+/**
+ * Creates a new URL by combining the specified URLs
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} relativeURL The relative URL
+ * @returns {string} The combined URL
+ */
+module.exports = function combineURLs(baseURL, relativeURL) {
+  return relativeURL
+    ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '')
+    : baseURL;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/cookies.js":
+/*!***************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/cookies.js ***!
+  \***************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
+
+module.exports = (
+  utils.isStandardBrowserEnv() ?
+
+  // Standard browser envs support document.cookie
+    (function standardBrowserEnv() {
+      return {
+        write: function write(name, value, expires, path, domain, secure) {
+          var cookie = [];
+          cookie.push(name + '=' + encodeURIComponent(value));
+
+          if (utils.isNumber(expires)) {
+            cookie.push('expires=' + new Date(expires).toGMTString());
+          }
+
+          if (utils.isString(path)) {
+            cookie.push('path=' + path);
+          }
+
+          if (utils.isString(domain)) {
+            cookie.push('domain=' + domain);
+          }
+
+          if (secure === true) {
+            cookie.push('secure');
+          }
+
+          document.cookie = cookie.join('; ');
+        },
+
+        read: function read(name) {
+          var match = document.cookie.match(new RegExp('(^|;\\s*)(' + name + ')=([^;]*)'));
+          return (match ? decodeURIComponent(match[3]) : null);
+        },
+
+        remove: function remove(name) {
+          this.write(name, '', Date.now() - 86400000);
+        }
+      };
+    })() :
+
+  // Non standard browser env (web workers, react-native) lack needed support.
+    (function nonStandardBrowserEnv() {
+      return {
+        write: function write() {},
+        read: function read() { return null; },
+        remove: function remove() {}
+      };
+    })()
+);
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/isAbsoluteURL.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/isAbsoluteURL.js ***!
+  \*********************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+/**
+ * Determines whether the specified URL is absolute
+ *
+ * @param {string} url The URL to test
+ * @returns {boolean} True if the specified URL is absolute, otherwise false
+ */
+module.exports = function isAbsoluteURL(url) {
+  // A URL is considered absolute if it begins with "<scheme>://" or "//" (protocol-relative URL).
+  // RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
+  // by any combination of letters, digits, plus, period, or hyphen.
+  return /^([a-z][a-z\d+\-.]*:)?\/\//i.test(url);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/isAxiosError.js":
+/*!********************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/isAxiosError.js ***!
+  \********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
+
+/**
+ * Determines whether the payload is an error thrown by Axios
+ *
+ * @param {*} payload The value to test
+ * @returns {boolean} True if the payload is an error thrown by Axios, otherwise false
+ */
+module.exports = function isAxiosError(payload) {
+  return utils.isObject(payload) && (payload.isAxiosError === true);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/isURLSameOrigin.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/isURLSameOrigin.js ***!
+  \***********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
+
+module.exports = (
+  utils.isStandardBrowserEnv() ?
+
+  // Standard browser envs have full support of the APIs needed to test
+  // whether the request URL is of the same origin as current location.
+    (function standardBrowserEnv() {
+      var msie = /(msie|trident)/i.test(navigator.userAgent);
+      var urlParsingNode = document.createElement('a');
+      var originURL;
+
+      /**
+    * Parse a URL to discover it's components
+    *
+    * @param {String} url The URL to be parsed
+    * @returns {Object}
+    */
+      function resolveURL(url) {
+        var href = url;
+
+        if (msie) {
+        // IE needs attribute set twice to normalize properties
+          urlParsingNode.setAttribute('href', href);
+          href = urlParsingNode.href;
+        }
+
+        urlParsingNode.setAttribute('href', href);
+
+        // urlParsingNode provides the UrlUtils interface - http://url.spec.whatwg.org/#urlutils
+        return {
+          href: urlParsingNode.href,
+          protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, '') : '',
+          host: urlParsingNode.host,
+          search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, '') : '',
+          hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, '') : '',
+          hostname: urlParsingNode.hostname,
+          port: urlParsingNode.port,
+          pathname: (urlParsingNode.pathname.charAt(0) === '/') ?
+            urlParsingNode.pathname :
+            '/' + urlParsingNode.pathname
+        };
+      }
+
+      originURL = resolveURL(window.location.href);
+
+      /**
+    * Determine if a URL shares the same origin as the current location
+    *
+    * @param {String} requestURL The URL to test
+    * @returns {boolean} True if URL shares the same origin, otherwise false
+    */
+      return function isURLSameOrigin(requestURL) {
+        var parsed = (utils.isString(requestURL)) ? resolveURL(requestURL) : requestURL;
+        return (parsed.protocol === originURL.protocol &&
+            parsed.host === originURL.host);
+      };
+    })() :
+
+  // Non standard browser envs (web workers, react-native) lack needed support.
+    (function nonStandardBrowserEnv() {
+      return function isURLSameOrigin() {
+        return true;
+      };
+    })()
+);
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/normalizeHeaderName.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/normalizeHeaderName.js ***!
+  \***************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ../utils */ "./node_modules/axios/lib/utils.js");
+
+module.exports = function normalizeHeaderName(headers, normalizedName) {
+  utils.forEach(headers, function processHeader(value, name) {
+    if (name !== normalizedName && name.toUpperCase() === normalizedName.toUpperCase()) {
+      headers[normalizedName] = value;
+      delete headers[name];
+    }
+  });
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/parseHeaders.js":
+/*!********************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/parseHeaders.js ***!
+  \********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "./node_modules/axios/lib/utils.js");
+
+// Headers whose duplicates are ignored by node
+// c.f. https://nodejs.org/api/http.html#http_message_headers
+var ignoreDuplicateOf = [
+  'age', 'authorization', 'content-length', 'content-type', 'etag',
+  'expires', 'from', 'host', 'if-modified-since', 'if-unmodified-since',
+  'last-modified', 'location', 'max-forwards', 'proxy-authorization',
+  'referer', 'retry-after', 'user-agent'
+];
+
+/**
+ * Parse headers into an object
+ *
+ * ```
+ * Date: Wed, 27 Aug 2014 08:58:49 GMT
+ * Content-Type: application/json
+ * Connection: keep-alive
+ * Transfer-Encoding: chunked
+ * ```
+ *
+ * @param {String} headers Headers needing to be parsed
+ * @returns {Object} Headers parsed into an object
+ */
+module.exports = function parseHeaders(headers) {
+  var parsed = {};
+  var key;
+  var val;
+  var i;
+
+  if (!headers) { return parsed; }
+
+  utils.forEach(headers.split('\n'), function parser(line) {
+    i = line.indexOf(':');
+    key = utils.trim(line.substr(0, i)).toLowerCase();
+    val = utils.trim(line.substr(i + 1));
+
+    if (key) {
+      if (parsed[key] && ignoreDuplicateOf.indexOf(key) >= 0) {
+        return;
+      }
+      if (key === 'set-cookie') {
+        parsed[key] = (parsed[key] ? parsed[key] : []).concat([val]);
+      } else {
+        parsed[key] = parsed[key] ? parsed[key] + ', ' + val : val;
+      }
+    }
+  });
+
+  return parsed;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/spread.js":
+/*!**************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/spread.js ***!
+  \**************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+/**
+ * Syntactic sugar for invoking a function and expanding an array for arguments.
+ *
+ * Common use case would be to use `Function.prototype.apply`.
+ *
+ *  ```js
+ *  function f(x, y, z) {}
+ *  var args = [1, 2, 3];
+ *  f.apply(null, args);
+ *  ```
+ *
+ * With `spread` this example can be re-written.
+ *
+ *  ```js
+ *  spread(function(x, y, z) {})([1, 2, 3]);
+ *  ```
+ *
+ * @param {Function} callback
+ * @returns {Function}
+ */
+module.exports = function spread(callback) {
+  return function wrap(arr) {
+    return callback.apply(null, arr);
+  };
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/helpers/validator.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/axios/lib/helpers/validator.js ***!
+  \*****************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var VERSION = (__webpack_require__(/*! ../env/data */ "./node_modules/axios/lib/env/data.js").version);
+
+var validators = {};
+
+// eslint-disable-next-line func-names
+['object', 'boolean', 'number', 'function', 'string', 'symbol'].forEach(function(type, i) {
+  validators[type] = function validator(thing) {
+    return typeof thing === type || 'a' + (i < 1 ? 'n ' : ' ') + type;
+  };
+});
+
+var deprecatedWarnings = {};
+
+/**
+ * Transitional option validator
+ * @param {function|boolean?} validator - set to false if the transitional option has been removed
+ * @param {string?} version - deprecated version / removed since version
+ * @param {string?} message - some message with additional info
+ * @returns {function}
+ */
+validators.transitional = function transitional(validator, version, message) {
+  function formatMessage(opt, desc) {
+    return '[Axios v' + VERSION + '] Transitional option \'' + opt + '\'' + desc + (message ? '. ' + message : '');
+  }
+
+  // eslint-disable-next-line func-names
+  return function(value, opt, opts) {
+    if (validator === false) {
+      throw new Error(formatMessage(opt, ' has been removed' + (version ? ' in ' + version : '')));
+    }
+
+    if (version && !deprecatedWarnings[opt]) {
+      deprecatedWarnings[opt] = true;
+      // eslint-disable-next-line no-console
+      console.warn(
+        formatMessage(
+          opt,
+          ' has been deprecated since v' + version + ' and will be removed in the near future'
+        )
+      );
+    }
+
+    return validator ? validator(value, opt, opts) : true;
+  };
+};
+
+/**
+ * Assert object's properties type
+ * @param {object} options
+ * @param {object} schema
+ * @param {boolean?} allowUnknown
+ */
+
+function assertOptions(options, schema, allowUnknown) {
+  if (typeof options !== 'object') {
+    throw new TypeError('options must be an object');
+  }
+  var keys = Object.keys(options);
+  var i = keys.length;
+  while (i-- > 0) {
+    var opt = keys[i];
+    var validator = schema[opt];
+    if (validator) {
+      var value = options[opt];
+      var result = value === undefined || validator(value, opt, options);
+      if (result !== true) {
+        throw new TypeError('option ' + opt + ' must be ' + result);
+      }
+      continue;
+    }
+    if (allowUnknown !== true) {
+      throw Error('Unknown option ' + opt);
+    }
+  }
+}
+
+module.exports = {
+  assertOptions: assertOptions,
+  validators: validators
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/axios/lib/utils.js":
+/*!*****************************************!*\
+  !*** ./node_modules/axios/lib/utils.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var bind = __webpack_require__(/*! ./helpers/bind */ "./node_modules/axios/lib/helpers/bind.js");
+
+// utils is a library of generic helper functions non-specific to axios
+
+var toString = Object.prototype.toString;
+
+/**
+ * Determine if a value is an Array
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Array, otherwise false
+ */
+function isArray(val) {
+  return Array.isArray(val);
+}
+
+/**
+ * Determine if a value is undefined
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if the value is undefined, otherwise false
+ */
+function isUndefined(val) {
+  return typeof val === 'undefined';
+}
+
+/**
+ * Determine if a value is a Buffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Buffer, otherwise false
+ */
+function isBuffer(val) {
+  return val !== null && !isUndefined(val) && val.constructor !== null && !isUndefined(val.constructor)
+    && typeof val.constructor.isBuffer === 'function' && val.constructor.isBuffer(val);
+}
+
+/**
+ * Determine if a value is an ArrayBuffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an ArrayBuffer, otherwise false
+ */
+function isArrayBuffer(val) {
+  return toString.call(val) === '[object ArrayBuffer]';
+}
+
+/**
+ * Determine if a value is a FormData
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an FormData, otherwise false
+ */
+function isFormData(val) {
+  return toString.call(val) === '[object FormData]';
+}
+
+/**
+ * Determine if a value is a view on an ArrayBuffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a view on an ArrayBuffer, otherwise false
+ */
+function isArrayBufferView(val) {
+  var result;
+  if ((typeof ArrayBuffer !== 'undefined') && (ArrayBuffer.isView)) {
+    result = ArrayBuffer.isView(val);
+  } else {
+    result = (val) && (val.buffer) && (isArrayBuffer(val.buffer));
+  }
+  return result;
+}
+
+/**
+ * Determine if a value is a String
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a String, otherwise false
+ */
+function isString(val) {
+  return typeof val === 'string';
+}
+
+/**
+ * Determine if a value is a Number
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Number, otherwise false
+ */
+function isNumber(val) {
+  return typeof val === 'number';
+}
+
+/**
+ * Determine if a value is an Object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Object, otherwise false
+ */
+function isObject(val) {
+  return val !== null && typeof val === 'object';
+}
+
+/**
+ * Determine if a value is a plain Object
+ *
+ * @param {Object} val The value to test
+ * @return {boolean} True if value is a plain Object, otherwise false
+ */
+function isPlainObject(val) {
+  if (toString.call(val) !== '[object Object]') {
+    return false;
+  }
+
+  var prototype = Object.getPrototypeOf(val);
+  return prototype === null || prototype === Object.prototype;
+}
+
+/**
+ * Determine if a value is a Date
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Date, otherwise false
+ */
+function isDate(val) {
+  return toString.call(val) === '[object Date]';
+}
+
+/**
+ * Determine if a value is a File
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a File, otherwise false
+ */
+function isFile(val) {
+  return toString.call(val) === '[object File]';
+}
+
+/**
+ * Determine if a value is a Blob
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Blob, otherwise false
+ */
+function isBlob(val) {
+  return toString.call(val) === '[object Blob]';
+}
+
+/**
+ * Determine if a value is a Function
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Function, otherwise false
+ */
+function isFunction(val) {
+  return toString.call(val) === '[object Function]';
+}
+
+/**
+ * Determine if a value is a Stream
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Stream, otherwise false
+ */
+function isStream(val) {
+  return isObject(val) && isFunction(val.pipe);
+}
+
+/**
+ * Determine if a value is a URLSearchParams object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a URLSearchParams object, otherwise false
+ */
+function isURLSearchParams(val) {
+  return toString.call(val) === '[object URLSearchParams]';
+}
+
+/**
+ * Trim excess whitespace off the beginning and end of a string
+ *
+ * @param {String} str The String to trim
+ * @returns {String} The String freed of excess whitespace
+ */
+function trim(str) {
+  return str.trim ? str.trim() : str.replace(/^\s+|\s+$/g, '');
+}
+
+/**
+ * Determine if we're running in a standard browser environment
+ *
+ * This allows axios to run in a web worker, and react-native.
+ * Both environments support XMLHttpRequest, but not fully standard globals.
+ *
+ * web workers:
+ *  typeof window -> undefined
+ *  typeof document -> undefined
+ *
+ * react-native:
+ *  navigator.product -> 'ReactNative'
+ * nativescript
+ *  navigator.product -> 'NativeScript' or 'NS'
+ */
+function isStandardBrowserEnv() {
+  if (typeof navigator !== 'undefined' && (navigator.product === 'ReactNative' ||
+                                           navigator.product === 'NativeScript' ||
+                                           navigator.product === 'NS')) {
+    return false;
+  }
+  return (
+    typeof window !== 'undefined' &&
+    typeof document !== 'undefined'
+  );
+}
+
+/**
+ * Iterate over an Array or an Object invoking a function for each item.
+ *
+ * If `obj` is an Array callback will be called passing
+ * the value, index, and complete array for each item.
+ *
+ * If 'obj' is an Object callback will be called passing
+ * the value, key, and complete object for each property.
+ *
+ * @param {Object|Array} obj The object to iterate
+ * @param {Function} fn The callback to invoke for each item
+ */
+function forEach(obj, fn) {
+  // Don't bother if no value provided
+  if (obj === null || typeof obj === 'undefined') {
+    return;
+  }
+
+  // Force an array if not already something iterable
+  if (typeof obj !== 'object') {
+    /*eslint no-param-reassign:0*/
+    obj = [obj];
+  }
+
+  if (isArray(obj)) {
+    // Iterate over array values
+    for (var i = 0, l = obj.length; i < l; i++) {
+      fn.call(null, obj[i], i, obj);
+    }
+  } else {
+    // Iterate over object keys
+    for (var key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        fn.call(null, obj[key], key, obj);
+      }
+    }
+  }
+}
+
+/**
+ * Accepts varargs expecting each argument to be an object, then
+ * immutably merges the properties of each object and returns result.
+ *
+ * When multiple objects contain the same key the later object in
+ * the arguments list will take precedence.
+ *
+ * Example:
+ *
+ * ```js
+ * var result = merge({foo: 123}, {foo: 456});
+ * console.log(result.foo); // outputs 456
+ * ```
+ *
+ * @param {Object} obj1 Object to merge
+ * @returns {Object} Result of all merge properties
+ */
+function merge(/* obj1, obj2, obj3, ... */) {
+  var result = {};
+  function assignValue(val, key) {
+    if (isPlainObject(result[key]) && isPlainObject(val)) {
+      result[key] = merge(result[key], val);
+    } else if (isPlainObject(val)) {
+      result[key] = merge({}, val);
+    } else if (isArray(val)) {
+      result[key] = val.slice();
+    } else {
+      result[key] = val;
+    }
+  }
+
+  for (var i = 0, l = arguments.length; i < l; i++) {
+    forEach(arguments[i], assignValue);
+  }
+  return result;
+}
+
+/**
+ * Extends object a by mutably adding to it the properties of object b.
+ *
+ * @param {Object} a The object to be extended
+ * @param {Object} b The object to copy properties from
+ * @param {Object} thisArg The object to bind function to
+ * @return {Object} The resulting value of object a
+ */
+function extend(a, b, thisArg) {
+  forEach(b, function assignValue(val, key) {
+    if (thisArg && typeof val === 'function') {
+      a[key] = bind(val, thisArg);
+    } else {
+      a[key] = val;
+    }
+  });
+  return a;
+}
+
+/**
+ * Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
+ *
+ * @param {string} content with BOM
+ * @return {string} content value without BOM
+ */
+function stripBOM(content) {
+  if (content.charCodeAt(0) === 0xFEFF) {
+    content = content.slice(1);
+  }
+  return content;
+}
+
+module.exports = {
+  isArray: isArray,
+  isArrayBuffer: isArrayBuffer,
+  isBuffer: isBuffer,
+  isFormData: isFormData,
+  isArrayBufferView: isArrayBufferView,
+  isString: isString,
+  isNumber: isNumber,
+  isObject: isObject,
+  isPlainObject: isPlainObject,
+  isUndefined: isUndefined,
+  isDate: isDate,
+  isFile: isFile,
+  isBlob: isBlob,
+  isFunction: isFunction,
+  isStream: isStream,
+  isURLSearchParams: isURLSearchParams,
+  isStandardBrowserEnv: isStandardBrowserEnv,
+  forEach: forEach,
+  merge: merge,
+  extend: extend,
+  trim: trim,
+  stripBOM: stripBOM
+};
+
+
+/***/ }),
+
+/***/ "./resources/js/dir/messageTemplate.js":
+/*!*********************************************!*\
+  !*** ./resources/js/dir/messageTemplate.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getDropdownContact": () => (/* binding */ getDropdownContact),
+/* harmony export */   "getDropdownMessage": () => (/* binding */ getDropdownMessage),
+/* harmony export */   "getNewMessage": () => (/* binding */ getNewMessage)
+/* harmony export */ });
+var getNewMessage = function getNewMessage(messageIds, content, time) {
+  var position = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'left';
+  return "<li class=\"chat-list ".concat(position, "\" id=\"chat-list-") + messageIds + '" >\
+                <div class="conversation-list">\
+                    <div class="user-chat-content">\
+                        <div class="ctext-wrap">\
+                            <div class="ctext-wrap-content">\
+                                <p class="mb-0 ctext-content">' + content + '</p>\
+                            </div>' + getDropdownMessage(messageIds) + '</div>' + '<div class="conversation-name">\
+                        <small class="text-muted time">' + time + '</small>\
+                        <span class="text-success check-message-icon"><i class="bx bx-check"></i></span>\
+                    </div>\
+                </div>\
+            </div>\
+        </li>';
+};
+var getDropdownMessage = function getDropdownMessage(messageIds) {
+  return '<div class="align-self-start message-box-drop d-flex">\
+  <div class="dropdown">\
+      <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
+          <i class="ri-more-2-fill"></i>\
+      </a>\
+      <div class="dropdown-menu">\
+          <a class="dropdown-item d-flex align-items-center justify-content-between copy-message" href="#" id="copy-message-' + messageIds + '">Copy <i class="bx bx-copy text-muted ms-2"></i></a>\
+          <a class="dropdown-item d-flex align-items-center justify-content-between delete-item" href="#">Delete <i class="bx bx-trash text-muted ms-2"></i></a>\
+      </div>\
+  </div>\
+</div>';
+};
+var getDropdownContact = function getDropdownContact(profile, user) {
+  return '<li>\
+  <div class="d-flex align-items-center">\
+      <div class="flex-shrink-0 me-2">\
+          <div class="avatar-xs">\
+          ' + profile + '\
+          </div>\
+      </div>\
+      <div class="flex-grow-1">\
+          <h5 class="fs-14 m-0" >' + user.name + '</h5>\
+      </div>\
+  </div>\
+</li>';
+};
+
+/***/ }),
+
+/***/ "./resources/js/helpers.js":
+/*!*********************************!*\
+  !*** ./resources/js/helpers.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "scrollToBottom": () => (/* binding */ scrollToBottom)
+/* harmony export */ });
+var scrollToBottom = function scrollToBottom(id) {
+  var simpleBar = document.getElementById(id).querySelector("#chat-conversation .simplebar-content-wrapper");
+  var offsetHeight = document.getElementsByClassName("chat-conversation-list")[0] ? document.getElementById(id).getElementsByClassName("chat-conversation-list")[0].scrollHeight - window.innerHeight + 250 : 0;
+  if (offsetHeight) simpleBar.scrollTo({
+    top: offsetHeight,
+    behavior: "smooth"
+  });
+};
+
+/***/ }),
+
+/***/ "./resources/js/pages/chat.js":
+/*!************************************!*\
+  !*** ./resources/js/pages/chat.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchMessages": () => (/* binding */ fetchMessages),
+/* harmony export */   "formatTimeForMessages": () => (/* binding */ formatTimeForMessages),
+/* harmony export */   "getChatList": () => (/* binding */ getChatList),
+/* harmony export */   "getMsg": () => (/* binding */ getMsg),
+/* harmony export */   "toggleSelected": () => (/* binding */ toggleSelected),
+/* harmony export */   "updateChats": () => (/* binding */ updateChats),
+/* harmony export */   "updateSelectedChat": () => (/* binding */ updateSelectedChat)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
+/* harmony import */ var _dir_messageTemplate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../dir/messageTemplate */ "./resources/js/dir/messageTemplate.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../helpers */ "./resources/js/helpers.js");
+/* harmony import */ var _users__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./users */ "./resources/js/pages/users.js");
+
+
+
+
+
+window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
+window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_1__["default"]({
+  broadcaster: 'pusher',
+  key: "a6fab289d8203d719aca",
+  cluster: "eu"
+});
+var userUUID = document.querySelector('meta[name="uuid"]').content;
+window.Echo["private"]("message.".concat(userUUID)).listen('MessageSent', function (e) {
+  var selectedChat = document.getElementById('users-conversation').getAttribute('selected-chat');
+
+  if (selectedChat == e.message.from_id) {
+    getChatList(null, e.message.content);
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/messageRead', {
+      params: {
+        chatId: e.message.from_id
+      }
+    }).then(function (e) {
+      (0,_users__WEBPACK_IMPORTED_MODULE_4__.getUsersList)();
+    });
+  } else {
+    (0,_users__WEBPACK_IMPORTED_MODULE_4__.getUsersList)();
+  }
+});
+var formatTimeForMessages = function formatTimeForMessages(time) {
+  if (time === null) {
+    time = new Date();
+  } else if (!(time instanceof Date)) {
+    time = new Date(time);
+  }
+
+  var date = time.getDate();
+  var month = time.getMonth();
+  var year = time.getFullYear();
+  var hours = time.getHours();
+  var minutes = time.getMinutes();
+  return "".concat(date, "-").concat(month, "-").concat(year, " ").concat(hours, ":").concat(minutes);
+};
+var getChatList = function getChatList(chatid, content) {
+  var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : new Date();
+  var position = arguments.length > 3 ? arguments[3] : undefined;
+  time = formatTimeForMessages(time);
+  var itemList = document.getElementById("users-conversation");
+  var messageIds = itemList.childElementCount;
+  messageIds++;
+
+  if (content != null) {
+    itemList.insertAdjacentHTML("beforeend", (0,_dir_messageTemplate__WEBPACK_IMPORTED_MODULE_2__.getNewMessage)(messageIds, content, time, position));
+  }
+
+  console.log(messageIds); // remove chat list
+
+  var newChatList = document.getElementById("chat-list-" + messageIds);
+  newChatList.querySelectorAll(".delete-item").forEach(function (subitem) {
+    subitem.addEventListener("click", function () {
+      itemList.removeChild(newChatList);
+    });
+  }); //Copy Clipboard alert
+
+  newChatList.querySelectorAll(".copy-message").forEach(function (subitem) {
+    subitem.addEventListener("click", function () {
+      document.getElementById("copyClipBoard").style.display = "block";
+      document.getElementById("copyClipBoardChannel").style.display = "block";
+      setTimeout(hideclipboardNew, 1000);
+
+      function hideclipboardNew() {
+        document.getElementById("copyClipBoard").style.display = "none";
+        document.getElementById("copyClipBoardChannel").style.display = "none";
+      }
+    });
+  }); //reply Message model
+
+  newChatList.querySelectorAll(".reply-message").forEach(function (subitem) {
+    subitem.addEventListener("click", function () {
+      var replyToggleOpenNew = document.querySelector(".replyCard");
+      var replyToggleCloseNew = document.querySelector("#close_toggle");
+      var replyMessageNew = subitem.closest(".ctext-wrap").children[0].children[0].innerText;
+      var replyUserNew = document.querySelector(".user-profile-show").innerHTML;
+      isreplyMessage = true;
+      replyToggleOpenNew.classList.add("show");
+      replyToggleCloseNew.addEventListener("click", function () {
+        replyToggleOpenNew.classList.remove("show");
+      });
+      document.querySelector(".replyCard .replymessage-block .flex-grow-1 .mb-0").innerText = replyMessageNew;
+      document.querySelector(".replyCard .replymessage-block .flex-grow-1 .conversation-name").innerText = replyUserNew;
+    });
+  }); //Copy Message
+
+  newChatList.querySelectorAll(".copy-message").forEach(function (subitem) {
+    subitem.addEventListener("click", function () {
+      var currentValue = newChatList.childNodes[1].firstElementChild.firstElementChild.firstElementChild.firstElementChild.innerText;
+      navigator.clipboard.writeText(currentValue);
+    });
+  });
+  messageIds++;
+};
+var toggleSelected = function toggleSelected() {
+  var userChatElement = document.getElementsByClassName("user-chat");
+  document.querySelectorAll(".chat-user-list li a").forEach(function (item) {
+    item.addEventListener("click", function (event) {
+      userChatElement.forEach(function (elm) {
+        elm.classList.add("user-chat-show");
+      }); // chat user list link active
+
+      var chatUserList = document.querySelector(".chat-user-list li.active");
+      if (chatUserList) chatUserList.classList.remove("active");
+      this.parentNode.classList.add("active");
+    });
+  });
+  document.querySelectorAll(".sort-contact ul li").forEach(function (item2) {
+    item2.addEventListener("click", function (event) {
+      userChatElement.forEach(function (elm) {
+        elm.classList.add("user-chat-show");
+      });
+    });
+  }); // user-chat-remove
+
+  document.querySelectorAll(".user-chat-remove").forEach(function (item) {
+    item.addEventListener("click", function (event) {
+      userChatElement.forEach(function (elm) {
+        elm.classList.remove("user-chat-show");
+      });
+    });
+  });
+};
+var updateSelectedChat = function updateSelectedChat() {
+  document.getElementById("channel-chat").style.display = "none";
+  document.getElementById("users-chat").style.display = "block";
+};
+var fetchMessages = function fetchMessages(uuid) {
+  axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/chatMessages', {
+    params: {
+      'uuid': uuid
+    }
+  }).then(function (response) {
+    updateChats(response.data);
+  });
+};
+var updateChats = function updateChats(chatData) {
+  resetOldChats();
+  var lenght = chatData.lenght,
+      messages = chatData.messages,
+      sender = chatData.sender;
+  var itemList = document.getElementById("users-conversation");
+  itemList.setAttribute('selected-chat', sender.uuid);
+  var messageIds = itemList.childElementCount;
+  var currentSelectedChat = 'users';
+  var isContinue = 0;
+  messages.forEach(function (message, index) {
+    messageIds++;
+    var userChatUuid = sender.uuid;
+    /*if (isContinue > 0) {
+        isContinue = isContinue - 1;
+        return;
+    }*/
+
+    var isAlighn = message.from_id != userChatUuid ? " right" : " left";
+    var msgHTML = '<li class="chat-list' + isAlighn + '" id=chat-list-' + messageIds + '>\
+                <div class="conversation-list">';
+    if (userChatUuid == message.from_id && sender) msgHTML += '<div class="chat-avatar"><img src="' + sender.profile + '" alt=""></div>';
+    msgHTML += '<div class="user-chat-content">';
+    msgHTML += getMsg(message.id, message.content, true);
+
+    if (messages[index + 1] && message.from_id == messages[index + 1]["from_id"]) {
+      isContinue = getNextMsgCounts(messages, index, message.from_id);
+      msgHTML += getNextMsgs(messages, index, message.from_id, isContinue);
+    }
+
+    msgHTML += '<div class="conversation-name"><small class="text-muted time">' + formatTimeForMessages(message.created_at) + '</small> <span class="text-success check-message-icon"><i class="bx bx-check-double"></i></span></div>';
+    msgHTML += "</div>\
+        </div>\
+    </li>";
+    document.getElementById(currentSelectedChat + "-conversation").innerHTML += msgHTML;
+  });
+  deleteMessage();
+  copyMessage();
+  (0,_helpers__WEBPACK_IMPORTED_MODULE_3__.scrollToBottom)("users-chat");
+  copyClipboard();
+  replyMessage();
+};
+var getMsg = function getMsg(id, msg, has_dropDown) {
+  var msgHTML = '<div class="ctext-wrap">';
+
+  if (msg != null) {
+    msgHTML += '<div class="ctext-wrap-content" id=' + id + '>\
+    <p class="mb-0 ctext-content">' + msg + "</p></div>";
+  }
+
+  if (has_dropDown === true) {
+    msgHTML += (0,_dir_messageTemplate__WEBPACK_IMPORTED_MODULE_2__.getDropdownMessage)();
+  }
+
+  msgHTML += "</div>";
+  return msgHTML;
+};
+/**
+ * Chat helpers function
+ */
+
+function resetOldChats() {
+  document.getElementById('users-conversation').innerHTML = "";
+}
+
+function replyMessage() {
+  var itemList = document.getElementById("users-conversation");
+  var replyMessage = itemList.querySelectorAll(".reply-message");
+  var replyToggleOpen = document.querySelector(".replyCard");
+  var replyToggleClose = document.querySelector("#close_toggle");
+  replyMessage.forEach(function (item) {
+    item.addEventListener("click", function () {
+      isreplyMessage = true;
+      replyToggleOpen.classList.add("show");
+      replyToggleClose.addEventListener("click", function () {
+        replyToggleOpen.classList.remove("show");
+      });
+      var replyMsg = item.closest(".ctext-wrap").children[0].children[0].innerText;
+      document.querySelector(".replyCard .replymessage-block .flex-grow-1 .mb-0").innerText = replyMsg;
+      var replyuser = document.querySelector(".user-profile-show").innerHTML;
+      var msgWwnerName = item.closest(".chat-list") ? item.closest(".chat-list").classList.contains("left") ? replyuser : "You" : replyuser;
+      document.querySelector(".replyCard .replymessage-block .flex-grow-1 .conversation-name").innerText = msgWwnerName;
+    });
+  });
+}
+
+function copyMessage() {
+  var itemList = document.getElementById("users-conversation");
+  var copyMessage = itemList.querySelectorAll(".copy-message");
+  copyMessage.forEach(function (item) {
+    item.addEventListener("click", function () {
+      var isText = item.closest(".ctext-wrap").children[0] ? item.closest(".ctext-wrap").children[0].children[0].innerText : "";
+      navigator.clipboard.writeText(isText);
+    });
+  });
+}
+
+function copyClipboard() {
+  var copyClipboardAlert = document.querySelectorAll(".copy-message");
+  copyClipboardAlert.forEach(function (item) {
+    item.addEventListener("click", function () {
+      document.getElementById("copyClipBoard").style.display = "block";
+      document.getElementById("copyClipBoardChannel").style.display = "block";
+      setTimeout(hideclipboard, 1000);
+
+      function hideclipboard() {
+        document.getElementById("copyClipBoard").style.display = "none";
+        document.getElementById("copyClipBoardChannel").style.display = "none";
+      }
+    });
+  });
+}
+
+function deleteMessage() {
+  var itemList = document.getElementById("users-conversation");
+  var deleteItems = itemList.querySelectorAll(".delete-item");
+  deleteItems.forEach(function (item) {
+    item.addEventListener("click", function () {
+      item.closest(".user-chat-content").childElementCount == 2 ? item.closest(".chat-list").remove() : item.closest(".ctext-wrap").remove();
+    });
+  });
+}
+
+function getNextMsgCounts(chatsData, i, from_id) {
+  var counts = 0;
+
+  while (chatsData[i]) {
+    if (chatsData[i + 1] && chatsData[i + 1]["from_id"] == from_id) {
+      counts++;
+      i++;
+    } else {
+      break;
+    }
+  }
+
+  return counts;
+} //getNextMsgs
+
+
+function getNextMsgs(chatsData, i, from_id, isContinue) {
+  var msgs = 0;
+
+  while (chatsData[i]) {
+    if (chatsData[i + 1] && chatsData[i + 1]["from_id"] == from_id) {
+      msgs = getMsg(chatsData[i + 1].id, chatsData[i + 1].msg, chatsData[i + 1].has_images, chatsData[i + 1].has_files, chatsData[i + 1].has_audios, chatsData[i + 1].has_videos, chatsData[i + 1].has_dropDown);
+      i++;
+    } else {
+      break;
+    }
+  }
+
+  return msgs;
+}
+
+/***/ }),
+
+/***/ "./resources/js/pages/users.js":
+/*!*************************************!*\
+  !*** ./resources/js/pages/users.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "contactList": () => (/* binding */ contactList),
+/* harmony export */   "getUsersList": () => (/* binding */ getUsersList)
+/* harmony export */ });
+/* harmony import */ var _request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../request */ "./resources/js/request.js");
+/* harmony import */ var _chat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chat */ "./resources/js/pages/chat.js");
+
+
+var getUsersList = function getUsersList() {
+  _request__WEBPACK_IMPORTED_MODULE_0__.axios.get('/api/messages').then(function (response) {
+    var users;
+
+    if (typeof response.data == 'string') {
+      users = JSON.parse(response.data).messages;
+    } else {
+      users = response.data.messages;
+    }
+
+    document.getElementById('usersList').innerHTML = "";
+    users.forEach(function (userData, index) {
+      var notReadCount = userData.notReadCount;
+      var message = userData.message;
+      var sender = userData.sender;
+      var isUserProfile = sender.profile ? '<img src="' + sender.profile + '" class="rounded-circle avatar-xs" alt=""><span class="user-status"></span>' : '<div class="avatar-xs"><span class="avatar-title rounded-circle bg-primary text-white"><span class="username">JL</span><span class="user-status"></span></span></div>'; // TODO
+
+      var isMessageCount = notReadCount ? '<div class="ms-auto"><span class="badge badge-soft-danger rounded p-1 fs-10">' + notReadCount + "</span></div>" : "";
+      var messageCount = notReadCount ? '<a href="javascript: void(0);" class="unread-msg-user">' : '<a href="javascript: void(0);">'; // END TODO
+      //var activeClass = sender.id === 1 ? "active" : "";
+
+      var profile = sender.profile ? '<img src="' + sender.profile + '" class="rounded-circle avatar-xs" alt=""><span class="user-status"></span>' : '<div class="avatar-xs"><span class="avatar-title rounded-circle bg-primary text-white"><span class="username">' + sender.name + '</span><span class="user-status"></span></span></div>';
+      profile += "<input type=\"hidden\" class=\"_user-uuid\" value=\"".concat(sender.uuid, "\" >");
+      document.getElementById("usersList").innerHTML += '<li id="contact-id-' + sender.id + '" data-name="favorite">\
+            ' + messageCount + ' \
+                                <div class="d-flex align-items-center">\
+                                    <div class="chat-user-img online align-self-center me-2 ms-0">\
+                                        ' + profile + '\
+                                    </div>\
+                                    <div class="overflow-hidden me-2">\
+                                        <p class="text-truncate chat-username mb-0">' + sender.name + '</p>\
+                                        <p class="text-truncate text-muted fs-13 mb-0">' + message.content + "</p>\
+                                    </div>\
+                                    " + isMessageCount + "\
+                                </div>\
+                            </a>\
+                        </li>";
+      (0,_chat__WEBPACK_IMPORTED_MODULE_1__.toggleSelected)();
+    });
+    document.querySelectorAll('#usersList li').forEach(function (item) {
+      item.addEventListener("click", function (event) {
+        var unreadMessage = item.querySelector('.d-flex .ms-auto');
+
+        if (unreadMessage) {
+          unreadMessage.style.display = 'none';
+        }
+
+        item.currentSelectedChat = "users";
+        (0,_chat__WEBPACK_IMPORTED_MODULE_1__.updateSelectedChat)();
+        var uuid = item.querySelector('._user-uuid').value;
+        document.getElementById("users-conversation").setAttribute('selected-chat', uuid);
+        var contactName = item.querySelector(".chat-username").innerHTML;
+        document.querySelector(".text-truncate .user-profile-show").innerHTML = contactName;
+        document.querySelector(".user-profile-desc .text-truncate").innerHTML = contactName;
+        document.querySelector(".audiocallModal .text-truncate").innerHTML = contactName;
+        document.querySelector(".videocallModal .text-truncate").innerHTML = contactName;
+        document.querySelector(".user-profile-sidebar .user-name").innerHTML = contactName;
+        document.querySelector(".chat-input-typing").style.display = "none";
+        document.querySelector(".user-profile-status").style.display = "none";
+        var contactImg = item.querySelector(".avatar-xs").getAttribute("src");
+
+        if (contactImg) {
+          document.querySelector(".user-own-img .avatar-sm").setAttribute("src", contactImg);
+          document.querySelector(".user-profile-sidebar .profile-img").setAttribute("src", contactImg);
+          document.querySelector(".audiocallModal .img-thumbnail").setAttribute("src", contactImg);
+          document.querySelector(".videocallModal .videocallModal-bg").setAttribute("src", contactImg);
+        } else {
+          document.querySelector(".user-own-img .avatar-sm").setAttribute("src", dummyImage);
+          document.querySelector(".user-profile-sidebar .profile-img").setAttribute("src", dummyImage);
+          document.querySelector(".audiocallModal .img-thumbnail").setAttribute("src", dummyImage);
+          document.querySelector(".videocallModal .videocallModal-bg").setAttribute("src", dummyImage);
+        }
+
+        var conversationImg = document.getElementById("users-conversation");
+        conversationImg.querySelectorAll(".left .chat-avatar").forEach(function (item3) {
+          if (contactImg) {
+            item3.querySelector("img").setAttribute("src", contactImg);
+          } else {
+            item3.querySelector("img").setAttribute("src", dummyImage);
+          }
+        });
+        (0,_chat__WEBPACK_IMPORTED_MODULE_1__.fetchMessages)(uuid);
+      });
+    });
+  })["finally"](function () {
+    if (!document.getElementById("users-conversation").getAttribute('selected-chat')) {
+      document.querySelector('#usersList li').click();
+    }
+  });
+};
+var contactList = function contactList() {
+  document.querySelectorAll(".sort-contact ul li").forEach(function (item) {
+    item.addEventListener("click", function (event) {
+      item.currentSelectedChat = "users";
+      (0,_chat__WEBPACK_IMPORTED_MODULE_1__.updateSelectedChat)();
+      var uuid = item.querySelector('._user-uuid').value;
+      var contactName = item.querySelector("li .fs-14").innerHTML;
+      document.querySelector(".text-truncate .user-profile-show").innerHTML = contactName;
+      document.querySelector(".user-profile-desc .text-truncate").innerHTML = contactName;
+      document.querySelector(".audiocallModal .text-truncate").innerHTML = contactName;
+      document.querySelector(".videocallModal .text-truncate").innerHTML = contactName;
+      document.querySelector(".user-profile-sidebar .user-name").innerHTML = contactName;
+      document.querySelector(".chat-input-typing").style.display = "none";
+      document.querySelector(".user-profile-status").style.display = "none";
+      var contactImg = item.querySelector("li .align-items-center").querySelector(".avatar-xs .rounded-circle").getAttribute("src");
+
+      if (contactImg) {
+        document.querySelector(".user-own-img .avatar-sm").setAttribute("src", contactImg);
+        document.querySelector(".user-profile-sidebar .profile-img").setAttribute("src", contactImg);
+        document.querySelector(".audiocallModal .img-thumbnail").setAttribute("src", contactImg);
+        document.querySelector(".videocallModal .videocallModal-bg").setAttribute("src", contactImg);
+      } else {
+        document.querySelector(".user-own-img .avatar-sm").setAttribute("src", dummyImage);
+        document.querySelector(".user-profile-sidebar .profile-img").setAttribute("src", dummyImage);
+        document.querySelector(".audiocallModal .img-thumbnail").setAttribute("src", dummyImage);
+        document.querySelector(".videocallModal .videocallModal-bg").setAttribute("src", dummyImage);
+      }
+
+      var conversationImg = document.getElementById("users-conversation");
+      conversationImg.querySelectorAll(".left .chat-avatar").forEach(function (item3) {
+        if (contactImg) {
+          item3.querySelector("img").setAttribute("src", contactImg);
+        } else {
+          item3.querySelector("img").setAttribute("src", dummyImage);
+        }
+      });
+      (0,_chat__WEBPACK_IMPORTED_MODULE_1__.toggleSelected)();
+      (0,_chat__WEBPACK_IMPORTED_MODULE_1__.fetchMessages)(uuid); //window.stop();
+    });
+  });
+};
+window.addEventListener('load', function () {
+  // profile user edit
+  document.getElementById("user-profile-edit-btn").addEventListener("click", function (e) {
+    document.querySelectorAll(".edit-input .form-control").forEach(function (item) {
+      var editIcon = document.getElementById("edit-icon");
+
+      if (item.disabled) {
+        editIcon.classList.replace("bxs-pencil", "bxs-save");
+        item.disabled = false;
+      } else {
+        var name = document.getElementById('editName').value;
+        var email = document.getElementById('editEmail').value;
+        var formData = new FormData();
+        formData.append('name', name);
+        formData.append('email', email);
+        _request__WEBPACK_IMPORTED_MODULE_0__.axios.post('/api/user/update', formData);
+        editIcon.classList.replace("bxs-save", "bxs-pencil");
+        item.disabled = true;
+      }
+    });
+  });
+});
+
+/***/ }),
+
+/***/ "./resources/js/request.js":
+/*!*********************************!*\
+  !*** ./resources/js/request.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "axios": () => (/* binding */ axios)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+var axios = new axios__WEBPACK_IMPORTED_MODULE_0__.Axios({
+  withCredentials: true
+});
+
+/***/ }),
+
+/***/ "./node_modules/laravel-echo/dist/echo.js":
+/*!************************************************!*\
+  !*** ./node_modules/laravel-echo/dist/echo.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Channel": () => (/* binding */ Channel),
+/* harmony export */   "default": () => (/* binding */ Echo)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  Object.defineProperty(Constructor, "prototype", {
+    writable: false
+  });
+  return Constructor;
+}
+
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  Object.defineProperty(subClass, "prototype", {
+    writable: false
+  });
+  if (superClass) _setPrototypeOf(subClass, superClass);
+}
+
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (typeof call === "object" || typeof call === "function")) {
+    return call;
+  } else if (call !== void 0) {
+    throw new TypeError("Derived constructors may only return object or undefined");
+  }
+
+  return _assertThisInitialized(self);
+}
+
+function _createSuper(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+  return function _createSuperInternal() {
+    var Super = _getPrototypeOf(Derived),
+        result;
+
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf(this).constructor;
+
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return _possibleConstructorReturn(this, result);
+  };
+}
+
+/**
+ * This class represents a basic channel.
+ */
+var Channel = /*#__PURE__*/function () {
+  function Channel() {
+    _classCallCheck(this, Channel);
+  }
+
+  _createClass(Channel, [{
+    key: "listenForWhisper",
+    value:
+    /**
+     * Listen for a whisper event on the channel instance.
+     */
+    function listenForWhisper(event, callback) {
+      return this.listen('.client-' + event, callback);
+    }
+    /**
+     * Listen for an event on the channel instance.
+     */
+
+  }, {
+    key: "notification",
+    value: function notification(callback) {
+      return this.listen('.Illuminate\\Notifications\\Events\\BroadcastNotificationCreated', callback);
+    }
+    /**
+     * Stop listening for a whisper event on the channel instance.
+     */
+
+  }, {
+    key: "stopListeningForWhisper",
+    value: function stopListeningForWhisper(event, callback) {
+      return this.stopListening('.client-' + event, callback);
+    }
+  }]);
+
+  return Channel;
+}();
+
+/**
+ * Event name formatter
+ */
+var EventFormatter = /*#__PURE__*/function () {
+  /**
+   * Create a new class instance.
+   */
+  function EventFormatter(namespace) {
+    _classCallCheck(this, EventFormatter);
+
+    this.setNamespace(namespace);
+  }
+  /**
+   * Format the given event name.
+   */
+
+
+  _createClass(EventFormatter, [{
+    key: "format",
+    value: function format(event) {
+      if (event.charAt(0) === '.' || event.charAt(0) === '\\') {
+        return event.substr(1);
+      } else if (this.namespace) {
+        event = this.namespace + '.' + event;
+      }
+
+      return event.replace(/\./g, '\\');
+    }
+    /**
+     * Set the event namespace.
+     */
+
+  }, {
+    key: "setNamespace",
+    value: function setNamespace(value) {
+      this.namespace = value;
+    }
+  }]);
+
+  return EventFormatter;
+}();
+
+/**
+ * This class represents a Pusher channel.
+ */
+
+var PusherChannel = /*#__PURE__*/function (_Channel) {
+  _inherits(PusherChannel, _Channel);
+
+  var _super = _createSuper(PusherChannel);
+
+  /**
+   * Create a new class instance.
+   */
+  function PusherChannel(pusher, name, options) {
+    var _this;
+
+    _classCallCheck(this, PusherChannel);
+
+    _this = _super.call(this);
+    _this.name = name;
+    _this.pusher = pusher;
+    _this.options = options;
+    _this.eventFormatter = new EventFormatter(_this.options.namespace);
+
+    _this.subscribe();
+
+    return _this;
+  }
+  /**
+   * Subscribe to a Pusher channel.
+   */
+
+
+  _createClass(PusherChannel, [{
+    key: "subscribe",
+    value: function subscribe() {
+      this.subscription = this.pusher.subscribe(this.name);
+    }
+    /**
+     * Unsubscribe from a Pusher channel.
+     */
+
+  }, {
+    key: "unsubscribe",
+    value: function unsubscribe() {
+      this.pusher.unsubscribe(this.name);
+    }
+    /**
+     * Listen for an event on the channel instance.
+     */
+
+  }, {
+    key: "listen",
+    value: function listen(event, callback) {
+      this.on(this.eventFormatter.format(event), callback);
+      return this;
+    }
+    /**
+     * Listen for all events on the channel instance.
+     */
+
+  }, {
+    key: "listenToAll",
+    value: function listenToAll(callback) {
+      var _this2 = this;
+
+      this.subscription.bind_global(function (event, data) {
+        if (event.startsWith('pusher:')) {
+          return;
+        }
+
+        var namespace = _this2.options.namespace.replace(/\./g, '\\');
+
+        var formattedEvent = event.startsWith(namespace) ? event.substring(namespace.length + 1) : '.' + event;
+        callback(formattedEvent, data);
+      });
+      return this;
+    }
+    /**
+     * Stop listening for an event on the channel instance.
+     */
+
+  }, {
+    key: "stopListening",
+    value: function stopListening(event, callback) {
+      if (callback) {
+        this.subscription.unbind(this.eventFormatter.format(event), callback);
+      } else {
+        this.subscription.unbind(this.eventFormatter.format(event));
+      }
+
+      return this;
+    }
+    /**
+     * Stop listening for all events on the channel instance.
+     */
+
+  }, {
+    key: "stopListeningToAll",
+    value: function stopListeningToAll(callback) {
+      if (callback) {
+        this.subscription.unbind_global(callback);
+      } else {
+        this.subscription.unbind_global();
+      }
+
+      return this;
+    }
+    /**
+     * Register a callback to be called anytime a subscription succeeds.
+     */
+
+  }, {
+    key: "subscribed",
+    value: function subscribed(callback) {
+      this.on('pusher:subscription_succeeded', function () {
+        callback();
+      });
+      return this;
+    }
+    /**
+     * Register a callback to be called anytime a subscription error occurs.
+     */
+
+  }, {
+    key: "error",
+    value: function error(callback) {
+      this.on('pusher:subscription_error', function (status) {
+        callback(status);
+      });
+      return this;
+    }
+    /**
+     * Bind a channel to an event.
+     */
+
+  }, {
+    key: "on",
+    value: function on(event, callback) {
+      this.subscription.bind(event, callback);
+      return this;
+    }
+  }]);
+
+  return PusherChannel;
+}(Channel);
+
+/**
+ * This class represents a Pusher private channel.
+ */
+
+var PusherPrivateChannel = /*#__PURE__*/function (_PusherChannel) {
+  _inherits(PusherPrivateChannel, _PusherChannel);
+
+  var _super = _createSuper(PusherPrivateChannel);
+
+  function PusherPrivateChannel() {
+    _classCallCheck(this, PusherPrivateChannel);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(PusherPrivateChannel, [{
+    key: "whisper",
+    value:
+    /**
+     * Trigger client event on the channel.
+     */
+    function whisper(eventName, data) {
+      this.pusher.channels.channels[this.name].trigger("client-".concat(eventName), data);
+      return this;
+    }
+  }]);
+
+  return PusherPrivateChannel;
+}(PusherChannel);
+
+/**
+ * This class represents a Pusher private channel.
+ */
+
+var PusherEncryptedPrivateChannel = /*#__PURE__*/function (_PusherChannel) {
+  _inherits(PusherEncryptedPrivateChannel, _PusherChannel);
+
+  var _super = _createSuper(PusherEncryptedPrivateChannel);
+
+  function PusherEncryptedPrivateChannel() {
+    _classCallCheck(this, PusherEncryptedPrivateChannel);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(PusherEncryptedPrivateChannel, [{
+    key: "whisper",
+    value:
+    /**
+     * Trigger client event on the channel.
+     */
+    function whisper(eventName, data) {
+      this.pusher.channels.channels[this.name].trigger("client-".concat(eventName), data);
+      return this;
+    }
+  }]);
+
+  return PusherEncryptedPrivateChannel;
+}(PusherChannel);
+
+/**
+ * This class represents a Pusher presence channel.
+ */
+
+var PusherPresenceChannel = /*#__PURE__*/function (_PusherChannel) {
+  _inherits(PusherPresenceChannel, _PusherChannel);
+
+  var _super = _createSuper(PusherPresenceChannel);
+
+  function PusherPresenceChannel() {
+    _classCallCheck(this, PusherPresenceChannel);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(PusherPresenceChannel, [{
+    key: "here",
+    value:
+    /**
+     * Register a callback to be called anytime the member list changes.
+     */
+    function here(callback) {
+      this.on('pusher:subscription_succeeded', function (data) {
+        callback(Object.keys(data.members).map(function (k) {
+          return data.members[k];
+        }));
+      });
+      return this;
+    }
+    /**
+     * Listen for someone joining the channel.
+     */
+
+  }, {
+    key: "joining",
+    value: function joining(callback) {
+      this.on('pusher:member_added', function (member) {
+        callback(member.info);
+      });
+      return this;
+    }
+    /**
+     * Listen for someone leaving the channel.
+     */
+
+  }, {
+    key: "leaving",
+    value: function leaving(callback) {
+      this.on('pusher:member_removed', function (member) {
+        callback(member.info);
+      });
+      return this;
+    }
+    /**
+     * Trigger client event on the channel.
+     */
+
+  }, {
+    key: "whisper",
+    value: function whisper(eventName, data) {
+      this.pusher.channels.channels[this.name].trigger("client-".concat(eventName), data);
+      return this;
+    }
+  }]);
+
+  return PusherPresenceChannel;
+}(PusherChannel);
+
+/**
+ * This class represents a Socket.io channel.
+ */
+
+var SocketIoChannel = /*#__PURE__*/function (_Channel) {
+  _inherits(SocketIoChannel, _Channel);
+
+  var _super = _createSuper(SocketIoChannel);
+
+  /**
+   * Create a new class instance.
+   */
+  function SocketIoChannel(socket, name, options) {
+    var _this;
+
+    _classCallCheck(this, SocketIoChannel);
+
+    _this = _super.call(this);
+    /**
+     * The event callbacks applied to the socket.
+     */
+
+    _this.events = {};
+    /**
+     * User supplied callbacks for events on this channel.
+     */
+
+    _this.listeners = {};
+    _this.name = name;
+    _this.socket = socket;
+    _this.options = options;
+    _this.eventFormatter = new EventFormatter(_this.options.namespace);
+
+    _this.subscribe();
+
+    return _this;
+  }
+  /**
+   * Subscribe to a Socket.io channel.
+   */
+
+
+  _createClass(SocketIoChannel, [{
+    key: "subscribe",
+    value: function subscribe() {
+      this.socket.emit('subscribe', {
+        channel: this.name,
+        auth: this.options.auth || {}
+      });
+    }
+    /**
+     * Unsubscribe from channel and ubind event callbacks.
+     */
+
+  }, {
+    key: "unsubscribe",
+    value: function unsubscribe() {
+      this.unbind();
+      this.socket.emit('unsubscribe', {
+        channel: this.name,
+        auth: this.options.auth || {}
+      });
+    }
+    /**
+     * Listen for an event on the channel instance.
+     */
+
+  }, {
+    key: "listen",
+    value: function listen(event, callback) {
+      this.on(this.eventFormatter.format(event), callback);
+      return this;
+    }
+    /**
+     * Stop listening for an event on the channel instance.
+     */
+
+  }, {
+    key: "stopListening",
+    value: function stopListening(event, callback) {
+      this.unbindEvent(this.eventFormatter.format(event), callback);
+      return this;
+    }
+    /**
+     * Register a callback to be called anytime a subscription succeeds.
+     */
+
+  }, {
+    key: "subscribed",
+    value: function subscribed(callback) {
+      this.on('connect', function (socket) {
+        callback(socket);
+      });
+      return this;
+    }
+    /**
+     * Register a callback to be called anytime an error occurs.
+     */
+
+  }, {
+    key: "error",
+    value: function error(callback) {
+      return this;
+    }
+    /**
+     * Bind the channel's socket to an event and store the callback.
+     */
+
+  }, {
+    key: "on",
+    value: function on(event, callback) {
+      var _this2 = this;
+
+      this.listeners[event] = this.listeners[event] || [];
+
+      if (!this.events[event]) {
+        this.events[event] = function (channel, data) {
+          if (_this2.name === channel && _this2.listeners[event]) {
+            _this2.listeners[event].forEach(function (cb) {
+              return cb(data);
+            });
+          }
+        };
+
+        this.socket.on(event, this.events[event]);
+      }
+
+      this.listeners[event].push(callback);
+      return this;
+    }
+    /**
+     * Unbind the channel's socket from all stored event callbacks.
+     */
+
+  }, {
+    key: "unbind",
+    value: function unbind() {
+      var _this3 = this;
+
+      Object.keys(this.events).forEach(function (event) {
+        _this3.unbindEvent(event);
+      });
+    }
+    /**
+     * Unbind the listeners for the given event.
+     */
+
+  }, {
+    key: "unbindEvent",
+    value: function unbindEvent(event, callback) {
+      this.listeners[event] = this.listeners[event] || [];
+
+      if (callback) {
+        this.listeners[event] = this.listeners[event].filter(function (cb) {
+          return cb !== callback;
+        });
+      }
+
+      if (!callback || this.listeners[event].length === 0) {
+        if (this.events[event]) {
+          this.socket.removeListener(event, this.events[event]);
+          delete this.events[event];
+        }
+
+        delete this.listeners[event];
+      }
+    }
+  }]);
+
+  return SocketIoChannel;
+}(Channel);
+
+/**
+ * This class represents a Socket.io private channel.
+ */
+
+var SocketIoPrivateChannel = /*#__PURE__*/function (_SocketIoChannel) {
+  _inherits(SocketIoPrivateChannel, _SocketIoChannel);
+
+  var _super = _createSuper(SocketIoPrivateChannel);
+
+  function SocketIoPrivateChannel() {
+    _classCallCheck(this, SocketIoPrivateChannel);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(SocketIoPrivateChannel, [{
+    key: "whisper",
+    value:
+    /**
+     * Trigger client event on the channel.
+     */
+    function whisper(eventName, data) {
+      this.socket.emit('client event', {
+        channel: this.name,
+        event: "client-".concat(eventName),
+        data: data
+      });
+      return this;
+    }
+  }]);
+
+  return SocketIoPrivateChannel;
+}(SocketIoChannel);
+
+/**
+ * This class represents a Socket.io presence channel.
+ */
+
+var SocketIoPresenceChannel = /*#__PURE__*/function (_SocketIoPrivateChann) {
+  _inherits(SocketIoPresenceChannel, _SocketIoPrivateChann);
+
+  var _super = _createSuper(SocketIoPresenceChannel);
+
+  function SocketIoPresenceChannel() {
+    _classCallCheck(this, SocketIoPresenceChannel);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(SocketIoPresenceChannel, [{
+    key: "here",
+    value:
+    /**
+     * Register a callback to be called anytime the member list changes.
+     */
+    function here(callback) {
+      this.on('presence:subscribed', function (members) {
+        callback(members.map(function (m) {
+          return m.user_info;
+        }));
+      });
+      return this;
+    }
+    /**
+     * Listen for someone joining the channel.
+     */
+
+  }, {
+    key: "joining",
+    value: function joining(callback) {
+      this.on('presence:joining', function (member) {
+        return callback(member.user_info);
+      });
+      return this;
+    }
+    /**
+     * Listen for someone leaving the channel.
+     */
+
+  }, {
+    key: "leaving",
+    value: function leaving(callback) {
+      this.on('presence:leaving', function (member) {
+        return callback(member.user_info);
+      });
+      return this;
+    }
+  }]);
+
+  return SocketIoPresenceChannel;
+}(SocketIoPrivateChannel);
+
+/**
+ * This class represents a null channel.
+ */
+
+var NullChannel = /*#__PURE__*/function (_Channel) {
+  _inherits(NullChannel, _Channel);
+
+  var _super = _createSuper(NullChannel);
+
+  function NullChannel() {
+    _classCallCheck(this, NullChannel);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(NullChannel, [{
+    key: "subscribe",
+    value:
+    /**
+     * Subscribe to a channel.
+     */
+    function subscribe() {//
+    }
+    /**
+     * Unsubscribe from a channel.
+     */
+
+  }, {
+    key: "unsubscribe",
+    value: function unsubscribe() {//
+    }
+    /**
+     * Listen for an event on the channel instance.
+     */
+
+  }, {
+    key: "listen",
+    value: function listen(event, callback) {
+      return this;
+    }
+    /**
+     * Stop listening for an event on the channel instance.
+     */
+
+  }, {
+    key: "stopListening",
+    value: function stopListening(event, callback) {
+      return this;
+    }
+    /**
+     * Register a callback to be called anytime a subscription succeeds.
+     */
+
+  }, {
+    key: "subscribed",
+    value: function subscribed(callback) {
+      return this;
+    }
+    /**
+     * Register a callback to be called anytime an error occurs.
+     */
+
+  }, {
+    key: "error",
+    value: function error(callback) {
+      return this;
+    }
+    /**
+     * Bind a channel to an event.
+     */
+
+  }, {
+    key: "on",
+    value: function on(event, callback) {
+      return this;
+    }
+  }]);
+
+  return NullChannel;
+}(Channel);
+
+/**
+ * This class represents a null private channel.
+ */
+
+var NullPrivateChannel = /*#__PURE__*/function (_NullChannel) {
+  _inherits(NullPrivateChannel, _NullChannel);
+
+  var _super = _createSuper(NullPrivateChannel);
+
+  function NullPrivateChannel() {
+    _classCallCheck(this, NullPrivateChannel);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(NullPrivateChannel, [{
+    key: "whisper",
+    value:
+    /**
+     * Trigger client event on the channel.
+     */
+    function whisper(eventName, data) {
+      return this;
+    }
+  }]);
+
+  return NullPrivateChannel;
+}(NullChannel);
+
+/**
+ * This class represents a null presence channel.
+ */
+
+var NullPresenceChannel = /*#__PURE__*/function (_NullChannel) {
+  _inherits(NullPresenceChannel, _NullChannel);
+
+  var _super = _createSuper(NullPresenceChannel);
+
+  function NullPresenceChannel() {
+    _classCallCheck(this, NullPresenceChannel);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(NullPresenceChannel, [{
+    key: "here",
+    value:
+    /**
+     * Register a callback to be called anytime the member list changes.
+     */
+    function here(callback) {
+      return this;
+    }
+    /**
+     * Listen for someone joining the channel.
+     */
+
+  }, {
+    key: "joining",
+    value: function joining(callback) {
+      return this;
+    }
+    /**
+     * Listen for someone leaving the channel.
+     */
+
+  }, {
+    key: "leaving",
+    value: function leaving(callback) {
+      return this;
+    }
+    /**
+     * Trigger client event on the channel.
+     */
+
+  }, {
+    key: "whisper",
+    value: function whisper(eventName, data) {
+      return this;
+    }
+  }]);
+
+  return NullPresenceChannel;
+}(NullChannel);
+
+var Connector = /*#__PURE__*/function () {
+  /**
+   * Create a new class instance.
+   */
+  function Connector(options) {
+    _classCallCheck(this, Connector);
+
+    /**
+     * Default connector options.
+     */
+    this._defaultOptions = {
+      auth: {
+        headers: {}
+      },
+      authEndpoint: '/broadcasting/auth',
+      broadcaster: 'pusher',
+      csrfToken: null,
+      host: null,
+      key: null,
+      namespace: 'App.Events'
+    };
+    this.setOptions(options);
+    this.connect();
+  }
+  /**
+   * Merge the custom options with the defaults.
+   */
+
+
+  _createClass(Connector, [{
+    key: "setOptions",
+    value: function setOptions(options) {
+      this.options = _extends(this._defaultOptions, options);
+
+      if (this.csrfToken()) {
+        this.options.auth.headers['X-CSRF-TOKEN'] = this.csrfToken();
+      }
+
+      return options;
+    }
+    /**
+     * Extract the CSRF token from the page.
+     */
+
+  }, {
+    key: "csrfToken",
+    value: function csrfToken() {
+      var selector;
+
+      if (typeof window !== 'undefined' && window['Laravel'] && window['Laravel'].csrfToken) {
+        return window['Laravel'].csrfToken;
+      } else if (this.options.csrfToken) {
+        return this.options.csrfToken;
+      } else if (typeof document !== 'undefined' && typeof document.querySelector === 'function' && (selector = document.querySelector('meta[name="csrf-token"]'))) {
+        return selector.getAttribute('content');
+      }
+
+      return null;
+    }
+  }]);
+
+  return Connector;
+}();
+
+/**
+ * This class creates a connector to Pusher.
+ */
+
+var PusherConnector = /*#__PURE__*/function (_Connector) {
+  _inherits(PusherConnector, _Connector);
+
+  var _super = _createSuper(PusherConnector);
+
+  function PusherConnector() {
+    var _this;
+
+    _classCallCheck(this, PusherConnector);
+
+    _this = _super.apply(this, arguments);
+    /**
+     * All of the subscribed channel names.
+     */
+
+    _this.channels = {};
+    return _this;
+  }
+  /**
+   * Create a fresh Pusher connection.
+   */
+
+
+  _createClass(PusherConnector, [{
+    key: "connect",
+    value: function connect() {
+      if (typeof this.options.client !== 'undefined') {
+        this.pusher = this.options.client;
+      } else {
+        this.pusher = new Pusher(this.options.key, this.options);
+      }
+    }
+    /**
+     * Listen for an event on a channel instance.
+     */
+
+  }, {
+    key: "listen",
+    value: function listen(name, event, callback) {
+      return this.channel(name).listen(event, callback);
+    }
+    /**
+     * Get a channel instance by name.
+     */
+
+  }, {
+    key: "channel",
+    value: function channel(name) {
+      if (!this.channels[name]) {
+        this.channels[name] = new PusherChannel(this.pusher, name, this.options);
+      }
+
+      return this.channels[name];
+    }
+    /**
+     * Get a private channel instance by name.
+     */
+
+  }, {
+    key: "privateChannel",
+    value: function privateChannel(name) {
+      if (!this.channels['private-' + name]) {
+        this.channels['private-' + name] = new PusherPrivateChannel(this.pusher, 'private-' + name, this.options);
+      }
+
+      return this.channels['private-' + name];
+    }
+    /**
+     * Get a private encrypted channel instance by name.
+     */
+
+  }, {
+    key: "encryptedPrivateChannel",
+    value: function encryptedPrivateChannel(name) {
+      if (!this.channels['private-encrypted-' + name]) {
+        this.channels['private-encrypted-' + name] = new PusherEncryptedPrivateChannel(this.pusher, 'private-encrypted-' + name, this.options);
+      }
+
+      return this.channels['private-encrypted-' + name];
+    }
+    /**
+     * Get a presence channel instance by name.
+     */
+
+  }, {
+    key: "presenceChannel",
+    value: function presenceChannel(name) {
+      if (!this.channels['presence-' + name]) {
+        this.channels['presence-' + name] = new PusherPresenceChannel(this.pusher, 'presence-' + name, this.options);
+      }
+
+      return this.channels['presence-' + name];
+    }
+    /**
+     * Leave the given channel, as well as its private and presence variants.
+     */
+
+  }, {
+    key: "leave",
+    value: function leave(name) {
+      var _this2 = this;
+
+      var channels = [name, 'private-' + name, 'presence-' + name];
+      channels.forEach(function (name, index) {
+        _this2.leaveChannel(name);
+      });
+    }
+    /**
+     * Leave the given channel.
+     */
+
+  }, {
+    key: "leaveChannel",
+    value: function leaveChannel(name) {
+      if (this.channels[name]) {
+        this.channels[name].unsubscribe();
+        delete this.channels[name];
+      }
+    }
+    /**
+     * Get the socket ID for the connection.
+     */
+
+  }, {
+    key: "socketId",
+    value: function socketId() {
+      return this.pusher.connection.socket_id;
+    }
+    /**
+     * Disconnect Pusher connection.
+     */
+
+  }, {
+    key: "disconnect",
+    value: function disconnect() {
+      this.pusher.disconnect();
+    }
+  }]);
+
+  return PusherConnector;
+}(Connector);
+
+/**
+ * This class creates a connnector to a Socket.io server.
+ */
+
+var SocketIoConnector = /*#__PURE__*/function (_Connector) {
+  _inherits(SocketIoConnector, _Connector);
+
+  var _super = _createSuper(SocketIoConnector);
+
+  function SocketIoConnector() {
+    var _this;
+
+    _classCallCheck(this, SocketIoConnector);
+
+    _this = _super.apply(this, arguments);
+    /**
+     * All of the subscribed channel names.
+     */
+
+    _this.channels = {};
+    return _this;
+  }
+  /**
+   * Create a fresh Socket.io connection.
+   */
+
+
+  _createClass(SocketIoConnector, [{
+    key: "connect",
+    value: function connect() {
+      var _this2 = this;
+
+      var io = this.getSocketIO();
+      this.socket = io(this.options.host, this.options);
+      this.socket.on('reconnect', function () {
+        Object.values(_this2.channels).forEach(function (channel) {
+          channel.subscribe();
+        });
+      });
+      return this.socket;
+    }
+    /**
+     * Get socket.io module from global scope or options.
+     */
+
+  }, {
+    key: "getSocketIO",
+    value: function getSocketIO() {
+      if (typeof this.options.client !== 'undefined') {
+        return this.options.client;
+      }
+
+      if (typeof io !== 'undefined') {
+        return io;
+      }
+
+      throw new Error('Socket.io client not found. Should be globally available or passed via options.client');
+    }
+    /**
+     * Listen for an event on a channel instance.
+     */
+
+  }, {
+    key: "listen",
+    value: function listen(name, event, callback) {
+      return this.channel(name).listen(event, callback);
+    }
+    /**
+     * Get a channel instance by name.
+     */
+
+  }, {
+    key: "channel",
+    value: function channel(name) {
+      if (!this.channels[name]) {
+        this.channels[name] = new SocketIoChannel(this.socket, name, this.options);
+      }
+
+      return this.channels[name];
+    }
+    /**
+     * Get a private channel instance by name.
+     */
+
+  }, {
+    key: "privateChannel",
+    value: function privateChannel(name) {
+      if (!this.channels['private-' + name]) {
+        this.channels['private-' + name] = new SocketIoPrivateChannel(this.socket, 'private-' + name, this.options);
+      }
+
+      return this.channels['private-' + name];
+    }
+    /**
+     * Get a presence channel instance by name.
+     */
+
+  }, {
+    key: "presenceChannel",
+    value: function presenceChannel(name) {
+      if (!this.channels['presence-' + name]) {
+        this.channels['presence-' + name] = new SocketIoPresenceChannel(this.socket, 'presence-' + name, this.options);
+      }
+
+      return this.channels['presence-' + name];
+    }
+    /**
+     * Leave the given channel, as well as its private and presence variants.
+     */
+
+  }, {
+    key: "leave",
+    value: function leave(name) {
+      var _this3 = this;
+
+      var channels = [name, 'private-' + name, 'presence-' + name];
+      channels.forEach(function (name) {
+        _this3.leaveChannel(name);
+      });
+    }
+    /**
+     * Leave the given channel.
+     */
+
+  }, {
+    key: "leaveChannel",
+    value: function leaveChannel(name) {
+      if (this.channels[name]) {
+        this.channels[name].unsubscribe();
+        delete this.channels[name];
+      }
+    }
+    /**
+     * Get the socket ID for the connection.
+     */
+
+  }, {
+    key: "socketId",
+    value: function socketId() {
+      return this.socket.id;
+    }
+    /**
+     * Disconnect Socketio connection.
+     */
+
+  }, {
+    key: "disconnect",
+    value: function disconnect() {
+      this.socket.disconnect();
+    }
+  }]);
+
+  return SocketIoConnector;
+}(Connector);
+
+/**
+ * This class creates a null connector.
+ */
+
+var NullConnector = /*#__PURE__*/function (_Connector) {
+  _inherits(NullConnector, _Connector);
+
+  var _super = _createSuper(NullConnector);
+
+  function NullConnector() {
+    var _this;
+
+    _classCallCheck(this, NullConnector);
+
+    _this = _super.apply(this, arguments);
+    /**
+     * All of the subscribed channel names.
+     */
+
+    _this.channels = {};
+    return _this;
+  }
+  /**
+   * Create a fresh connection.
+   */
+
+
+  _createClass(NullConnector, [{
+    key: "connect",
+    value: function connect() {//
+    }
+    /**
+     * Listen for an event on a channel instance.
+     */
+
+  }, {
+    key: "listen",
+    value: function listen(name, event, callback) {
+      return new NullChannel();
+    }
+    /**
+     * Get a channel instance by name.
+     */
+
+  }, {
+    key: "channel",
+    value: function channel(name) {
+      return new NullChannel();
+    }
+    /**
+     * Get a private channel instance by name.
+     */
+
+  }, {
+    key: "privateChannel",
+    value: function privateChannel(name) {
+      return new NullPrivateChannel();
+    }
+    /**
+     * Get a presence channel instance by name.
+     */
+
+  }, {
+    key: "presenceChannel",
+    value: function presenceChannel(name) {
+      return new NullPresenceChannel();
+    }
+    /**
+     * Leave the given channel, as well as its private and presence variants.
+     */
+
+  }, {
+    key: "leave",
+    value: function leave(name) {//
+    }
+    /**
+     * Leave the given channel.
+     */
+
+  }, {
+    key: "leaveChannel",
+    value: function leaveChannel(name) {//
+    }
+    /**
+     * Get the socket ID for the connection.
+     */
+
+  }, {
+    key: "socketId",
+    value: function socketId() {
+      return 'fake-socket-id';
+    }
+    /**
+     * Disconnect the connection.
+     */
+
+  }, {
+    key: "disconnect",
+    value: function disconnect() {//
+    }
+  }]);
+
+  return NullConnector;
+}(Connector);
+
+/**
+ * This class is the primary API for interacting with broadcasting.
+ */
+
+var Echo = /*#__PURE__*/function () {
+  /**
+   * Create a new class instance.
+   */
+  function Echo(options) {
+    _classCallCheck(this, Echo);
+
+    this.options = options;
+    this.connect();
+
+    if (!this.options.withoutInterceptors) {
+      this.registerInterceptors();
+    }
+  }
+  /**
+   * Get a channel instance by name.
+   */
+
+
+  _createClass(Echo, [{
+    key: "channel",
+    value: function channel(_channel) {
+      return this.connector.channel(_channel);
+    }
+    /**
+     * Create a new connection.
+     */
+
+  }, {
+    key: "connect",
+    value: function connect() {
+      if (this.options.broadcaster == 'pusher') {
+        this.connector = new PusherConnector(this.options);
+      } else if (this.options.broadcaster == 'socket.io') {
+        this.connector = new SocketIoConnector(this.options);
+      } else if (this.options.broadcaster == 'null') {
+        this.connector = new NullConnector(this.options);
+      } else if (typeof this.options.broadcaster == 'function') {
+        this.connector = new this.options.broadcaster(this.options);
+      }
+    }
+    /**
+     * Disconnect from the Echo server.
+     */
+
+  }, {
+    key: "disconnect",
+    value: function disconnect() {
+      this.connector.disconnect();
+    }
+    /**
+     * Get a presence channel instance by name.
+     */
+
+  }, {
+    key: "join",
+    value: function join(channel) {
+      return this.connector.presenceChannel(channel);
+    }
+    /**
+     * Leave the given channel, as well as its private and presence variants.
+     */
+
+  }, {
+    key: "leave",
+    value: function leave(channel) {
+      this.connector.leave(channel);
+    }
+    /**
+     * Leave the given channel.
+     */
+
+  }, {
+    key: "leaveChannel",
+    value: function leaveChannel(channel) {
+      this.connector.leaveChannel(channel);
+    }
+    /**
+     * Listen for an event on a channel instance.
+     */
+
+  }, {
+    key: "listen",
+    value: function listen(channel, event, callback) {
+      return this.connector.listen(channel, event, callback);
+    }
+    /**
+     * Get a private channel instance by name.
+     */
+
+  }, {
+    key: "private",
+    value: function _private(channel) {
+      return this.connector.privateChannel(channel);
+    }
+    /**
+     * Get a private encrypted channel instance by name.
+     */
+
+  }, {
+    key: "encryptedPrivate",
+    value: function encryptedPrivate(channel) {
+      return this.connector.encryptedPrivateChannel(channel);
+    }
+    /**
+     * Get the Socket ID for the connection.
+     */
+
+  }, {
+    key: "socketId",
+    value: function socketId() {
+      return this.connector.socketId();
+    }
+    /**
+     * Register 3rd party request interceptiors. These are used to automatically
+     * send a connections socket id to a Laravel app with a X-Socket-Id header.
+     */
+
+  }, {
+    key: "registerInterceptors",
+    value: function registerInterceptors() {
+      if (typeof Vue === 'function' && Vue.http) {
+        this.registerVueRequestInterceptor();
+      }
+
+      if (typeof axios === 'function') {
+        this.registerAxiosRequestInterceptor();
+      }
+
+      if (typeof jQuery === 'function') {
+        this.registerjQueryAjaxSetup();
+      }
+    }
+    /**
+     * Register a Vue HTTP interceptor to add the X-Socket-ID header.
+     */
+
+  }, {
+    key: "registerVueRequestInterceptor",
+    value: function registerVueRequestInterceptor() {
+      var _this = this;
+
+      Vue.http.interceptors.push(function (request, next) {
+        if (_this.socketId()) {
+          request.headers.set('X-Socket-ID', _this.socketId());
+        }
+
+        next();
+      });
+    }
+    /**
+     * Register an Axios HTTP interceptor to add the X-Socket-ID header.
+     */
+
+  }, {
+    key: "registerAxiosRequestInterceptor",
+    value: function registerAxiosRequestInterceptor() {
+      var _this2 = this;
+
+      axios.interceptors.request.use(function (config) {
+        if (_this2.socketId()) {
+          config.headers['X-Socket-Id'] = _this2.socketId();
+        }
+
+        return config;
+      });
+    }
+    /**
+     * Register jQuery AjaxPrefilter to add the X-Socket-ID header.
+     */
+
+  }, {
+    key: "registerjQueryAjaxSetup",
+    value: function registerjQueryAjaxSetup() {
+      var _this3 = this;
+
+      if (typeof jQuery.ajax != 'undefined') {
+        jQuery.ajaxPrefilter(function (options, originalOptions, xhr) {
+          if (_this3.socketId()) {
+            xhr.setRequestHeader('X-Socket-Id', _this3.socketId());
+          }
+        });
+      }
+    }
+  }]);
+
+  return Echo;
+}();
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/process/browser.js":
+/*!*****************************************!*\
+  !*** ./node_modules/process/browser.js ***!
+  \*****************************************/
+/***/ ((module) => {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+
+/***/ }),
+
+/***/ "./node_modules/pusher-js/dist/web/pusher.js":
+/*!***************************************************!*\
+  !*** ./node_modules/pusher-js/dist/web/pusher.js ***!
+  \***************************************************/
+/***/ ((module) => {
+
+/*!
+ * Pusher JavaScript Library v7.1.1-beta
+ * https://pusher.com/
+ *
+ * Copyright 2020, Pusher
+ * Released under the MIT licence.
+ */
+
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(true)
+		module.exports = factory();
+	else {}
+})(window, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __nested_webpack_require_674__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __nested_webpack_require_674__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__nested_webpack_require_674__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__nested_webpack_require_674__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__nested_webpack_require_674__.d = function(exports, name, getter) {
+/******/ 		if(!__nested_webpack_require_674__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__nested_webpack_require_674__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__nested_webpack_require_674__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __nested_webpack_require_674__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__nested_webpack_require_674__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __nested_webpack_require_674__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__nested_webpack_require_674__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__nested_webpack_require_674__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__nested_webpack_require_674__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__nested_webpack_require_674__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __nested_webpack_require_674__(__nested_webpack_require_674__.s = 2);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// Copyright (C) 2016 Dmitry Chestnykh
+// MIT License. See LICENSE file for details.
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Package base64 implements Base64 encoding and decoding.
+ */
+// Invalid character used in decoding to indicate
+// that the character to decode is out of range of
+// alphabet and cannot be decoded.
+var INVALID_BYTE = 256;
+/**
+ * Implements standard Base64 encoding.
+ *
+ * Operates in constant time.
+ */
+var Coder = /** @class */ (function () {
+    // TODO(dchest): methods to encode chunk-by-chunk.
+    function Coder(_paddingCharacter) {
+        if (_paddingCharacter === void 0) { _paddingCharacter = "="; }
+        this._paddingCharacter = _paddingCharacter;
+    }
+    Coder.prototype.encodedLength = function (length) {
+        if (!this._paddingCharacter) {
+            return (length * 8 + 5) / 6 | 0;
+        }
+        return (length + 2) / 3 * 4 | 0;
+    };
+    Coder.prototype.encode = function (data) {
+        var out = "";
+        var i = 0;
+        for (; i < data.length - 2; i += 3) {
+            var c = (data[i] << 16) | (data[i + 1] << 8) | (data[i + 2]);
+            out += this._encodeByte((c >>> 3 * 6) & 63);
+            out += this._encodeByte((c >>> 2 * 6) & 63);
+            out += this._encodeByte((c >>> 1 * 6) & 63);
+            out += this._encodeByte((c >>> 0 * 6) & 63);
+        }
+        var left = data.length - i;
+        if (left > 0) {
+            var c = (data[i] << 16) | (left === 2 ? data[i + 1] << 8 : 0);
+            out += this._encodeByte((c >>> 3 * 6) & 63);
+            out += this._encodeByte((c >>> 2 * 6) & 63);
+            if (left === 2) {
+                out += this._encodeByte((c >>> 1 * 6) & 63);
+            }
+            else {
+                out += this._paddingCharacter || "";
+            }
+            out += this._paddingCharacter || "";
+        }
+        return out;
+    };
+    Coder.prototype.maxDecodedLength = function (length) {
+        if (!this._paddingCharacter) {
+            return (length * 6 + 7) / 8 | 0;
+        }
+        return length / 4 * 3 | 0;
+    };
+    Coder.prototype.decodedLength = function (s) {
+        return this.maxDecodedLength(s.length - this._getPaddingLength(s));
+    };
+    Coder.prototype.decode = function (s) {
+        if (s.length === 0) {
+            return new Uint8Array(0);
+        }
+        var paddingLength = this._getPaddingLength(s);
+        var length = s.length - paddingLength;
+        var out = new Uint8Array(this.maxDecodedLength(length));
+        var op = 0;
+        var i = 0;
+        var haveBad = 0;
+        var v0 = 0, v1 = 0, v2 = 0, v3 = 0;
+        for (; i < length - 4; i += 4) {
+            v0 = this._decodeChar(s.charCodeAt(i + 0));
+            v1 = this._decodeChar(s.charCodeAt(i + 1));
+            v2 = this._decodeChar(s.charCodeAt(i + 2));
+            v3 = this._decodeChar(s.charCodeAt(i + 3));
+            out[op++] = (v0 << 2) | (v1 >>> 4);
+            out[op++] = (v1 << 4) | (v2 >>> 2);
+            out[op++] = (v2 << 6) | v3;
+            haveBad |= v0 & INVALID_BYTE;
+            haveBad |= v1 & INVALID_BYTE;
+            haveBad |= v2 & INVALID_BYTE;
+            haveBad |= v3 & INVALID_BYTE;
+        }
+        if (i < length - 1) {
+            v0 = this._decodeChar(s.charCodeAt(i));
+            v1 = this._decodeChar(s.charCodeAt(i + 1));
+            out[op++] = (v0 << 2) | (v1 >>> 4);
+            haveBad |= v0 & INVALID_BYTE;
+            haveBad |= v1 & INVALID_BYTE;
+        }
+        if (i < length - 2) {
+            v2 = this._decodeChar(s.charCodeAt(i + 2));
+            out[op++] = (v1 << 4) | (v2 >>> 2);
+            haveBad |= v2 & INVALID_BYTE;
+        }
+        if (i < length - 3) {
+            v3 = this._decodeChar(s.charCodeAt(i + 3));
+            out[op++] = (v2 << 6) | v3;
+            haveBad |= v3 & INVALID_BYTE;
+        }
+        if (haveBad !== 0) {
+            throw new Error("Base64Coder: incorrect characters for decoding");
+        }
+        return out;
+    };
+    // Standard encoding have the following encoded/decoded ranges,
+    // which we need to convert between.
+    //
+    // ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789  +   /
+    // Index:   0 - 25                    26 - 51              52 - 61   62  63
+    // ASCII:  65 - 90                    97 - 122             48 - 57   43  47
+    //
+    // Encode 6 bits in b into a new character.
+    Coder.prototype._encodeByte = function (b) {
+        // Encoding uses constant time operations as follows:
+        //
+        // 1. Define comparison of A with B using (A - B) >>> 8:
+        //          if A > B, then result is positive integer
+        //          if A <= B, then result is 0
+        //
+        // 2. Define selection of C or 0 using bitwise AND: X & C:
+        //          if X == 0, then result is 0
+        //          if X != 0, then result is C
+        //
+        // 3. Start with the smallest comparison (b >= 0), which is always
+        //    true, so set the result to the starting ASCII value (65).
+        //
+        // 4. Continue comparing b to higher ASCII values, and selecting
+        //    zero if comparison isn't true, otherwise selecting a value
+        //    to add to result, which:
+        //
+        //          a) undoes the previous addition
+        //          b) provides new value to add
+        //
+        var result = b;
+        // b >= 0
+        result += 65;
+        // b > 25
+        result += ((25 - b) >>> 8) & ((0 - 65) - 26 + 97);
+        // b > 51
+        result += ((51 - b) >>> 8) & ((26 - 97) - 52 + 48);
+        // b > 61
+        result += ((61 - b) >>> 8) & ((52 - 48) - 62 + 43);
+        // b > 62
+        result += ((62 - b) >>> 8) & ((62 - 43) - 63 + 47);
+        return String.fromCharCode(result);
+    };
+    // Decode a character code into a byte.
+    // Must return 256 if character is out of alphabet range.
+    Coder.prototype._decodeChar = function (c) {
+        // Decoding works similar to encoding: using the same comparison
+        // function, but now it works on ranges: result is always incremented
+        // by value, but this value becomes zero if the range is not
+        // satisfied.
+        //
+        // Decoding starts with invalid value, 256, which is then
+        // subtracted when the range is satisfied. If none of the ranges
+        // apply, the function returns 256, which is then checked by
+        // the caller to throw error.
+        var result = INVALID_BYTE; // start with invalid character
+        // c == 43 (c > 42 and c < 44)
+        result += (((42 - c) & (c - 44)) >>> 8) & (-INVALID_BYTE + c - 43 + 62);
+        // c == 47 (c > 46 and c < 48)
+        result += (((46 - c) & (c - 48)) >>> 8) & (-INVALID_BYTE + c - 47 + 63);
+        // c > 47 and c < 58
+        result += (((47 - c) & (c - 58)) >>> 8) & (-INVALID_BYTE + c - 48 + 52);
+        // c > 64 and c < 91
+        result += (((64 - c) & (c - 91)) >>> 8) & (-INVALID_BYTE + c - 65 + 0);
+        // c > 96 and c < 123
+        result += (((96 - c) & (c - 123)) >>> 8) & (-INVALID_BYTE + c - 97 + 26);
+        return result;
+    };
+    Coder.prototype._getPaddingLength = function (s) {
+        var paddingLength = 0;
+        if (this._paddingCharacter) {
+            for (var i = s.length - 1; i >= 0; i--) {
+                if (s[i] !== this._paddingCharacter) {
+                    break;
+                }
+                paddingLength++;
+            }
+            if (s.length < 4 || paddingLength > 2) {
+                throw new Error("Base64Coder: incorrect padding");
+            }
+        }
+        return paddingLength;
+    };
+    return Coder;
+}());
+exports.Coder = Coder;
+var stdCoder = new Coder();
+function encode(data) {
+    return stdCoder.encode(data);
+}
+exports.encode = encode;
+function decode(s) {
+    return stdCoder.decode(s);
+}
+exports.decode = decode;
+/**
+ * Implements URL-safe Base64 encoding.
+ * (Same as Base64, but '+' is replaced with '-', and '/' with '_').
+ *
+ * Operates in constant time.
+ */
+var URLSafeCoder = /** @class */ (function (_super) {
+    __extends(URLSafeCoder, _super);
+    function URLSafeCoder() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    // URL-safe encoding have the following encoded/decoded ranges:
+    //
+    // ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789  -   _
+    // Index:   0 - 25                    26 - 51              52 - 61   62  63
+    // ASCII:  65 - 90                    97 - 122             48 - 57   45  95
+    //
+    URLSafeCoder.prototype._encodeByte = function (b) {
+        var result = b;
+        // b >= 0
+        result += 65;
+        // b > 25
+        result += ((25 - b) >>> 8) & ((0 - 65) - 26 + 97);
+        // b > 51
+        result += ((51 - b) >>> 8) & ((26 - 97) - 52 + 48);
+        // b > 61
+        result += ((61 - b) >>> 8) & ((52 - 48) - 62 + 45);
+        // b > 62
+        result += ((62 - b) >>> 8) & ((62 - 45) - 63 + 95);
+        return String.fromCharCode(result);
+    };
+    URLSafeCoder.prototype._decodeChar = function (c) {
+        var result = INVALID_BYTE;
+        // c == 45 (c > 44 and c < 46)
+        result += (((44 - c) & (c - 46)) >>> 8) & (-INVALID_BYTE + c - 45 + 62);
+        // c == 95 (c > 94 and c < 96)
+        result += (((94 - c) & (c - 96)) >>> 8) & (-INVALID_BYTE + c - 95 + 63);
+        // c > 47 and c < 58
+        result += (((47 - c) & (c - 58)) >>> 8) & (-INVALID_BYTE + c - 48 + 52);
+        // c > 64 and c < 91
+        result += (((64 - c) & (c - 91)) >>> 8) & (-INVALID_BYTE + c - 65 + 0);
+        // c > 96 and c < 123
+        result += (((96 - c) & (c - 123)) >>> 8) & (-INVALID_BYTE + c - 97 + 26);
+        return result;
+    };
+    return URLSafeCoder;
+}(Coder));
+exports.URLSafeCoder = URLSafeCoder;
+var urlSafeCoder = new URLSafeCoder();
+function encodeURLSafe(data) {
+    return urlSafeCoder.encode(data);
+}
+exports.encodeURLSafe = encodeURLSafe;
+function decodeURLSafe(s) {
+    return urlSafeCoder.decode(s);
+}
+exports.decodeURLSafe = decodeURLSafe;
+exports.encodedLength = function (length) {
+    return stdCoder.encodedLength(length);
+};
+exports.maxDecodedLength = function (length) {
+    return stdCoder.maxDecodedLength(length);
+};
+exports.decodedLength = function (s) {
+    return stdCoder.decodedLength(s);
+};
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// Copyright (C) 2016 Dmitry Chestnykh
+// MIT License. See LICENSE file for details.
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Package utf8 implements UTF-8 encoding and decoding.
+ */
+var INVALID_UTF16 = "utf8: invalid string";
+var INVALID_UTF8 = "utf8: invalid source encoding";
+/**
+ * Encodes the given string into UTF-8 byte array.
+ * Throws if the source string has invalid UTF-16 encoding.
+ */
+function encode(s) {
+    // Calculate result length and allocate output array.
+    // encodedLength() also validates string and throws errors,
+    // so we don't need repeat validation here.
+    var arr = new Uint8Array(encodedLength(s));
+    var pos = 0;
+    for (var i = 0; i < s.length; i++) {
+        var c = s.charCodeAt(i);
+        if (c < 0x80) {
+            arr[pos++] = c;
+        }
+        else if (c < 0x800) {
+            arr[pos++] = 0xc0 | c >> 6;
+            arr[pos++] = 0x80 | c & 0x3f;
+        }
+        else if (c < 0xd800) {
+            arr[pos++] = 0xe0 | c >> 12;
+            arr[pos++] = 0x80 | (c >> 6) & 0x3f;
+            arr[pos++] = 0x80 | c & 0x3f;
+        }
+        else {
+            i++; // get one more character
+            c = (c & 0x3ff) << 10;
+            c |= s.charCodeAt(i) & 0x3ff;
+            c += 0x10000;
+            arr[pos++] = 0xf0 | c >> 18;
+            arr[pos++] = 0x80 | (c >> 12) & 0x3f;
+            arr[pos++] = 0x80 | (c >> 6) & 0x3f;
+            arr[pos++] = 0x80 | c & 0x3f;
+        }
+    }
+    return arr;
+}
+exports.encode = encode;
+/**
+ * Returns the number of bytes required to encode the given string into UTF-8.
+ * Throws if the source string has invalid UTF-16 encoding.
+ */
+function encodedLength(s) {
+    var result = 0;
+    for (var i = 0; i < s.length; i++) {
+        var c = s.charCodeAt(i);
+        if (c < 0x80) {
+            result += 1;
+        }
+        else if (c < 0x800) {
+            result += 2;
+        }
+        else if (c < 0xd800) {
+            result += 3;
+        }
+        else if (c <= 0xdfff) {
+            if (i >= s.length - 1) {
+                throw new Error(INVALID_UTF16);
+            }
+            i++; // "eat" next character
+            result += 4;
+        }
+        else {
+            throw new Error(INVALID_UTF16);
+        }
+    }
+    return result;
+}
+exports.encodedLength = encodedLength;
+/**
+ * Decodes the given byte array from UTF-8 into a string.
+ * Throws if encoding is invalid.
+ */
+function decode(arr) {
+    var chars = [];
+    for (var i = 0; i < arr.length; i++) {
+        var b = arr[i];
+        if (b & 0x80) {
+            var min = void 0;
+            if (b < 0xe0) {
+                // Need 1 more byte.
+                if (i >= arr.length) {
+                    throw new Error(INVALID_UTF8);
+                }
+                var n1 = arr[++i];
+                if ((n1 & 0xc0) !== 0x80) {
+                    throw new Error(INVALID_UTF8);
+                }
+                b = (b & 0x1f) << 6 | (n1 & 0x3f);
+                min = 0x80;
+            }
+            else if (b < 0xf0) {
+                // Need 2 more bytes.
+                if (i >= arr.length - 1) {
+                    throw new Error(INVALID_UTF8);
+                }
+                var n1 = arr[++i];
+                var n2 = arr[++i];
+                if ((n1 & 0xc0) !== 0x80 || (n2 & 0xc0) !== 0x80) {
+                    throw new Error(INVALID_UTF8);
+                }
+                b = (b & 0x0f) << 12 | (n1 & 0x3f) << 6 | (n2 & 0x3f);
+                min = 0x800;
+            }
+            else if (b < 0xf8) {
+                // Need 3 more bytes.
+                if (i >= arr.length - 2) {
+                    throw new Error(INVALID_UTF8);
+                }
+                var n1 = arr[++i];
+                var n2 = arr[++i];
+                var n3 = arr[++i];
+                if ((n1 & 0xc0) !== 0x80 || (n2 & 0xc0) !== 0x80 || (n3 & 0xc0) !== 0x80) {
+                    throw new Error(INVALID_UTF8);
+                }
+                b = (b & 0x0f) << 18 | (n1 & 0x3f) << 12 | (n2 & 0x3f) << 6 | (n3 & 0x3f);
+                min = 0x10000;
+            }
+            else {
+                throw new Error(INVALID_UTF8);
+            }
+            if (b < min || (b >= 0xd800 && b <= 0xdfff)) {
+                throw new Error(INVALID_UTF8);
+            }
+            if (b >= 0x10000) {
+                // Surrogate pair.
+                if (b > 0x10ffff) {
+                    throw new Error(INVALID_UTF8);
+                }
+                b -= 0x10000;
+                chars.push(String.fromCharCode(0xd800 | (b >> 10)));
+                b = 0xdc00 | (b & 0x3ff);
+            }
+        }
+        chars.push(String.fromCharCode(b));
+    }
+    return chars.join("");
+}
+exports.decode = decode;
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __nested_webpack_require_19906__) {
+
+// required so we don't have to do require('pusher').default etc.
+module.exports = __nested_webpack_require_19906__(3).default;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __nested_webpack_require_20110__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__nested_webpack_require_20110__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./src/runtimes/web/dom/script_receiver_factory.ts
+var ScriptReceiverFactory = (function () {
+    function ScriptReceiverFactory(prefix, name) {
+        this.lastId = 0;
+        this.prefix = prefix;
+        this.name = name;
+    }
+    ScriptReceiverFactory.prototype.create = function (callback) {
+        this.lastId++;
+        var number = this.lastId;
+        var id = this.prefix + number;
+        var name = this.name + '[' + number + ']';
+        var called = false;
+        var callbackWrapper = function () {
+            if (!called) {
+                callback.apply(null, arguments);
+                called = true;
+            }
+        };
+        this[number] = callbackWrapper;
+        return { number: number, id: id, name: name, callback: callbackWrapper };
+    };
+    ScriptReceiverFactory.prototype.remove = function (receiver) {
+        delete this[receiver.number];
+    };
+    return ScriptReceiverFactory;
+}());
+
+var ScriptReceivers = new ScriptReceiverFactory('_pusher_script_', 'Pusher.ScriptReceivers');
+
+// CONCATENATED MODULE: ./src/core/defaults.ts
+var Defaults = {
+    VERSION: "7.1.1-beta",
+    PROTOCOL: 7,
+    wsPort: 80,
+    wssPort: 443,
+    wsPath: '',
+    httpHost: 'sockjs.pusher.com',
+    httpPort: 80,
+    httpsPort: 443,
+    httpPath: '/pusher',
+    stats_host: 'stats.pusher.com',
+    authEndpoint: '/pusher/auth',
+    authTransport: 'ajax',
+    activityTimeout: 120000,
+    pongTimeout: 30000,
+    unavailableTimeout: 10000,
+    cluster: 'mt1',
+    userAuthentication: {
+        endpoint: '/pusher/user-auth',
+        transport: 'ajax'
+    },
+    channelAuthorization: {
+        endpoint: '/pusher/auth',
+        transport: 'ajax'
+    },
+    cdn_http: "http://js.pusher.com",
+    cdn_https: "https://js.pusher.com",
+    dependency_suffix: ""
+};
+/* harmony default export */ var defaults = (Defaults);
+
+// CONCATENATED MODULE: ./src/runtimes/web/dom/dependency_loader.ts
+
+
+var dependency_loader_DependencyLoader = (function () {
+    function DependencyLoader(options) {
+        this.options = options;
+        this.receivers = options.receivers || ScriptReceivers;
+        this.loading = {};
+    }
+    DependencyLoader.prototype.load = function (name, options, callback) {
+        var self = this;
+        if (self.loading[name] && self.loading[name].length > 0) {
+            self.loading[name].push(callback);
+        }
+        else {
+            self.loading[name] = [callback];
+            var request = runtime.createScriptRequest(self.getPath(name, options));
+            var receiver = self.receivers.create(function (error) {
+                self.receivers.remove(receiver);
+                if (self.loading[name]) {
+                    var callbacks = self.loading[name];
+                    delete self.loading[name];
+                    var successCallback = function (wasSuccessful) {
+                        if (!wasSuccessful) {
+                            request.cleanup();
+                        }
+                    };
+                    for (var i = 0; i < callbacks.length; i++) {
+                        callbacks[i](error, successCallback);
+                    }
+                }
+            });
+            request.send(receiver);
+        }
+    };
+    DependencyLoader.prototype.getRoot = function (options) {
+        var cdn;
+        var protocol = runtime.getDocument().location.protocol;
+        if ((options && options.useTLS) || protocol === 'https:') {
+            cdn = this.options.cdn_https;
+        }
+        else {
+            cdn = this.options.cdn_http;
+        }
+        return cdn.replace(/\/*$/, '') + '/' + this.options.version;
+    };
+    DependencyLoader.prototype.getPath = function (name, options) {
+        return this.getRoot(options) + '/' + name + this.options.suffix + '.js';
+    };
+    return DependencyLoader;
+}());
+/* harmony default export */ var dependency_loader = (dependency_loader_DependencyLoader);
+
+// CONCATENATED MODULE: ./src/runtimes/web/dom/dependencies.ts
+
+
+
+var DependenciesReceivers = new ScriptReceiverFactory('_pusher_dependencies', 'Pusher.DependenciesReceivers');
+var Dependencies = new dependency_loader({
+    cdn_http: defaults.cdn_http,
+    cdn_https: defaults.cdn_https,
+    version: defaults.VERSION,
+    suffix: defaults.dependency_suffix,
+    receivers: DependenciesReceivers
+});
+
+// CONCATENATED MODULE: ./src/core/utils/url_store.ts
+var urlStore = {
+    baseUrl: 'https://pusher.com',
+    urls: {
+        authenticationEndpoint: {
+            path: '/docs/channels/server_api/authenticating_users'
+        },
+        authorizationEndpoint: {
+            path: '/docs/channels/server_api/authorizing-users/'
+        },
+        javascriptQuickStart: {
+            path: '/docs/javascript_quick_start'
+        },
+        triggeringClientEvents: {
+            path: '/docs/client_api_guide/client_events#trigger-events'
+        },
+        encryptedChannelSupport: {
+            fullUrl: 'https://github.com/pusher/pusher-js/tree/cc491015371a4bde5743d1c87a0fbac0feb53195#encrypted-channel-support'
+        }
+    }
+};
+var buildLogSuffix = function (key) {
+    var urlPrefix = 'See:';
+    var urlObj = urlStore.urls[key];
+    if (!urlObj)
+        return '';
+    var url;
+    if (urlObj.fullUrl) {
+        url = urlObj.fullUrl;
+    }
+    else if (urlObj.path) {
+        url = urlStore.baseUrl + urlObj.path;
+    }
+    if (!url)
+        return '';
+    return urlPrefix + " " + url;
+};
+/* harmony default export */ var url_store = ({ buildLogSuffix: buildLogSuffix });
+
+// CONCATENATED MODULE: ./src/core/auth/options.ts
+var AuthRequestType;
+(function (AuthRequestType) {
+    AuthRequestType["UserAuthentication"] = "user-authentication";
+    AuthRequestType["ChannelAuthorization"] = "channel-authorization";
+})(AuthRequestType || (AuthRequestType = {}));
+
+// CONCATENATED MODULE: ./src/core/errors.ts
+var __extends = ( false) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var BadEventName = (function (_super) {
+    __extends(BadEventName, _super);
+    function BadEventName(msg) {
+        var _newTarget = this.constructor;
+        var _this = _super.call(this, msg) || this;
+        Object.setPrototypeOf(_this, _newTarget.prototype);
+        return _this;
+    }
+    return BadEventName;
+}(Error));
+
+var BadChannelName = (function (_super) {
+    __extends(BadChannelName, _super);
+    function BadChannelName(msg) {
+        var _newTarget = this.constructor;
+        var _this = _super.call(this, msg) || this;
+        Object.setPrototypeOf(_this, _newTarget.prototype);
+        return _this;
+    }
+    return BadChannelName;
+}(Error));
+
+var RequestTimedOut = (function (_super) {
+    __extends(RequestTimedOut, _super);
+    function RequestTimedOut(msg) {
+        var _newTarget = this.constructor;
+        var _this = _super.call(this, msg) || this;
+        Object.setPrototypeOf(_this, _newTarget.prototype);
+        return _this;
+    }
+    return RequestTimedOut;
+}(Error));
+
+var TransportPriorityTooLow = (function (_super) {
+    __extends(TransportPriorityTooLow, _super);
+    function TransportPriorityTooLow(msg) {
+        var _newTarget = this.constructor;
+        var _this = _super.call(this, msg) || this;
+        Object.setPrototypeOf(_this, _newTarget.prototype);
+        return _this;
+    }
+    return TransportPriorityTooLow;
+}(Error));
+
+var TransportClosed = (function (_super) {
+    __extends(TransportClosed, _super);
+    function TransportClosed(msg) {
+        var _newTarget = this.constructor;
+        var _this = _super.call(this, msg) || this;
+        Object.setPrototypeOf(_this, _newTarget.prototype);
+        return _this;
+    }
+    return TransportClosed;
+}(Error));
+
+var UnsupportedFeature = (function (_super) {
+    __extends(UnsupportedFeature, _super);
+    function UnsupportedFeature(msg) {
+        var _newTarget = this.constructor;
+        var _this = _super.call(this, msg) || this;
+        Object.setPrototypeOf(_this, _newTarget.prototype);
+        return _this;
+    }
+    return UnsupportedFeature;
+}(Error));
+
+var UnsupportedTransport = (function (_super) {
+    __extends(UnsupportedTransport, _super);
+    function UnsupportedTransport(msg) {
+        var _newTarget = this.constructor;
+        var _this = _super.call(this, msg) || this;
+        Object.setPrototypeOf(_this, _newTarget.prototype);
+        return _this;
+    }
+    return UnsupportedTransport;
+}(Error));
+
+var UnsupportedStrategy = (function (_super) {
+    __extends(UnsupportedStrategy, _super);
+    function UnsupportedStrategy(msg) {
+        var _newTarget = this.constructor;
+        var _this = _super.call(this, msg) || this;
+        Object.setPrototypeOf(_this, _newTarget.prototype);
+        return _this;
+    }
+    return UnsupportedStrategy;
+}(Error));
+
+var HTTPAuthError = (function (_super) {
+    __extends(HTTPAuthError, _super);
+    function HTTPAuthError(status, msg) {
+        var _newTarget = this.constructor;
+        var _this = _super.call(this, msg) || this;
+        _this.status = status;
+        Object.setPrototypeOf(_this, _newTarget.prototype);
+        return _this;
+    }
+    return HTTPAuthError;
+}(Error));
+
+
+// CONCATENATED MODULE: ./src/runtimes/isomorphic/auth/xhr_auth.ts
+
+
+
+
+var ajax = function (context, query, authOptions, authRequestType, callback) {
+    var xhr = runtime.createXHR();
+    xhr.open('POST', authOptions.endpoint, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    for (var headerName in authOptions.headers) {
+        xhr.setRequestHeader(headerName, authOptions.headers[headerName]);
+    }
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                var data = void 0;
+                var parsed = false;
+                try {
+                    data = JSON.parse(xhr.responseText);
+                    parsed = true;
+                }
+                catch (e) {
+                    callback(new HTTPAuthError(200, "JSON returned from " + authRequestType.toString() + " endpoint was invalid, yet status code was 200. Data was: " + xhr.responseText), null);
+                }
+                if (parsed) {
+                    callback(null, data);
+                }
+            }
+            else {
+                var suffix = '';
+                switch (authRequestType) {
+                    case AuthRequestType.UserAuthentication:
+                        suffix = url_store.buildLogSuffix('authenticationEndpoint');
+                        break;
+                    case AuthRequestType.ChannelAuthorization:
+                        suffix = "Clients must be authenticated to join private or presence channels. " + url_store.buildLogSuffix('authorizationEndpoint');
+                        break;
+                }
+                callback(new HTTPAuthError(xhr.status, "Unable to retrieve auth string from " + authRequestType.toString() + " endpoint - " +
+                    ("received status: " + xhr.status + " from " + authOptions.endpoint + ". " + suffix)), null);
+            }
+        }
+    };
+    xhr.send(query);
+    return xhr;
+};
+/* harmony default export */ var xhr_auth = (ajax);
+
+// CONCATENATED MODULE: ./src/core/base64.ts
+function encode(s) {
+    return btoa(utob(s));
+}
+var fromCharCode = String.fromCharCode;
+var b64chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+var b64tab = {};
+for (var base64_i = 0, l = b64chars.length; base64_i < l; base64_i++) {
+    b64tab[b64chars.charAt(base64_i)] = base64_i;
+}
+var cb_utob = function (c) {
+    var cc = c.charCodeAt(0);
+    return cc < 0x80
+        ? c
+        : cc < 0x800
+            ? fromCharCode(0xc0 | (cc >>> 6)) + fromCharCode(0x80 | (cc & 0x3f))
+            : fromCharCode(0xe0 | ((cc >>> 12) & 0x0f)) +
+                fromCharCode(0x80 | ((cc >>> 6) & 0x3f)) +
+                fromCharCode(0x80 | (cc & 0x3f));
+};
+var utob = function (u) {
+    return u.replace(/[^\x00-\x7F]/g, cb_utob);
+};
+var cb_encode = function (ccc) {
+    var padlen = [0, 2, 1][ccc.length % 3];
+    var ord = (ccc.charCodeAt(0) << 16) |
+        ((ccc.length > 1 ? ccc.charCodeAt(1) : 0) << 8) |
+        (ccc.length > 2 ? ccc.charCodeAt(2) : 0);
+    var chars = [
+        b64chars.charAt(ord >>> 18),
+        b64chars.charAt((ord >>> 12) & 63),
+        padlen >= 2 ? '=' : b64chars.charAt((ord >>> 6) & 63),
+        padlen >= 1 ? '=' : b64chars.charAt(ord & 63)
+    ];
+    return chars.join('');
+};
+var btoa = window.btoa ||
+    function (b) {
+        return b.replace(/[\s\S]{1,3}/g, cb_encode);
+    };
+
+// CONCATENATED MODULE: ./src/core/utils/timers/abstract_timer.ts
+var Timer = (function () {
+    function Timer(set, clear, delay, callback) {
+        var _this = this;
+        this.clear = clear;
+        this.timer = set(function () {
+            if (_this.timer) {
+                _this.timer = callback(_this.timer);
+            }
+        }, delay);
+    }
+    Timer.prototype.isRunning = function () {
+        return this.timer !== null;
+    };
+    Timer.prototype.ensureAborted = function () {
+        if (this.timer) {
+            this.clear(this.timer);
+            this.timer = null;
+        }
+    };
+    return Timer;
+}());
+/* harmony default export */ var abstract_timer = (Timer);
+
+// CONCATENATED MODULE: ./src/core/utils/timers/index.ts
+var timers_extends = ( false) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+function timers_clearTimeout(timer) {
+    window.clearTimeout(timer);
+}
+function timers_clearInterval(timer) {
+    window.clearInterval(timer);
+}
+var OneOffTimer = (function (_super) {
+    timers_extends(OneOffTimer, _super);
+    function OneOffTimer(delay, callback) {
+        return _super.call(this, setTimeout, timers_clearTimeout, delay, function (timer) {
+            callback();
+            return null;
+        }) || this;
+    }
+    return OneOffTimer;
+}(abstract_timer));
+
+var PeriodicTimer = (function (_super) {
+    timers_extends(PeriodicTimer, _super);
+    function PeriodicTimer(delay, callback) {
+        return _super.call(this, setInterval, timers_clearInterval, delay, function (timer) {
+            callback();
+            return timer;
+        }) || this;
+    }
+    return PeriodicTimer;
+}(abstract_timer));
+
+
+// CONCATENATED MODULE: ./src/core/util.ts
+
+var Util = {
+    now: function () {
+        if (Date.now) {
+            return Date.now();
+        }
+        else {
+            return new Date().valueOf();
+        }
+    },
+    defer: function (callback) {
+        return new OneOffTimer(0, callback);
+    },
+    method: function (name) {
+        var args = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            args[_i - 1] = arguments[_i];
+        }
+        var boundArguments = Array.prototype.slice.call(arguments, 1);
+        return function (object) {
+            return object[name].apply(object, boundArguments.concat(arguments));
+        };
+    }
+};
+/* harmony default export */ var util = (Util);
+
+// CONCATENATED MODULE: ./src/core/utils/collections.ts
+
+
+function extend(target) {
+    var sources = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        sources[_i - 1] = arguments[_i];
+    }
+    for (var i = 0; i < sources.length; i++) {
+        var extensions = sources[i];
+        for (var property in extensions) {
+            if (extensions[property] &&
+                extensions[property].constructor &&
+                extensions[property].constructor === Object) {
+                target[property] = extend(target[property] || {}, extensions[property]);
+            }
+            else {
+                target[property] = extensions[property];
+            }
+        }
+    }
+    return target;
+}
+function stringify() {
+    var m = ['Pusher'];
+    for (var i = 0; i < arguments.length; i++) {
+        if (typeof arguments[i] === 'string') {
+            m.push(arguments[i]);
+        }
+        else {
+            m.push(safeJSONStringify(arguments[i]));
+        }
+    }
+    return m.join(' : ');
+}
+function arrayIndexOf(array, item) {
+    var nativeIndexOf = Array.prototype.indexOf;
+    if (array === null) {
+        return -1;
+    }
+    if (nativeIndexOf && array.indexOf === nativeIndexOf) {
+        return array.indexOf(item);
+    }
+    for (var i = 0, l = array.length; i < l; i++) {
+        if (array[i] === item) {
+            return i;
+        }
+    }
+    return -1;
+}
+function objectApply(object, f) {
+    for (var key in object) {
+        if (Object.prototype.hasOwnProperty.call(object, key)) {
+            f(object[key], key, object);
+        }
+    }
+}
+function keys(object) {
+    var keys = [];
+    objectApply(object, function (_, key) {
+        keys.push(key);
+    });
+    return keys;
+}
+function values(object) {
+    var values = [];
+    objectApply(object, function (value) {
+        values.push(value);
+    });
+    return values;
+}
+function apply(array, f, context) {
+    for (var i = 0; i < array.length; i++) {
+        f.call(context || window, array[i], i, array);
+    }
+}
+function map(array, f) {
+    var result = [];
+    for (var i = 0; i < array.length; i++) {
+        result.push(f(array[i], i, array, result));
+    }
+    return result;
+}
+function mapObject(object, f) {
+    var result = {};
+    objectApply(object, function (value, key) {
+        result[key] = f(value);
+    });
+    return result;
+}
+function filter(array, test) {
+    test =
+        test ||
+            function (value) {
+                return !!value;
+            };
+    var result = [];
+    for (var i = 0; i < array.length; i++) {
+        if (test(array[i], i, array, result)) {
+            result.push(array[i]);
+        }
+    }
+    return result;
+}
+function filterObject(object, test) {
+    var result = {};
+    objectApply(object, function (value, key) {
+        if ((test && test(value, key, object, result)) || Boolean(value)) {
+            result[key] = value;
+        }
+    });
+    return result;
+}
+function flatten(object) {
+    var result = [];
+    objectApply(object, function (value, key) {
+        result.push([key, value]);
+    });
+    return result;
+}
+function any(array, test) {
+    for (var i = 0; i < array.length; i++) {
+        if (test(array[i], i, array)) {
+            return true;
+        }
+    }
+    return false;
+}
+function collections_all(array, test) {
+    for (var i = 0; i < array.length; i++) {
+        if (!test(array[i], i, array)) {
+            return false;
+        }
+    }
+    return true;
+}
+function encodeParamsObject(data) {
+    return mapObject(data, function (value) {
+        if (typeof value === 'object') {
+            value = safeJSONStringify(value);
+        }
+        return encodeURIComponent(encode(value.toString()));
+    });
+}
+function buildQueryString(data) {
+    var params = filterObject(data, function (value) {
+        return value !== undefined;
+    });
+    var query = map(flatten(encodeParamsObject(params)), util.method('join', '=')).join('&');
+    return query;
+}
+function decycleObject(object) {
+    var objects = [], paths = [];
+    return (function derez(value, path) {
+        var i, name, nu;
+        switch (typeof value) {
+            case 'object':
+                if (!value) {
+                    return null;
+                }
+                for (i = 0; i < objects.length; i += 1) {
+                    if (objects[i] === value) {
+                        return { $ref: paths[i] };
+                    }
+                }
+                objects.push(value);
+                paths.push(path);
+                if (Object.prototype.toString.apply(value) === '[object Array]') {
+                    nu = [];
+                    for (i = 0; i < value.length; i += 1) {
+                        nu[i] = derez(value[i], path + '[' + i + ']');
+                    }
+                }
+                else {
+                    nu = {};
+                    for (name in value) {
+                        if (Object.prototype.hasOwnProperty.call(value, name)) {
+                            nu[name] = derez(value[name], path + '[' + JSON.stringify(name) + ']');
+                        }
+                    }
+                }
+                return nu;
+            case 'number':
+            case 'string':
+            case 'boolean':
+                return value;
+        }
+    })(object, '$');
+}
+function safeJSONStringify(source) {
+    try {
+        return JSON.stringify(source);
+    }
+    catch (e) {
+        return JSON.stringify(decycleObject(source));
+    }
+}
+
+// CONCATENATED MODULE: ./src/core/logger.ts
+
+
+var logger_Logger = (function () {
+    function Logger() {
+        this.globalLog = function (message) {
+            if (window.console && window.console.log) {
+                window.console.log(message);
+            }
+        };
+    }
+    Logger.prototype.debug = function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
+        this.log(this.globalLog, args);
+    };
+    Logger.prototype.warn = function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
+        this.log(this.globalLogWarn, args);
+    };
+    Logger.prototype.error = function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
+        this.log(this.globalLogError, args);
+    };
+    Logger.prototype.globalLogWarn = function (message) {
+        if (window.console && window.console.warn) {
+            window.console.warn(message);
+        }
+        else {
+            this.globalLog(message);
+        }
+    };
+    Logger.prototype.globalLogError = function (message) {
+        if (window.console && window.console.error) {
+            window.console.error(message);
+        }
+        else {
+            this.globalLogWarn(message);
+        }
+    };
+    Logger.prototype.log = function (defaultLoggingFunction) {
+        var args = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            args[_i - 1] = arguments[_i];
+        }
+        var message = stringify.apply(this, arguments);
+        if (core_pusher.log) {
+            core_pusher.log(message);
+        }
+        else if (core_pusher.logToConsole) {
+            var log = defaultLoggingFunction.bind(this);
+            log(message);
+        }
+    };
+    return Logger;
+}());
+/* harmony default export */ var logger = (new logger_Logger());
+
+// CONCATENATED MODULE: ./src/runtimes/web/auth/jsonp_auth.ts
+
+var jsonp = function (context, query, authOptions, authRequestType, callback) {
+    if (authOptions.headers !== undefined) {
+        logger.warn("To send headers with the " + authRequestType.toString() + " request, you must use AJAX, rather than JSONP.");
+    }
+    var callbackName = context.nextAuthCallbackID.toString();
+    context.nextAuthCallbackID++;
+    var document = context.getDocument();
+    var script = document.createElement('script');
+    context.auth_callbacks[callbackName] = function (data) {
+        callback(null, data);
+    };
+    var callback_name = "Pusher.auth_callbacks['" + callbackName + "']";
+    script.src =
+        authOptions.endpoint +
+            '?callback=' +
+            encodeURIComponent(callback_name) +
+            '&' +
+            query;
+    var head = document.getElementsByTagName('head')[0] || document.documentElement;
+    head.insertBefore(script, head.firstChild);
+};
+/* harmony default export */ var jsonp_auth = (jsonp);
+
+// CONCATENATED MODULE: ./src/runtimes/web/dom/script_request.ts
+var ScriptRequest = (function () {
+    function ScriptRequest(src) {
+        this.src = src;
+    }
+    ScriptRequest.prototype.send = function (receiver) {
+        var self = this;
+        var errorString = 'Error loading ' + self.src;
+        self.script = document.createElement('script');
+        self.script.id = receiver.id;
+        self.script.src = self.src;
+        self.script.type = 'text/javascript';
+        self.script.charset = 'UTF-8';
+        if (self.script.addEventListener) {
+            self.script.onerror = function () {
+                receiver.callback(errorString);
+            };
+            self.script.onload = function () {
+                receiver.callback(null);
+            };
+        }
+        else {
+            self.script.onreadystatechange = function () {
+                if (self.script.readyState === 'loaded' ||
+                    self.script.readyState === 'complete') {
+                    receiver.callback(null);
+                }
+            };
+        }
+        if (self.script.async === undefined &&
+            document.attachEvent &&
+            /opera/i.test(navigator.userAgent)) {
+            self.errorScript = document.createElement('script');
+            self.errorScript.id = receiver.id + '_error';
+            self.errorScript.text = receiver.name + "('" + errorString + "');";
+            self.script.async = self.errorScript.async = false;
+        }
+        else {
+            self.script.async = true;
+        }
+        var head = document.getElementsByTagName('head')[0];
+        head.insertBefore(self.script, head.firstChild);
+        if (self.errorScript) {
+            head.insertBefore(self.errorScript, self.script.nextSibling);
+        }
+    };
+    ScriptRequest.prototype.cleanup = function () {
+        if (this.script) {
+            this.script.onload = this.script.onerror = null;
+            this.script.onreadystatechange = null;
+        }
+        if (this.script && this.script.parentNode) {
+            this.script.parentNode.removeChild(this.script);
+        }
+        if (this.errorScript && this.errorScript.parentNode) {
+            this.errorScript.parentNode.removeChild(this.errorScript);
+        }
+        this.script = null;
+        this.errorScript = null;
+    };
+    return ScriptRequest;
+}());
+/* harmony default export */ var script_request = (ScriptRequest);
+
+// CONCATENATED MODULE: ./src/runtimes/web/dom/jsonp_request.ts
+
+
+var jsonp_request_JSONPRequest = (function () {
+    function JSONPRequest(url, data) {
+        this.url = url;
+        this.data = data;
+    }
+    JSONPRequest.prototype.send = function (receiver) {
+        if (this.request) {
+            return;
+        }
+        var query = buildQueryString(this.data);
+        var url = this.url + '/' + receiver.number + '?' + query;
+        this.request = runtime.createScriptRequest(url);
+        this.request.send(receiver);
+    };
+    JSONPRequest.prototype.cleanup = function () {
+        if (this.request) {
+            this.request.cleanup();
+        }
+    };
+    return JSONPRequest;
+}());
+/* harmony default export */ var jsonp_request = (jsonp_request_JSONPRequest);
+
+// CONCATENATED MODULE: ./src/runtimes/web/timeline/jsonp_timeline.ts
+
+
+var getAgent = function (sender, useTLS) {
+    return function (data, callback) {
+        var scheme = 'http' + (useTLS ? 's' : '') + '://';
+        var url = scheme + (sender.host || sender.options.host) + sender.options.path;
+        var request = runtime.createJSONPRequest(url, data);
+        var receiver = runtime.ScriptReceivers.create(function (error, result) {
+            ScriptReceivers.remove(receiver);
+            request.cleanup();
+            if (result && result.host) {
+                sender.host = result.host;
+            }
+            if (callback) {
+                callback(error, result);
+            }
+        });
+        request.send(receiver);
+    };
+};
+var jsonp_timeline_jsonp = {
+    name: 'jsonp',
+    getAgent: getAgent
+};
+/* harmony default export */ var jsonp_timeline = (jsonp_timeline_jsonp);
+
+// CONCATENATED MODULE: ./src/core/transports/url_schemes.ts
+
+function getGenericURL(baseScheme, params, path) {
+    var scheme = baseScheme + (params.useTLS ? 's' : '');
+    var host = params.useTLS ? params.hostTLS : params.hostNonTLS;
+    return scheme + '://' + host + path;
+}
+function getGenericPath(key, queryString) {
+    var path = '/app/' + key;
+    var query = '?protocol=' +
+        defaults.PROTOCOL +
+        '&client=js' +
+        '&version=' +
+        defaults.VERSION +
+        (queryString ? '&' + queryString : '');
+    return path + query;
+}
+var ws = {
+    getInitial: function (key, params) {
+        var path = (params.httpPath || '') + getGenericPath(key, 'flash=false');
+        return getGenericURL('ws', params, path);
+    }
+};
+var http = {
+    getInitial: function (key, params) {
+        var path = (params.httpPath || '/pusher') + getGenericPath(key);
+        return getGenericURL('http', params, path);
+    }
+};
+var sockjs = {
+    getInitial: function (key, params) {
+        return getGenericURL('http', params, params.httpPath || '/pusher');
+    },
+    getPath: function (key, params) {
+        return getGenericPath(key);
+    }
+};
+
+// CONCATENATED MODULE: ./src/core/events/callback_registry.ts
+
+var callback_registry_CallbackRegistry = (function () {
+    function CallbackRegistry() {
+        this._callbacks = {};
+    }
+    CallbackRegistry.prototype.get = function (name) {
+        return this._callbacks[prefix(name)];
+    };
+    CallbackRegistry.prototype.add = function (name, callback, context) {
+        var prefixedEventName = prefix(name);
+        this._callbacks[prefixedEventName] =
+            this._callbacks[prefixedEventName] || [];
+        this._callbacks[prefixedEventName].push({
+            fn: callback,
+            context: context
+        });
+    };
+    CallbackRegistry.prototype.remove = function (name, callback, context) {
+        if (!name && !callback && !context) {
+            this._callbacks = {};
+            return;
+        }
+        var names = name ? [prefix(name)] : keys(this._callbacks);
+        if (callback || context) {
+            this.removeCallback(names, callback, context);
+        }
+        else {
+            this.removeAllCallbacks(names);
+        }
+    };
+    CallbackRegistry.prototype.removeCallback = function (names, callback, context) {
+        apply(names, function (name) {
+            this._callbacks[name] = filter(this._callbacks[name] || [], function (binding) {
+                return ((callback && callback !== binding.fn) ||
+                    (context && context !== binding.context));
+            });
+            if (this._callbacks[name].length === 0) {
+                delete this._callbacks[name];
+            }
+        }, this);
+    };
+    CallbackRegistry.prototype.removeAllCallbacks = function (names) {
+        apply(names, function (name) {
+            delete this._callbacks[name];
+        }, this);
+    };
+    return CallbackRegistry;
+}());
+/* harmony default export */ var callback_registry = (callback_registry_CallbackRegistry);
+function prefix(name) {
+    return '_' + name;
+}
+
+// CONCATENATED MODULE: ./src/core/events/dispatcher.ts
+
+
+var dispatcher_Dispatcher = (function () {
+    function Dispatcher(failThrough) {
+        this.callbacks = new callback_registry();
+        this.global_callbacks = [];
+        this.failThrough = failThrough;
+    }
+    Dispatcher.prototype.bind = function (eventName, callback, context) {
+        this.callbacks.add(eventName, callback, context);
+        return this;
+    };
+    Dispatcher.prototype.bind_global = function (callback) {
+        this.global_callbacks.push(callback);
+        return this;
+    };
+    Dispatcher.prototype.unbind = function (eventName, callback, context) {
+        this.callbacks.remove(eventName, callback, context);
+        return this;
+    };
+    Dispatcher.prototype.unbind_global = function (callback) {
+        if (!callback) {
+            this.global_callbacks = [];
+            return this;
+        }
+        this.global_callbacks = filter(this.global_callbacks || [], function (c) { return c !== callback; });
+        return this;
+    };
+    Dispatcher.prototype.unbind_all = function () {
+        this.unbind();
+        this.unbind_global();
+        return this;
+    };
+    Dispatcher.prototype.emit = function (eventName, data, metadata) {
+        for (var i = 0; i < this.global_callbacks.length; i++) {
+            this.global_callbacks[i](eventName, data);
+        }
+        var callbacks = this.callbacks.get(eventName);
+        var args = [];
+        if (metadata) {
+            args.push(data, metadata);
+        }
+        else if (data) {
+            args.push(data);
+        }
+        if (callbacks && callbacks.length > 0) {
+            for (var i = 0; i < callbacks.length; i++) {
+                callbacks[i].fn.apply(callbacks[i].context || window, args);
+            }
+        }
+        else if (this.failThrough) {
+            this.failThrough(eventName, data);
+        }
+        return this;
+    };
+    return Dispatcher;
+}());
+/* harmony default export */ var dispatcher = (dispatcher_Dispatcher);
+
+// CONCATENATED MODULE: ./src/core/transports/transport_connection.ts
+var transport_connection_extends = ( false) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+
+
+
+var transport_connection_TransportConnection = (function (_super) {
+    transport_connection_extends(TransportConnection, _super);
+    function TransportConnection(hooks, name, priority, key, options) {
+        var _this = _super.call(this) || this;
+        _this.initialize = runtime.transportConnectionInitializer;
+        _this.hooks = hooks;
+        _this.name = name;
+        _this.priority = priority;
+        _this.key = key;
+        _this.options = options;
+        _this.state = 'new';
+        _this.timeline = options.timeline;
+        _this.activityTimeout = options.activityTimeout;
+        _this.id = _this.timeline.generateUniqueID();
+        return _this;
+    }
+    TransportConnection.prototype.handlesActivityChecks = function () {
+        return Boolean(this.hooks.handlesActivityChecks);
+    };
+    TransportConnection.prototype.supportsPing = function () {
+        return Boolean(this.hooks.supportsPing);
+    };
+    TransportConnection.prototype.connect = function () {
+        var _this = this;
+        if (this.socket || this.state !== 'initialized') {
+            return false;
+        }
+        var url = this.hooks.urls.getInitial(this.key, this.options);
+        try {
+            this.socket = this.hooks.getSocket(url, this.options);
+        }
+        catch (e) {
+            util.defer(function () {
+                _this.onError(e);
+                _this.changeState('closed');
+            });
+            return false;
+        }
+        this.bindListeners();
+        logger.debug('Connecting', { transport: this.name, url: url });
+        this.changeState('connecting');
+        return true;
+    };
+    TransportConnection.prototype.close = function () {
+        if (this.socket) {
+            this.socket.close();
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    TransportConnection.prototype.send = function (data) {
+        var _this = this;
+        if (this.state === 'open') {
+            util.defer(function () {
+                if (_this.socket) {
+                    _this.socket.send(data);
+                }
+            });
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    TransportConnection.prototype.ping = function () {
+        if (this.state === 'open' && this.supportsPing()) {
+            this.socket.ping();
+        }
+    };
+    TransportConnection.prototype.onOpen = function () {
+        if (this.hooks.beforeOpen) {
+            this.hooks.beforeOpen(this.socket, this.hooks.urls.getPath(this.key, this.options));
+        }
+        this.changeState('open');
+        this.socket.onopen = undefined;
+    };
+    TransportConnection.prototype.onError = function (error) {
+        this.emit('error', { type: 'WebSocketError', error: error });
+        this.timeline.error(this.buildTimelineMessage({ error: error.toString() }));
+    };
+    TransportConnection.prototype.onClose = function (closeEvent) {
+        if (closeEvent) {
+            this.changeState('closed', {
+                code: closeEvent.code,
+                reason: closeEvent.reason,
+                wasClean: closeEvent.wasClean
+            });
+        }
+        else {
+            this.changeState('closed');
+        }
+        this.unbindListeners();
+        this.socket = undefined;
+    };
+    TransportConnection.prototype.onMessage = function (message) {
+        this.emit('message', message);
+    };
+    TransportConnection.prototype.onActivity = function () {
+        this.emit('activity');
+    };
+    TransportConnection.prototype.bindListeners = function () {
+        var _this = this;
+        this.socket.onopen = function () {
+            _this.onOpen();
+        };
+        this.socket.onerror = function (error) {
+            _this.onError(error);
+        };
+        this.socket.onclose = function (closeEvent) {
+            _this.onClose(closeEvent);
+        };
+        this.socket.onmessage = function (message) {
+            _this.onMessage(message);
+        };
+        if (this.supportsPing()) {
+            this.socket.onactivity = function () {
+                _this.onActivity();
+            };
+        }
+    };
+    TransportConnection.prototype.unbindListeners = function () {
+        if (this.socket) {
+            this.socket.onopen = undefined;
+            this.socket.onerror = undefined;
+            this.socket.onclose = undefined;
+            this.socket.onmessage = undefined;
+            if (this.supportsPing()) {
+                this.socket.onactivity = undefined;
+            }
+        }
+    };
+    TransportConnection.prototype.changeState = function (state, params) {
+        this.state = state;
+        this.timeline.info(this.buildTimelineMessage({
+            state: state,
+            params: params
+        }));
+        this.emit(state, params);
+    };
+    TransportConnection.prototype.buildTimelineMessage = function (message) {
+        return extend({ cid: this.id }, message);
+    };
+    return TransportConnection;
+}(dispatcher));
+/* harmony default export */ var transport_connection = (transport_connection_TransportConnection);
+
+// CONCATENATED MODULE: ./src/core/transports/transport.ts
+
+var transport_Transport = (function () {
+    function Transport(hooks) {
+        this.hooks = hooks;
+    }
+    Transport.prototype.isSupported = function (environment) {
+        return this.hooks.isSupported(environment);
+    };
+    Transport.prototype.createConnection = function (name, priority, key, options) {
+        return new transport_connection(this.hooks, name, priority, key, options);
+    };
+    return Transport;
+}());
+/* harmony default export */ var transports_transport = (transport_Transport);
+
+// CONCATENATED MODULE: ./src/runtimes/isomorphic/transports/transports.ts
+
+
+
+
+var WSTransport = new transports_transport({
+    urls: ws,
+    handlesActivityChecks: false,
+    supportsPing: false,
+    isInitialized: function () {
+        return Boolean(runtime.getWebSocketAPI());
+    },
+    isSupported: function () {
+        return Boolean(runtime.getWebSocketAPI());
+    },
+    getSocket: function (url) {
+        return runtime.createWebSocket(url);
+    }
+});
+var httpConfiguration = {
+    urls: http,
+    handlesActivityChecks: false,
+    supportsPing: true,
+    isInitialized: function () {
+        return true;
+    }
+};
+var streamingConfiguration = extend({
+    getSocket: function (url) {
+        return runtime.HTTPFactory.createStreamingSocket(url);
+    }
+}, httpConfiguration);
+var pollingConfiguration = extend({
+    getSocket: function (url) {
+        return runtime.HTTPFactory.createPollingSocket(url);
+    }
+}, httpConfiguration);
+var xhrConfiguration = {
+    isSupported: function () {
+        return runtime.isXHRSupported();
+    }
+};
+var XHRStreamingTransport = new transports_transport((extend({}, streamingConfiguration, xhrConfiguration)));
+var XHRPollingTransport = new transports_transport(extend({}, pollingConfiguration, xhrConfiguration));
+var Transports = {
+    ws: WSTransport,
+    xhr_streaming: XHRStreamingTransport,
+    xhr_polling: XHRPollingTransport
+};
+/* harmony default export */ var transports = (Transports);
+
+// CONCATENATED MODULE: ./src/runtimes/web/transports/transports.ts
+
+
+
+
+
+
+var SockJSTransport = new transports_transport({
+    file: 'sockjs',
+    urls: sockjs,
+    handlesActivityChecks: true,
+    supportsPing: false,
+    isSupported: function () {
+        return true;
+    },
+    isInitialized: function () {
+        return window.SockJS !== undefined;
+    },
+    getSocket: function (url, options) {
+        return new window.SockJS(url, null, {
+            js_path: Dependencies.getPath('sockjs', {
+                useTLS: options.useTLS
+            }),
+            ignore_null_origin: options.ignoreNullOrigin
+        });
+    },
+    beforeOpen: function (socket, path) {
+        socket.send(JSON.stringify({
+            path: path
+        }));
+    }
+});
+var xdrConfiguration = {
+    isSupported: function (environment) {
+        var yes = runtime.isXDRSupported(environment.useTLS);
+        return yes;
+    }
+};
+var XDRStreamingTransport = new transports_transport((extend({}, streamingConfiguration, xdrConfiguration)));
+var XDRPollingTransport = new transports_transport(extend({}, pollingConfiguration, xdrConfiguration));
+transports.xdr_streaming = XDRStreamingTransport;
+transports.xdr_polling = XDRPollingTransport;
+transports.sockjs = SockJSTransport;
+/* harmony default export */ var transports_transports = (transports);
+
+// CONCATENATED MODULE: ./src/runtimes/web/net_info.ts
+var net_info_extends = ( false) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+var NetInfo = (function (_super) {
+    net_info_extends(NetInfo, _super);
+    function NetInfo() {
+        var _this = _super.call(this) || this;
+        var self = _this;
+        if (window.addEventListener !== undefined) {
+            window.addEventListener('online', function () {
+                self.emit('online');
+            }, false);
+            window.addEventListener('offline', function () {
+                self.emit('offline');
+            }, false);
+        }
+        return _this;
+    }
+    NetInfo.prototype.isOnline = function () {
+        if (window.navigator.onLine === undefined) {
+            return true;
+        }
+        else {
+            return window.navigator.onLine;
+        }
+    };
+    return NetInfo;
+}(dispatcher));
+
+var net_info_Network = new NetInfo();
+
+// CONCATENATED MODULE: ./src/core/transports/assistant_to_the_transport_manager.ts
+
+
+var assistant_to_the_transport_manager_AssistantToTheTransportManager = (function () {
+    function AssistantToTheTransportManager(manager, transport, options) {
+        this.manager = manager;
+        this.transport = transport;
+        this.minPingDelay = options.minPingDelay;
+        this.maxPingDelay = options.maxPingDelay;
+        this.pingDelay = undefined;
+    }
+    AssistantToTheTransportManager.prototype.createConnection = function (name, priority, key, options) {
+        var _this = this;
+        options = extend({}, options, {
+            activityTimeout: this.pingDelay
+        });
+        var connection = this.transport.createConnection(name, priority, key, options);
+        var openTimestamp = null;
+        var onOpen = function () {
+            connection.unbind('open', onOpen);
+            connection.bind('closed', onClosed);
+            openTimestamp = util.now();
+        };
+        var onClosed = function (closeEvent) {
+            connection.unbind('closed', onClosed);
+            if (closeEvent.code === 1002 || closeEvent.code === 1003) {
+                _this.manager.reportDeath();
+            }
+            else if (!closeEvent.wasClean && openTimestamp) {
+                var lifespan = util.now() - openTimestamp;
+                if (lifespan < 2 * _this.maxPingDelay) {
+                    _this.manager.reportDeath();
+                    _this.pingDelay = Math.max(lifespan / 2, _this.minPingDelay);
+                }
+            }
+        };
+        connection.bind('open', onOpen);
+        return connection;
+    };
+    AssistantToTheTransportManager.prototype.isSupported = function (environment) {
+        return this.manager.isAlive() && this.transport.isSupported(environment);
+    };
+    return AssistantToTheTransportManager;
+}());
+/* harmony default export */ var assistant_to_the_transport_manager = (assistant_to_the_transport_manager_AssistantToTheTransportManager);
+
+// CONCATENATED MODULE: ./src/core/connection/protocol/protocol.ts
+var Protocol = {
+    decodeMessage: function (messageEvent) {
+        try {
+            var messageData = JSON.parse(messageEvent.data);
+            var pusherEventData = messageData.data;
+            if (typeof pusherEventData === 'string') {
+                try {
+                    pusherEventData = JSON.parse(messageData.data);
+                }
+                catch (e) { }
+            }
+            var pusherEvent = {
+                event: messageData.event,
+                channel: messageData.channel,
+                data: pusherEventData
+            };
+            if (messageData.user_id) {
+                pusherEvent.user_id = messageData.user_id;
+            }
+            return pusherEvent;
+        }
+        catch (e) {
+            throw { type: 'MessageParseError', error: e, data: messageEvent.data };
+        }
+    },
+    encodeMessage: function (event) {
+        return JSON.stringify(event);
+    },
+    processHandshake: function (messageEvent) {
+        var message = Protocol.decodeMessage(messageEvent);
+        if (message.event === 'pusher:connection_established') {
+            if (!message.data.activity_timeout) {
+                throw 'No activity timeout specified in handshake';
+            }
+            return {
+                action: 'connected',
+                id: message.data.socket_id,
+                activityTimeout: message.data.activity_timeout * 1000
+            };
+        }
+        else if (message.event === 'pusher:error') {
+            return {
+                action: this.getCloseAction(message.data),
+                error: this.getCloseError(message.data)
+            };
+        }
+        else {
+            throw 'Invalid handshake';
+        }
+    },
+    getCloseAction: function (closeEvent) {
+        if (closeEvent.code < 4000) {
+            if (closeEvent.code >= 1002 && closeEvent.code <= 1004) {
+                return 'backoff';
+            }
+            else {
+                return null;
+            }
+        }
+        else if (closeEvent.code === 4000) {
+            return 'tls_only';
+        }
+        else if (closeEvent.code < 4100) {
+            return 'refused';
+        }
+        else if (closeEvent.code < 4200) {
+            return 'backoff';
+        }
+        else if (closeEvent.code < 4300) {
+            return 'retry';
+        }
+        else {
+            return 'refused';
+        }
+    },
+    getCloseError: function (closeEvent) {
+        if (closeEvent.code !== 1000 && closeEvent.code !== 1001) {
+            return {
+                type: 'PusherError',
+                data: {
+                    code: closeEvent.code,
+                    message: closeEvent.reason || closeEvent.message
+                }
+            };
+        }
+        else {
+            return null;
+        }
+    }
+};
+/* harmony default export */ var protocol_protocol = (Protocol);
+
+// CONCATENATED MODULE: ./src/core/connection/connection.ts
+var connection_extends = ( false) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+
+
+var connection_Connection = (function (_super) {
+    connection_extends(Connection, _super);
+    function Connection(id, transport) {
+        var _this = _super.call(this) || this;
+        _this.id = id;
+        _this.transport = transport;
+        _this.activityTimeout = transport.activityTimeout;
+        _this.bindListeners();
+        return _this;
+    }
+    Connection.prototype.handlesActivityChecks = function () {
+        return this.transport.handlesActivityChecks();
+    };
+    Connection.prototype.send = function (data) {
+        return this.transport.send(data);
+    };
+    Connection.prototype.send_event = function (name, data, channel) {
+        var event = { event: name, data: data };
+        if (channel) {
+            event.channel = channel;
+        }
+        logger.debug('Event sent', event);
+        return this.send(protocol_protocol.encodeMessage(event));
+    };
+    Connection.prototype.ping = function () {
+        if (this.transport.supportsPing()) {
+            this.transport.ping();
+        }
+        else {
+            this.send_event('pusher:ping', {});
+        }
+    };
+    Connection.prototype.close = function () {
+        this.transport.close();
+    };
+    Connection.prototype.bindListeners = function () {
+        var _this = this;
+        var listeners = {
+            message: function (messageEvent) {
+                var pusherEvent;
+                try {
+                    pusherEvent = protocol_protocol.decodeMessage(messageEvent);
+                }
+                catch (e) {
+                    _this.emit('error', {
+                        type: 'MessageParseError',
+                        error: e,
+                        data: messageEvent.data
+                    });
+                }
+                if (pusherEvent !== undefined) {
+                    logger.debug('Event recd', pusherEvent);
+                    switch (pusherEvent.event) {
+                        case 'pusher:error':
+                            _this.emit('error', {
+                                type: 'PusherError',
+                                data: pusherEvent.data
+                            });
+                            break;
+                        case 'pusher:ping':
+                            _this.emit('ping');
+                            break;
+                        case 'pusher:pong':
+                            _this.emit('pong');
+                            break;
+                    }
+                    _this.emit('message', pusherEvent);
+                }
+            },
+            activity: function () {
+                _this.emit('activity');
+            },
+            error: function (error) {
+                _this.emit('error', error);
+            },
+            closed: function (closeEvent) {
+                unbindListeners();
+                if (closeEvent && closeEvent.code) {
+                    _this.handleCloseEvent(closeEvent);
+                }
+                _this.transport = null;
+                _this.emit('closed');
+            }
+        };
+        var unbindListeners = function () {
+            objectApply(listeners, function (listener, event) {
+                _this.transport.unbind(event, listener);
+            });
+        };
+        objectApply(listeners, function (listener, event) {
+            _this.transport.bind(event, listener);
+        });
+    };
+    Connection.prototype.handleCloseEvent = function (closeEvent) {
+        var action = protocol_protocol.getCloseAction(closeEvent);
+        var error = protocol_protocol.getCloseError(closeEvent);
+        if (error) {
+            this.emit('error', error);
+        }
+        if (action) {
+            this.emit(action, { action: action, error: error });
+        }
+    };
+    return Connection;
+}(dispatcher));
+/* harmony default export */ var connection_connection = (connection_Connection);
+
+// CONCATENATED MODULE: ./src/core/connection/handshake/index.ts
+
+
+
+var handshake_Handshake = (function () {
+    function Handshake(transport, callback) {
+        this.transport = transport;
+        this.callback = callback;
+        this.bindListeners();
+    }
+    Handshake.prototype.close = function () {
+        this.unbindListeners();
+        this.transport.close();
+    };
+    Handshake.prototype.bindListeners = function () {
+        var _this = this;
+        this.onMessage = function (m) {
+            _this.unbindListeners();
+            var result;
+            try {
+                result = protocol_protocol.processHandshake(m);
+            }
+            catch (e) {
+                _this.finish('error', { error: e });
+                _this.transport.close();
+                return;
+            }
+            if (result.action === 'connected') {
+                _this.finish('connected', {
+                    connection: new connection_connection(result.id, _this.transport),
+                    activityTimeout: result.activityTimeout
+                });
+            }
+            else {
+                _this.finish(result.action, { error: result.error });
+                _this.transport.close();
+            }
+        };
+        this.onClosed = function (closeEvent) {
+            _this.unbindListeners();
+            var action = protocol_protocol.getCloseAction(closeEvent) || 'backoff';
+            var error = protocol_protocol.getCloseError(closeEvent);
+            _this.finish(action, { error: error });
+        };
+        this.transport.bind('message', this.onMessage);
+        this.transport.bind('closed', this.onClosed);
+    };
+    Handshake.prototype.unbindListeners = function () {
+        this.transport.unbind('message', this.onMessage);
+        this.transport.unbind('closed', this.onClosed);
+    };
+    Handshake.prototype.finish = function (action, params) {
+        this.callback(extend({ transport: this.transport, action: action }, params));
+    };
+    return Handshake;
+}());
+/* harmony default export */ var connection_handshake = (handshake_Handshake);
+
+// CONCATENATED MODULE: ./src/core/timeline/timeline_sender.ts
+
+var timeline_sender_TimelineSender = (function () {
+    function TimelineSender(timeline, options) {
+        this.timeline = timeline;
+        this.options = options || {};
+    }
+    TimelineSender.prototype.send = function (useTLS, callback) {
+        if (this.timeline.isEmpty()) {
+            return;
+        }
+        this.timeline.send(runtime.TimelineTransport.getAgent(this, useTLS), callback);
+    };
+    return TimelineSender;
+}());
+/* harmony default export */ var timeline_sender = (timeline_sender_TimelineSender);
+
+// CONCATENATED MODULE: ./src/core/channels/channel.ts
+var channel_extends = ( false) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+
+
+
+var channel_Channel = (function (_super) {
+    channel_extends(Channel, _super);
+    function Channel(name, pusher) {
+        var _this = _super.call(this, function (event, data) {
+            logger.debug('No callbacks on ' + name + ' for ' + event);
+        }) || this;
+        _this.name = name;
+        _this.pusher = pusher;
+        _this.subscribed = false;
+        _this.subscriptionPending = false;
+        _this.subscriptionCancelled = false;
+        return _this;
+    }
+    Channel.prototype.authorize = function (socketId, callback) {
+        return callback(null, { auth: '' });
+    };
+    Channel.prototype.trigger = function (event, data) {
+        if (event.indexOf('client-') !== 0) {
+            throw new BadEventName("Event '" + event + "' does not start with 'client-'");
+        }
+        if (!this.subscribed) {
+            var suffix = url_store.buildLogSuffix('triggeringClientEvents');
+            logger.warn("Client event triggered before channel 'subscription_succeeded' event . " + suffix);
+        }
+        return this.pusher.send_event(event, data, this.name);
+    };
+    Channel.prototype.disconnect = function () {
+        this.subscribed = false;
+        this.subscriptionPending = false;
+    };
+    Channel.prototype.handleEvent = function (event) {
+        var eventName = event.event;
+        var data = event.data;
+        if (eventName === 'pusher_internal:subscription_succeeded') {
+            this.handleSubscriptionSucceededEvent(event);
+        }
+        else if (eventName.indexOf('pusher_internal:') !== 0) {
+            var metadata = {};
+            this.emit(eventName, data, metadata);
+        }
+    };
+    Channel.prototype.handleSubscriptionSucceededEvent = function (event) {
+        this.subscriptionPending = false;
+        this.subscribed = true;
+        if (this.subscriptionCancelled) {
+            this.pusher.unsubscribe(this.name);
+        }
+        else {
+            this.emit('pusher:subscription_succeeded', event.data);
+        }
+    };
+    Channel.prototype.subscribe = function () {
+        var _this = this;
+        if (this.subscribed) {
+            return;
+        }
+        this.subscriptionPending = true;
+        this.subscriptionCancelled = false;
+        this.authorize(this.pusher.connection.socket_id, function (error, data) {
+            if (error) {
+                _this.subscriptionPending = false;
+                logger.error(error.toString());
+                _this.emit('pusher:subscription_error', Object.assign({}, {
+                    type: 'AuthError',
+                    error: error.message
+                }, error instanceof HTTPAuthError ? { status: error.status } : {}));
+            }
+            else {
+                _this.pusher.send_event('pusher:subscribe', {
+                    auth: data.auth,
+                    channel_data: data.channel_data,
+                    channel: _this.name
+                });
+            }
+        });
+    };
+    Channel.prototype.unsubscribe = function () {
+        this.subscribed = false;
+        this.pusher.send_event('pusher:unsubscribe', {
+            channel: this.name
+        });
+    };
+    Channel.prototype.cancelSubscription = function () {
+        this.subscriptionCancelled = true;
+    };
+    Channel.prototype.reinstateSubscription = function () {
+        this.subscriptionCancelled = false;
+    };
+    return Channel;
+}(dispatcher));
+/* harmony default export */ var channels_channel = (channel_Channel);
+
+// CONCATENATED MODULE: ./src/core/channels/private_channel.ts
+var private_channel_extends = ( false) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+var PrivateChannel = (function (_super) {
+    private_channel_extends(PrivateChannel, _super);
+    function PrivateChannel() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    PrivateChannel.prototype.authorize = function (socketId, callback) {
+        return this.pusher.config.channelAuthorizer({
+            channelName: this.name,
+            socketId: socketId
+        }, callback);
+    };
+    return PrivateChannel;
+}(channels_channel));
+/* harmony default export */ var private_channel = (PrivateChannel);
+
+// CONCATENATED MODULE: ./src/core/channels/members.ts
+
+var members_Members = (function () {
+    function Members() {
+        this.reset();
+    }
+    Members.prototype.get = function (id) {
+        if (Object.prototype.hasOwnProperty.call(this.members, id)) {
+            return {
+                id: id,
+                info: this.members[id]
+            };
+        }
+        else {
+            return null;
+        }
+    };
+    Members.prototype.each = function (callback) {
+        var _this = this;
+        objectApply(this.members, function (member, id) {
+            callback(_this.get(id));
+        });
+    };
+    Members.prototype.setMyID = function (id) {
+        this.myID = id;
+    };
+    Members.prototype.onSubscription = function (subscriptionData) {
+        this.members = subscriptionData.presence.hash;
+        this.count = subscriptionData.presence.count;
+        this.me = this.get(this.myID);
+    };
+    Members.prototype.addMember = function (memberData) {
+        if (this.get(memberData.user_id) === null) {
+            this.count++;
+        }
+        this.members[memberData.user_id] = memberData.user_info;
+        return this.get(memberData.user_id);
+    };
+    Members.prototype.removeMember = function (memberData) {
+        var member = this.get(memberData.user_id);
+        if (member) {
+            delete this.members[memberData.user_id];
+            this.count--;
+        }
+        return member;
+    };
+    Members.prototype.reset = function () {
+        this.members = {};
+        this.count = 0;
+        this.myID = null;
+        this.me = null;
+    };
+    return Members;
+}());
+/* harmony default export */ var members = (members_Members);
+
+// CONCATENATED MODULE: ./src/core/channels/presence_channel.ts
+var presence_channel_extends = ( false) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+
+
+var presence_channel_PresenceChannel = (function (_super) {
+    presence_channel_extends(PresenceChannel, _super);
+    function PresenceChannel(name, pusher) {
+        var _this = _super.call(this, name, pusher) || this;
+        _this.members = new members();
+        return _this;
+    }
+    PresenceChannel.prototype.authorize = function (socketId, callback) {
+        var _this = this;
+        _super.prototype.authorize.call(this, socketId, function (error, authData) {
+            if (!error) {
+                authData = authData;
+                if (authData.channel_data === undefined) {
+                    var suffix = url_store.buildLogSuffix('authenticationEndpoint');
+                    logger.error("Invalid auth response for channel '" + _this.name + "'," +
+                        ("expected 'channel_data' field. " + suffix));
+                    callback('Invalid auth response');
+                    return;
+                }
+                var channelData = JSON.parse(authData.channel_data);
+                _this.members.setMyID(channelData.user_id);
+            }
+            callback(error, authData);
+        });
+    };
+    PresenceChannel.prototype.handleEvent = function (event) {
+        var eventName = event.event;
+        if (eventName.indexOf('pusher_internal:') === 0) {
+            this.handleInternalEvent(event);
+        }
+        else {
+            var data = event.data;
+            var metadata = {};
+            if (event.user_id) {
+                metadata.user_id = event.user_id;
+            }
+            this.emit(eventName, data, metadata);
+        }
+    };
+    PresenceChannel.prototype.handleInternalEvent = function (event) {
+        var eventName = event.event;
+        var data = event.data;
+        switch (eventName) {
+            case 'pusher_internal:subscription_succeeded':
+                this.handleSubscriptionSucceededEvent(event);
+                break;
+            case 'pusher_internal:member_added':
+                var addedMember = this.members.addMember(data);
+                this.emit('pusher:member_added', addedMember);
+                break;
+            case 'pusher_internal:member_removed':
+                var removedMember = this.members.removeMember(data);
+                if (removedMember) {
+                    this.emit('pusher:member_removed', removedMember);
+                }
+                break;
+        }
+    };
+    PresenceChannel.prototype.handleSubscriptionSucceededEvent = function (event) {
+        this.subscriptionPending = false;
+        this.subscribed = true;
+        if (this.subscriptionCancelled) {
+            this.pusher.unsubscribe(this.name);
+        }
+        else {
+            this.members.onSubscription(event.data);
+            this.emit('pusher:subscription_succeeded', this.members);
+        }
+    };
+    PresenceChannel.prototype.disconnect = function () {
+        this.members.reset();
+        _super.prototype.disconnect.call(this);
+    };
+    return PresenceChannel;
+}(private_channel));
+/* harmony default export */ var presence_channel = (presence_channel_PresenceChannel);
+
+// EXTERNAL MODULE: ./node_modules/@stablelib/utf8/lib/utf8.js
+var utf8 = __nested_webpack_require_20110__(1);
+
+// EXTERNAL MODULE: ./node_modules/@stablelib/base64/lib/base64.js
+var base64 = __nested_webpack_require_20110__(0);
+
+// CONCATENATED MODULE: ./src/core/channels/encrypted_channel.ts
+var encrypted_channel_extends = ( false) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+
+
+
+var encrypted_channel_EncryptedChannel = (function (_super) {
+    encrypted_channel_extends(EncryptedChannel, _super);
+    function EncryptedChannel(name, pusher, nacl) {
+        var _this = _super.call(this, name, pusher) || this;
+        _this.key = null;
+        _this.nacl = nacl;
+        return _this;
+    }
+    EncryptedChannel.prototype.authorize = function (socketId, callback) {
+        var _this = this;
+        _super.prototype.authorize.call(this, socketId, function (error, authData) {
+            if (error) {
+                callback(error, authData);
+                return;
+            }
+            var sharedSecret = authData['shared_secret'];
+            if (!sharedSecret) {
+                callback(new Error("No shared_secret key in auth payload for encrypted channel: " + _this.name), null);
+                return;
+            }
+            _this.key = Object(base64["decode"])(sharedSecret);
+            delete authData['shared_secret'];
+            callback(null, authData);
+        });
+    };
+    EncryptedChannel.prototype.trigger = function (event, data) {
+        throw new UnsupportedFeature('Client events are not currently supported for encrypted channels');
+    };
+    EncryptedChannel.prototype.handleEvent = function (event) {
+        var eventName = event.event;
+        var data = event.data;
+        if (eventName.indexOf('pusher_internal:') === 0 ||
+            eventName.indexOf('pusher:') === 0) {
+            _super.prototype.handleEvent.call(this, event);
+            return;
+        }
+        this.handleEncryptedEvent(eventName, data);
+    };
+    EncryptedChannel.prototype.handleEncryptedEvent = function (event, data) {
+        var _this = this;
+        if (!this.key) {
+            logger.debug('Received encrypted event before key has been retrieved from the authEndpoint');
+            return;
+        }
+        if (!data.ciphertext || !data.nonce) {
+            logger.error('Unexpected format for encrypted event, expected object with `ciphertext` and `nonce` fields, got: ' +
+                data);
+            return;
+        }
+        var cipherText = Object(base64["decode"])(data.ciphertext);
+        if (cipherText.length < this.nacl.secretbox.overheadLength) {
+            logger.error("Expected encrypted event ciphertext length to be " + this.nacl.secretbox.overheadLength + ", got: " + cipherText.length);
+            return;
+        }
+        var nonce = Object(base64["decode"])(data.nonce);
+        if (nonce.length < this.nacl.secretbox.nonceLength) {
+            logger.error("Expected encrypted event nonce length to be " + this.nacl.secretbox.nonceLength + ", got: " + nonce.length);
+            return;
+        }
+        var bytes = this.nacl.secretbox.open(cipherText, nonce, this.key);
+        if (bytes === null) {
+            logger.debug('Failed to decrypt an event, probably because it was encrypted with a different key. Fetching a new key from the authEndpoint...');
+            this.authorize(this.pusher.connection.socket_id, function (error, authData) {
+                if (error) {
+                    logger.error("Failed to make a request to the authEndpoint: " + authData + ". Unable to fetch new key, so dropping encrypted event");
+                    return;
+                }
+                bytes = _this.nacl.secretbox.open(cipherText, nonce, _this.key);
+                if (bytes === null) {
+                    logger.error("Failed to decrypt event with new key. Dropping encrypted event");
+                    return;
+                }
+                _this.emit(event, _this.getDataToEmit(bytes));
+                return;
+            });
+            return;
+        }
+        this.emit(event, this.getDataToEmit(bytes));
+    };
+    EncryptedChannel.prototype.getDataToEmit = function (bytes) {
+        var raw = Object(utf8["decode"])(bytes);
+        try {
+            return JSON.parse(raw);
+        }
+        catch (_a) {
+            return raw;
+        }
+    };
+    return EncryptedChannel;
+}(private_channel));
+/* harmony default export */ var encrypted_channel = (encrypted_channel_EncryptedChannel);
+
+// CONCATENATED MODULE: ./src/core/connection/connection_manager.ts
+var connection_manager_extends = ( false) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+
+
+
+var connection_manager_ConnectionManager = (function (_super) {
+    connection_manager_extends(ConnectionManager, _super);
+    function ConnectionManager(key, options) {
+        var _this = _super.call(this) || this;
+        _this.state = 'initialized';
+        _this.connection = null;
+        _this.key = key;
+        _this.options = options;
+        _this.timeline = _this.options.timeline;
+        _this.usingTLS = _this.options.useTLS;
+        _this.errorCallbacks = _this.buildErrorCallbacks();
+        _this.connectionCallbacks = _this.buildConnectionCallbacks(_this.errorCallbacks);
+        _this.handshakeCallbacks = _this.buildHandshakeCallbacks(_this.errorCallbacks);
+        var Network = runtime.getNetwork();
+        Network.bind('online', function () {
+            _this.timeline.info({ netinfo: 'online' });
+            if (_this.state === 'connecting' || _this.state === 'unavailable') {
+                _this.retryIn(0);
+            }
+        });
+        Network.bind('offline', function () {
+            _this.timeline.info({ netinfo: 'offline' });
+            if (_this.connection) {
+                _this.sendActivityCheck();
+            }
+        });
+        _this.updateStrategy();
+        return _this;
+    }
+    ConnectionManager.prototype.connect = function () {
+        if (this.connection || this.runner) {
+            return;
+        }
+        if (!this.strategy.isSupported()) {
+            this.updateState('failed');
+            return;
+        }
+        this.updateState('connecting');
+        this.startConnecting();
+        this.setUnavailableTimer();
+    };
+    ConnectionManager.prototype.send = function (data) {
+        if (this.connection) {
+            return this.connection.send(data);
+        }
+        else {
+            return false;
+        }
+    };
+    ConnectionManager.prototype.send_event = function (name, data, channel) {
+        if (this.connection) {
+            return this.connection.send_event(name, data, channel);
+        }
+        else {
+            return false;
+        }
+    };
+    ConnectionManager.prototype.disconnect = function () {
+        this.disconnectInternally();
+        this.updateState('disconnected');
+    };
+    ConnectionManager.prototype.isUsingTLS = function () {
+        return this.usingTLS;
+    };
+    ConnectionManager.prototype.startConnecting = function () {
+        var _this = this;
+        var callback = function (error, handshake) {
+            if (error) {
+                _this.runner = _this.strategy.connect(0, callback);
+            }
+            else {
+                if (handshake.action === 'error') {
+                    _this.emit('error', {
+                        type: 'HandshakeError',
+                        error: handshake.error
+                    });
+                    _this.timeline.error({ handshakeError: handshake.error });
+                }
+                else {
+                    _this.abortConnecting();
+                    _this.handshakeCallbacks[handshake.action](handshake);
+                }
+            }
+        };
+        this.runner = this.strategy.connect(0, callback);
+    };
+    ConnectionManager.prototype.abortConnecting = function () {
+        if (this.runner) {
+            this.runner.abort();
+            this.runner = null;
+        }
+    };
+    ConnectionManager.prototype.disconnectInternally = function () {
+        this.abortConnecting();
+        this.clearRetryTimer();
+        this.clearUnavailableTimer();
+        if (this.connection) {
+            var connection = this.abandonConnection();
+            connection.close();
+        }
+    };
+    ConnectionManager.prototype.updateStrategy = function () {
+        this.strategy = this.options.getStrategy({
+            key: this.key,
+            timeline: this.timeline,
+            useTLS: this.usingTLS
+        });
+    };
+    ConnectionManager.prototype.retryIn = function (delay) {
+        var _this = this;
+        this.timeline.info({ action: 'retry', delay: delay });
+        if (delay > 0) {
+            this.emit('connecting_in', Math.round(delay / 1000));
+        }
+        this.retryTimer = new OneOffTimer(delay || 0, function () {
+            _this.disconnectInternally();
+            _this.connect();
+        });
+    };
+    ConnectionManager.prototype.clearRetryTimer = function () {
+        if (this.retryTimer) {
+            this.retryTimer.ensureAborted();
+            this.retryTimer = null;
+        }
+    };
+    ConnectionManager.prototype.setUnavailableTimer = function () {
+        var _this = this;
+        this.unavailableTimer = new OneOffTimer(this.options.unavailableTimeout, function () {
+            _this.updateState('unavailable');
+        });
+    };
+    ConnectionManager.prototype.clearUnavailableTimer = function () {
+        if (this.unavailableTimer) {
+            this.unavailableTimer.ensureAborted();
+        }
+    };
+    ConnectionManager.prototype.sendActivityCheck = function () {
+        var _this = this;
+        this.stopActivityCheck();
+        this.connection.ping();
+        this.activityTimer = new OneOffTimer(this.options.pongTimeout, function () {
+            _this.timeline.error({ pong_timed_out: _this.options.pongTimeout });
+            _this.retryIn(0);
+        });
+    };
+    ConnectionManager.prototype.resetActivityCheck = function () {
+        var _this = this;
+        this.stopActivityCheck();
+        if (this.connection && !this.connection.handlesActivityChecks()) {
+            this.activityTimer = new OneOffTimer(this.activityTimeout, function () {
+                _this.sendActivityCheck();
+            });
+        }
+    };
+    ConnectionManager.prototype.stopActivityCheck = function () {
+        if (this.activityTimer) {
+            this.activityTimer.ensureAborted();
+        }
+    };
+    ConnectionManager.prototype.buildConnectionCallbacks = function (errorCallbacks) {
+        var _this = this;
+        return extend({}, errorCallbacks, {
+            message: function (message) {
+                _this.resetActivityCheck();
+                _this.emit('message', message);
+            },
+            ping: function () {
+                _this.send_event('pusher:pong', {});
+            },
+            activity: function () {
+                _this.resetActivityCheck();
+            },
+            error: function (error) {
+                _this.emit('error', error);
+            },
+            closed: function () {
+                _this.abandonConnection();
+                if (_this.shouldRetry()) {
+                    _this.retryIn(1000);
+                }
+            }
+        });
+    };
+    ConnectionManager.prototype.buildHandshakeCallbacks = function (errorCallbacks) {
+        var _this = this;
+        return extend({}, errorCallbacks, {
+            connected: function (handshake) {
+                _this.activityTimeout = Math.min(_this.options.activityTimeout, handshake.activityTimeout, handshake.connection.activityTimeout || Infinity);
+                _this.clearUnavailableTimer();
+                _this.setConnection(handshake.connection);
+                _this.socket_id = _this.connection.id;
+                _this.updateState('connected', { socket_id: _this.socket_id });
+            }
+        });
+    };
+    ConnectionManager.prototype.buildErrorCallbacks = function () {
+        var _this = this;
+        var withErrorEmitted = function (callback) {
+            return function (result) {
+                if (result.error) {
+                    _this.emit('error', { type: 'WebSocketError', error: result.error });
+                }
+                callback(result);
+            };
+        };
+        return {
+            tls_only: withErrorEmitted(function () {
+                _this.usingTLS = true;
+                _this.updateStrategy();
+                _this.retryIn(0);
+            }),
+            refused: withErrorEmitted(function () {
+                _this.disconnect();
+            }),
+            backoff: withErrorEmitted(function () {
+                _this.retryIn(1000);
+            }),
+            retry: withErrorEmitted(function () {
+                _this.retryIn(0);
+            })
+        };
+    };
+    ConnectionManager.prototype.setConnection = function (connection) {
+        this.connection = connection;
+        for (var event in this.connectionCallbacks) {
+            this.connection.bind(event, this.connectionCallbacks[event]);
+        }
+        this.resetActivityCheck();
+    };
+    ConnectionManager.prototype.abandonConnection = function () {
+        if (!this.connection) {
+            return;
+        }
+        this.stopActivityCheck();
+        for (var event in this.connectionCallbacks) {
+            this.connection.unbind(event, this.connectionCallbacks[event]);
+        }
+        var connection = this.connection;
+        this.connection = null;
+        return connection;
+    };
+    ConnectionManager.prototype.updateState = function (newState, data) {
+        var previousState = this.state;
+        this.state = newState;
+        if (previousState !== newState) {
+            var newStateDescription = newState;
+            if (newStateDescription === 'connected') {
+                newStateDescription += ' with new socket ID ' + data.socket_id;
+            }
+            logger.debug('State changed', previousState + ' -> ' + newStateDescription);
+            this.timeline.info({ state: newState, params: data });
+            this.emit('state_change', { previous: previousState, current: newState });
+            this.emit(newState, data);
+        }
+    };
+    ConnectionManager.prototype.shouldRetry = function () {
+        return this.state === 'connecting' || this.state === 'connected';
+    };
+    return ConnectionManager;
+}(dispatcher));
+/* harmony default export */ var connection_manager = (connection_manager_ConnectionManager);
+
+// CONCATENATED MODULE: ./src/core/channels/channels.ts
+
+
+
+
+var channels_Channels = (function () {
+    function Channels() {
+        this.channels = {};
+    }
+    Channels.prototype.add = function (name, pusher) {
+        if (!this.channels[name]) {
+            this.channels[name] = createChannel(name, pusher);
+        }
+        return this.channels[name];
+    };
+    Channels.prototype.all = function () {
+        return values(this.channels);
+    };
+    Channels.prototype.find = function (name) {
+        return this.channels[name];
+    };
+    Channels.prototype.remove = function (name) {
+        var channel = this.channels[name];
+        delete this.channels[name];
+        return channel;
+    };
+    Channels.prototype.disconnect = function () {
+        objectApply(this.channels, function (channel) {
+            channel.disconnect();
+        });
+    };
+    return Channels;
+}());
+/* harmony default export */ var channels = (channels_Channels);
+function createChannel(name, pusher) {
+    if (name.indexOf('private-encrypted-') === 0) {
+        if (pusher.config.nacl) {
+            return factory.createEncryptedChannel(name, pusher, pusher.config.nacl);
+        }
+        var errMsg = 'Tried to subscribe to a private-encrypted- channel but no nacl implementation available';
+        var suffix = url_store.buildLogSuffix('encryptedChannelSupport');
+        throw new UnsupportedFeature(errMsg + ". " + suffix);
+    }
+    else if (name.indexOf('private-') === 0) {
+        return factory.createPrivateChannel(name, pusher);
+    }
+    else if (name.indexOf('presence-') === 0) {
+        return factory.createPresenceChannel(name, pusher);
+    }
+    else if (name.indexOf('#') === 0) {
+        throw new BadChannelName('Cannot create a channel with name "' + name + '".');
+    }
+    else {
+        return factory.createChannel(name, pusher);
+    }
+}
+
+// CONCATENATED MODULE: ./src/core/utils/factory.ts
+
+
+
+
+
+
+
+
+
+var Factory = {
+    createChannels: function () {
+        return new channels();
+    },
+    createConnectionManager: function (key, options) {
+        return new connection_manager(key, options);
+    },
+    createChannel: function (name, pusher) {
+        return new channels_channel(name, pusher);
+    },
+    createPrivateChannel: function (name, pusher) {
+        return new private_channel(name, pusher);
+    },
+    createPresenceChannel: function (name, pusher) {
+        return new presence_channel(name, pusher);
+    },
+    createEncryptedChannel: function (name, pusher, nacl) {
+        return new encrypted_channel(name, pusher, nacl);
+    },
+    createTimelineSender: function (timeline, options) {
+        return new timeline_sender(timeline, options);
+    },
+    createHandshake: function (transport, callback) {
+        return new connection_handshake(transport, callback);
+    },
+    createAssistantToTheTransportManager: function (manager, transport, options) {
+        return new assistant_to_the_transport_manager(manager, transport, options);
+    }
+};
+/* harmony default export */ var factory = (Factory);
+
+// CONCATENATED MODULE: ./src/core/transports/transport_manager.ts
+
+var transport_manager_TransportManager = (function () {
+    function TransportManager(options) {
+        this.options = options || {};
+        this.livesLeft = this.options.lives || Infinity;
+    }
+    TransportManager.prototype.getAssistant = function (transport) {
+        return factory.createAssistantToTheTransportManager(this, transport, {
+            minPingDelay: this.options.minPingDelay,
+            maxPingDelay: this.options.maxPingDelay
+        });
+    };
+    TransportManager.prototype.isAlive = function () {
+        return this.livesLeft > 0;
+    };
+    TransportManager.prototype.reportDeath = function () {
+        this.livesLeft -= 1;
+    };
+    return TransportManager;
+}());
+/* harmony default export */ var transport_manager = (transport_manager_TransportManager);
+
+// CONCATENATED MODULE: ./src/core/strategies/sequential_strategy.ts
+
+
+
+var sequential_strategy_SequentialStrategy = (function () {
+    function SequentialStrategy(strategies, options) {
+        this.strategies = strategies;
+        this.loop = Boolean(options.loop);
+        this.failFast = Boolean(options.failFast);
+        this.timeout = options.timeout;
+        this.timeoutLimit = options.timeoutLimit;
+    }
+    SequentialStrategy.prototype.isSupported = function () {
+        return any(this.strategies, util.method('isSupported'));
+    };
+    SequentialStrategy.prototype.connect = function (minPriority, callback) {
+        var _this = this;
+        var strategies = this.strategies;
+        var current = 0;
+        var timeout = this.timeout;
+        var runner = null;
+        var tryNextStrategy = function (error, handshake) {
+            if (handshake) {
+                callback(null, handshake);
+            }
+            else {
+                current = current + 1;
+                if (_this.loop) {
+                    current = current % strategies.length;
+                }
+                if (current < strategies.length) {
+                    if (timeout) {
+                        timeout = timeout * 2;
+                        if (_this.timeoutLimit) {
+                            timeout = Math.min(timeout, _this.timeoutLimit);
+                        }
+                    }
+                    runner = _this.tryStrategy(strategies[current], minPriority, { timeout: timeout, failFast: _this.failFast }, tryNextStrategy);
+                }
+                else {
+                    callback(true);
+                }
+            }
+        };
+        runner = this.tryStrategy(strategies[current], minPriority, { timeout: timeout, failFast: this.failFast }, tryNextStrategy);
+        return {
+            abort: function () {
+                runner.abort();
+            },
+            forceMinPriority: function (p) {
+                minPriority = p;
+                if (runner) {
+                    runner.forceMinPriority(p);
+                }
+            }
+        };
+    };
+    SequentialStrategy.prototype.tryStrategy = function (strategy, minPriority, options, callback) {
+        var timer = null;
+        var runner = null;
+        if (options.timeout > 0) {
+            timer = new OneOffTimer(options.timeout, function () {
+                runner.abort();
+                callback(true);
+            });
+        }
+        runner = strategy.connect(minPriority, function (error, handshake) {
+            if (error && timer && timer.isRunning() && !options.failFast) {
+                return;
+            }
+            if (timer) {
+                timer.ensureAborted();
+            }
+            callback(error, handshake);
+        });
+        return {
+            abort: function () {
+                if (timer) {
+                    timer.ensureAborted();
+                }
+                runner.abort();
+            },
+            forceMinPriority: function (p) {
+                runner.forceMinPriority(p);
+            }
+        };
+    };
+    return SequentialStrategy;
+}());
+/* harmony default export */ var sequential_strategy = (sequential_strategy_SequentialStrategy);
+
+// CONCATENATED MODULE: ./src/core/strategies/best_connected_ever_strategy.ts
+
+
+var best_connected_ever_strategy_BestConnectedEverStrategy = (function () {
+    function BestConnectedEverStrategy(strategies) {
+        this.strategies = strategies;
+    }
+    BestConnectedEverStrategy.prototype.isSupported = function () {
+        return any(this.strategies, util.method('isSupported'));
+    };
+    BestConnectedEverStrategy.prototype.connect = function (minPriority, callback) {
+        return connect(this.strategies, minPriority, function (i, runners) {
+            return function (error, handshake) {
+                runners[i].error = error;
+                if (error) {
+                    if (allRunnersFailed(runners)) {
+                        callback(true);
+                    }
+                    return;
+                }
+                apply(runners, function (runner) {
+                    runner.forceMinPriority(handshake.transport.priority);
+                });
+                callback(null, handshake);
+            };
+        });
+    };
+    return BestConnectedEverStrategy;
+}());
+/* harmony default export */ var best_connected_ever_strategy = (best_connected_ever_strategy_BestConnectedEverStrategy);
+function connect(strategies, minPriority, callbackBuilder) {
+    var runners = map(strategies, function (strategy, i, _, rs) {
+        return strategy.connect(minPriority, callbackBuilder(i, rs));
+    });
+    return {
+        abort: function () {
+            apply(runners, abortRunner);
+        },
+        forceMinPriority: function (p) {
+            apply(runners, function (runner) {
+                runner.forceMinPriority(p);
+            });
+        }
+    };
+}
+function allRunnersFailed(runners) {
+    return collections_all(runners, function (runner) {
+        return Boolean(runner.error);
+    });
+}
+function abortRunner(runner) {
+    if (!runner.error && !runner.aborted) {
+        runner.abort();
+        runner.aborted = true;
+    }
+}
+
+// CONCATENATED MODULE: ./src/core/strategies/cached_strategy.ts
+
+
+
+
+var cached_strategy_CachedStrategy = (function () {
+    function CachedStrategy(strategy, transports, options) {
+        this.strategy = strategy;
+        this.transports = transports;
+        this.ttl = options.ttl || 1800 * 1000;
+        this.usingTLS = options.useTLS;
+        this.timeline = options.timeline;
+    }
+    CachedStrategy.prototype.isSupported = function () {
+        return this.strategy.isSupported();
+    };
+    CachedStrategy.prototype.connect = function (minPriority, callback) {
+        var usingTLS = this.usingTLS;
+        var info = fetchTransportCache(usingTLS);
+        var strategies = [this.strategy];
+        if (info && info.timestamp + this.ttl >= util.now()) {
+            var transport = this.transports[info.transport];
+            if (transport) {
+                this.timeline.info({
+                    cached: true,
+                    transport: info.transport,
+                    latency: info.latency
+                });
+                strategies.push(new sequential_strategy([transport], {
+                    timeout: info.latency * 2 + 1000,
+                    failFast: true
+                }));
+            }
+        }
+        var startTimestamp = util.now();
+        var runner = strategies
+            .pop()
+            .connect(minPriority, function cb(error, handshake) {
+            if (error) {
+                flushTransportCache(usingTLS);
+                if (strategies.length > 0) {
+                    startTimestamp = util.now();
+                    runner = strategies.pop().connect(minPriority, cb);
+                }
+                else {
+                    callback(error);
+                }
+            }
+            else {
+                storeTransportCache(usingTLS, handshake.transport.name, util.now() - startTimestamp);
+                callback(null, handshake);
+            }
+        });
+        return {
+            abort: function () {
+                runner.abort();
+            },
+            forceMinPriority: function (p) {
+                minPriority = p;
+                if (runner) {
+                    runner.forceMinPriority(p);
+                }
+            }
+        };
+    };
+    return CachedStrategy;
+}());
+/* harmony default export */ var cached_strategy = (cached_strategy_CachedStrategy);
+function getTransportCacheKey(usingTLS) {
+    return 'pusherTransport' + (usingTLS ? 'TLS' : 'NonTLS');
+}
+function fetchTransportCache(usingTLS) {
+    var storage = runtime.getLocalStorage();
+    if (storage) {
+        try {
+            var serializedCache = storage[getTransportCacheKey(usingTLS)];
+            if (serializedCache) {
+                return JSON.parse(serializedCache);
+            }
+        }
+        catch (e) {
+            flushTransportCache(usingTLS);
+        }
+    }
+    return null;
+}
+function storeTransportCache(usingTLS, transport, latency) {
+    var storage = runtime.getLocalStorage();
+    if (storage) {
+        try {
+            storage[getTransportCacheKey(usingTLS)] = safeJSONStringify({
+                timestamp: util.now(),
+                transport: transport,
+                latency: latency
+            });
+        }
+        catch (e) {
+        }
+    }
+}
+function flushTransportCache(usingTLS) {
+    var storage = runtime.getLocalStorage();
+    if (storage) {
+        try {
+            delete storage[getTransportCacheKey(usingTLS)];
+        }
+        catch (e) {
+        }
+    }
+}
+
+// CONCATENATED MODULE: ./src/core/strategies/delayed_strategy.ts
+
+var delayed_strategy_DelayedStrategy = (function () {
+    function DelayedStrategy(strategy, _a) {
+        var number = _a.delay;
+        this.strategy = strategy;
+        this.options = { delay: number };
+    }
+    DelayedStrategy.prototype.isSupported = function () {
+        return this.strategy.isSupported();
+    };
+    DelayedStrategy.prototype.connect = function (minPriority, callback) {
+        var strategy = this.strategy;
+        var runner;
+        var timer = new OneOffTimer(this.options.delay, function () {
+            runner = strategy.connect(minPriority, callback);
+        });
+        return {
+            abort: function () {
+                timer.ensureAborted();
+                if (runner) {
+                    runner.abort();
+                }
+            },
+            forceMinPriority: function (p) {
+                minPriority = p;
+                if (runner) {
+                    runner.forceMinPriority(p);
+                }
+            }
+        };
+    };
+    return DelayedStrategy;
+}());
+/* harmony default export */ var delayed_strategy = (delayed_strategy_DelayedStrategy);
+
+// CONCATENATED MODULE: ./src/core/strategies/if_strategy.ts
+var IfStrategy = (function () {
+    function IfStrategy(test, trueBranch, falseBranch) {
+        this.test = test;
+        this.trueBranch = trueBranch;
+        this.falseBranch = falseBranch;
+    }
+    IfStrategy.prototype.isSupported = function () {
+        var branch = this.test() ? this.trueBranch : this.falseBranch;
+        return branch.isSupported();
+    };
+    IfStrategy.prototype.connect = function (minPriority, callback) {
+        var branch = this.test() ? this.trueBranch : this.falseBranch;
+        return branch.connect(minPriority, callback);
+    };
+    return IfStrategy;
+}());
+/* harmony default export */ var if_strategy = (IfStrategy);
+
+// CONCATENATED MODULE: ./src/core/strategies/first_connected_strategy.ts
+var FirstConnectedStrategy = (function () {
+    function FirstConnectedStrategy(strategy) {
+        this.strategy = strategy;
+    }
+    FirstConnectedStrategy.prototype.isSupported = function () {
+        return this.strategy.isSupported();
+    };
+    FirstConnectedStrategy.prototype.connect = function (minPriority, callback) {
+        var runner = this.strategy.connect(minPriority, function (error, handshake) {
+            if (handshake) {
+                runner.abort();
+            }
+            callback(error, handshake);
+        });
+        return runner;
+    };
+    return FirstConnectedStrategy;
+}());
+/* harmony default export */ var first_connected_strategy = (FirstConnectedStrategy);
+
+// CONCATENATED MODULE: ./src/runtimes/web/default_strategy.ts
+
+
+
+
+
+
+
+function testSupportsStrategy(strategy) {
+    return function () {
+        return strategy.isSupported();
+    };
+}
+var getDefaultStrategy = function (config, baseOptions, defineTransport) {
+    var definedTransports = {};
+    function defineTransportStrategy(name, type, priority, options, manager) {
+        var transport = defineTransport(config, name, type, priority, options, manager);
+        definedTransports[name] = transport;
+        return transport;
+    }
+    var ws_options = Object.assign({}, baseOptions, {
+        hostNonTLS: config.wsHost + ':' + config.wsPort,
+        hostTLS: config.wsHost + ':' + config.wssPort,
+        httpPath: config.wsPath
+    });
+    var wss_options = Object.assign({}, ws_options, {
+        useTLS: true
+    });
+    var sockjs_options = Object.assign({}, baseOptions, {
+        hostNonTLS: config.httpHost + ':' + config.httpPort,
+        hostTLS: config.httpHost + ':' + config.httpsPort,
+        httpPath: config.httpPath
+    });
+    var timeouts = {
+        loop: true,
+        timeout: 15000,
+        timeoutLimit: 60000
+    };
+    var ws_manager = new transport_manager({
+        lives: 2,
+        minPingDelay: 10000,
+        maxPingDelay: config.activityTimeout
+    });
+    var streaming_manager = new transport_manager({
+        lives: 2,
+        minPingDelay: 10000,
+        maxPingDelay: config.activityTimeout
+    });
+    var ws_transport = defineTransportStrategy('ws', 'ws', 3, ws_options, ws_manager);
+    var wss_transport = defineTransportStrategy('wss', 'ws', 3, wss_options, ws_manager);
+    var sockjs_transport = defineTransportStrategy('sockjs', 'sockjs', 1, sockjs_options);
+    var xhr_streaming_transport = defineTransportStrategy('xhr_streaming', 'xhr_streaming', 1, sockjs_options, streaming_manager);
+    var xdr_streaming_transport = defineTransportStrategy('xdr_streaming', 'xdr_streaming', 1, sockjs_options, streaming_manager);
+    var xhr_polling_transport = defineTransportStrategy('xhr_polling', 'xhr_polling', 1, sockjs_options);
+    var xdr_polling_transport = defineTransportStrategy('xdr_polling', 'xdr_polling', 1, sockjs_options);
+    var ws_loop = new sequential_strategy([ws_transport], timeouts);
+    var wss_loop = new sequential_strategy([wss_transport], timeouts);
+    var sockjs_loop = new sequential_strategy([sockjs_transport], timeouts);
+    var streaming_loop = new sequential_strategy([
+        new if_strategy(testSupportsStrategy(xhr_streaming_transport), xhr_streaming_transport, xdr_streaming_transport)
+    ], timeouts);
+    var polling_loop = new sequential_strategy([
+        new if_strategy(testSupportsStrategy(xhr_polling_transport), xhr_polling_transport, xdr_polling_transport)
+    ], timeouts);
+    var http_loop = new sequential_strategy([
+        new if_strategy(testSupportsStrategy(streaming_loop), new best_connected_ever_strategy([
+            streaming_loop,
+            new delayed_strategy(polling_loop, { delay: 4000 })
+        ]), polling_loop)
+    ], timeouts);
+    var http_fallback_loop = new if_strategy(testSupportsStrategy(http_loop), http_loop, sockjs_loop);
+    var wsStrategy;
+    if (baseOptions.useTLS) {
+        wsStrategy = new best_connected_ever_strategy([
+            ws_loop,
+            new delayed_strategy(http_fallback_loop, { delay: 2000 })
+        ]);
+    }
+    else {
+        wsStrategy = new best_connected_ever_strategy([
+            ws_loop,
+            new delayed_strategy(wss_loop, { delay: 2000 }),
+            new delayed_strategy(http_fallback_loop, { delay: 5000 })
+        ]);
+    }
+    return new cached_strategy(new first_connected_strategy(new if_strategy(testSupportsStrategy(ws_transport), wsStrategy, http_fallback_loop)), definedTransports, {
+        ttl: 1800000,
+        timeline: baseOptions.timeline,
+        useTLS: baseOptions.useTLS
+    });
+};
+/* harmony default export */ var default_strategy = (getDefaultStrategy);
+
+// CONCATENATED MODULE: ./src/runtimes/web/transports/transport_connection_initializer.ts
+
+/* harmony default export */ var transport_connection_initializer = (function () {
+    var self = this;
+    self.timeline.info(self.buildTimelineMessage({
+        transport: self.name + (self.options.useTLS ? 's' : '')
+    }));
+    if (self.hooks.isInitialized()) {
+        self.changeState('initialized');
+    }
+    else if (self.hooks.file) {
+        self.changeState('initializing');
+        Dependencies.load(self.hooks.file, { useTLS: self.options.useTLS }, function (error, callback) {
+            if (self.hooks.isInitialized()) {
+                self.changeState('initialized');
+                callback(true);
+            }
+            else {
+                if (error) {
+                    self.onError(error);
+                }
+                self.onClose();
+                callback(false);
+            }
+        });
+    }
+    else {
+        self.onClose();
+    }
+});
+
+// CONCATENATED MODULE: ./src/runtimes/web/http/http_xdomain_request.ts
+
+var http_xdomain_request_hooks = {
+    getRequest: function (socket) {
+        var xdr = new window.XDomainRequest();
+        xdr.ontimeout = function () {
+            socket.emit('error', new RequestTimedOut());
+            socket.close();
+        };
+        xdr.onerror = function (e) {
+            socket.emit('error', e);
+            socket.close();
+        };
+        xdr.onprogress = function () {
+            if (xdr.responseText && xdr.responseText.length > 0) {
+                socket.onChunk(200, xdr.responseText);
+            }
+        };
+        xdr.onload = function () {
+            if (xdr.responseText && xdr.responseText.length > 0) {
+                socket.onChunk(200, xdr.responseText);
+            }
+            socket.emit('finished', 200);
+            socket.close();
+        };
+        return xdr;
+    },
+    abortRequest: function (xdr) {
+        xdr.ontimeout = xdr.onerror = xdr.onprogress = xdr.onload = null;
+        xdr.abort();
+    }
+};
+/* harmony default export */ var http_xdomain_request = (http_xdomain_request_hooks);
+
+// CONCATENATED MODULE: ./src/core/http/http_request.ts
+var http_request_extends = ( false) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+var MAX_BUFFER_LENGTH = 256 * 1024;
+var http_request_HTTPRequest = (function (_super) {
+    http_request_extends(HTTPRequest, _super);
+    function HTTPRequest(hooks, method, url) {
+        var _this = _super.call(this) || this;
+        _this.hooks = hooks;
+        _this.method = method;
+        _this.url = url;
+        return _this;
+    }
+    HTTPRequest.prototype.start = function (payload) {
+        var _this = this;
+        this.position = 0;
+        this.xhr = this.hooks.getRequest(this);
+        this.unloader = function () {
+            _this.close();
+        };
+        runtime.addUnloadListener(this.unloader);
+        this.xhr.open(this.method, this.url, true);
+        if (this.xhr.setRequestHeader) {
+            this.xhr.setRequestHeader('Content-Type', 'application/json');
+        }
+        this.xhr.send(payload);
+    };
+    HTTPRequest.prototype.close = function () {
+        if (this.unloader) {
+            runtime.removeUnloadListener(this.unloader);
+            this.unloader = null;
+        }
+        if (this.xhr) {
+            this.hooks.abortRequest(this.xhr);
+            this.xhr = null;
+        }
+    };
+    HTTPRequest.prototype.onChunk = function (status, data) {
+        while (true) {
+            var chunk = this.advanceBuffer(data);
+            if (chunk) {
+                this.emit('chunk', { status: status, data: chunk });
+            }
+            else {
+                break;
+            }
+        }
+        if (this.isBufferTooLong(data)) {
+            this.emit('buffer_too_long');
+        }
+    };
+    HTTPRequest.prototype.advanceBuffer = function (buffer) {
+        var unreadData = buffer.slice(this.position);
+        var endOfLinePosition = unreadData.indexOf('\n');
+        if (endOfLinePosition !== -1) {
+            this.position += endOfLinePosition + 1;
+            return unreadData.slice(0, endOfLinePosition);
+        }
+        else {
+            return null;
+        }
+    };
+    HTTPRequest.prototype.isBufferTooLong = function (buffer) {
+        return this.position === buffer.length && buffer.length > MAX_BUFFER_LENGTH;
+    };
+    return HTTPRequest;
+}(dispatcher));
+/* harmony default export */ var http_request = (http_request_HTTPRequest);
+
+// CONCATENATED MODULE: ./src/core/http/state.ts
+var State;
+(function (State) {
+    State[State["CONNECTING"] = 0] = "CONNECTING";
+    State[State["OPEN"] = 1] = "OPEN";
+    State[State["CLOSED"] = 3] = "CLOSED";
+})(State || (State = {}));
+/* harmony default export */ var state = (State);
+
+// CONCATENATED MODULE: ./src/core/http/http_socket.ts
+
+
+
+var autoIncrement = 1;
+var http_socket_HTTPSocket = (function () {
+    function HTTPSocket(hooks, url) {
+        this.hooks = hooks;
+        this.session = randomNumber(1000) + '/' + randomString(8);
+        this.location = getLocation(url);
+        this.readyState = state.CONNECTING;
+        this.openStream();
+    }
+    HTTPSocket.prototype.send = function (payload) {
+        return this.sendRaw(JSON.stringify([payload]));
+    };
+    HTTPSocket.prototype.ping = function () {
+        this.hooks.sendHeartbeat(this);
+    };
+    HTTPSocket.prototype.close = function (code, reason) {
+        this.onClose(code, reason, true);
+    };
+    HTTPSocket.prototype.sendRaw = function (payload) {
+        if (this.readyState === state.OPEN) {
+            try {
+                runtime.createSocketRequest('POST', getUniqueURL(getSendURL(this.location, this.session))).start(payload);
+                return true;
+            }
+            catch (e) {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+    };
+    HTTPSocket.prototype.reconnect = function () {
+        this.closeStream();
+        this.openStream();
+    };
+    HTTPSocket.prototype.onClose = function (code, reason, wasClean) {
+        this.closeStream();
+        this.readyState = state.CLOSED;
+        if (this.onclose) {
+            this.onclose({
+                code: code,
+                reason: reason,
+                wasClean: wasClean
+            });
+        }
+    };
+    HTTPSocket.prototype.onChunk = function (chunk) {
+        if (chunk.status !== 200) {
+            return;
+        }
+        if (this.readyState === state.OPEN) {
+            this.onActivity();
+        }
+        var payload;
+        var type = chunk.data.slice(0, 1);
+        switch (type) {
+            case 'o':
+                payload = JSON.parse(chunk.data.slice(1) || '{}');
+                this.onOpen(payload);
+                break;
+            case 'a':
+                payload = JSON.parse(chunk.data.slice(1) || '[]');
+                for (var i = 0; i < payload.length; i++) {
+                    this.onEvent(payload[i]);
+                }
+                break;
+            case 'm':
+                payload = JSON.parse(chunk.data.slice(1) || 'null');
+                this.onEvent(payload);
+                break;
+            case 'h':
+                this.hooks.onHeartbeat(this);
+                break;
+            case 'c':
+                payload = JSON.parse(chunk.data.slice(1) || '[]');
+                this.onClose(payload[0], payload[1], true);
+                break;
+        }
+    };
+    HTTPSocket.prototype.onOpen = function (options) {
+        if (this.readyState === state.CONNECTING) {
+            if (options && options.hostname) {
+                this.location.base = replaceHost(this.location.base, options.hostname);
+            }
+            this.readyState = state.OPEN;
+            if (this.onopen) {
+                this.onopen();
+            }
+        }
+        else {
+            this.onClose(1006, 'Server lost session', true);
+        }
+    };
+    HTTPSocket.prototype.onEvent = function (event) {
+        if (this.readyState === state.OPEN && this.onmessage) {
+            this.onmessage({ data: event });
+        }
+    };
+    HTTPSocket.prototype.onActivity = function () {
+        if (this.onactivity) {
+            this.onactivity();
+        }
+    };
+    HTTPSocket.prototype.onError = function (error) {
+        if (this.onerror) {
+            this.onerror(error);
+        }
+    };
+    HTTPSocket.prototype.openStream = function () {
+        var _this = this;
+        this.stream = runtime.createSocketRequest('POST', getUniqueURL(this.hooks.getReceiveURL(this.location, this.session)));
+        this.stream.bind('chunk', function (chunk) {
+            _this.onChunk(chunk);
+        });
+        this.stream.bind('finished', function (status) {
+            _this.hooks.onFinished(_this, status);
+        });
+        this.stream.bind('buffer_too_long', function () {
+            _this.reconnect();
+        });
+        try {
+            this.stream.start();
+        }
+        catch (error) {
+            util.defer(function () {
+                _this.onError(error);
+                _this.onClose(1006, 'Could not start streaming', false);
+            });
+        }
+    };
+    HTTPSocket.prototype.closeStream = function () {
+        if (this.stream) {
+            this.stream.unbind_all();
+            this.stream.close();
+            this.stream = null;
+        }
+    };
+    return HTTPSocket;
+}());
+function getLocation(url) {
+    var parts = /([^\?]*)\/*(\??.*)/.exec(url);
+    return {
+        base: parts[1],
+        queryString: parts[2]
+    };
+}
+function getSendURL(url, session) {
+    return url.base + '/' + session + '/xhr_send';
+}
+function getUniqueURL(url) {
+    var separator = url.indexOf('?') === -1 ? '?' : '&';
+    return url + separator + 't=' + +new Date() + '&n=' + autoIncrement++;
+}
+function replaceHost(url, hostname) {
+    var urlParts = /(https?:\/\/)([^\/:]+)((\/|:)?.*)/.exec(url);
+    return urlParts[1] + hostname + urlParts[3];
+}
+function randomNumber(max) {
+    return Math.floor(Math.random() * max);
+}
+function randomString(length) {
+    var result = [];
+    for (var i = 0; i < length; i++) {
+        result.push(randomNumber(32).toString(32));
+    }
+    return result.join('');
+}
+/* harmony default export */ var http_socket = (http_socket_HTTPSocket);
+
+// CONCATENATED MODULE: ./src/core/http/http_streaming_socket.ts
+var http_streaming_socket_hooks = {
+    getReceiveURL: function (url, session) {
+        return url.base + '/' + session + '/xhr_streaming' + url.queryString;
+    },
+    onHeartbeat: function (socket) {
+        socket.sendRaw('[]');
+    },
+    sendHeartbeat: function (socket) {
+        socket.sendRaw('[]');
+    },
+    onFinished: function (socket, status) {
+        socket.onClose(1006, 'Connection interrupted (' + status + ')', false);
+    }
+};
+/* harmony default export */ var http_streaming_socket = (http_streaming_socket_hooks);
+
+// CONCATENATED MODULE: ./src/core/http/http_polling_socket.ts
+var http_polling_socket_hooks = {
+    getReceiveURL: function (url, session) {
+        return url.base + '/' + session + '/xhr' + url.queryString;
+    },
+    onHeartbeat: function () {
+    },
+    sendHeartbeat: function (socket) {
+        socket.sendRaw('[]');
+    },
+    onFinished: function (socket, status) {
+        if (status === 200) {
+            socket.reconnect();
+        }
+        else {
+            socket.onClose(1006, 'Connection interrupted (' + status + ')', false);
+        }
+    }
+};
+/* harmony default export */ var http_polling_socket = (http_polling_socket_hooks);
+
+// CONCATENATED MODULE: ./src/runtimes/isomorphic/http/http_xhr_request.ts
+
+var http_xhr_request_hooks = {
+    getRequest: function (socket) {
+        var Constructor = runtime.getXHRAPI();
+        var xhr = new Constructor();
+        xhr.onreadystatechange = xhr.onprogress = function () {
+            switch (xhr.readyState) {
+                case 3:
+                    if (xhr.responseText && xhr.responseText.length > 0) {
+                        socket.onChunk(xhr.status, xhr.responseText);
+                    }
+                    break;
+                case 4:
+                    if (xhr.responseText && xhr.responseText.length > 0) {
+                        socket.onChunk(xhr.status, xhr.responseText);
+                    }
+                    socket.emit('finished', xhr.status);
+                    socket.close();
+                    break;
+            }
+        };
+        return xhr;
+    },
+    abortRequest: function (xhr) {
+        xhr.onreadystatechange = null;
+        xhr.abort();
+    }
+};
+/* harmony default export */ var http_xhr_request = (http_xhr_request_hooks);
+
+// CONCATENATED MODULE: ./src/runtimes/isomorphic/http/http.ts
+
+
+
+
+
+var HTTP = {
+    createStreamingSocket: function (url) {
+        return this.createSocket(http_streaming_socket, url);
+    },
+    createPollingSocket: function (url) {
+        return this.createSocket(http_polling_socket, url);
+    },
+    createSocket: function (hooks, url) {
+        return new http_socket(hooks, url);
+    },
+    createXHR: function (method, url) {
+        return this.createRequest(http_xhr_request, method, url);
+    },
+    createRequest: function (hooks, method, url) {
+        return new http_request(hooks, method, url);
+    }
+};
+/* harmony default export */ var http_http = (HTTP);
+
+// CONCATENATED MODULE: ./src/runtimes/web/http/http.ts
+
+
+http_http.createXDR = function (method, url) {
+    return this.createRequest(http_xdomain_request, method, url);
+};
+/* harmony default export */ var web_http_http = (http_http);
+
+// CONCATENATED MODULE: ./src/runtimes/web/runtime.ts
+
+
+
+
+
+
+
+
+
+
+
+
+var Runtime = {
+    nextAuthCallbackID: 1,
+    auth_callbacks: {},
+    ScriptReceivers: ScriptReceivers,
+    DependenciesReceivers: DependenciesReceivers,
+    getDefaultStrategy: default_strategy,
+    Transports: transports_transports,
+    transportConnectionInitializer: transport_connection_initializer,
+    HTTPFactory: web_http_http,
+    TimelineTransport: jsonp_timeline,
+    getXHRAPI: function () {
+        return window.XMLHttpRequest;
+    },
+    getWebSocketAPI: function () {
+        return window.WebSocket || window.MozWebSocket;
+    },
+    setup: function (PusherClass) {
+        var _this = this;
+        window.Pusher = PusherClass;
+        var initializeOnDocumentBody = function () {
+            _this.onDocumentBody(PusherClass.ready);
+        };
+        if (!window.JSON) {
+            Dependencies.load('json2', {}, initializeOnDocumentBody);
+        }
+        else {
+            initializeOnDocumentBody();
+        }
+    },
+    getDocument: function () {
+        return document;
+    },
+    getProtocol: function () {
+        return this.getDocument().location.protocol;
+    },
+    getAuthorizers: function () {
+        return { ajax: xhr_auth, jsonp: jsonp_auth };
+    },
+    onDocumentBody: function (callback) {
+        var _this = this;
+        if (document.body) {
+            callback();
+        }
+        else {
+            setTimeout(function () {
+                _this.onDocumentBody(callback);
+            }, 0);
+        }
+    },
+    createJSONPRequest: function (url, data) {
+        return new jsonp_request(url, data);
+    },
+    createScriptRequest: function (src) {
+        return new script_request(src);
+    },
+    getLocalStorage: function () {
+        try {
+            return window.localStorage;
+        }
+        catch (e) {
+            return undefined;
+        }
+    },
+    createXHR: function () {
+        if (this.getXHRAPI()) {
+            return this.createXMLHttpRequest();
+        }
+        else {
+            return this.createMicrosoftXHR();
+        }
+    },
+    createXMLHttpRequest: function () {
+        var Constructor = this.getXHRAPI();
+        return new Constructor();
+    },
+    createMicrosoftXHR: function () {
+        return new ActiveXObject('Microsoft.XMLHTTP');
+    },
+    getNetwork: function () {
+        return net_info_Network;
+    },
+    createWebSocket: function (url) {
+        var Constructor = this.getWebSocketAPI();
+        return new Constructor(url);
+    },
+    createSocketRequest: function (method, url) {
+        if (this.isXHRSupported()) {
+            return this.HTTPFactory.createXHR(method, url);
+        }
+        else if (this.isXDRSupported(url.indexOf('https:') === 0)) {
+            return this.HTTPFactory.createXDR(method, url);
+        }
+        else {
+            throw 'Cross-origin HTTP requests are not supported';
+        }
+    },
+    isXHRSupported: function () {
+        var Constructor = this.getXHRAPI();
+        return (Boolean(Constructor) && new Constructor().withCredentials !== undefined);
+    },
+    isXDRSupported: function (useTLS) {
+        var protocol = useTLS ? 'https:' : 'http:';
+        var documentProtocol = this.getProtocol();
+        return (Boolean(window['XDomainRequest']) && documentProtocol === protocol);
+    },
+    addUnloadListener: function (listener) {
+        if (window.addEventListener !== undefined) {
+            window.addEventListener('unload', listener, false);
+        }
+        else if (window.attachEvent !== undefined) {
+            window.attachEvent('onunload', listener);
+        }
+    },
+    removeUnloadListener: function (listener) {
+        if (window.addEventListener !== undefined) {
+            window.removeEventListener('unload', listener, false);
+        }
+        else if (window.detachEvent !== undefined) {
+            window.detachEvent('onunload', listener);
+        }
+    }
+};
+/* harmony default export */ var runtime = (Runtime);
+
+// CONCATENATED MODULE: ./src/core/timeline/level.ts
+var TimelineLevel;
+(function (TimelineLevel) {
+    TimelineLevel[TimelineLevel["ERROR"] = 3] = "ERROR";
+    TimelineLevel[TimelineLevel["INFO"] = 6] = "INFO";
+    TimelineLevel[TimelineLevel["DEBUG"] = 7] = "DEBUG";
+})(TimelineLevel || (TimelineLevel = {}));
+/* harmony default export */ var timeline_level = (TimelineLevel);
+
+// CONCATENATED MODULE: ./src/core/timeline/timeline.ts
+
+
+
+var timeline_Timeline = (function () {
+    function Timeline(key, session, options) {
+        this.key = key;
+        this.session = session;
+        this.events = [];
+        this.options = options || {};
+        this.sent = 0;
+        this.uniqueID = 0;
+    }
+    Timeline.prototype.log = function (level, event) {
+        if (level <= this.options.level) {
+            this.events.push(extend({}, event, { timestamp: util.now() }));
+            if (this.options.limit && this.events.length > this.options.limit) {
+                this.events.shift();
+            }
+        }
+    };
+    Timeline.prototype.error = function (event) {
+        this.log(timeline_level.ERROR, event);
+    };
+    Timeline.prototype.info = function (event) {
+        this.log(timeline_level.INFO, event);
+    };
+    Timeline.prototype.debug = function (event) {
+        this.log(timeline_level.DEBUG, event);
+    };
+    Timeline.prototype.isEmpty = function () {
+        return this.events.length === 0;
+    };
+    Timeline.prototype.send = function (sendfn, callback) {
+        var _this = this;
+        var data = extend({
+            session: this.session,
+            bundle: this.sent + 1,
+            key: this.key,
+            lib: 'js',
+            version: this.options.version,
+            cluster: this.options.cluster,
+            features: this.options.features,
+            timeline: this.events
+        }, this.options.params);
+        this.events = [];
+        sendfn(data, function (error, result) {
+            if (!error) {
+                _this.sent++;
+            }
+            if (callback) {
+                callback(error, result);
+            }
+        });
+        return true;
+    };
+    Timeline.prototype.generateUniqueID = function () {
+        this.uniqueID++;
+        return this.uniqueID;
+    };
+    return Timeline;
+}());
+/* harmony default export */ var timeline_timeline = (timeline_Timeline);
+
+// CONCATENATED MODULE: ./src/core/strategies/transport_strategy.ts
+
+
+
+
+var transport_strategy_TransportStrategy = (function () {
+    function TransportStrategy(name, priority, transport, options) {
+        this.name = name;
+        this.priority = priority;
+        this.transport = transport;
+        this.options = options || {};
+    }
+    TransportStrategy.prototype.isSupported = function () {
+        return this.transport.isSupported({
+            useTLS: this.options.useTLS
+        });
+    };
+    TransportStrategy.prototype.connect = function (minPriority, callback) {
+        var _this = this;
+        if (!this.isSupported()) {
+            return failAttempt(new UnsupportedStrategy(), callback);
+        }
+        else if (this.priority < minPriority) {
+            return failAttempt(new TransportPriorityTooLow(), callback);
+        }
+        var connected = false;
+        var transport = this.transport.createConnection(this.name, this.priority, this.options.key, this.options);
+        var handshake = null;
+        var onInitialized = function () {
+            transport.unbind('initialized', onInitialized);
+            transport.connect();
+        };
+        var onOpen = function () {
+            handshake = factory.createHandshake(transport, function (result) {
+                connected = true;
+                unbindListeners();
+                callback(null, result);
+            });
+        };
+        var onError = function (error) {
+            unbindListeners();
+            callback(error);
+        };
+        var onClosed = function () {
+            unbindListeners();
+            var serializedTransport;
+            serializedTransport = safeJSONStringify(transport);
+            callback(new TransportClosed(serializedTransport));
+        };
+        var unbindListeners = function () {
+            transport.unbind('initialized', onInitialized);
+            transport.unbind('open', onOpen);
+            transport.unbind('error', onError);
+            transport.unbind('closed', onClosed);
+        };
+        transport.bind('initialized', onInitialized);
+        transport.bind('open', onOpen);
+        transport.bind('error', onError);
+        transport.bind('closed', onClosed);
+        transport.initialize();
+        return {
+            abort: function () {
+                if (connected) {
+                    return;
+                }
+                unbindListeners();
+                if (handshake) {
+                    handshake.close();
+                }
+                else {
+                    transport.close();
+                }
+            },
+            forceMinPriority: function (p) {
+                if (connected) {
+                    return;
+                }
+                if (_this.priority < p) {
+                    if (handshake) {
+                        handshake.close();
+                    }
+                    else {
+                        transport.close();
+                    }
+                }
+            }
+        };
+    };
+    return TransportStrategy;
+}());
+/* harmony default export */ var transport_strategy = (transport_strategy_TransportStrategy);
+function failAttempt(error, callback) {
+    util.defer(function () {
+        callback(error);
+    });
+    return {
+        abort: function () { },
+        forceMinPriority: function () { }
+    };
+}
+
+// CONCATENATED MODULE: ./src/core/strategies/strategy_builder.ts
+
+
+
+
+
+var strategy_builder_Transports = runtime.Transports;
+var strategy_builder_defineTransport = function (config, name, type, priority, options, manager) {
+    var transportClass = strategy_builder_Transports[type];
+    if (!transportClass) {
+        throw new UnsupportedTransport(type);
+    }
+    var enabled = (!config.enabledTransports ||
+        arrayIndexOf(config.enabledTransports, name) !== -1) &&
+        (!config.disabledTransports ||
+            arrayIndexOf(config.disabledTransports, name) === -1);
+    var transport;
+    if (enabled) {
+        options = Object.assign({ ignoreNullOrigin: config.ignoreNullOrigin }, options);
+        transport = new transport_strategy(name, priority, manager ? manager.getAssistant(transportClass) : transportClass, options);
+    }
+    else {
+        transport = strategy_builder_UnsupportedStrategy;
+    }
+    return transport;
+};
+var strategy_builder_UnsupportedStrategy = {
+    isSupported: function () {
+        return false;
+    },
+    connect: function (_, callback) {
+        var deferred = util.defer(function () {
+            callback(new UnsupportedStrategy());
+        });
+        return {
+            abort: function () {
+                deferred.ensureAborted();
+            },
+            forceMinPriority: function () { }
+        };
+    }
+};
+
+// CONCATENATED MODULE: ./src/core/auth/user_authenticator.ts
+
+
+var composeChannelQuery = function (params, authOptions) {
+    var query = 'socket_id=' + encodeURIComponent(params.socketId);
+    for (var i in authOptions.params) {
+        query +=
+            '&' +
+                encodeURIComponent(i) +
+                '=' +
+                encodeURIComponent(authOptions.params[i]);
+    }
+    return query;
+};
+var UserAuthenticator = function (authOptions) {
+    if (typeof runtime.getAuthorizers()[authOptions.transport] === 'undefined') {
+        throw "'" + authOptions.transport + "' is not a recognized auth transport";
+    }
+    return function (params, callback) {
+        var query = composeChannelQuery(params, authOptions);
+        runtime.getAuthorizers()[authOptions.transport](runtime, query, authOptions, AuthRequestType.UserAuthentication, callback);
+    };
+};
+/* harmony default export */ var user_authenticator = (UserAuthenticator);
+
+// CONCATENATED MODULE: ./src/core/auth/channel_authorizer.ts
+
+
+var channel_authorizer_composeChannelQuery = function (params, authOptions) {
+    var query = 'socket_id=' + encodeURIComponent(params.socketId);
+    query += '&channel_name=' + encodeURIComponent(params.channelName);
+    for (var i in authOptions.params) {
+        query +=
+            '&' +
+                encodeURIComponent(i) +
+                '=' +
+                encodeURIComponent(authOptions.params[i]);
+    }
+    return query;
+};
+var ChannelAuthorizer = function (authOptions) {
+    if (typeof runtime.getAuthorizers()[authOptions.transport] === 'undefined') {
+        throw "'" + authOptions.transport + "' is not a recognized auth transport";
+    }
+    return function (params, callback) {
+        var query = channel_authorizer_composeChannelQuery(params, authOptions);
+        runtime.getAuthorizers()[authOptions.transport](runtime, query, authOptions, AuthRequestType.ChannelAuthorization, callback);
+    };
+};
+/* harmony default export */ var channel_authorizer = (ChannelAuthorizer);
+
+// CONCATENATED MODULE: ./src/core/auth/deprecated_channel_authorizer.ts
+var ChannelAuthorizerProxy = function (pusher, authOptions, channelAuthorizerGenerator) {
+    var deprecatedAuthorizerOptions = {
+        authTransport: authOptions.transport,
+        authEndpoint: authOptions.endpoint,
+        auth: {
+            params: authOptions.params,
+            headers: authOptions.headers
+        }
+    };
+    return function (params, callback) {
+        var channel = pusher.channel(params.channelName);
+        var channelAuthorizer = channelAuthorizerGenerator(channel, deprecatedAuthorizerOptions);
+        channelAuthorizer.authorize(params.socketId, callback);
+    };
+};
+
+// CONCATENATED MODULE: ./src/core/config.ts
+var __assign = ( false) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+
+
+
+
+
+function getConfig(opts, pusher) {
+    var config = {
+        activityTimeout: opts.activityTimeout || defaults.activityTimeout,
+        cluster: opts.cluster || defaults.cluster,
+        httpPath: opts.httpPath || defaults.httpPath,
+        httpPort: opts.httpPort || defaults.httpPort,
+        httpsPort: opts.httpsPort || defaults.httpsPort,
+        pongTimeout: opts.pongTimeout || defaults.pongTimeout,
+        statsHost: opts.statsHost || defaults.stats_host,
+        unavailableTimeout: opts.unavailableTimeout || defaults.unavailableTimeout,
+        wsPath: opts.wsPath || defaults.wsPath,
+        wsPort: opts.wsPort || defaults.wsPort,
+        wssPort: opts.wssPort || defaults.wssPort,
+        enableStats: getEnableStatsConfig(opts),
+        httpHost: getHttpHost(opts),
+        useTLS: shouldUseTLS(opts),
+        wsHost: getWebsocketHost(opts),
+        userAuthenticator: buildUserAuthenticator(opts),
+        channelAuthorizer: buildChannelAuthorizer(opts, pusher)
+    };
+    if ('disabledTransports' in opts)
+        config.disabledTransports = opts.disabledTransports;
+    if ('enabledTransports' in opts)
+        config.enabledTransports = opts.enabledTransports;
+    if ('ignoreNullOrigin' in opts)
+        config.ignoreNullOrigin = opts.ignoreNullOrigin;
+    if ('timelineParams' in opts)
+        config.timelineParams = opts.timelineParams;
+    if ('nacl' in opts) {
+        config.nacl = opts.nacl;
+    }
+    return config;
+}
+function getHttpHost(opts) {
+    if (opts.httpHost) {
+        return opts.httpHost;
+    }
+    if (opts.cluster) {
+        return "sockjs-" + opts.cluster + ".pusher.com";
+    }
+    return defaults.httpHost;
+}
+function getWebsocketHost(opts) {
+    if (opts.wsHost) {
+        return opts.wsHost;
+    }
+    if (opts.cluster) {
+        return getWebsocketHostFromCluster(opts.cluster);
+    }
+    return getWebsocketHostFromCluster(defaults.cluster);
+}
+function getWebsocketHostFromCluster(cluster) {
+    return "ws-" + cluster + ".pusher.com";
+}
+function shouldUseTLS(opts) {
+    if (runtime.getProtocol() === 'https:') {
+        return true;
+    }
+    else if (opts.forceTLS === false) {
+        return false;
+    }
+    return true;
+}
+function getEnableStatsConfig(opts) {
+    if ('enableStats' in opts) {
+        return opts.enableStats;
+    }
+    if ('disableStats' in opts) {
+        return !opts.disableStats;
+    }
+    return false;
+}
+function buildUserAuthenticator(opts) {
+    var userAuthentication = __assign({}, defaults.userAuthentication, opts.userAuthentication);
+    if ('customHandler' in userAuthentication &&
+        userAuthentication['customHandler'] != null) {
+        return userAuthentication['customHandler'];
+    }
+    return user_authenticator(userAuthentication);
+}
+function buildChannelAuth(opts, pusher) {
+    var channelAuthorization;
+    if ('channelAuthorization' in opts) {
+        channelAuthorization = __assign({}, defaults.channelAuthorization, opts.channelAuthorization);
+    }
+    else {
+        channelAuthorization = {
+            transport: opts.authTransport || defaults.authTransport,
+            endpoint: opts.authEndpoint || defaults.authEndpoint
+        };
+        if ('auth' in opts) {
+            if ('params' in opts.auth)
+                channelAuthorization.params = opts.auth.params;
+            if ('headers' in opts.auth)
+                channelAuthorization.headers = opts.auth.headers;
+        }
+        if ('authorizer' in opts)
+            channelAuthorization.customHandler = ChannelAuthorizerProxy(pusher, channelAuthorization, opts.authorizer);
+    }
+    return channelAuthorization;
+}
+function buildChannelAuthorizer(opts, pusher) {
+    var channelAuthorization = buildChannelAuth(opts, pusher);
+    if ('customHandler' in channelAuthorization &&
+        channelAuthorization['customHandler'] != null) {
+        return channelAuthorization['customHandler'];
+    }
+    return channel_authorizer(channelAuthorization);
+}
+
+// CONCATENATED MODULE: ./src/core/user.ts
+var user_extends = ( false) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+
+var user_UserFacade = (function (_super) {
+    user_extends(UserFacade, _super);
+    function UserFacade(pusher) {
+        var _this = _super.call(this, function (eventName, data) {
+            logger.debug('No callbacks on user for ' + eventName);
+        }) || this;
+        _this.signin_requested = false;
+        _this.user_data = null;
+        _this.serverToUserChannel = null;
+        _this.pusher = pusher;
+        _this.pusher.connection.bind('connected', function () {
+            _this._signin();
+        });
+        _this.pusher.connection.bind('connecting', function () {
+            _this._disconnect();
+        });
+        _this.pusher.connection.bind('disconnected', function () {
+            _this._disconnect();
+        });
+        _this.pusher.connection.bind('message', function (event) {
+            var eventName = event.event;
+            if (eventName === 'pusher:signin_success') {
+                _this._onSigninSuccess(event.data);
+            }
+            if (_this.serverToUserChannel &&
+                _this.serverToUserChannel.name === event.channel) {
+                _this.serverToUserChannel.handleEvent(event);
+            }
+        });
+        return _this;
+    }
+    UserFacade.prototype.signin = function () {
+        if (this.signin_requested) {
+            return;
+        }
+        this.signin_requested = true;
+        this._signin();
+    };
+    UserFacade.prototype._signin = function () {
+        var _this = this;
+        if (!this.signin_requested) {
+            return;
+        }
+        if (this.pusher.connection.state !== 'connected') {
+            return;
+        }
+        var onAuthorize = function (err, authData) {
+            if (err) {
+                logger.warn("Error during signin: " + err);
+                return;
+            }
+            _this.pusher.send_event('pusher:signin', {
+                auth: authData.auth,
+                user_data: authData.user_data
+            });
+        };
+        this.pusher.config.userAuthenticator({
+            socketId: this.pusher.connection.socket_id
+        }, onAuthorize);
+    };
+    UserFacade.prototype._onSigninSuccess = function (data) {
+        try {
+            this.user_data = JSON.parse(data.user_data);
+        }
+        catch (e) {
+            logger.error("Failed parsing user data after signin: " + data.user_data);
+            return;
+        }
+        if (typeof this.user_data.id !== 'string' || this.user_data.id === '') {
+            logger.error("user_data doesn't contain an id. user_data: " + this.user_data);
+            return;
+        }
+        this._subscribeChannels();
+    };
+    UserFacade.prototype._subscribeChannels = function () {
+        var _this = this;
+        var ensure_subscribed = function (channel) {
+            if (channel.subscriptionPending && channel.subscriptionCancelled) {
+                channel.reinstateSubscription();
+            }
+            else if (!channel.subscriptionPending &&
+                _this.pusher.connection.state === 'connected') {
+                channel.subscribe();
+            }
+        };
+        this.serverToUserChannel = new channels_channel("#server-to-user-" + this.user_data.id, this.pusher);
+        this.serverToUserChannel.bind_global(function (eventName, data) {
+            if (eventName.indexOf('pusher_internal:') === 0 ||
+                eventName.indexOf('pusher:') === 0) {
+                return;
+            }
+            _this.emit(eventName, data);
+        });
+        ensure_subscribed(this.serverToUserChannel);
+    };
+    UserFacade.prototype._disconnect = function () {
+        this.user_data = null;
+        if (this.serverToUserChannel) {
+            this.serverToUserChannel.unbind_all();
+            this.serverToUserChannel.disconnect();
+            this.serverToUserChannel = null;
+        }
+    };
+    return UserFacade;
+}(dispatcher));
+/* harmony default export */ var user = (user_UserFacade);
+
+// CONCATENATED MODULE: ./src/core/pusher.ts
+
+
+
+
+
+
+
+
+
+
+
+
+
+var pusher_Pusher = (function () {
+    function Pusher(app_key, options) {
+        var _this = this;
+        checkAppKey(app_key);
+        options = options || {};
+        if (!options.cluster && !(options.wsHost || options.httpHost)) {
+            var suffix = url_store.buildLogSuffix('javascriptQuickStart');
+            logger.warn("You should always specify a cluster when connecting. " + suffix);
+        }
+        if ('disableStats' in options) {
+            logger.warn('The disableStats option is deprecated in favor of enableStats');
+        }
+        this.key = app_key;
+        this.config = getConfig(options, this);
+        this.channels = factory.createChannels();
+        this.global_emitter = new dispatcher();
+        this.sessionID = Math.floor(Math.random() * 1000000000);
+        this.timeline = new timeline_timeline(this.key, this.sessionID, {
+            cluster: this.config.cluster,
+            features: Pusher.getClientFeatures(),
+            params: this.config.timelineParams || {},
+            limit: 50,
+            level: timeline_level.INFO,
+            version: defaults.VERSION
+        });
+        if (this.config.enableStats) {
+            this.timelineSender = factory.createTimelineSender(this.timeline, {
+                host: this.config.statsHost,
+                path: '/timeline/v2/' + runtime.TimelineTransport.name
+            });
+        }
+        var getStrategy = function (options) {
+            return runtime.getDefaultStrategy(_this.config, options, strategy_builder_defineTransport);
+        };
+        this.connection = factory.createConnectionManager(this.key, {
+            getStrategy: getStrategy,
+            timeline: this.timeline,
+            activityTimeout: this.config.activityTimeout,
+            pongTimeout: this.config.pongTimeout,
+            unavailableTimeout: this.config.unavailableTimeout,
+            useTLS: Boolean(this.config.useTLS)
+        });
+        this.connection.bind('connected', function () {
+            _this.subscribeAll();
+            if (_this.timelineSender) {
+                _this.timelineSender.send(_this.connection.isUsingTLS());
+            }
+        });
+        this.connection.bind('message', function (event) {
+            var eventName = event.event;
+            var internal = eventName.indexOf('pusher_internal:') === 0;
+            if (event.channel) {
+                var channel = _this.channel(event.channel);
+                if (channel) {
+                    channel.handleEvent(event);
+                }
+            }
+            if (!internal) {
+                _this.global_emitter.emit(event.event, event.data);
+            }
+        });
+        this.connection.bind('connecting', function () {
+            _this.channels.disconnect();
+        });
+        this.connection.bind('disconnected', function () {
+            _this.channels.disconnect();
+        });
+        this.connection.bind('error', function (err) {
+            logger.warn(err);
+        });
+        Pusher.instances.push(this);
+        this.timeline.info({ instances: Pusher.instances.length });
+        this.user = new user(this);
+        if (Pusher.isReady) {
+            this.connect();
+        }
+    }
+    Pusher.ready = function () {
+        Pusher.isReady = true;
+        for (var i = 0, l = Pusher.instances.length; i < l; i++) {
+            Pusher.instances[i].connect();
+        }
+    };
+    Pusher.getClientFeatures = function () {
+        return keys(filterObject({ ws: runtime.Transports.ws }, function (t) {
+            return t.isSupported({});
+        }));
+    };
+    Pusher.prototype.channel = function (name) {
+        return this.channels.find(name);
+    };
+    Pusher.prototype.allChannels = function () {
+        return this.channels.all();
+    };
+    Pusher.prototype.connect = function () {
+        this.connection.connect();
+        if (this.timelineSender) {
+            if (!this.timelineSenderTimer) {
+                var usingTLS = this.connection.isUsingTLS();
+                var timelineSender = this.timelineSender;
+                this.timelineSenderTimer = new PeriodicTimer(60000, function () {
+                    timelineSender.send(usingTLS);
+                });
+            }
+        }
+    };
+    Pusher.prototype.disconnect = function () {
+        this.connection.disconnect();
+        if (this.timelineSenderTimer) {
+            this.timelineSenderTimer.ensureAborted();
+            this.timelineSenderTimer = null;
+        }
+    };
+    Pusher.prototype.bind = function (event_name, callback, context) {
+        this.global_emitter.bind(event_name, callback, context);
+        return this;
+    };
+    Pusher.prototype.unbind = function (event_name, callback, context) {
+        this.global_emitter.unbind(event_name, callback, context);
+        return this;
+    };
+    Pusher.prototype.bind_global = function (callback) {
+        this.global_emitter.bind_global(callback);
+        return this;
+    };
+    Pusher.prototype.unbind_global = function (callback) {
+        this.global_emitter.unbind_global(callback);
+        return this;
+    };
+    Pusher.prototype.unbind_all = function (callback) {
+        this.global_emitter.unbind_all();
+        return this;
+    };
+    Pusher.prototype.subscribeAll = function () {
+        var channelName;
+        for (channelName in this.channels.channels) {
+            if (this.channels.channels.hasOwnProperty(channelName)) {
+                this.subscribe(channelName);
+            }
+        }
+    };
+    Pusher.prototype.subscribe = function (channel_name) {
+        var channel = this.channels.add(channel_name, this);
+        if (channel.subscriptionPending && channel.subscriptionCancelled) {
+            channel.reinstateSubscription();
+        }
+        else if (!channel.subscriptionPending &&
+            this.connection.state === 'connected') {
+            channel.subscribe();
+        }
+        return channel;
+    };
+    Pusher.prototype.unsubscribe = function (channel_name) {
+        var channel = this.channels.find(channel_name);
+        if (channel && channel.subscriptionPending) {
+            channel.cancelSubscription();
+        }
+        else {
+            channel = this.channels.remove(channel_name);
+            if (channel && channel.subscribed) {
+                channel.unsubscribe();
+            }
+        }
+    };
+    Pusher.prototype.send_event = function (event_name, data, channel) {
+        return this.connection.send_event(event_name, data, channel);
+    };
+    Pusher.prototype.shouldUseTLS = function () {
+        return this.config.useTLS;
+    };
+    Pusher.prototype.signin = function () {
+        this.user.signin();
+    };
+    Pusher.instances = [];
+    Pusher.isReady = false;
+    Pusher.logToConsole = false;
+    Pusher.Runtime = runtime;
+    Pusher.ScriptReceivers = runtime.ScriptReceivers;
+    Pusher.DependenciesReceivers = runtime.DependenciesReceivers;
+    Pusher.auth_callbacks = runtime.auth_callbacks;
+    return Pusher;
+}());
+/* harmony default export */ var core_pusher = __webpack_exports__["default"] = (pusher_Pusher);
+function checkAppKey(key) {
+    if (key === null || key === undefined) {
+        throw 'You must pass your app key when you instantiate Pusher.';
+    }
+}
+runtime.setup(pusher_Pusher);
+
+
+/***/ })
+/******/ ]);
+});
+//# sourceMappingURL=pusher.js.map
 
 /***/ })
 
 /******/ 	});
 /************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
 /******/ 	
-/******/ 	// startup
-/******/ 	// Load entry module and return exports
-/******/ 	// This entry module can't be inlined because the eval-source-map devtool is used.
-/******/ 	var __webpack_exports__ = {};
-/******/ 	__webpack_modules__["./resources/js/pages/index.init.js"]();
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
 /******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+/*!******************************************!*\
+  !*** ./resources/js/pages/index.init.js ***!
+  \******************************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _dir_messageTemplate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../dir/messageTemplate */ "./resources/js/dir/messageTemplate.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers */ "./resources/js/helpers.js");
+/* harmony import */ var _request__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../request */ "./resources/js/request.js");
+/* harmony import */ var _chat__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chat */ "./resources/js/pages/chat.js");
+/* harmony import */ var _users__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./users */ "./resources/js/pages/users.js");
+/*
+Template Name: Vhato - Responsive Bootstrap 5 Chat App
+Author: Themesbrand
+Website: https://themesbrand.com/
+Contact: themesbrand@gmail.com
+File: Index init js
+*/
+
+
+
+
+
+
+(function () {
+  var isreplyMessage = false;
+  var currentChatId = "users-chat";
+  document.getElementById("copyClipBoard").style.display = "none";
+  document.getElementById("copyClipBoardChannel").style.display = "none";
+  (0,_users__WEBPACK_IMPORTED_MODULE_4__.getUsersList)(); //Contact List dynamic Details
+
+  (0,_chat__WEBPACK_IMPORTED_MODULE_3__.updateSelectedChat)(); // Profile hide/show
+
+  var userProfileSidebar = document.querySelector(".user-profile-sidebar");
+  document.querySelectorAll(".user-profile-show").forEach(function (item) {
+    item.addEventListener("click", function (event) {
+      userProfileSidebar.classList.toggle("d-block");
+    });
+  }); // chat conversation scroll
+
+  window.addEventListener("DOMContentLoaded", function () {
+    var conversationScroll = document.querySelector("#chat-conversation .simplebar-content-wrapper");
+    conversationScroll.scrollTop = conversationScroll.scrollHeight;
+  });
+
+  function initSwiper() {
+    var swiper = new Swiper(".chatinput-links", {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      breakpoints: {
+        768: {
+          slidesPerView: 4
+        },
+        1024: {
+          slidesPerView: 6
+        }
+      }
+    });
+  } // contact modal list
+
+
+  var contactModalList = document.querySelectorAll(".contact-modal-list .contact-list li");
+  contactModalList.forEach(function (link) {
+    link.addEventListener("click", function () {
+      link.classList.toggle("selected");
+    });
+  }); // Change conversation bg
+  //Auto Focus curser to Text Box Area
+
+  document.getElementById("usersList").onclick = function () {
+    document.getElementById("chat-input").focus();
+  }; // Scroll to Bottom
+  //add an eventListener to the from
+
+
+  var chatForm = document.querySelector("#chatinput-form");
+  var chatInput = document.querySelector("#chat-input");
+  var itemList = document.querySelector(".chat-conversation-list");
+  var chatInputFeedback = document.querySelector(".chat-input-feedback");
+
+  function currentTime() {
+    var ampm = new Date().getHours() >= 12 ? "pm" : "am";
+    var hour = new Date().getHours() > 12 ? new Date().getHours() % 12 : new Date().getHours();
+    var minute = new Date().getMinutes() < 10 ? "0" + new Date().getMinutes() : new Date().getMinutes();
+
+    if (hour < 10) {
+      return "0" + hour + ":" + minute + " " + ampm;
+    } else {
+      return hour + ":" + minute + " " + ampm;
+    }
+  }
+
+  setInterval(currentTime, 1000);
+  var messageIds = 0;
+  var messageboxcollapse = 1; //message with reply
+
+  var getReplyChatList = function getReplyChatList(chatReplyId, chatReplyItems) {
+    var chatReplyUser = document.querySelector(".user-profile-show").innerHTML;
+    var chatReplyMessage = document.querySelector(".replyCard .replymessage-block .flex-grow-1 .mb-0").innerText;
+    messageIds++;
+    var chatreplyConList = document.getElementById(chatReplyId);
+    var itemReplyList = chatreplyConList.querySelector(".chat-conversation-list");
+
+    if (chatReplyItems != null) {
+      itemReplyList.insertAdjacentHTML("beforeend", '<li class="chat-list right" id="chat-list-' + messageIds + '" >\
+                <div class="conversation-list">\
+                    <div class="user-chat-content">\
+                        <div class="ctext-wrap">\
+                            <div class="ctext-wrap-content">\
+                            <div class="replymessage-block mb-0 d-flex align-items-start">\
+                        <div class="flex-grow-1">\
+                            <h5 class="conversation-name">' + chatReplyUser + '</h5>\
+                            <p class="mb-0">' + chatReplyMessage + '</p>\
+                        </div>\
+                        <div class="flex-shrink-0">\
+                            <button type="button" class="btn btn-sm btn-link mt-n2 me-n3 fs-18">\
+                            </button>\
+                        </div>\
+                    </div>\
+                                <p class="mb-0 ctext-content mt-1">\
+                                    ' + chatReplyItems + '\
+                                </p>\
+                            </div>\
+                            <div class="align-self-start message-box-drop d-flex">\
+                            <div class="dropdown">\
+                              <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
+                                <i class="ri-emotion-happy-line"></i>\
+                              </a>\
+                              <div class="dropdown-menu emoji-dropdown-menu">\
+                                <div class="hstack align-items-center gap-2 px-2 fs-25">\
+                                  <a href="javascript:void(0);">💛</a>\
+                                  <a href="javascript:void(0);">🤣</a>\
+                                  <a href="javascript:void(0);">😜</a>\
+                                  <a href="javascript:void(0);">😘</a>\
+                                  <a href="javascript:void(0);">😍</a>\
+                                  <div class="avatar-xs">\
+                                    <a href="javascript:void(0);" class="avatar-title bg-soft-primary rounded-circle fs-19 text-primary">+</a>\
+                                  </div>\
+                                </div>\
+                              </div>\
+                            </div>\
+                              <div class="dropdown">\
+                                  <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
+                                      <i class="ri-more-2-fill"></i>\
+                                  </a>\
+                                  <div class="dropdown-menu">\
+                                      <a class="dropdown-item d-flex align-items-center justify-content-between reply-message" href="#" data-bs-toggle="collapse" data-bs-target=".replyCollapse">Reply <i class="bx bx-share ms-2 text-muted"></i></a>\
+                                      <a class="dropdown-item d-flex align-items-center justify-content-between" href="#" data-bs-toggle="modal" data-bs-target=".forwardModal">Forward <i class="bx bx-share-alt ms-2 text-muted"></i></a>\
+                                      <a class="dropdown-item d-flex align-items-center justify-content-between copy-message" href="#" id="copy-message-' + messageIds + '">Copy <i class="bx bx-copy text-muted ms-2"></i></a>\
+                                      <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Bookmark <i class="bx bx-bookmarks text-muted ms-2"></i></a>\
+                                      <a class="dropdown-item d-flex align-items-center justify-content-between" href="#">Mark as Unread <i class="bx bx-message-error text-muted ms-2"></i></a>\
+                                      <a class="dropdown-item d-flex align-items-center justify-content-between delete-item" id="delete-item-' + messageIds + '" href="#">Delete <i class="bx bx-trash text-muted ms-2"></i></a>\
+                              </div>\
+                            </div>\
+                        </div>\
+                    </div>\
+                    <div class="conversation-name">\
+                        <small class="text-muted time">' + currentTime() + '</small>\
+                        <span class="text-success check-message-icon"><i class="bx bx-check"></i></span>\
+                    </div>\
+                </div>\
+            </div>\
+        </li>');
+      messageboxcollapse++;
+    } // remove chat list
+
+
+    var newChatList = document.getElementById("chat-list-" + messageIds);
+    newChatList.querySelectorAll(".delete-item").forEach(function (subitem) {
+      subitem.addEventListener("click", function () {
+        itemList.removeChild(newChatList);
+      });
+    }); //Copy Clipboard alert
+
+    newChatList.querySelectorAll(".copy-message").forEach(function (subitem) {
+      subitem.addEventListener("click", function () {
+        document.getElementById("copyClipBoard").style.display = "block";
+        document.getElementById("copyClipBoardChannel").style.display = "block";
+        setTimeout(hideclipboardNew, 1000);
+
+        function hideclipboardNew() {
+          document.getElementById("copyClipBoard").style.display = "none";
+          document.getElementById("copyClipBoardChannel").style.display = "none";
+        }
+      });
+    });
+    newChatList.querySelectorAll(".reply-message").forEach(function (subitem) {
+      subitem.addEventListener("click", function () {
+        var replyMessage = subitem.closest(".ctext-wrap").children[0].children[0].innerText;
+        var replyuser = document.querySelector(".user-profile-show").innerHTML;
+        document.querySelector(".replyCard .replymessage-block .flex-grow-1 .mb-0").innerText = replyMessage;
+        var msgWwnerName = subitem.closest(".chat-list") ? subitem.closest(".chat-list").classList.contains("left") ? replyuser : "You" : replyuser;
+        document.querySelector(".replyCard .replymessage-block .flex-grow-1 .conversation-name").innerText = msgWwnerName;
+      });
+    }); //Copy Message
+
+    newChatList.querySelectorAll(".copy-message").forEach(function (subitem) {
+      subitem.addEventListener("click", function () {
+        newChatList.childNodes[1].children[1].firstElementChild.firstElementChild.getAttribute("id");
+        isText = newChatList.childNodes[1].children[1].firstElementChild.firstElementChild.innerText;
+        navigator.clipboard.writeText(isText);
+      });
+    });
+  };
+
+  if (chatForm) {
+    //add an item to the List, including to local storage
+    chatForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var chatId = currentChatId;
+      var chatId1 = currentChatId;
+      var chatId2 = currentChatId;
+      var chatId3 = currentChatId;
+      var chatReplyId = currentChatId;
+      var chatInputValue = chatInput.value;
+      var chatInputfeedback = document.querySelector(".chat-input-feedback");
+
+      if (chatInputValue.length === 0) {
+        chatInputfeedback.classList.add("show");
+        setTimeout(function () {
+          chatInputfeedback.classList.remove("show");
+        }, 2000);
+      } else {
+        if (isreplyMessage == true) {
+          getReplyChatList(chatReplyId, chatInputValue);
+          isreplyMessage = false;
+        } else {
+          (0,_chat__WEBPACK_IMPORTED_MODULE_3__.getChatList)(chatId, chatInputValue, null, 'right');
+          (0,_users__WEBPACK_IMPORTED_MODULE_4__.getUsersList)();
+          var params = new URLSearchParams();
+          var uuid = document.getElementById('users-conversation').getAttribute('selected-chat');
+          params.append('uuid', uuid);
+          params.append('content', chatInputValue);
+          _request__WEBPACK_IMPORTED_MODULE_2__.axios.post('/api/message/', params).then(function (response) {});
+        }
+      }
+
+      (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.scrollToBottom)(chatId || chatId1 || chatId2 || chatId3 || chatReplyId);
+      chatInput.value = ""; //reply msg remove textarea
+
+      document.getElementById("close_toggle").click();
+    });
+  } // Profile Foreground Img
+
+
+  document.querySelector("#profile-foreground-img-file-input").addEventListener("change", function () {
+    var preview = document.querySelector(".profile-foreground-img");
+    var file = document.querySelector(".profile-foreground-img-file-input").files[0];
+    var reader = new FileReader();
+    reader.addEventListener("load", function () {
+      preview.src = reader.result;
+    }, false);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }); // user profile img
+
+  document.querySelector("#profile-img-file-input").addEventListener("change", function () {
+    var preview = document.querySelector(".user-profile-image");
+    var file = document.querySelector(".profile-img-file-input").files[0];
+    var reader = new FileReader();
+    reader.addEventListener("load", function () {
+      preview.src = reader.result;
+    }, false);
+
+    if (file) {
+      reader.readAsDataURL(file);
+      var formData = new FormData();
+      formData.append('profile', file);
+      _request__WEBPACK_IMPORTED_MODULE_2__.axios.post('/api/user/update', formData);
+    }
+  }); // profile user edit
+
+  document.getElementById("user-profile-edit-btn").addEventListener("click", function (e) {
+    document.querySelectorAll(".edit-input .form-control").forEach(function (item) {
+      var editIcon = document.getElementById("edit-icon");
+
+      if (item.disabled) {
+        // If disabled, do this
+        editIcon.classList.replace("bxs-pencil", "bxs-save");
+        item.disabled = false;
+      } else {
+        // Enter code here
+        editIcon.classList.replace("bxs-save", "bxs-pencil");
+        item.disabled = true;
+      }
+    });
+  }); // favourite btn
+
+  var favouriteBtn = document.getElementsByClassName("favourite-btn");
+
+  for (var i = 0; i < favouriteBtn.length; i++) {
+    var favouriteBtns = favouriteBtn[i];
+
+    favouriteBtns.onclick = function () {
+      favouriteBtns.classList.toggle("active");
+    };
+  }
+
+  var input, filter, ul, li, a, i, j, div;
+
+  function searchContacts() {
+    var input = document.getElementById("searchContact");
+    var filter = input.value.toUpperCase();
+    var list = document.querySelector(".sort-contact");
+    var li = list.querySelectorAll(".mt-3 li");
+    var div = list.querySelectorAll(".mt-3 .contact-list-title"); // Fetching users from remote
+
+    _request__WEBPACK_IMPORTED_MODULE_2__.axios.get("/api/user/contacts", {
+      params: {
+        searchQuery: input.value
+      }
+    }).then(function (response) {
+      try {
+        var contacts = JSON.parse(response.data);
+        updateContacts(contacts);
+      } catch (err) {
+        // 👇️ This runs
+        console.log('Error: ', err.message);
+      }
+    });
+
+    for (j = 0; j < div.length; j++) {
+      var contactTitle = div[j];
+      var txtValue = contactTitle.innerText;
+
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        div[j].style.display = "";
+      } else {
+        div[j].style.display = "none";
+      }
+    }
+
+    for (i = 0; i < li.length; i++) {
+      var contactName = li[i];
+      var _txtValue = contactName.querySelector("h5").innerText;
+
+      if (_txtValue.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = "";
+      } else {
+        li[i].style.display = "none";
+      }
+    }
+  }
+
+  document.getElementById("searchContact").addEventListener("keyup", searchContacts);
+
+  function resetOldContacts() {
+    document.getElementsByClassName("sort-contact")[0].innerHTML = "";
+  }
+
+  function updateContacts(data) {
+    resetOldContacts();
+    data.contacts.forEach(function (user) {
+      var profile = user.profile ? '<img src="' + user.profile + '" class="img-fluid rounded-circle" alt="">' : '<span class="avatar-title rounded-circle bg-primary fs-10">' + user.name + "</span>";
+      profile += "<input type=\"hidden\" class=\"_user-uuid\" value=\"".concat(user.uuid, "\" >");
+      var msgHTML = (0,_dir_messageTemplate__WEBPACK_IMPORTED_MODULE_0__.getDropdownContact)(profile, user);
+      var isSortContact = '<div class="mt-3" >\
+                <div class="contact-list-title">' + user.name.charAt(0).toUpperCase() + '\
+                </div>\
+                <ul id="contact-sort-' + user.name.charAt(0) + '" class="list-unstyled contact-list" >';
+
+      if (!document.getElementById('contact-sort-' + user.name.charAt(0))) {
+        document.getElementsByClassName("sort-contact")[0].innerHTML += isSortContact;
+      }
+
+      document.getElementById("contact-sort-" + user.name.charAt(0)).innerHTML = document.getElementById("contact-sort-" + user.name.charAt(0)).innerHTML + msgHTML + "</ul>" + "</div>";
+    });
+    (0,_users__WEBPACK_IMPORTED_MODULE_4__.contactList)();
+  }
+
+  document.documentElement.style.setProperty("--bs-primary-rgb", window.localStorage.getItem("colorPrimary"));
+  document.documentElement.style.setProperty("--bs-secondary-rgb", window.localStorage.getItem("colorSecondary"));
+
+  function themeColor(primaryColor) {
+    var activeCustomcolor = localStorage.getItem("activeCustomcolor");
+
+    if (activeCustomcolor) {
+      document.getElementById(activeCustomcolor).checked = true;
+    }
+
+    document.querySelectorAll(".theme-color").forEach(function (item) {
+      var colorRadioElements = document.querySelector("input[name=bgcolor-radio]:checked");
+
+      if (colorRadioElements) {
+        colorRadioElements = colorRadioElements.id;
+        var elementsColor = document.getElementsByClassName(colorRadioElements);
+        var color = window.getComputedStyle(elementsColor[0], null).getPropertyValue("background-image");
+        var rgbColorSecondary = color.substring(color.indexOf("b") + 2, color.indexOf(")"));
+        var rgbColorPrimary = color.substring(color.lastIndexOf("(") + 1, color.lastIndexOf(")") - 1);
+      }
+
+      item.addEventListener("click", function (event) {
+        if (item.id) {
+          localStorage.setItem("activeCustomcolor", item.id);
+        } // choose theme color
+
+
+        var colorRadioElements = document.querySelector("input[name=bgcolor-radio]:checked");
+
+        if (colorRadioElements) {
+          colorRadioElements = colorRadioElements.id;
+          var elementsColor = document.getElementsByClassName(colorRadioElements);
+
+          if (elementsColor) {
+            var color = window.getComputedStyle(elementsColor[0], null).getPropertyValue("background-image");
+
+            var _rgbColorSecondary = color.substring(color.indexOf("b") + 2, color.indexOf(")"));
+
+            var _rgbColorPrimary = color.substring(color.lastIndexOf("(") + 1, color.lastIndexOf(")") - 1);
+
+            window.localStorage.setItem("colorPrimary", _rgbColorPrimary);
+            window.localStorage.setItem("colorSecondary", _rgbColorSecondary);
+            document.documentElement.style.setProperty("--bs-primary-rgb", window.localStorage.getItem("colorPrimary"));
+            document.documentElement.style.setProperty("--bs-secondary-rgb", window.localStorage.getItem("colorSecondary"));
+          }
+        }
+      });
+    }); // primary color picker
+
+    var classicPickrPrimary = document.querySelectorAll(".colorpicker-primary");
+    classicPickrPrimary.forEach(function () {
+      var primarycolor = localStorage.getItem("colorPrimary") ? "rgba(" + localStorage.getItem("colorPrimary") + ",1)" : "#6153CC";
+      var primaryPicker = Pickr.create({
+        el: ".colorpicker-primary",
+        theme: "nano",
+        // or 'monolith', or 'nano'
+        "default": primarycolor,
+        swatches: null,
+        defaultRepresentation: "RGBA",
+        components: {
+          // Main components
+          preview: true,
+          opacity: true,
+          hue: true,
+          // Input / output Options
+          interaction: {
+            hex: false,
+            rgba: false,
+            hsva: false,
+            input: true,
+            clear: true,
+            save: true
+          }
+        }
+      }); // primary colorpicker
+
+      primaryPicker.on("clear", function (instance) {// console.log('Event: "clear"', instance);
+      }).on("cancel", function (instance) {// console.log('cancel', primaryPicker.getColor().toRGBA().toString(0));
+      }).on("change", function (color, source, instance) {
+        // console.log('Event: "change"', instance, primaryPicker.getColor().toRGBA().toString(0));
+        var primaryColorValue = primaryPicker.getColor().toRGBA().toString(0);
+        var rgbColorsPrimary = primaryColorValue.substring(primaryColorValue.indexOf("(") + 1, primaryColorValue.lastIndexOf(","));
+        localStorage.setItem("colorPrimary", rgbColorsPrimary);
+        document.documentElement.style.setProperty("--bs-primary-rgb", window.localStorage.getItem("colorPrimary"));
+      });
+    }); // secondary color picker
+
+    var classicPickrSecondary = document.querySelectorAll(".colorpicker-secondary");
+    classicPickrSecondary.forEach(function () {
+      var secondarycolor = localStorage.getItem("colorSecondary") ? "rgba(" + localStorage.getItem("colorSecondary") + ",1)" : "#b966c1";
+      var secondaryPicker = Pickr.create({
+        el: ".colorpicker-secondary",
+        theme: "nano",
+        // or 'monolith', or 'nano'
+        "default": secondarycolor,
+        swatches: null,
+        defaultRepresentation: "RGBA",
+        components: {
+          // Main components
+          preview: true,
+          opacity: true,
+          hue: true,
+          // Input / output Options
+          interaction: {
+            hex: false,
+            rgba: false,
+            hsva: false,
+            input: true,
+            clear: true,
+            save: true
+          }
+        }
+      }); // primary colorpicker
+
+      secondaryPicker.on("clear", function (instance) {// console.log('Event: "clear"', instance);
+      }).on("cancel", function (instance) {// console.log('cancel', secondaryPicker.getColor().toRGBA().toString(0));
+      }).on("change", function (color, source, instance) {
+        // console.log('Event: "change"', instance, secondaryPicker.getColor().toRGBA().toString(0));
+        var secondaryColorValue = secondaryPicker.getColor().toRGBA().toString(0);
+        var rgbColorSecondary = secondaryColorValue.substring(secondaryColorValue.lastIndexOf("(") + 1, secondaryColorValue.lastIndexOf(","));
+        localStorage.setItem("colorSecondary", rgbColorSecondary);
+        document.documentElement.style.setProperty("--bs-secondary-rgb", window.localStorage.getItem("colorSecondary"));
+      });
+    });
+  }
+
+  var primaryColor = window.getComputedStyle(document.body, null).getPropertyValue("--bs-primary-rgb");
+  themeColor(primaryColor);
+  document.getElementById('pills-contacts-tab').addEventListener('click', function () {
+    searchContacts();
+  });
+})();
+})();
+
 /******/ })()
 ;
