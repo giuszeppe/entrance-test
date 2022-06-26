@@ -1,7 +1,7 @@
 <div class="side-menu flex-lg-column">
     <!-- LOGO -->
     <div class="navbar-brand-box">
-        <a href="index" class="logo logo-dark">
+        <a href="#" class="logo logo-dark">
             <span class="logo-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30">
                     <path fill="none" d="M0 0h24v24H0z" />
@@ -11,7 +11,7 @@
             </span>
         </a>
 
-        <a href="index" class="logo logo-light">
+        <a href="#" class="logo logo-light">
             <span class="logo-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30">
                     <path fill="none" d="M0 0h24v24H0z" />
