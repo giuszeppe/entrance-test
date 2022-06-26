@@ -309,7 +309,7 @@ import { contactList, getUsersList } from './users';
                     params.append('content',chatInputValue)
                     axios.post('/api/message/', params,{
                         headers : {
-                            'Content-type' : 'application/json'
+                            'Accept' : 'application/json'
                         }
                     })
                     .then((response)=>{

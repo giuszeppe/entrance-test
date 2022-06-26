@@ -3,7 +3,12 @@ import { fetchMessages, toggleSelected, updateSelectedChat} from "./chat";
 
 
 export const getUsersList = () =>{
-        axios.get('/api/messages')
+        axios.get('/api/messages',{
+		headers : {
+			'Accept' : 'application/json',
+			"Access-Control-Allow-Origin": "*"
+		}
+	})
             .then((response)=>{
                 let users;
                 if(typeof response.data == 'string'){
