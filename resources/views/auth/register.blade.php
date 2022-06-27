@@ -11,7 +11,9 @@
                 @csrf
                 <div class="mb-3">
                     <label for="useremail" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="useremail"
+		    <input type="email" 
+			class="form-control @if($errors->has('email')) is-invalid @endif" 
+			id="useremail"
                         name='email' 
                         placeholder="Enter email" 
                         value="{{old('email')}}"
@@ -23,7 +25,9 @@
                 </div>
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
-                    <input name='name' type="text" class="form-control" id="username"
+		    <input name='name' type="text" 
+			class="form-control @if($errors->has('name')) is-invalid @endif" 
+			id="username"
                         placeholder="Enter username" 
                         value="{{old('name')}}"
                         required>
@@ -34,7 +38,10 @@
 
                 <div class="mb-3">
                     <label for="userpassword" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="userpassword" name='password'
+		    <input type="password" 
+			class="form-control @if($errors->has('password')) is-invalid @endif" 
+			id="userpassword" 
+			name='password'
                         placeholder="Enter password" required>
                     <div class="invalid-feedback">
                         Please Enter Password
@@ -42,7 +49,10 @@
                 </div>
                 <div class="mb-3">
                     <label for="userpassword_confirmation" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="userpassword_confirmation" name='password_confirmation'
+		    <input type="password" 
+			class="form-control @if($errors->has('password_confirmation')) is-invalid @endif" 
+			id="userpassword_confirmation" 
+			name='password_confirmation'
                         placeholder="Enter password" required>
                     <div class="invalid-feedback">
                         Please Enter Password

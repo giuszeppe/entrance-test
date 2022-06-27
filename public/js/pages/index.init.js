@@ -2575,7 +2575,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var getUsersList = function getUsersList() {
-  _request__WEBPACK_IMPORTED_MODULE_0__.axios.get('/api/messages').then(function (response) {
+  _request__WEBPACK_IMPORTED_MODULE_0__.axios.get('/api/messages', {
+    headers: {}
+  }).then(function (response) {
     var users;
 
     if (typeof response.data == 'string') {
@@ -2660,7 +2662,7 @@ var getUsersList = function getUsersList() {
     });
   })["finally"](function () {
     if (!document.getElementById("users-conversation").getAttribute('selected-chat')) {
-      document.querySelector('#usersList li').click();
+      if (document.querySelector('#usersList li')) document.querySelector('#usersList li').click();
     }
   });
 };
@@ -9652,7 +9654,11 @@ File: Index init js
           var uuid = document.getElementById('users-conversation').getAttribute('selected-chat');
           params.append('uuid', uuid);
           params.append('content', chatInputValue);
-          _request__WEBPACK_IMPORTED_MODULE_2__.axios.post('/api/message/', params).then(function (response) {});
+          _request__WEBPACK_IMPORTED_MODULE_2__.axios.post('/api/message', params, {
+            headers: {
+              'Accept': 'application/json'
+            }
+          }).then(function (response) {});
         }
       }
 

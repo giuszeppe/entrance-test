@@ -13,8 +13,11 @@
                 @csrf
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input name="email" type="text" class="form-control" id="email"
+                    <input name="email" type="text" class="@if($errors->has('email')) is-invalid @endif form-control" id="email"
                         placeholder="Enter email">
+			<div class="invalid-feedback">
+				Please Enter Email
+		    </div>
                 </div>
 
                 <div class="mb-3">
@@ -23,12 +26,11 @@
                     </div>
                     <label for="userpassword" class="form-label">Password</label>
                     <div class="position-relative auth-pass-inputgroup mb-3">
-                        <input type="password" class="form-control pe-5"
-                            name="password" placeholder="Enter Password" id="password-input">
-                        <button
-                            class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted"
-                            type="button" id="password-addon"><i
-                                class="ri-eye-fill align-middle"></i></button>
+                        <input type="password" class="form-control @if($errors->has('password')) is-invalid @endif pe-5"
+			    name="password" placeholder="Enter Password" id="password-input">
+			<div class="invalid-feedback">
+                        	Please Enter Password
+                    	</div>
                     </div>
                 </div>
 
@@ -40,10 +42,10 @@
                     </label>
                 </div>
                 --}}
-
                 <div class="text-center mt-4">
                     <button class="btn btn-primary w-100" type="submit">Log In</button>
                 </div>
+
             </form><!-- end form -->
 
             <div class="mt-5 text-center text-muted">
@@ -55,7 +57,4 @@
 </div><!-- end row -->
 <script src="js/pages/login.js"> </script>
 
-@if($errors->any())
-{{dump($errors)}}
-@endif
 @endsection

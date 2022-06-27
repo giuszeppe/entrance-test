@@ -5,8 +5,6 @@ import { fetchMessages, toggleSelected, updateSelectedChat} from "./chat";
 export const getUsersList = () =>{
         axios.get('/api/messages',{
 		headers : {
-			'Accept' : 'application/json',
-			"Access-Control-Allow-Origin": "*"
 		}
 	})
             .then((response)=>{
@@ -158,6 +156,7 @@ export const getUsersList = () =>{
             })
             .finally(() =>{
                 if(!document.getElementById("users-conversation").getAttribute('selected-chat')){
+			if(document.querySelector('#usersList li'))
                     document.querySelector('#usersList li').click()
                 }
                 
